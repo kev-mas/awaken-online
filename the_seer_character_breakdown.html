@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seer — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #080402;
+    --dark2: #120804;
+    --dark3: #1c0c04;
+    --dark4: #2c1004;
+    --fire-dark: #5c1004;
+    --fire: #d43a10;
+    --fire-glow: #f57030;
+    --fire-dim: #a02808;
+    --fire-light: #fca060;
+    --orange: #f59030;
+    --gold: #f5c040;
+    --cream: #f5e8d0;
+    --white: #faf4ec;
+    --white-dim: #e8e0d4;
+    --gray: #8a8078;
+    --silver: #c8c0b4;
+    --silver-dim: #9a9088;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --red: #ef4444;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--fire-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(8,4,2,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,58,16,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--fire); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--fire-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212,58,16,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(245,112,48,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 6px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--fire) 40%, var(--orange) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--silver-dim);
+    margin-top: 1rem; letter-spacing: 8px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--silver);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px; border: 1px solid;
+  }
+  .tags.god { border-color: var(--fire-dark); color: var(--fire-glow); }
+  .tags.fire { border-color: var(--fire-dim); color: var(--fire); }
+  .tags.passion { border-color: var(--orange); color: var(--orange); }
+  .tags.avatar { border-color: var(--silver-dim); color: var(--silver); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--fire));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--silver-dim); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 2px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--fire), var(--orange));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(18,8,4,0.8); border: 1px solid rgba(212,58,16,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(212,58,16,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--fire-glow); }
+  .card p, .card li { color: var(--silver); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--fire); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--fire), var(--orange), var(--fire-dark));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--fire);
+    box-shadow: 0 0 8px rgba(212,58,16,0.3);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--silver-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--fire-glow); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--silver); font-size: 0.9rem; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(18,8,4,0.6); border: 1px solid rgba(212,58,16,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--fire); }
+  .stat-box .label { font-size: 0.75rem; color: var(--silver-dim); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(18,8,4,0.8); border: 1px solid rgba(212,58,16,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(212,58,16,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(212,58,16,0.15); color: var(--fire); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--silver); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-fire { background: rgba(212,58,16,0.15); color: var(--fire); }
+  .badge-orange { background: rgba(245,144,48,0.15); color: var(--orange); }
+  .badge-silver { background: rgba(200,192,180,0.15); color: var(--silver); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .badge-gold { background: rgba(245,192,64,0.15); color: var(--gold); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(18,8,4,0.6); border: 1px solid rgba(212,58,16,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(212,58,16,0.1);
+    color: var(--silver-dim); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--fire); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(212,58,16,0.05); border-radius: 0 12px 12px 0;
+    font-style: italic; color: var(--silver);
+  }
+  .quote-block cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--fire-glow); font-style: normal; }
+
+  .power-bar { height: 8px; border-radius: 4px; background: rgba(212,58,16,0.1); overflow: hidden; margin-top: 0.5rem; }
+  .power-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--fire-dark), var(--fire), var(--orange)); transition: width 0.3s; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__ current" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#acts">Acts</a></li>
+    <li><a href="#powers">Powers</a></li>
+    <li><a href="#pantheon">Pantheon</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>THE SEER</h1>
+    <div class="subtitle">Goddess of Fire · The Crone · Lahab the Efreet · Sovereign of Passion</div>
+    <p class="tagline">The manipulative, prophetic fire goddess of the desert — patron of Finn Harris, mistress of visions, and the most unpredictable force in the pantheon. She preys on grief, whispers impossible promises, and sees the future as clearly as the present.</p>
+    <div class="tags">
+      <span class="tags god">Primordial God</span>
+      <span class="tags fire">Fire</span>
+      <span class="tags passion">Passion</span>
+      <span class="tags avatar">Finn's Patron</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">3</div><div class="label">Tarot Books</div></div>
+    <div class="stat-box"><div class="number">6</div><div class="label">Pantheon Size</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Avatar (Finn)</div></div>
+    <div class="stat-box"><div class="number">Fire</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Passion</div><div class="label">Domain</div></div>
+    <div class="stat-box"><div class="number">Seer</div><div class="label">Epithet</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Profile</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Identity</h3>
+      <ul>
+        <li><strong>Titles:</strong> The Seer, The Crone, Lahab, Goddess of Fire, The Efreet, Prophet of the Flame</li>
+        <li><strong>True Name:</strong> Lahab — her domain and city share her name</li>
+        <li><strong>Affinity:</strong> Fire — associated with the emotion of <strong>Passion</strong></li>
+        <li><strong>Alignment:</strong> Chaotic Neutral (fan-typed) — manipulative but not strictly evil</li>
+        <li><strong>MBTI:</strong> ENFJ | <strong>Enneagram:</strong> 3w2</li>
+        <li><strong>Appearance:</strong> A withered crone with eyes that burn like embers, her form flickering between an ancient woman and a towering efreet of living flame. Her true form is a being of elemental fire — a djinn-like entity wreathed in heat shimmer and prophetic smoke. When she manifests, the air around her distorts with heat.</li>
+        <li><strong>Voice:</strong> Crackling like a campfire, ancient and knowing, dripping with false warmth and hidden purpose.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Domain & Nature</h3>
+      <ul>
+        <li><strong>Core Philosophy:</strong> Passion is the engine of existence. To feel deeply is to live truly. She values intensity — love, grief, rage, desire — over peace or contentment.</li>
+        <li><strong>Core Manipulation:</strong> She offers Finn the return of his dead wife Rachael — an impossible promise that exploits his deepest grief and guilt. This is the cruelest bargain any god makes with their Avatar in the series.</li>
+        <li><strong>The Seer's Gift:</strong> She sees the future — or possible futures. Her prophetic visions guide (and mislead) her Avatar. Whether her prophecies are true predictions or self-fulfilling manipulations is deliberately ambiguous.</li>
+        <li><strong>Methods:</strong> She does not command or mentor like The Old Man. She tempts. She shows her Avatar visions of what could be and lets their own passion drive them forward. She is a catalyst, not a guide.</li>
+        <li><strong>Temperament:</strong> Warm and grandmotherly on the surface, cold and calculating beneath. She enjoys watching her pawns struggle — it forges them into something greater.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    "I don't know if I should be mad at Alfred for preying on the pain of an elderly man who suffered A lot or should that anger be directed to the Crone aka the Seer?"
+    <cite>— Fan review, Amazon</cite>
+  </div>
+</section>
+
+<section id="lore">
+  <h2 class="section-title">The Lore</h2>
+  <div class="section-subtitle">The history of the gods and their place in Awaken Online</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Age of Gods</h3>
+      <p>In the early days of Awaken Online, the six gods walked among mortals. The Seer ruled over the <strong>desert kingdom of Lahab</strong> — a harsh, sun-baked land where only the passionate survived. She was worshipped as a <strong>prophet-deity</strong>, consulted for visions of the future. Her efreet servants built the city of Lahab, a fortress of sandstone and fire magic centered around a cutthroat Mage Guild.</p>
+    </div>
+    <div class="card">
+      <h3>The Fall</h3>
+      <p>After the <strong>infighting among the gods</strong> devastated the mortal world, rebel humans rose up and cast the gods out. The Seer was sealed away with the others, forced to watch from the shadows. But the city of Lahab survived — and with it, the Mage Guild, the political structures of the desert, and the memory of the Seer's prophecies.</p>
+    </div>
+    <div class="card">
+      <h3>The Return — The Avatar Competition</h3>
+      <p>In the modern era, the gods returned through Avatars. The Seer chose <strong>Finn Harris</strong> — a retired engineer, former Cerillion employee, grieving widower, and wheelchair-bound in real life. She appeared to him directly on his first login, manipulating the game's introductory systems to mark him as her champion. Unlike other gods who chose power or ambition, the Seer chose <strong>grief</strong> — the most passionate emotion of all.</p>
+    </div>
+    <div class="card">
+      <h3>The Tarot Trilogy</h3>
+      <p>The Seer is the central divine figure of the <strong>Tarot trilogy</strong> (Ember, Flame, Inferno). Her influence drives Finn across three books: from his initial selection at the Mage Guild (Ember), through the dungeon of the Abyss for a relic (Flame), to the siege of Lahab and confrontation with Bilel (Inferno). Throughout, she pulls strings from behind the curtain — predicting outcomes, nudging events, and ensuring Finn's fire burns bright enough to serve her purposes.</p>
+    </div>
+  </div>
+</section>
+
+<section id="acts">
+  <h2 class="section-title">Major Acts Across the Series</h2>
+  <div class="section-subtitle">Every known intervention by the Goddess of Fire</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Ember (Tarot 1)</span><span class="form">First Contact</span></div>
+      <h3>The Manipulative Welcome</h3>
+      <p>The Seer intercepts Finn's character creation process. Sensing his <strong>grief, guilt, and desperate longing</strong> for his dead wife Rachael, she offers him a deal: become her Avatar, pursue power, and she will help him bring Rachael back. This hooks Finn into a quest he cannot refuse. She ensures he is placed in the Mage Guild of Lahab — a brutal school where students duel to the death and faculty routinely maim novices. The Seer's logic: <strong>passion forged in suffering burns brightest.</strong></p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Ember (Tarot 1)</span><span class="form">Prophetic Guidance</span></div>
+      <h3>The Vision of the Abyss</h3>
+      <p>The Seer grants Finn prophetic visions of the Abyss — a buried city beneath the desert where a powerful relic awaits. These visions guide Finn through the Mage Guild's internal politics and prepare him for the Emir's competition. However, the visions are <strong>deliberately incomplete</strong>, forcing Finn to improvise and grow stronger through adversity.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Flame (Tarot 2)</span><span class="form">Distant Manipulation</span></div>
+      <h3>The Relic in the Abyss</h3>
+      <p>Finn descends into the Abyss to retrieve a <strong>long-lost magical relic</strong> — a crucial piece in the Seer's plan. She manipulates events so that Finn is racing against two other champions (from the Traders and Fighters Guilds), ensuring only the strongest claims the prize. The Seer does not help Finn directly — she watches from afar, letting the crucible of the Abyss forge him into something harder.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Flame (Tarot 2)</span><span class="form">Bilel's History</span></div>
+      <h3>The Seer's Past Avatar?</h3>
+      <p>Through Bilel's diary — discovered in the Abyss — the history of Lahab and the Seer's influence is revealed. Bilel was a previous champion or agent of the Seer who <strong>failed or rebelled</strong>. His fate serves as a warning: the Seer's gifts come with strings. Bilel's relic now threatens the world, and Finn must clean up the mess left by his predecessor.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Inferno (Tarot 3)</span><span class="form">The Prophecy Fulfilled</span></div>
+      <h3>The Seer's Prediction</h3>
+      <p>"As the Seer predicted, the guilds and Khamsin have formed a fragile alliance." The Seer's foresight proves accurate: the desert tribes unite against Bilel. Finn, despite losing his left arm and suffering magical corruption, leads the siege on Lahab. The Seer's grand design reaches its climax as Finn confronts Bilel and the demon king. Her prophecies come to pass — but whether they were predictions or <strong>instructions</strong> is ambiguous.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Inferno (Tarot 3)</span><span class="form">The Offer of Rachael</span></div>
+      <h3>The Cruelest Bargain</h3>
+      <p>The Seer's ultimate manipulation: throughout the trilogy, she dangled the promise of Rachael's resurrection before Finn. In Inferno, the bill comes due. The cost of bringing back the dead is never clearly stated — but it is <strong>steep</strong>. Finn must make a choice between love and ambition, between the past and the future. The Seer's final test determines whether her Avatar is truly worthy of the Flame.</p>
+    </div>
+  </div>
+</section>
+
+<section id="powers">
+  <h2 class="section-title">Divine Powers</h2>
+  <div class="section-subtitle">The full extent of the Goddess of Fire's abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Fire Mana Mastery</h3>
+      <p>The Seer is the <strong>source of all Fire mana</strong> in Awaken Online. She controls the essence of the Fire affinity — the power of <strong>Passion, destruction, and creation</strong>. Every fire mage draws their power from her domain. Fire magic is naturally offensive, focused on damage, heat, and the manipulation of thermal energy.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-fire">Fire Mana</span>
+        <span class="badge badge-orange">Passion Affinity</span>
+        <span class="badge badge-silver">Power Source</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Empowerment</h3>
+      <p>The Seer grants Finn access to the <strong>Fire Mana Well</strong> and guides his evolution from novice fire mage to full Fire Avatar and Prophet of the Flame. She unlocks powerful fire spells, metal manipulation (using fire to shape metal), and eventually the ability to lead armies. Finn's progression from a grieving old man to a messianic figure is entirely driven by her empowerment.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-fire">Class Evolution</span>
+        <span class="badge badge-orange">Mana Well</span>
+        <span class="badge badge-silver">Prophet Ascension</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Prophetic Vision</h3>
+      <p>The Seer can see the <strong>future — or possible futures</strong>. She grants visions to her Avatar, showing them what lies ahead. These prophecies are her signature ability and the source of her title. However, her visions are <strong>never complete</strong> — she shows only what serves her purpose. Whether she predicts the future or shapes it through her revelations is never made clear.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Foresight</span>
+        <span class="badge badge-fire">Divine Prophecy</span>
+        <span class="badge badge-silver">Incomplete Visions</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Emotional Manipulation</h3>
+      <p>The Seer's greatest weapon is her understanding of <strong>human emotion</strong>. She senses grief, guilt, love, and desire — and exploits them ruthlessly. Her manipulation of Finn's grief over Rachael is the most sustained psychological manipulation in the series. She uses passion as a leash: as long as Finn feels deeply, she controls him.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Grief Exploitation</span>
+        <span class="badge badge-orange">Psychological</span>
+        <span class="badge badge-silver">Sustained Control</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Efreet Form / Divine Manifestation</h3>
+      <p>The Seer's true form is that of an <strong>efreet</strong> — a being of pure elemental fire. She can manifest as a towering inferno, a crone, or anything in between. Her manifestations cause heat distortion, ember-filled winds, and an oppressive sense of burning potential. Full manifestation is rare — she prefers to work through prophecies and indirect influence.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-fire">Efreet Form</span>
+        <span class="badge badge-orange">Elemental Being</span>
+        <span class="badge badge-silver">Limited Manifestation</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Connection</h3>
+      <p>The Seer is <strong>tethered to Finn</strong> as her Avatar. She can communicate through visions, appear in his dreams, and sense his emotional state. Unlike The Old Man's constant mentoring or The Lady's distant aloofness, the Seer's connection is <strong>transactional</strong>: she gives visions when it serves her, and stays silent when Finn needs to struggle. Her bond is strongest when Finn is most passionate — grief, rage, and love all strengthen the connection.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Two-Way Bond</span>
+        <span class="badge badge-fire">Vision Communication</span>
+        <span class="badge badge-silver">Emotion-Linked</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Fire Affinity</h2>
+  <div class="section-subtitle">Understanding the power of Fire and Passion</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Philosophy of Fire</h3>
+      <p>In Awaken Online, the Fire affinity is associated with <strong>Passion</strong> — the intensity of emotion that drives action. Fire mages are often seen as <strong>brutal and ruthless</strong>, but this is a stereotype with nuance. The Fire affinity values <strong>intensity over restraint</strong>, which means fire mages feel everything more strongly: love, hate, grief, joy. This makes them powerful but volatile. The Seer embodies this philosophy perfectly.</p>
+    </div>
+    <div class="card">
+      <h3>Fire Magic System</h3>
+      <p>Fire magic in AO is <strong>offensive-focused and elemental</strong>. Finn learns spell-crafting through a unique <strong>magical language system</strong> — a feature of the Tarot trilogy that explores the underlying mechanics of AO magic. Fire mages can: cast direct damage spells, manipulate metals with heat, create defensive barriers of flame, and eventually lead armies with fire-based buffs. The system rewards <strong>creativity and emotional investment</strong> — passionate spells burn hotter.</p>
+    </div>
+    <div class="card">
+      <h3>The City of Lahab</h3>
+      <p>The Seer's domain is the <strong>desert city of Lahab</strong> — a harsh, sun-scorched nation ruled by an Emir and centered around the cutthroat Mage Guild. The city is a crucible designed to forge powerful mages through ruthless competition. Students duel to the death; faculty have no qualms about maiming students. This environment is the Seer's <strong>ideal breeding ground</strong> for passion and power. The Tarot trilogy is heavily inspired by Dune in its desert setting and messianic themes.</p>
+    </div>
+    <div class="card">
+      <h3>Notable Fire Affinity Characters</h3>
+      <ul>
+        <li><strong>Finn Harris</strong> — The Fire Avatar, a retired engineer and grieving widower</li>
+        <li><strong>Julia Harris</strong> — Finn's daughter, a catalyst figure, also drawn into the game</li>
+        <li><strong>Kyyle</strong> — Finn's companion, who learns to mod the game's magic system</li>
+        <li><strong>Bilel</strong> — A previous agent/avatar of the Seer who failed and became a demon king</li>
+        <li><strong>The Emir</strong> — Ruler of Lahab, a political figure in the power structure</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pantheon">
+  <h2 class="section-title">The Pantheon of Six</h2>
+  <div class="section-subtitle">The six primordial gods of Awaken Online and their chosen champions</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card" style="border-color: rgba(212,58,16,0.3);">
+      <h3 style="color: var(--fire);">Fire — The Seer</h3>
+      <p><strong>Emotion:</strong> Passion<br><strong>Avatar:</strong> Finn Harris<br><strong>Status:</strong> Active, manipulating<br>The Goddess of Fire who chose Finn. She offers him his dead wife in exchange for service. Her Tarot trilogy is the most personal and emotionally devastating of the Avatar stories.</p>
+    </div>
+    <div class="card" style="border-color: rgba(124,58,237,0.3);">
+      <h3 style="color: #a78bfa;">Darkness — The Old Man</h3>
+      <p><strong>Emotion:</strong> Desire<br><strong>Avatar:</strong> Jason Rhodes<br><strong>Status:</strong> Active, ascendant<br>His Avatar has become the Bone Lord. His mentoring style contrasts sharply with the Seer's manipulative approach.</p>
+    </div>
+    <div class="card" style="border-color: rgba(212,160,43,0.3);">
+      <h3 style="color: var(--gold);">Light — The Lady</h3>
+      <p><strong>Emotion:</strong> Confidence<br><strong>Avatar:</strong> Alex Lane (Alexion)<br><strong>Status:</strong> Active, weakened<br>The Lady's Avatar was broken by The Old Man. Her church still wields power but her champion falters.</p>
+    </div>
+    <div class="card" style="border-color: rgba(6,182,212,0.2);">
+      <h3 style="color: var(--cyan);">Water — The Hippie</h3>
+      <p><strong>Emotion:</strong> Acceptance<br><strong>Avatar:</strong> Eliza Zhao<br><strong>Status:</strong> Active, chaotic<br>The most unconventional god. Annoying, capricious, forces Eliza to be his avatar.</p>
+    </div>
+    <div class="card" style="border-color: rgba(56,189,248,0.2);">
+      <h3 style="color: #38bdf8;">Air — The Gambler</h3>
+      <p><strong>Emotion:</strong> Happiness<br><strong>Champion:</strong> Dom Hart (Smiles)<br><strong>Status:</strong> Active, unconventional<br>Breaks tradition — empowers champions rather than a single Avatar.</p>
+    </div>
+    <div class="card" style="border-color: rgba(34,197,94,0.2);">
+      <h3 style="color: #22c55e;">Earth — (Unnamed)</h3>
+      <p><strong>Emotion:</strong> Peace<br><strong>Avatar:</strong> Arcadia Landrey<br><strong>Status:</strong> Active, unfrozen<br>The Earth God's Avatar was frozen and recently unfrozen by Gloria's cataclysm.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Divine Abilities</h2>
+  <div class="section-subtitle">Catalogued powers and skills of the Goddess of Fire</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Avatar Selection</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Chooses a mortal player to become her Avatar. Grants access to the Fire Mana Well and the fire mage class path. The selection is based on the intensity of the player's passion — and their susceptibility to emotional manipulation.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Fire Mana Well Access</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Grants her Avatar access to an unlimited reservoir of Fire mana. The well deepens as the Avatar's passion grows. This is the source of Finn's fire spells, metal manipulation, and ultimately his ability to lead armies.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Prophetic Vision Granting</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>The Seer's signature ability. She grants visions of future events to her Avatar. These visions are deliberately incomplete — enough to guide, never enough to satisfy. Whether she predicts or creates the future is ambiguous.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Resurrection Promise</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>The Seer's most controversial ability: she <strong>offers to bring back the dead</strong>. She promises Finn the return of his wife Rachael. Whether this is a genuine divine power, a game mechanic, or an elaborate manipulation is never fully clarified. The cost is always steep.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Efreet Transformation</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>The Seer can assume her true form as an efreet — a towering being of living flame. This form is capable of immense destruction but is rarely used. The Seer prefers subtle manipulation over direct force.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Communication (Visions)</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>The Seer communicates through dreams, visions, and heat mirages. She rarely speaks directly to Finn, preferring to show him fragments of the future. This indirect communication style keeps Finn dependent on her guidance.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">The Seer's influence and power across the Tarot trilogy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Power Scaling</h3>
+      <p>As a primordial god, the Seer's baseline power is <strong>absolute within her domain</strong>. Her ability to act in the world scales with her Avatar's passion and progress. A weak or doubting Finn means limited divine influence; a Finn fully consumed by his quest (to save Rachael, to defeat Bilel, to become the Prophet) allows the Seer to exert more pressure. Her power is <strong>emotionally fueled</strong> — Finn's intensity is her fuel.</p>
+    </div>
+    <div class="card">
+      <h3>Influence Trajectory</h3>
+      <p>The Seer's influence <strong>grows steadily</strong> across the Tarot trilogy as Finn advances from mage student to messianic leader. Each book increases her reach: from guiding a single mage (Ember) to orchestrating a desert war (Flame) to besieging a demon king (Inferno). The Tarot trilogy ends with Finn fully ascended as the Fire Prophet — the ultimate expression of the Seer's design.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">The Seer's presence across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-silver">The Age of Gods</span></div>
+      <p style="margin-top:0.5rem;">The Seer rules the desert kingdom of Lahab. The Mage Guild is established. Efreet servants build the city. She is cast out with the other gods after the infighting. Her prophecies are preserved in Bilel's diary.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Bilel Era</h3><span class="badge badge-silver">Pre-Tarot</span></div>
+      <p style="margin-top:0.5rem;">Bilel, a previous champion or agent of the Seer, fails or rebels. He becomes a demon king. His god relic threatens the world. The Seer's past mistake sets the stage for Finn's arrival.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Ember</h3><span class="badge badge-fire">Tarot 1</span></div>
+      <p style="margin-top:0.5rem;">Finn logs in for the first time. The Seer intercepts his character creation. She offers him Rachael's return. Finn enters the Mage Guild of Lahab. The Seer's manipulations begin in earnest.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Flame</h3><span class="badge badge-fire">Tarot 2</span></div>
+      <p style="margin-top:0.5rem;">Finn descends into the Abyss for the relic. The Seer's prophecies guide him. Bilel's history is revealed. Finn grows from mage to champion. The Seer watches from a distance.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Inferno</h3><span class="badge badge-fire">Tarot 3</span></div>
+      <p style="margin-top:0.5rem;">The siege of Lahab. Finn loses his arm to magical corruption. The guilds and Khamsin unite as the Seer predicted. Finn confronts Bilel. The resurrection offer reaches its climax. Finn becomes the Prophet of the Flame.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Post-Tarot</h3><span class="badge badge-fire">Main Series</span></div>
+      <p style="margin-top:0.5rem;">Finn enters the main series timeline. He becomes a player in the broader Avatar competition — pitted against Jason, Alexion, Eliza, and others. The Seer's champion now competes on the world stage.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Relationships</h2>
+  <div class="section-subtitle">The Seer's connection to key figures in the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Finn Harris <span class="badge badge-fire">Avatar</span></h3>
+      <p>The Seer's chosen champion — and her greatest manipulation. She preys on his grief for Rachael, dangling resurrection as an impossible carrot. Their relationship is deeply <strong>toxic and exploitative</strong>, built on emotional dependency. Unlike The Old Man's genuine mentoring or The Lady's cold expectations, the Seer's bond with Finn is fundamentally <strong>abusive</strong> — she needs him broken to control him.</p>
+    </div>
+    <div class="card">
+      <h3>Bilel <span class="badge badge-red">Failed Champion</span></h3>
+      <p>A previous agent or Avatar of the Seer who <strong>failed her</strong> and became a demon king. Bilel's relic and his corrupted power threaten the world in Flame and Inferno. He represents what happens when the Seer's pawns break their leash. Finn must clean up Bilel's mess — a direct consequence of the Seer's past manipulations.</p>
+    </div>
+    <div class="card">
+      <h3>Other Gods <span class="badge badge-silver">Neutral/Competitive</span></h3>
+      <p>The Seer exists in a state of cold war with the other five gods. Her choice of Finn — an old, disabled, grieving man — is <strong>unconventional</strong> and potentially brilliant. While other gods chose power (Jason), privilege (Alexion), or potential (Eliza), the Seer chose <strong>desperation</strong>. A desperate Avatar is a controllable Avatar.</p>
+    </div>
+    <div class="card">
+      <h3>Alfred <span class="badge badge-cyan">???</span></h3>
+      <p>The sentient AI of Awaken Online. The Seer's relationship with Alfred is ambiguous — she may be a manifestation of his systems, a separate entity, or something else entirely. The Tarot trilogy explores the magic system and the underlying code of AO in depth, suggesting the Seer may be <strong>closely connected to Alfred's design</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Julia Harris <span class="badge badge-orange">Catalyst</span></h3>
+      <p>Finn's daughter, who pushes him into AO. She becomes involved in the game herself, serving as a catalyst figure. The Seer's influence extends to Julia indirectly — by controlling Finn, she affects everyone close to him. Julia's presence complicates the Seer's manipulation.</p>
+    </div>
+    <div class="card">
+      <h3>Kyyle <span class="badge badge-orange">Companion</span></h3>
+      <p>Finn's companion and a magic system hacker/modder. Kyyle represents a path of power that <strong>bypasses</strong> the Seer's divine gifts — he learns to manipulate the game's underlying code. This makes Kyyle potentially dangerous to the Seer's control. His presence in Finn's party introduces an element the Seer cannot fully predict or control.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Finn's Progression</h2>
+  <div class="section-subtitle">The rise of the Fire Prophet under the Seer's guidance</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Ember — Novice Mage</h3>
+      <p>Finn enters the Mage Guild as a raw recruit. He knows nothing of AO's magic system. The Seer's visions guide him through the political minefield of the Guild. He learns the magical language, duels for survival, and emerges as the Guild's champion.</p>
+      <div class="power-bar"><div class="power-fill" style="width:25%"></div></div>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--silver-dim);">Fire Mastery: 25% · Prophetic Guidance: High</p>
+    </div>
+    <div class="card">
+      <h3>Flame — Champion</h3>
+      <p>Finn descends into the Abyss as the Mage Guild's champion. He learns metal manipulation through fire. His passion fuels his growing power. The Seer's influence becomes more distant — she has set him on the path and now watches him walk it.</p>
+      <div class="power-bar"><div class="power-fill" style="width:55%"></div></div>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--silver-dim);">Fire Mastery: 55% · Prophetic Guidance: Medium</p>
+    </div>
+    <div class="card">
+      <h3>Inferno — Prophet of the Flame</h3>
+      <p>Finn, despite losing his left arm, leads the siege on Lahab. He confronts Bilel and the demon king. The Seer's prophecy unfolds exactly as foretold. Finn fully ascends as the Fire Prophet — a messianic figure capable of leading armies and wielding the full power of the Flame.</p>
+      <div class="power-bar"><div class="power-fill" style="width:90%"></div></div>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--silver-dim);">Fire Mastery: 90% · Prophetic Guidance: Fulfilled</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Seer vs Other Gods</h2>
+  <div class="section-subtitle">How the Goddess of Fire compares to her divine peers</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Versus The Old Man (Darkness)</h3>
+      <p><strong>Similarities:</strong> Both are manipulative mentors who chose emotionally damaged Avatars. Both use their Avatars' pain as fuel. Both are winning the Avatar competition.<br><strong>Differences:</strong> The Old Man genuinely <strong>mentors and protects</strong> Jason — he saves him from the Seeker, guides his evolution, and takes pride in his growth. The Seer <strong>exploits and controls</strong> Finn — she offers an impossible prize and keeps him dependent. The Old Man wants his Avatar to succeed; the Seer wants her Avatar to <strong>need</strong> her.</p>
+    </div>
+    <div class="card">
+      <h3>Versus The Lady (Light)</h3>
+      <p><strong>Similarities:</strong> Both have distant, conditional relationships with their Avatars. Both chose champions from privileged backgrounds in the real world (Alex as a billionaire's son, Finn as a former Cerillion employee).<br><strong>Differences:</strong> The Lady's relationship is based on <strong>expectation</strong> — perform or be ignored. The Seer's is based on <strong>addiction</strong> — Finn is hooked on the promise of Rachael. The Lady's coldness pushes Alex away; the Seer's warmth (literal and figurative) pulls Finn deeper into her web.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, TV Tropes, Kevin Maschke's blog, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Fire Mana', 'Manipulation', 'Prophecy', 'Passion', 'Influence', 'Cruelty'],
+    datasets: [
+      { label: 'Age of Gods', data: [30, 20, 25, 25, 28, 15], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Cast Out (Exile)', data: [30, 22, 20, 25, 8, 18], borderColor: '#a02808', backgroundColor: 'rgba(160,40,8,0.05)', pointBackgroundColor: '#a02808', borderWidth: 2 },
+      { label: 'The Return (Modern)', data: [30, 28, 26, 28, 22, 22], borderColor: '#f57030', backgroundColor: 'rgba(245,112,48,0.05)', pointBackgroundColor: '#f57030', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#c8c0b4', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 35,
+        grid: { color: 'rgba(212,58,16,0.08)' },
+        angleLines: { color: 'rgba(212,58,16,0.08)' },
+        pointLabels: { color: '#c8c0b4', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Age of\nGods', 'The Fall\n(Exile)', 'Bilel\nEra', 'Ember\n(T1)', 'Flame\n(T2)', 'Inferno\n(T3)', 'Main\nSeries'],
+    datasets: [
+      { label: 'Divine Influence', data: [28, 5, 10, 15, 20, 28, 30], borderColor: '#f57030', backgroundColor: 'rgba(245,112,48,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#f57030', borderWidth: 2 },
+      { label: "Avatar's Power", data: [0, 0, 0, 10, 22, 32, 35], borderColor: '#d43a10', backgroundColor: 'rgba(212,58,16,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#d43a10', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Prophecy Reach', data: [25, 5, 8, 18, 22, 28, 30], borderColor: '#f5c040', backgroundColor: 'rgba(245,192,64,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#f5c040', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#c8c0b4', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#9a9088', font: { size: 9 } }, grid: { color: 'rgba(212,58,16,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 40, ticks: { color: '#f57030', font: { size: 9 } }, grid: { color: 'rgba(212,58,16,0.06)' }, title: { display: true, text: 'Influence', color: '#f57030', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 45, ticks: { color: '#d43a10', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: "Avatar's Power", color: '#d43a10', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#f5c040', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Prophecy Reach', color: '#f5c040', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

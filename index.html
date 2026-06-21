@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awaken Online — Compendium</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #12121a;
+    --dark3: #1a1a2e;
+    --dark4: #252540;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  .wrapper { max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
+  header {
+    text-align: center;
+    padding: 80px 20px 48px;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), rgba(255,255,255,0.3), rgba(255,255,255,0.15), transparent);
+  }
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b, #ef4444, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  header p {
+    color: var(--gray);
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    font-weight: 300;
+  }
+  header .sub {
+    color: rgba(255,255,255,0.2);
+    font-size: 0.8rem;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+  .section-block { margin-bottom: 64px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .section-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--white);
+  }
+  .section-header .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2), transparent);
+  }
+  .section-desc {
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-top: -16px;
+    margin-bottom: 24px;
+    padding-left: 2px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .sub-header {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .grid + .sub-header { margin-top: 28px; }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent, #555);
+    transition: height 0.25s ease;
+  }
+  .card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: var(--accent, #555);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .card:hover::before { height: 4px; }
+  .card .name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .card .desc {
+    font-size: 0.84rem;
+    color: var(--gray);
+    line-height: 1.55;
+    flex: 1;
+  }
+  .card .tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    align-self: flex-start;
+  }
+  .divider-bar {
+    height: 2px;
+    margin: 0 0 48px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), rgba(255,255,255,0.1), rgba(255,255,255,0.06), transparent);
+    border-radius: 1px;
+  }
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.15);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.8rem; letter-spacing: 3px; }
+    header { padding: 40px 20px 32px; }
+    .grid { grid-template-columns: 1fr; }
+    .wrapper { padding: 20px 16px; }
+    .section-header h2 { font-size: 1.1rem; white-space: normal; }
+  }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+<div class="wrapper">
+
+<header>
+  <h1>Awaken Online</h1>
+  <p>Character &amp; World Compendium</p>
+  <div class="sub">26 entries &bull; Complete series reference</div>
+</header>
+
+<!-- 1. Player Characters -->
+<div class="section-block">
+  <div class="section-header">
+    <h2>Player Characters</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="sub-header">Avatars</div>
+  <div class="grid">
+    <a href="jason_rhodes_character_breakdown.html" class="card" style="--accent:#a855f7;">
+      <span class="name">Jason Rhodes</span>
+      <span class="desc">The Dark Prophet &mdash; Necromancer lord of Twilight Throne, avatar of the Old Man.</span>
+      <span class="tag">Darkness</span>
+    </a>
+    <a href="alexion_character_breakdown.html" class="card" style="--accent:#facc15;">
+      <span class="name">Alexion</span>
+      <span class="desc">The Lightwarden &mdash; Paladin commander of Crystal Reach, avatar of the Lady.</span>
+      <span class="tag">Light</span>
+    </a>
+    <a href="eliza_character_breakdown.html" class="card" style="--accent:#2dd4bf;">
+      <span class="name">Eliza Zhao</span>
+      <span class="desc">The Tidebreaker &mdash; Beast master of Sea&rsquo;s Edge, bonded to Fluffy the hydra.</span>
+      <span class="tag">Water</span>
+    </a>
+    <a href="finn_harris_character_breakdown.html" class="card" style="--accent:#ef4444;">
+      <span class="name">Finn Harris</span>
+      <span class="desc">The Blazing Scion &mdash; Fire mage of Sandscrit, the Seer&rsquo;s champion in the Tarot war.</span>
+      <span class="tag">Fire</span>
+    </a>
+    <a href="dominic_hart_character_breakdown.html" class="card" style="--accent:#fbbf24;">
+      <span class="name">Dominic Hart</span>
+      <span class="desc">The Gilded Gambler &mdash; Luck-forged rogue of Boomtown, champion of the Gambler.</span>
+      <span class="tag">Air</span>
+    </a>
+    <a href="arcadia_landrey_character_breakdown.html" class="card" style="--accent:#84cc16;">
+      <span class="name">Arcadia Landrey</span>
+      <span class="desc">The Verdant Warden &mdash; Earth shaman ruler of Pax, unfrozen from ages past.</span>
+      <span class="tag">Earth</span>
+    </a>
+  </div>
+
+  <div class="sub-header">Non-Avatars</div>
+  <div class="grid">
+    <a href="riley_jones_character_breakdown.html" class="card" style="--accent:#d946ef;">
+      <span class="name">Riley Jones</span>
+      <span class="desc">The Shadow Dreamer &mdash; Siren queen of Lahab, master of mind and dream magic.</span>
+      <span class="tag">Darkness</span>
+    </a>
+    <a href="frank_cross_character_breakdown.html" class="card" style="--accent:#22c55e;">
+      <span class="name">Frank Cross</span>
+      <span class="desc">The Emerald Strategist &mdash; Master alchemist, guild leader, earth-aligned kingmaker.</span>
+      <span class="tag">Earth</span>
+    </a>
+    <a href="julia_harris_character_breakdown.html" class="card" style="--accent:#fb7185;">
+      <span class="name">Julia Harris</span>
+      <span class="desc">The Crimson Strategist &mdash; Finn&rsquo;s sister, fire mage and battlefield commander.</span>
+      <span class="tag">Fire</span>
+    </a>
+    <a href="kyyle_character_breakdown.html" class="card" style="--accent:#a3e635;">
+      <span class="name">Kyyle</span>
+      <span class="desc">The Sage of Sands &mdash; Elder druid of Lahab, desert prophet and healer.</span>
+      <span class="tag">Earth</span>
+    </a>
+  </div>
+</div>
+
+<div class="divider-bar"></div>
+
+<!-- 2. Primordial Gods -->
+<div class="section-block">
+  <div class="section-header">
+    <h2>Primordial Gods</h2>
+    <span class="line"></span>
+  </div>
+  <div class="section-desc">The six elemental deities who shaped Lamentia and chose champions to wage the Tarot war.</div>
+  <div class="grid">
+    <a href="old_man_god_of_darkness_character_breakdown.html" class="card" style="--accent:#6b21a8;">
+      <span class="name">The Old Man</span>
+      <span class="desc">God of Darkness &mdash; Primordial lord of shadow, death, and the void beyond.</span>
+      <span class="tag">Darkness</span>
+    </a>
+    <a href="the_lady_character_breakdown.html" class="card" style="--accent:#fef08a;">
+      <span class="name">The Lady</span>
+      <span class="desc">Goddess of Light &mdash; Radiant mother of creation, eternal champion of order.</span>
+      <span class="tag">Light</span>
+    </a>
+    <a href="the_hippie_character_breakdown.html" class="card" style="--accent:#2dd4bf;">
+      <span class="name">The Hippie</span>
+      <span class="desc">God of Water &mdash; Oceanic force of change, tide, and boundless freedom.</span>
+      <span class="tag">Water</span>
+    </a>
+    <a href="the_seer_character_breakdown.html" class="card" style="--accent:#ef4444;">
+      <span class="name">The Seer</span>
+      <span class="desc">Goddess of Fire &mdash; Blazing eye of prophecy, destruction and rebirth incarnate.</span>
+      <span class="tag">Fire</span>
+    </a>
+    <a href="the_gambler_character_breakdown.html" class="card" style="--accent:#38bdf8;">
+      <span class="name">The Gambler</span>
+      <span class="desc">God of Air &mdash; Keeper of luck, fortune, and the winds of chance.</span>
+      <span class="tag">Air</span>
+    </a>
+  </div>
+</div>
+
+<div class="divider-bar"></div>
+
+<!-- 3. Timelines -->
+<div class="section-block">
+  <div class="section-header">
+    <h2>Timelines</h2>
+    <span class="line"></span>
+  </div>
+  <div class="section-desc">Complete chronology of the series from the Age of Gods through the Tarot war and beyond.</div>
+  <div class="grid">
+    <a href="awaken_online_global_timeline.html" class="card" style="--accent:#a855f7;">
+      <span class="name">Global Timeline</span>
+      <span class="desc">Full series chronology — Creation, Age of Gods, launch, and all major arcs through the Tarot era.</span>
+      <span class="tag">Reference</span>
+    </a>
+    <a href="awaken_online_visual_path_timeline.html" class="card" style="--accent:#f59e0b;">
+      <span class="name">Visual Path Timeline</span>
+      <span class="desc">Interactive SVG winding path with 20 event nodes, color-coded eras, and scroll animations.</span>
+      <span class="tag">Interactive</span>
+    </a>
+  </div>
+</div>
+
+<div class="divider-bar"></div>
+
+<!-- 4. Locations -->
+<div class="section-block">
+  <div class="section-header">
+    <h2>Locations</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="sub-header">Faction Capitals</div>
+  <div class="grid">
+    <a href="twilight_throne_breakdown.html" class="card" style="--accent:#7b2d8e;">
+      <span class="name">Twilight Throne</span>
+      <span class="desc">Darkness affinity capital &mdash; Gothic necropolis fortress of the Dark Prophet.</span>
+      <span class="tag">Darkness</span>
+    </a>
+    <a href="crystal_reach_breakdown.html" class="card" style="--accent:#fef08a;">
+      <span class="name">Crystal Reach</span>
+      <span class="desc">Light affinity capital &mdash; Golden fortress of the Lightwarden, fallen from grace.</span>
+      <span class="tag">Light</span>
+    </a>
+    <a href="seas_edge_breakdown.html" class="card" style="--accent:#2dd4bf;">
+      <span class="name">Sea&rsquo;s Edge</span>
+      <span class="desc">Water affinity capital &mdash; Coastal merfolk city, home of Eliza and Fluffy.</span>
+      <span class="tag">Water</span>
+    </a>
+    <a href="sandscrit_breakdown.html" class="card" style="--accent:#ef4444;">
+      <span class="name">Sandscrit</span>
+      <span class="desc">Fire affinity capital &mdash; Blazing desert forge-city of the Seer.</span>
+      <span class="tag">Fire</span>
+    </a>
+    <a href="boomtown_breakdown.html" class="card" style="--accent:#38bdf8;">
+      <span class="name">Boomtown</span>
+      <span class="desc">Air affinity capital &mdash; Lawless luck-fueled frontier town of the Gambler.</span>
+      <span class="tag">Air</span>
+    </a>
+    <a href="pax_breakdown.html" class="card" style="--accent:#84cc16;">
+      <span class="name">Pax</span>
+      <span class="desc">Earth affinity capital &mdash; Ancient stone city of the Verdant Warden, unfrozen in Timeless.</span>
+      <span class="tag">Earth</span>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  Awaken Online Compendium &bull; Built from source materials, wiki, and community research
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

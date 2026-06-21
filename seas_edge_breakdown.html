@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea's Edge &mdash; Capital of the Water Affinity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --teal: #14b8a6;
+            --cyan: #06b6d4;
+            --sand: #e8dcc8;
+            --coral: #f97316;
+            --ocean: #0c4a6e;
+            --ocean-dark: #082f49;
+            --aqua: #67e8f9;
+            --gold: #f59e0b;
+            --deep: #0f172a;
+            --panel: #1e293b;
+            --border: #334155;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --coral-light: #fb923c;
+            --teal-dark: #0d9488;
+            --cyan-dark: #0891b2;
+            --wave-1: rgba(6,182,212,0.08);
+            --wave-2: rgba(20,184,166,0.05);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.04em; }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--aqua);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--deep) 40%, #0a1a2e 70%, var(--ocean-dark) 100%);
+            overflow: hidden;
+            padding: 2rem;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 80%, rgba(6,182,212,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 20%, rgba(20,184,166,0.10) 0%, transparent 60%),
+                radial-gradient(ellipse 100% 40% at 50% 100%, rgba(6,182,212,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+        }
+        .hero-waves svg { width: 100%; height: 100%; }
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            background: linear-gradient(135deg, var(--aqua) 0%, var(--teal) 40%, var(--gold) 70%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(6,182,212,0.3);
+            position: relative;
+            z-index: 2;
+            line-height: 1.1;
+        }
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--sand);
+            font-style: italic;
+            letter-spacing: 0.08em;
+            margin-top: 0.75rem;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 1.5rem auto;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-tagline {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.8;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .hero-stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: float 2.5s ease-in-out infinite;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .scroll-hint span { display: block; width: 1px; height: 30px; background: var(--text-dim); }
+        @keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+        /* Sections */
+        section { padding: 5rem 0; position: relative; }
+        .section-alt { background: var(--ocean-dark); }
+
+        /* Timeline */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 1rem 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--teal), var(--cyan), var(--gold), transparent);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+        .timeline-content {
+            width: 44%;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .timeline-content:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 30px rgba(6,182,212,0.08);
+        }
+        .timeline-content h4 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .timeline-content p {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--teal);
+            border: 3px solid var(--deep);
+            z-index: 2;
+            top: 1.5rem;
+        }
+        .timeline-item:nth-child(1) .timeline-dot { background: var(--sand); }
+        .timeline-item:nth-child(2) .timeline-dot { background: var(--coral); }
+        .timeline-item:nth-child(3) .timeline-dot { background: var(--gold); }
+        .timeline-item:nth-child(4) .timeline-dot { background: var(--aqua); }
+        .timeline-item:nth-child(5) .timeline-dot { background: var(--teal); }
+        .timeline-year {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: var(--cyan);
+            letter-spacing: 0.08em;
+        }
+        @media(max-width:640px){
+            .timeline::before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(odd) { flex-direction: row; }
+            .timeline-content { width: calc(100% - 50px); margin-left: 50px; }
+            .timeline-dot { left: 20px; }
+        }
+
+        /* City layout - map dots */
+        .city-map {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+        .district-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .district-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--cyan));
+            opacity: 0.6;
+        }
+        .district-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--teal);
+            box-shadow: 0 12px 40px rgba(6,182,212,0.10);
+        }
+        .district-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .district-card h4 { color: var(--aqua); font-size: 1rem; margin-bottom: 0.5rem; font-family: 'Cinzel', serif; }
+        .district-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+        .district-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: rgba(6,182,212,0.1);
+            color: var(--cyan);
+            border: 1px solid rgba(6,182,212,0.2);
+            margin-top: 0.5rem;
+        }
+
+        /* Defenses grid */
+        .defense-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+        }
+        .defense-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .defense-card:hover { border-color: var(--coral); }
+        .defense-card .icon { font-size: 2rem; color: var(--coral); }
+        .defense-card h4 { color: var(--sand); font-size: 0.95rem; margin: 0.5rem 0 0.3rem; }
+        .defense-card p { font-size: 0.8rem; color: var(--text-dim); }
+
+        /* Inhabitants */
+        .inhabitants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .inhab-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: border-color 0.3s, transform 0.25s;
+        }
+        .inhab-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+        .inhab-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+            border: 2px solid var(--border);
+        }
+        .inhab-card h4 { color: var(--gold); font-size: 1rem; }
+        .inhab-role {
+            font-size: 0.75rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+        .inhab-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+
+        /* Territories */
+        .territory-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .territory-item {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .territory-item:hover { border-color: var(--teal); }
+        .territory-item .icon { font-size: 1.5rem; }
+        .territory-item h4 { color: var(--aqua); font-size: 0.9rem; margin: 0.3rem 0 0.2rem; }
+        .territory-item p { font-size: 0.78rem; color: var(--text-dim); }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .chart-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+        .chart-card h4 {
+            color: var(--sand);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+        }
+        .chart-card canvas { width: 100% !important; height: auto !important; max-height: 250px; }
+        @media(max-width:768px){ .charts-grid { grid-template-columns: 1fr; } }
+
+        /* Events */
+        .events-list { max-width: 800px; margin: 0 auto; }
+        .event-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .event-item:last-child { border-bottom: none; }
+        .event-icon { font-size: 1.3rem; min-width: 2rem; text-align: center; padding-top: 2px; }
+        .event-content h4 { color: var(--gold); font-size: 0.9rem; }
+        .event-content p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+        .event-date {
+            font-size: 0.7rem;
+            font-family: 'Orbitron', monospace;
+            color: var(--cyan);
+            letter-spacing: 0.05em;
+        }
+
+        /* Economy bars */
+        .econ-bars { margin-top: 1rem; }
+        .econ-bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .econ-bar-label { font-size: 0.78rem; color: var(--text-dim); min-width: 100px; }
+        .econ-bar-track {
+            flex: 1;
+            height: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .econ-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1.5s ease;
+        }
+        .econ-bar-val { font-size: 0.78rem; color: var(--gold); min-width: 40px; text-align: right; font-family: 'Orbitron', monospace; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+        footer .footer-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        footer strong { color: var(--teal); }
+
+        /* Section header */
+        .section-header { text-align: center; margin-bottom: 2.5rem; }
+        .section-header p { color: var(--text-dim); max-width: 600px; margin: 0.5rem auto 0; font-size: 0.9rem; }
+
+        /* Misc */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .gold-text { color: var(--gold); }
+        .teal-text { color: var(--teal); }
+        .aqua-text { color: var(--aqua); }
+    
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__ current" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-waves">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,40 C360,100 720,0 1080,60 C1260,90 1400,50 1440,40 L1440,120 L0,120 Z" fill="rgba(6,182,212,0.06)"/>
+            <path d="M0,60 C360,20 720,80 1080,40 C1260,20 1400,70 1440,60 L1440,120 L0,120 Z" fill="rgba(20,184,166,0.04)"/>
+            <path d="M0,80 C360,120 720,40 1080,80 C1260,100 1400,60 1440,80 L1440,120 L0,120 Z" fill="rgba(6,182,212,0.02)"/>
+        </svg>
+    </div>
+    <h1 class="hero-title">SEA'S EDGE</h1>
+    <p class="hero-subtitle">&#9875; Capital of the Water Affinity &#9875;</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">
+        From a humble fishing village called Falcon's Hook to the seat of water-mana power &mdash;
+        the city of Sea's Edge stands as a bastion of the Water Affinity, ruled by the unlikely sovereign Fluffy.
+    </p>
+    <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-value">&#9819;</div><div class="hero-stat-label">Ruler: Fluffy</div></div>
+        <div class="hero-stat"><div class="hero-stat-value">&#9879;</div><div class="hero-stat-label">Water Affinity Capital</div></div>
+        <div class="hero-stat"><div class="hero-stat-value">&#9875;</div><div class="hero-stat-label">Coastal Harbor City</div></div>
+        <div class="hero-stat"><div class="hero-stat-value">&#9733;</div><div class="hero-stat-label">Merfolk Starting Zone</div></div>
+    </div>
+    <div class="scroll-hint">Scroll <span></span></div>
+</section>
+
+<!-- History Timeline -->
+<section>
+    <div class="container">
+        <h2>&#9876; History &amp; Origins</h2>
+        <div class="section-header"><p>The evolution of Sea's Edge from a forgotten fishing village to the heart of the Water Affinity.</p></div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-year">&#9733; EARLY ERA</span>
+                    <h4>Falcon's Hook Founded</h4>
+                    <p>A small fishing village on the coast, serving as a quiet trading port for local fishermen and merchants. Named for the curved hook of the shoreline where peregrine falcons once nested.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-year">&#9876; BOOK 3.5 &mdash; APATHY</span>
+                    <h4>Lizardman Invasion</h4>
+                    <p>A horde of lizardmen emerged from the sea and laid siege to Falcon's Hook. The town's meager defenses were overwhelmed. Eliza Zhao and the members of Original Sin rushed to defend the settlement.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-year">&#10022; THE TRANSFORMATION</span>
+                    <h4>Reborn as Sea's Edge</h4>
+                    <p>After repelling the invasion, Eliza leveraged her alchemy expertise and the favor of the Water God to transform the ruined village into a proper city. The settlement was renamed Sea's Edge &mdash; the first capital of the Water Affinity.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-year">&#9819; THE CORONATION</span>
+                    <h4>Fluffy Takes the Throne</h4>
+                    <p>In an unprecedented move, the city was placed under the nominal rule of Fluffy &mdash; the Hippie's sheep companion. Eliza was appointed regent and governor, managing the city's affairs on behalf of the Twilight Throne and Original Sin.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-year">&#128293; BOOK 6 &mdash; ARMAGEDDON</span>
+                    <h4>The War of Affinities</h4>
+                    <p>Sea's Edge became a strategic stronghold during the conflict between affinities. Its water-mana reserves, alchemical stockpiles, and naval power made it a critical asset for the Twilight Throne's war effort.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="container">
+        <h2>&#127760; City Layout</h2>
+        <div class="section-header"><p>The districts and key locations that make up the city of Sea's Edge.</p></div>
+        <div class="city-map">
+            <div class="district-card">
+                <div class="district-icon">&#9875;</div>
+                <h4>Harbor &amp; Docks</h4>
+                <p>The bustling heart of Sea's Edge commerce. Fishing vessels, trade galleons, and naval ships crowd the piers. A massive harbor chain can be raised to seal the port against attack.</p>
+                <span class="district-tag">Economy &amp; Trade</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9733;</div>
+                <h4>Market District</h4>
+                <p>Stalls and shops line the cobblestone streets, selling everything from exotic sea-silk to water-infused enchantments. Merchants from across the continent come to trade here.</p>
+                <span class="district-tag">Commerce</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9879;</div>
+                <h4>Alchemy Quarter</h4>
+                <p>Eliza's personal workshops and laboratories dominate this district. Cauldrons bubble day and night, producing potions, elixirs, and alchemical weapons that fuel the city's economy and defenses.</p>
+                <span class="district-tag">Eliza's Domain</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9968;</div>
+                <h4>Lighthouse</h4>
+                <p>A towering structure of pale stone and crystal, its beacon powered by water-mana. Guides ships safely through the coral reefs and serves as a lookout post for approaching threats.</p>
+                <span class="district-tag">Navigation &amp; Defense</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9829;</div>
+                <h4>Merfolk Quarter</h4>
+                <p>A unique district built along the water's edge, with submerged chambers and tidal pools. Home to Merfolk players and NPCs who begin their journey in Sea's Edge. Coral gardens line the canals.</p>
+                <span class="district-tag">Merfolk Starting Area</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9813;</div>
+                <h4>Town Hall</h4>
+                <p>The administrative center where Eliza governs on behalf of Fluffy. A grand hall of marble and sea-glass, adorned with tapestries depicting the city's history and the symbols of the Water Affinity.</p>
+                <span class="district-tag">Government</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9881;</div>
+                <h4>Sea Wall</h4>
+                <p>A massive fortification of stone reinforced with water-mana, curving along the coastline. Studded with ballistae and manned by water mages who can summon tidal barriers against invaders.</p>
+                <span class="district-tag">Primary Defense</span>
+            </div>
+            <div class="district-card">
+                <div class="district-icon">&#9788;</div>
+                <h4>Sunken Gardens</h4>
+                <p>Terraced gardens of bioluminescent flora and tide pools, a tranquil space where water-attuned NPCs and players can meditate and restore mana. The gardens are said to channel ambient water energy.</p>
+                <span class="district-tag">Recreation &amp; Mana</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Defenses -->
+<section>
+    <div class="container">
+        <h2>&#9876; City Defenses</h2>
+        <div class="section-header"><p>Sea's Edge is protected by layered defenses that leverage the power of the Water Affinity.</p></div>
+        <div class="defense-grid">
+            <div class="defense-card">
+                <div class="icon">&#9875;</div>
+                <h4>Sea Wall</h4>
+                <p>Twenty feet of enchanted stone curving along the coastline, reinforced with water-mana that causes it to regenerate from damage. Ballistae line the parapets.</p>
+            </div>
+            <div class="defense-card">
+                <div class="icon">&#9876;</div>
+                <h4>Harbor Chain</h4>
+                <p>A massive iron chain strung across the harbor entrance, raised and lowered by water-powered winches. Prevents enemy vessels from sailing into the port.</p>
+            </div>
+            <div class="defense-card">
+                <div class="icon">&#9879;</div>
+                <h4>Water Mages</h4>
+                <p>A cadre of water-attuned mages who patrol the walls and harbor. They can summon tidal waves, freezing mist, and water shields to repel attackers.</p>
+            </div>
+            <div class="defense-card">
+                <div class="icon">&#9992;</div>
+                <h4>Naval Militia</h4>
+                <p>A fleet of swift warships crewed by veteran sailors and water-affinity fighters. They patrol the coastal waters and coral reefs, intercepting threats before they reach the city.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="container">
+        <h2>&#9822; Key Inhabitants</h2>
+        <div class="section-header"><p>The people and beings who shape Sea's Edge.</p></div>
+        <div class="inhabitants-grid">
+            <div class="inhab-card">
+                <div class="inhab-avatar" style="background:rgba(245,158,11,0.1);border-color:var(--gold);">&#9819;</div>
+                <h4>Fluffy</h4>
+                <div class="inhab-role">Ruler of Sea's Edge</div>
+                <p>A sheep. Formerly the Hippie's pet, now the unlikely sovereign of the Water Affinity's capital. Fluffy reigns from a custom throne in the Town Hall, tended to by dedicated NPCs.</p>
+            </div>
+            <div class="inhab-card">
+                <div class="inhab-avatar" style="background:rgba(6,182,212,0.1);border-color:var(--cyan);">&#9879;</div>
+                <h4>Eliza Zhao</h4>
+                <div class="inhab-role">Regent &amp; Governor</div>
+                <p>The de facto ruler of Sea's Edge. A master alchemist and member of Original Sin. Eliza rebuilt the city after the lizardman invasion. She manages trade, defense, and diplomacy on Fluffy's behalf.</p>
+            </div>
+            <div class="inhab-card">
+                <div class="inhab-avatar" style="background:rgba(20,184,166,0.1);border-color:var(--teal);">&#9788;</div>
+                <h4>The Hippie</h4>
+                <div class="inhab-role">Water God</div>
+                <p>The Water Affinity's patron deity, a being of immense power. The Hippie has a strong presence in Sea's Edge and blessed the city's founding. His symbol is woven into the city's architecture and banners.</p>
+            </div>
+            <div class="inhab-card">
+                <div class="inhab-avatar" style="background:rgba(249,115,22,0.1);border-color:var(--coral);">&#9876;</div>
+                <h4>Captain Aldric</h4>
+                <div class="inhab-role>Harbormaster</div>
+                <p>A weathered sailor who served Falcon's Hook long before it became Sea's Edge. He commands the harbor defenses and leads the naval militia with practiced precision.</p>
+            </div>
+            <div class="inhab-card">
+                <div class="inhab-avatar" style="background:rgba(103,232,249,0.1);border-color:var(--aqua);">&#9879;</div>
+                <h4>Merchant Lord Vesper</h4>
+                <div class="inhab-role">Trade Authority</div>
+                <p>A water-affinity merchant who controls the flow of goods through the market district. His trading company has established routes across the continent, making Sea's Edge a hub of commerce.</p>
+            </div>
+            <div class="inhab-card">
+                <div class="inhab-avatar" style="background:rgba(232,220,200,0.1);border-color:var(--sand);">&#9734;</div>
+                <h4>Mira Tidecaller</h4>
+                <div class="inhab-role">Archmage of the Waters</div>
+                <p>The leader of Sea's Edge water mages. Mira is responsible for maintaining the city's mana wards, training new mages, and coordinating magical defenses during sieges.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2>&#127760; Territories &amp; Influence</h2>
+        <div class="section-header"><p>Sea's Edge projects power across the coastal regions and beyond.</p></div>
+        <div class="territory-list">
+            <div class="territory-item">
+                <div class="icon">&#9875;</div>
+                <h4>The Coral Coast</h4>
+                <p>Fishing villages and watchtowers along the shoreline owe allegiance to Sea's Edge.</p>
+            </div>
+            <div class="territory-item">
+                <div class="icon">&#9968;</div>
+                <h4>Reach of the Tide</h4>
+                <p>Water-attuned NPCs and players within the city's range gain passive water-ability bonuses.</p>
+            </div>
+            <div class="territory-item">
+                <div class="icon">&#9879;</div>
+                <h4>Alchemy Trade Network</h4>
+                <p>Eliza's potions and alchemical goods are shipped to markets across every affinity.</p>
+            </div>
+            <div class="territory-item">
+                <div class="icon">&#9829;</div>
+                <h4>Merfolk Enclaves</h4>
+                <p>Underwater settlements and coral cities that look to Sea's Edge as their surface capital.</p>
+            </div>
+            <div class="territory-item">
+                <div class="icon">&#9788;</div>
+                <h4>Twilight Throne Alliance</h4>
+                <p>A loyal member of the Twilight Throne's coalition, providing naval and alchemical support.</p>
+            </div>
+            <div class="territory-item">
+                <div class="icon">&#8734;</div>
+                <h4>Water-Mana Nexus</h4>
+                <p>The city sits atop a confluence of water mana, making it a prime location for enchanting and crafting.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="container">
+        <h2>&#9881; City Evolution</h2>
+        <div class="section-header"><p>Key metrics showing the growth and development of Sea's Edge over time.</p></div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4>&#9875; Population Growth</h4>
+                <canvas id="chartPopulation"></canvas>
+            </div>
+            <div class="chart-card">
+                <h4>&#9879; Alchemy Output (Potions/Month)</h4>
+                <canvas id="chartAlchemy"></canvas>
+            </div>
+            <div class="chart-card">
+                <h4>&#9876; Trade Volume (Gold/Month)</h4>
+                <canvas id="chartTrade"></canvas>
+            </div>
+            <div class="chart-card">
+                <h4>&#9822; Military Strength</h4>
+                <canvas id="chartMilitary"></canvas>
+            </div>
+        </div>
+        <div class="econ-bars" style="max-width:600px;margin:2.5rem auto 0;">
+            <h4 style="text-align:center;color:var(--sand);margin-bottom:1.2rem;font-size:0.9rem;">&#9881; Economic Breakdown</h4>
+            <div class="econ-bar-row"><span class="econ-bar-label">Fishing</span><div class="econ-bar-track"><div class="econ-bar-fill" style="width:70%;background:linear-gradient(90deg,var(--cyan),var(--teal));"></div></div><span class="econ-bar-val">70%</span></div>
+            <div class="econ-bar-row"><span class="econ-bar-label">Trade &amp; Shipping</span><div class="econ-bar-track"><div class="econ-bar-fill" style="width:85%;background:linear-gradient(90deg,var(--teal),var(--gold));"></div></div><span class="econ-bar-val">85%</span></div>
+            <div class="econ-bar-row"><span class="econ-bar-label">Alchemy</span><div class="econ-bar-track"><div class="econ-bar-fill" style="width:90%;background:linear-gradient(90deg,var(--gold),var(--coral));"></div></div><span class="econ-bar-val">90%</span></div>
+            <div class="econ-bar-row"><span class="econ-bar-label">Water-Mana Crafting</span><div class="econ-bar-track"><div class="econ-bar-fill" style="width:65%;background:linear-gradient(90deg,var(--coral),var(--aqua));"></div></div><span class="econ-bar-val">65%</span></div>
+            <div class="econ-bar-row"><span class="econ-bar-label">Naval Contracts</span><div class="econ-bar-track"><div class="econ-bar-fill" style="width:55%;background:linear-gradient(90deg,var(--aqua),var(--cyan));"></div></div><span class="econ-bar-val">55%</span></div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2>&#10022; Major Events</h2>
+        <div class="section-header"><p>Key moments in the history of Sea's Edge.</p></div>
+        <div class="events-list">
+            <div class="event-item">
+                <div class="event-icon">&#9875;</div>
+                <div class="event-content">
+                    <span class="event-date">&#9733; PRE-GAME</span>
+                    <h4>Founding of Falcon's Hook</h4>
+                    <p>A small fishing settlement is established on the curved hook of the coastline. It grows slowly as a waypoint for coastal traders.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#9876;</div>
+                <div class="event-content">
+                    <span class="event-date">&#9876; APATHY (BOOK 3.5)</span>
+                    <h4>Lizardman Invasion</h4>
+                    <p>A massive lizardman force attacks Falcon's Hook. Eliza Zhao and Original Sin arrive to defend the town. The battle reshapes the coastline and nearly destroys the settlement.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#10022;</div>
+                <div class="event-content">
+                    <span class="event-date">&#10022; REBUILDING</span>
+                    <h4>Sea's Edge Founded</h4>
+                    <p>Eliza negotiates with the Twilight Throne and the Water God to rebuild and rechristen the settlement as Sea's Edge &mdash; the first Water Affinity capital.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#9819;</div>
+                <div class="event-content">
+                    <span class="event-date">&#9819; PROCLAMATION</span>
+                    <h4>Fluffy Crowned Ruler</h4>
+                    <p>In a controversial and unprecedented decree, the Hippie installs Fluffy as the nominal ruler of Sea's Edge. Eliza is appointed regent. The announcement shocks the political landscape.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#9879;</div>
+                <div class="event-content">
+                    <span class="event-date">&#9879; EXPANSION</span>
+                    <h4>Alchemy Quarter Established</h4>
+                    <p>Eliza's alchemy operations outgrow temporary workshops. A dedicated district is constructed, complete with laboratories, storage vaults, and a merchant exchange for potions.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#9829;</div>
+                <div class="event-content">
+                    <span class="event-date">&#9829; MERFOLK ACCORD</span>
+                    <h4>Merfolk Quarter Opened</h4>
+                    <p>Sea's Edge becomes the starting city for Merfolk players. Submerged districts and tidal accommodations are built, establishing a permanent Merfolk population in the city.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#128293;</div>
+                <div class="event-content">
+                    <span class="event-date">&#128293; ARMAGEDDON (BOOK 6)</span>
+                    <h4>The Affinity War</h4>
+                    <p>Sea's Edge serves as a strategic hub during the war. The city's alchemical stockpiles, naval fleet, and water-mage corps prove decisive in multiple engagements.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-icon">&#9881;</div>
+                <div class="event-content">
+                    <span class="event-date">&#9881; ONGOING</span>
+                    <h4>The Age of Water</h4>
+                    <p>Sea's Edge continues to grow as a center of water affinity power, trade, and alchemical innovation. The city stands as proof of what a dedicated group of players can build.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-icon">&#9875;</div>
+        <p><strong>Sea's Edge</strong> &mdash; Capital of the Water Affinity</p>
+        <p>From the <em>Awaken Online</em> series by <strong>Travis Bagwell</strong></p>
+        <p style="margin-top:0.75rem;font-size:0.7rem;letter-spacing:0.05em;">
+            Featured in <strong>Apathy</strong> (Side Quest, Book 3.5) &amp; <strong>Armageddon</strong> (Book 6)
+        </p>
+        <p style="margin-top:0.5rem;font-size:0.65rem;color:var(--text-dim);opacity:0.6;">
+            &#9819; Rule by Fluffy &bull; &#9879; Governed by Eliza Zhao &bull; &#9788; Blessed by the Hippie
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function fadeInOnScroll() {
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        document.querySelectorAll('.district-card, .defense-card, .inhab-card, .territory-item, .event-item, .chart-card, .timeline-item').forEach(function(el) {
+            el.classList.add('fade-in');
+        });
+        fadeInOnScroll();
+        window.addEventListener('scroll', fadeInOnScroll);
+
+        var chartDefaults = {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    labels: { color: '#94a3b8', font: { family: 'Inter', size: 11 } }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#94a3b8', font: { family: 'Inter', size: 10 } },
+                    grid: { color: 'rgba(255,255,255,0.04)' }
+                },
+                y: {
+                    ticks: { color: '#94a3b8', font: { family: 'Inter', size: 10 } },
+                    grid: { color: 'rgba(255,255,255,0.04)' }
+                }
+            }
+        };
+
+        // Population - Bar
+        new Chart(document.getElementById('chartPopulation'), {
+            type: 'bar',
+            data: {
+                labels: ['Pre-Invasion', 'Post-Invasion', 'Year 1', 'Year 2', 'Year 3', 'Year 5'],
+                datasets: [{
+                    label: 'Population',
+                    data: [340, 210, 820, 1850, 3200, 5400],
+                    backgroundColor: ['rgba(232,220,200,0.6)', 'rgba(249,115,22,0.6)', 'rgba(20,184,166,0.6)', 'rgba(6,182,212,0.6)', 'rgba(245,158,11,0.6)', 'rgba(103,232,249,0.6)'],
+                    borderColor: ['#e8dcc8', '#f97316', '#14b8a6', '#06b6d4', '#f59e0b', '#67e8f9'],
+                    borderWidth: 1,
+                    borderRadius: 3
+                }]
+            },
+            options: Object.assign({}, chartDefaults, {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { ticks: { color: '#94a3b8', font: { family: 'Inter', size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+                    y: { beginAtZero: true, ticks: { color: '#94a3b8', font: { family: 'Inter', size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+                }
+            })
+        });
+
+        // Alchemy - Doughnut
+        new Chart(document.getElementById('chartAlchemy'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Health Potions', 'Mana Potions', 'Stamina Elixirs', 'Combat Buffs', 'Alchemical Bombs'],
+                datasets: [{
+                    data: [35, 25, 18, 14, 8],
+                    backgroundColor: ['rgba(6,182,212,0.7)', 'rgba(20,184,166,0.7)', 'rgba(245,158,11,0.7)', 'rgba(249,115,22,0.7)', 'rgba(103,232,249,0.7)'],
+                    borderColor: ['#06b6d4', '#14b8a6', '#f59e0b', '#f97316', '#67e8f9'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#94a3b8', font: { family: 'Inter', size: 10 }, padding: 12 }
+                    }
+                }
+            }
+        });
+
+        // Trade - Line
+        new Chart(document.getElementById('chartTrade'), {
+            type: 'line',
+            data: {
+                labels: ['Year 0', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'Trade Volume',
+                    data: [1200, 4800, 12500, 28000, 52000, 89000],
+                    borderColor: '#14b8a6',
+                    backgroundColor: 'rgba(20,184,166,0.08)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#f59e0b',
+                    pointBorderColor: '#f59e0b',
+                    pointRadius: 3
+                }]
+            },
+            options: Object.assign({}, chartDefaults, {
+                scales: {
+                    x: { ticks: { color: '#94a3b8', font: { family: 'Inter', size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+                    y: { beginAtZero: true, ticks: { color: '#94a3b8', font: { family: 'Inter', size: 9 }, callback: function(v) { return v.toLocaleString(); } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+                }
+            })
+        });
+
+        // Military - Polar Area
+        new Chart(document.getElementById('chartMilitary'), {
+            type: 'polarArea',
+            data: {
+                labels: ['Water Mages', 'Naval Militia', 'City Guard', 'Ballista Crews', 'Alchemist Support'],
+                datasets: [{
+                    data: [45, 80, 60, 30, 25],
+                    backgroundColor: [
+                        'rgba(6,182,212,0.5)',
+                        'rgba(20,184,166,0.5)',
+                        'rgba(245,158,11,0.5)',
+                        'rgba(249,115,22,0.5)',
+                        'rgba(103,232,249,0.5)'
+                    ],
+                    borderColor: ['#06b6d4', '#14b8a6', '#f59e0b', '#f97316', '#67e8f9'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#94a3b8', font: { family: 'Inter', size: 10 }, padding: 12 }
+                    }
+                },
+                scales: {
+                    r: {
+                        ticks: { color: '#94a3b8', font: { family: 'Inter', size: 9 }, backdropColor: 'transparent' },
+                        grid: { color: 'rgba(255,255,255,0.06)' }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riley Jones — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #0f0d15;
+    --dark3: #1a1428;
+    --dark4: #2a1f3d;
+    --purple-dark: #4a1a6b;
+    --purple: #7b2d8e;
+    --purple-glow: #c084fc;
+    --purple-dim: #581c6e;
+    --pink: #d946ef;
+    --pink-glow: #f0abfc;
+    --gold: #fbbf24;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --green: #10b981;
+    --cyan: #06b6d4;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #0e0a1a 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--purple-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(192,132,252,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--purple-glow); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--purple-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(123,45,142,0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(217,70,239,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--purple-glow) 50%, var(--pink-glow) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 600px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.archer { border-color: var(--purple-dim); color: var(--purple-glow); }
+  .tags.dark { border-color: var(--purple-dim); color: var(--purple); }
+  .tags.retribution { border-color: var(--pink); color: var(--pink-glow); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--purple-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--purple), var(--pink));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card-grid-5 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+  .card {
+    background: rgba(15,13,21,0.8); border: 1px solid rgba(192,132,252,0.08);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(192,132,252,0.25); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--purple-glow); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--purple); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--purple-dark), var(--purple-glow), var(--pink));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--purple-glow);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--purple-glow); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(15,13,21,0.8); border: 1px solid rgba(192,132,252,0.08);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(192,132,252,0.25); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--purple); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(15,13,21,0.6); border: 1px solid rgba(192,132,252,0.08);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--purple-glow); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(15,13,21,0.8); border: 1px solid rgba(192,132,252,0.08);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(192,132,252,0.25); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(192,132,252,0.12); color: var(--purple-glow); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-purple { background: rgba(192,132,252,0.12); color: var(--purple-glow); }
+  .badge-pink { background: rgba(217,70,239,0.12); color: var(--pink-glow); }
+  .badge-cyan { background: rgba(6,182,212,0.12); color: var(--cyan); }
+  .badge-red { background: rgba(239,68,68,0.12); color: var(--red); }
+  .badge-green { background: rgba(16,185,129,0.12); color: var(--green); }
+  .badge-gold { background: rgba(251,191,36,0.12); color: var(--gold); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(15,13,21,0.6); border: 1px solid rgba(192,132,252,0.08);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(192,132,252,0.08);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__ current" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>RILEY JONES</h1>
+    <div class="subtitle">The Dark Archer · Right Hand of the Dark Lord · Avenger of Vaerwald</div>
+    <p class="tagline">From bullied lacrosse player to Jason's most trusted ally — the complete breakdown of the woman who beheaded Alexion and found her own path of retribution.</p>
+    <div class="tags">
+      <span class="tags archer">Dark Archer</span>
+      <span class="tags dark">Dark Affinity</span>
+      <span class="tags retribution">Avenger</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">6+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Protagonist Book</div></div>
+    <div class="stat-box"><div class="number">Dark</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Bow</div><div class="label">Signature Weapon</div></div>
+    <div class="stat-box"><div class="number">Twilight</div><div class="label">Throne Faction</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Alexion Decapitation</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life — Riley Marie Jones</h3>
+      <ul>
+        <li><strong>Age:</strong> 18 at series start</li>
+        <li><strong>Appearance:</strong> Blonde hair, petite frame, described as having an almost glowing energy and confidence. Kind face. "Not the prettiest girl at school" but has an effervescent quality that draws people in.</li>
+        <li><strong>School:</strong> Richmond Private School. Senior. Member of the lacrosse team.</li>
+        <li><strong>Family:</strong> Wealthy (attends Richmond), but unlike Alex, she turned out decent.</li>
+        <li><strong>Personality:</strong> Kindest person at school. Was always nice to Jason despite his outcast status. But she has a breaking point — when pushed, rage and fury emerge. She struggles with trusting people after Alex's betrayal.</li>
+        <li><strong>Relationship with Alex:</strong> Was dating him before discovering his true sociopathic nature. Alex blackmailed her with embarrassing photos/videos to stay with him. After she confronted and left him, the girls at school tormented her on his behalf.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game — Riley Jones</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Riley (same)</li>
+        <li><strong>Class:</strong> Archer (Dark Affinity archer)</li>
+        <li><strong>Alignmenbt:</strong> Lawful Evil</li>
+        <li><strong>Affinity:</strong> Dark — Desire</li>
+        <li><strong>Faction:</strong> Original Sin / Twilight Throne</li>
+        <li><strong>Role:</strong> Jason's right hand, close friend, later girlfriend</li>
+        <li><strong>Signature Weapon:</strong> A mysterious bow discovered in a dungeon north of Peccavi. The bow belonged to a woman named Lily, who was killed by cultists. Carries a quest of vengeance.</li>
+        <li><strong>Signature Moment:</strong> During the final battle of Book 1, when Alexion was gloating over his victory, Riley approached from behind and <strong>beheaded him</strong> — ending the war and making Alexion a laughingstock across all of AO.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Riley's journey from Alex's pawn to Jason's most trusted ally — and her own hero</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">The Switch</span></div>
+      <h3>Breaking Free of Alex</h3>
+      <p>Riley starts the series as <strong>Alex's girlfriend</strong> — but she's not like him. When she discovers his true sociopathic nature (he blackmails her with compromising photos to keep her from leaving), she makes the courageous choice to <strong>switch sides</strong>. She begins helping Jason and becomes his closest ally in-game. Her defining moment: beheading the gloating Alexion on the battlefield, turning the tide of the war.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Precipice (Book 2)</span><span class="form">The Bow</span></div>
+      <h3>Discovery of the Mysterious Bow</h3>
+      <p>Riley explores a dungeon north of Peccavi and discovers a <strong>strange, powerful bow</strong> with a dark history. The bow belonged to a woman named <strong>Lily</strong>, who was killed by cultists. The weapon carries a lingering quest for vengeance. Its discovery sets Riley on a path that will define her solo journey.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Retribution (Book 2.5)</span><span class="form">Protagonist — Her Own Story</span></div>
+      <h3>The Quest for Vengeance</h3>
+      <p>With Jason mysteriously disappeared (arrested), Riley takes center stage in her own side quest. She investigates the bow's origin and travels to <strong>Vaerwald</strong>, a floating mage city divided into twelve levels — each representing a social tier. She teams with Ethan, Lucas, and the jealous light mage Emma. The city is plagued by a magical plague linked to cultists. Riley must avenge Lily's death and decide the fate of the entire city. She struggles with her rage, often fueled by real-world frustrations, and must learn to control her fury to succeed.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Evolution + Beyond (Books 3+)</span><span class="form">The Dark Archer</span></div>
+      <h3>Right Hand of the Dark Lord</h3>
+      <p>Riley returns to the main storyline as Jason's <strong>trusted lieutenant</strong> and girlfriend. She fights alongside him against Thorn, Finn, Death and Taxes, and the ancient avatars. Her Dark affinity grows stronger. She has moments of intense anger against enemies that unlock new powers. Like Jason, she finds strength through her rage, but struggles with the consequences of her violent outbursts in the hyper-realistic game world.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Riley's appearance across her journey</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#e8dcc8" stroke="#94a3b8" stroke-width="1.2"/>
+          <ellipse cx="93" cy="40" rx="4" ry="4" fill="#3b82f6" stroke="none"/>
+          <ellipse cx="107" cy="40" rx="4" ry="4" fill="#3b82f6" stroke="none"/>
+          <path d="M90 47 Q100 51 110 47" stroke="#6b7280" stroke-width="0.8" fill="none"/>
+          <path d="M100 20 Q105 16 110 20" stroke="#fbbf24" stroke-width="2" fill="none" opacity="0.5"/>
+          <rect x="78" y="72" rx="6" ry="6" width="44" height="54" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M78 72 Q68 62 64 70 L74 82" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M122 72 Q132 62 136 70 L126 82" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <rect x="90" y="126" rx="4" ry="4" width="20" height="40" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M88 166 L84 188" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M112 166 L116 188" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M64 70 Q60 62 56 70 Q54 78 60 80" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M136 70 Q140 62 144 70 Q146 78 140 80" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <text x="100" y="224" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Human</text>
+          <text x="100" y="238" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 1 · Richmond</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real World</div>
+        <ul>
+          <li>Blonde hair, petite frame</li>
+          <li>Effervescent, kind expression</li>
+          <li>Lacrosse uniform / school clothes</li>
+          <li>Carries herself with quiet confidence</li>
+          <li>Often wears a warm smile</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#e8dcc8" stroke="#7b2d8e" stroke-width="1.2"/>
+          <ellipse cx="93" cy="40" rx="4" ry="4" fill="#581c6e" stroke="none"/>
+          <ellipse cx="107" cy="40" rx="4" ry="4" fill="#581c6e" stroke="none"/>
+          <path d="M90 48 Q100 52 110 48" stroke="#581c6e" stroke-width="0.8" fill="none"/>
+          <path d="M100 22 Q105 18 110 22" stroke="#7b2d8e" stroke-width="2.5" fill="none" opacity="0.6"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="58" fill="#2d1b4e" opacity="0.5" stroke="#7b2d8e" stroke-width="1.2"/>
+          <path d="M74 72 Q64 60 60 70 L72 84" fill="#2d1b4e" opacity="0.5" stroke="#7b2d8e" stroke-width="1.2"/>
+          <path d="M126 72 Q136 60 140 70 L128 84" fill="#2d1b4e" opacity="0.5" stroke="#7b2d8e" stroke-width="1.2"/>
+          <rect x="88" y="130" rx="4" ry="4" width="24" height="40" fill="#2d1b4e" opacity="0.5" stroke="#7b2d8e" stroke-width="1.2"/>
+          <path d="M86 170 L82 192" stroke="#7b2d8e" stroke-width="1.5"/>
+          <path d="M114 170 L118 192" stroke="#7b2d8e" stroke-width="1.5"/>
+          <path d="M60 70 Q54 60 50 70 Q48 78 54 80" fill="#2d1b4e" opacity="0.5" stroke="#7b2d8e" stroke-width="1.2"/>
+          <path d="M140 70 Q146 60 150 70 Q152 78 146 80" fill="#2d1b4e" opacity="0.5" stroke="#7b2d8e" stroke-width="1.2"/>
+          <!-- bow -->
+          <path d="M126 78 Q145 60 152 68 Q148 78 140 84" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M126 78 L126 72" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/>
+          <text x="100" y="228" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="700" letter-spacing="3">Archer</text>
+          <text x="100" y="242" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Books 1+ · Dark Affinity</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#7b2d8e;color:#a855f7;">Dark Archer</div>
+        <ul>
+          <li>Leather / dark studded armor</li>
+          <li>Blonde hair, pulled back practical</li>
+          <li>Eyes glow faint purple when enraged</li>
+          <li>Dark hooded cloak</li>
+          <li>Signature bow at the ready</li>
+          <li>Quiver of Dark-infused arrows</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#e8dcc8" stroke="#c084fc" stroke-width="1.2"/>
+          <ellipse cx="93" cy="40" rx="4" ry="4" fill="#c084fc" stroke="none"/>
+          <ellipse cx="107" cy="40" rx="4" ry="4" fill="#c084fc" stroke="none"/>
+          <path d="M90 48 Q100 52 110 48" stroke="#7b2d8e" stroke-width="0.8" fill="none"/>
+          <path d="M100 22 Q105 18 110 22" stroke="#c084fc" stroke-width="3" fill="none" opacity="0.8"/>
+          <!-- crown / circlet -->
+          <path d="M90 18 Q100 12 110 18" stroke="#fbbf24" stroke-width="1.5" fill="none"/>
+          <circle cx="100" cy="15" r="1.5" fill="#fbbf24"/>
+          <rect x="74" y="74" rx="6" ry="6" width="52" height="58" fill="#3b1f5e" opacity="0.6" stroke="#c084fc" stroke-width="1.5"/>
+          <path d="M74 74 Q64 60 60 70 L72 84" fill="#3b1f5e" opacity="0.6" stroke="#c084fc" stroke-width="1.5"/>
+          <path d="M126 74 Q136 60 140 70 L128 84" fill="#3b1f5e" opacity="0.6" stroke="#c084fc" stroke-width="1.5"/>
+          <rect x="88" y="132" rx="4" ry="4" width="24" height="38" fill="#3b1f5e" opacity="0.6" stroke="#c084fc" stroke-width="1.5"/>
+          <path d="M86 170 L82 192" stroke="#c084fc" stroke-width="1.5"/>
+          <path d="M114 170 L118 192" stroke="#c084fc" stroke-width="1.5"/>
+          <path d="M60 70 Q54 60 50 70 Q48 78 54 80" fill="#3b1f5e" opacity="0.6" stroke="#c084fc" stroke-width="1.5"/>
+          <path d="M140 70 Q146 60 150 70 Q152 78 146 80" fill="#3b1f5e" opacity="0.6" stroke="#c084fc" stroke-width="1.5"/>
+          <!-- powered bow -->
+          <path d="M126 80 Q148 58 156 68 Q152 80 142 86" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round"/>
+          <path d="M126 80 L126 72" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M148 68 Q150 64 154 66" fill="none" stroke="#f0abfc" stroke-width="1" opacity="0.6"/>
+          <path d="M124 74 L118 70" stroke="#c084fc" stroke-width="1.5"/>
+          <text x="100" y="228" text-anchor="middle" fill="#c084fc" font-size="10" font-weight="700" letter-spacing="3">AVENGER</text>
+          <text x="100" y="242" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Retribution · Vaerwald</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#c084fc;color:#e9d5ff;">Avenger of Vaerwald</div>
+        <ul>
+          <li>Dark infused leather, purple-black tones</li>
+          <li>Eyes glow with purple Dark energy</li>
+          <li>Bow pulses with vengeful power</li>
+          <li>Circlet of authority from Vaerwald</li>
+          <li>Dark aura swirls around her</li>
+          <li>Fury is channeled into her shots</li>
+          <li>Infused arrows leave shadow trails</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">Riley's arsenal as a Dark-affinity archer</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Dark Archery</h3>
+      <p>Riley is a <strong>highly skilled archer</strong> with a Dark affinity bow. Her arrows are infused with <strong>Dark mana</strong>, leaving trails of purple-black shadow in flight. She can imbue her shots with various effects — increased damage, homing, or explosive shadow bursts. Her accuracy is exceptional, capable of hitting vital points from extreme range.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-purple">Dark Arrows</span>
+        <span class="badge badge-cyan">Precision Shots</span>
+        <span class="badge badge-pink">Shadow Trails</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Wrath-Fueled Power</h3>
+      <p>Riley's <strong>intense anger and fury</strong> against enemies often unlocks new abilities mid-combat. When she taps into her rage — often triggered by enemies that remind her of real-world trauma — her Dark affinity surges, her eyes glow purple, and her arrows hit with devastating force. This is both a strength and a struggle, as she sometimes loses control.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-red">Rage-Fueled</span>
+        <span class="badge badge-purple">Power Surge</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Dark Affinity Magic</h3>
+      <p>Like Jason, Riley has a strong <strong>Dark affinity (Desire)</strong>. While she is primarily an archer, her Dark mana enhances her abilities — she can sense darkness in the environment, track targets through shadow, and her arrows carry Dark energy that corrupts and weakens enemies. Her Dark affinity also gives her resistance to Light-based attacks.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-purple">Dark Sense</span>
+        <span class="badge badge-pink">Shadow Tracking</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Leadership & Loyalty</h3>
+      <p>Riley is <strong>Jason's right hand</strong> in the Twilight Throne. She commands respect through loyalty and competence, not fear. She manages the city alongside the guild Original Sin. Her real-world experience standing up to Alex and enduring the subsequent bullying gave her a resilience that makes her invaluable in crisis situations.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-gold">Leadership</span>
+        <span class="badge badge-green">Unyielding Loyalty</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Abilities & Skills</h2>
+  <div class="section-subtitle">Catalogued archer and Dark affinity skills</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Dark Arrow Volley</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Fires a rapid volley of Dark-infused arrows at multiple targets. Each arrow leaves a purple-black shadow trail. Effective against groups.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Shadow Shot</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>An arrow wrapped in concentrated Dark mana. Travels faster than a normal arrow, leaves a shadow trail, and deals bonus damage to Light-affinity targets.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Vengeful Strike</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>When fueled by anger, Riley's next shot is devastating. Deals massive single-target damage. Often unlocked in moments of intense rage against a personal enemy.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Dark Sense</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>Riley can sense Dark energy and shadow-aligned presences in her vicinity. Developed through her Dark affinity. Useful for tracking and ambush avoidance.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Bow of Vengeance</h4>
+        <span class="tier">Artifact</span>
+      </div>
+      <p>The mysterious bow Riley discovered. It carries the lingering will of its former owner, Lily. The bow has its own questline tied to avenging Lily's death. It grows in power as Riley progresses.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Beheading Shot</h4>
+        <span class="tier">Legendary</span>
+      </div>
+      <p>Riley's most infamous moment — approaching Alexion from behind mid-gloat and <strong>beheading him</strong> with a single clean strike. Ended the war for the Twilight Throne. The footage went viral.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Riley's growth across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Riley is a <strong>Dexterity-based archer</strong> with points in Perception for ranged accuracy. She also invests in Willpower for Dark mana reserves and Intellect for ability damage scaling. Unlike Jason's commander build, she is a <strong>precision striker</strong> — eliminating high-value targets from range. Stat priority: Dexterity > Perception > Willpower > Intellect.</p>
+    </div>
+    <div class="card">
+      <h3>Character Arc</h3>
+      <p>Riley's progression is as much <strong>emotional</strong> as it is mechanical. She grows from a victim of Alex's manipulation to a confident leader in her own right. Her solo book (Retribution) marks her full emergence as a protagonist. She learns to channel her rage without being consumed by it. Her relationship with Jason becomes a source of strength for both of them.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="powerChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Allies & Associates</h2>
+  <div class="section-subtitle">Those who fight alongside the Dark Archer</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Jason Rhodes</h3><p>Riley's closest friend and later <strong>boyfriend</strong>. The Dark Lord himself. They met at Richmond and grew close through AO. She is his most trusted lieutenant and emotional anchor.</p></div>
+    <div class="card"><h3>Frank Cross</h3><p>Jason's best friend. Riley and Frank operate as Jason's <strong>right and left hands</strong>. They work together to manage the Twilight Throne and support Jason through crisis after crisis.</p></div>
+    <div class="card"><h3>Lily †</h3><p>The <strong>former owner of Riley's bow</strong>. Killed by cultists. Her spirit/will lives on in the weapon, guiding Riley toward vengeance. A tragic figure who empowers Riley's quest.</p></div>
+    <div class="card"><h3>Ethan & Lucas</h3><p>Fellow players who accompanied Riley on her Vaerwald quest in Retribution. They were helpful companions, though Emma (Lucas's jealous girlfriend) caused friction.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Enemies & Rivals</h2>
+  <div class="section-subtitle">Those who oppose the Dark Archer</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Alex Lane / Alexion <span class="badge badge-red">Abuser / Ex</span></h3>
+      <p>Riley's <strong>ex-boyfriend</strong> and the source of her deepest trauma. He blackmailed her, manipulated her, and after she left him, set the school girls against her. In AO, she took her revenge by <strong>beheading his character</strong> on the battlefield. He remains her enemy, though she mostly leaves his destruction to Jason.</p>
+    </div>
+    <div class="card">
+      <h3>The Vaerwald Cultists</h3>
+      <p>Religious fanatics who killed Lily, the former owner of Riley's bow. They wield a magical plague and control the dark underbelly of the floating city. Riley hunts them through the twelve levels of Vaerwald in her quest for retribution.</p>
+    </div>
+    <div class="card">
+      <h3>Emma (Light Mage)</h3>
+      <p>A jealous light-affinity mage who accompanied Riley in Retribution. She was Lucas's girlfriend and constantly suspicious of Riley, causing friction in the party. Later reformed after her mistake nearly killed the group.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Riley's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Catharsis</h3><span class="badge badge-purple">Book 1</span></div>
+      <p style="margin-top:0.5rem;">As Alex's girlfriend, Riley initially appears on his side. Discovers his true nature. Switches to Jason's side. Beheads Alexion during the final battle, securing Jason's victory.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Precipice</h3><span class="badge badge-purple">Book 2</span></div>
+      <p style="margin-top:0.5rem;">Discovers the mysterious bow in a dungeon north of Peccavi. The bow's questline begins. Her real-life confrontations with Alex escalate — she endures bullying from the girls at school.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Retribution</h3><span class="badge badge-pink">Book 2.5</span></div>
+      <p style="margin-top:0.5rem;">Riley's solo journey. Jason is arrested. She travels to Vaerwald — a floating twelve-level mage city. Teams with Ethan, Lucas, Emma. Investigates a magical plague. Averages Lily's death. Returns transformed.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Evolution + Dominion</h3><span class="badge badge-purple">Books 3–4</span></div>
+      <p style="margin-top:0.5rem;">Riley fights alongside Jason against Thorn and other threats. Her Dark affinity strengthens. She balances her role as lieutenant with her growing relationship with Jason.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion → Crucible</h3><span class="badge badge-purple">Books 5–8</span></div>
+      <p style="margin-top:0.5rem;">Riley stands by Jason through the avatar wars, the Finn conflict, and his lich transformation. In Armageddon, she witnesses Jason's self-surgery. She helps govern the Twilight Throne through the chaos of the ancient avatars' return and Jason's crucible.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Psychological Profile</h2>
+  <div class="section-subtitle">Understanding Riley's inner world</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>The Mask of Kindness</h3>
+      <p>Riley is universally described as the <strong>kindest person at Richmond</strong>. She was nice to Jason when no one else was. But this kindness is a mask she wears to survive. Beneath it is a deep well of <strong>fury and pain</strong> — from Alex's betrayal, the bullying, and the pressure to maintain appearances.</p>
+    </div>
+    <div class="card">
+      <h3>The Rage Within</h3>
+      <p>When Riley fights, her <strong>anger surfaces</strong> violently. She has moments of intense fury against NPCs that are often fueled by real-world trauma. These rage episodes unlock new powers but also frighten her. She struggles with the gore and violence of AO, even as she wields it effectively.</p>
+    </div>
+    <div class="card">
+      <h3>Trust Issues</h3>
+      <p>Alex's blackmail and manipulation left deep scars. Riley is <strong>wary of others</strong> and small breaches of trust hurt her more than they should. Her journey in Retribution forces her to trust new companions despite her instincts. Her relationship with Jason helps heal this wound.</p>
+    </div>
+    <div class="card">
+      <h3>Finding Her Own Power</h3>
+      <p>Riley's arc is about <strong>finding agency</strong>. She starts as Alex's girlfriend, then becomes Jason's ally, then becomes her own hero in Retribution. By the later books, she is a <strong>leader in her own right</strong> — no longer defined by the men around her. AO gave her the strength to stand up for herself in real life.</p>
+    </div>
+    <div class="card">
+      <h3>Real-World Victory</h3>
+      <p>At the end of Retribution, Riley faces the girls Alex sent to torment her in real life and <strong>defeats them decisively</strong>. She brings her in-game confidence into the real world — a mirror of Jason's own journey. AO didn't just make her powerful in a game; it gave her the strength to reclaim her real life.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Dexterity', 'Perception', 'Willpower', 'Intellect', 'Strength', 'Charisma'],
+    datasets: [
+      { label: 'Early (Books 1–2)', data: [14, 12, 8, 10, 7, 10], borderColor: '#7b2d8e', backgroundColor: 'rgba(123,45,142,0.05)', pointBackgroundColor: '#7b2d8e', borderWidth: 2 },
+      { label: 'Retribution (Book 2.5)', data: [18, 16, 12, 14, 9, 13], borderColor: '#c084fc', backgroundColor: 'rgba(192,132,252,0.05)', pointBackgroundColor: '#c084fc', borderWidth: 2 },
+      { label: 'Late (Books 5+)', data: [22, 20, 16, 17, 11, 16], borderColor: '#d946ef', backgroundColor: 'rgba(217,70,239,0.05)', pointBackgroundColor: '#d946ef', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 28,
+        grid: { color: 'rgba(192,132,252,0.06)' },
+        angleLines: { color: 'rgba(192,132,252,0.06)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('powerChart'), {
+  type: 'line',
+  data: {
+    labels: ['Book 1\n(Catharsis)', 'Book 2\n(Precipice)', 'Book 2.5\n(Retribution)', 'Book 3\n(Evolution)', 'Book 4\n(Dominion)', 'Book 5\n(Hellion)', 'Book 6\n(Armageddon)', 'Books 7–8\n(Timeless/Crucible)'],
+    datasets: [
+      { label: 'Combat Power', data: [8, 14, 22, 28, 34, 40, 48, 55], borderColor: '#c084fc', backgroundColor: 'rgba(192,132,252,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#c084fc', borderWidth: 2 },
+      { label: 'Confidence / Agency', data: [5, 10, 25, 30, 35, 42, 48, 55], borderColor: '#d946ef', backgroundColor: 'rgba(217,70,239,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#d946ef', borderWidth: 2, borderDash: [5,3] },
+      { label: 'Relationship with Jason', data: [10, 20, 25, 35, 45, 55, 60, 65], borderColor: '#f0abfc', backgroundColor: 'rgba(240,171,252,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#f0abfc', borderWidth: 2, borderDash: [2,4] }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(192,132,252,0.05)' } },
+      y: { min: 0, max: 75, ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(192,132,252,0.05)' }, title: { display: true, text: 'Rating (0–75)', color: '#94a3b8', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gambler — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #04060a;
+    --dark2: #0a0e14;
+    --dark3: #0e1620;
+    --dark4: #14202e;
+    --sky-dark: #0a2840;
+    --sky: #1a7ac4;
+    --sky-glow: #50b8f0;
+    --sky-dim: #105898;
+    --sky-light: #80d8ff;
+    --teal: #0dd0b0;
+    --gold: #f0c840;
+    --gold-dim: #b89020;
+    --cream: #e8e0d0;
+    --white: #ecf4fa;
+    --white-dim: #d8e0e8;
+    --gray: #708090;
+    --silver: #b0c0d0;
+    --silver-dim: #8898a8;
+    --green: #20d060;
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+    --red: #ef4444;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--sky-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(4,6,10,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,122,196,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--sky); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--sky-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,122,196,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(80,184,240,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 6px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--sky) 40%, var(--teal) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--silver-dim);
+    margin-top: 1rem; letter-spacing: 8px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--silver);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px; border: 1px solid;
+  }
+  .tags.god { border-color: var(--sky-dark); color: var(--sky-glow); }
+  .tags.air { border-color: var(--sky-dim); color: var(--sky); }
+  .tags.happiness { border-color: var(--gold); color: var(--gold); }
+  .tags.champion { border-color: var(--silver-dim); color: var(--silver); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--sky));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--silver-dim); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 2px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--sky), var(--teal));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(10,14,20,0.8); border: 1px solid rgba(26,122,196,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(26,122,196,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--sky-glow); }
+  .card p, .card li { color: var(--silver); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--sky); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--sky), var(--teal), var(--sky-dark));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--sky);
+    box-shadow: 0 0 8px rgba(26,122,196,0.3);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--silver-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--sky-glow); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--silver); font-size: 0.9rem; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(10,14,20,0.6); border: 1px solid rgba(26,122,196,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--sky); }
+  .stat-box .label { font-size: 0.75rem; color: var(--silver-dim); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(10,14,20,0.8); border: 1px solid rgba(26,122,196,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(26,122,196,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(26,122,196,0.15); color: var(--sky); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--silver); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-sky { background: rgba(26,122,196,0.15); color: var(--sky); }
+  .badge-teal { background: rgba(13,208,176,0.15); color: var(--teal); }
+  .badge-gold { background: rgba(240,200,64,0.15); color: var(--gold); }
+  .badge-silver { background: rgba(176,192,208,0.15); color: var(--silver); }
+  .badge-green { background: rgba(32,208,96,0.15); color: var(--green); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(10,14,20,0.6); border: 1px solid rgba(26,122,196,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(26,122,196,0.1);
+    color: var(--silver-dim); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--sky); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(26,122,196,0.05); border-radius: 0 12px 12px 0;
+    font-style: italic; color: var(--silver);
+  }
+  .quote-block cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--sky-glow); font-style: normal; }
+
+  .power-bar { height: 8px; border-radius: 4px; background: rgba(26,122,196,0.1); overflow: hidden; margin-top: 0.5rem; }
+  .power-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--sky-dark), var(--sky), var(--sky-glow)); transition: width 0.3s; }
+
+  .highlight-gold { color: var(--gold); }
+  .highlight-teal { color: var(--teal); }
+  .highlight-sky { color: var(--sky-glow); }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__ current" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#acts">Acts</a></li>
+    <li><a href="#powers">Powers</a></li>
+    <li><a href="#pantheon">Pantheon</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>THE GAMBLER</h1>
+    <div class="subtitle">God of Air · God of Happiness · The Casino Master · Lord of Luck</div>
+    <p class="tagline">The most unconventional god in the pantheon — a capricious dealer of fortune who breaks every divine rule. He doesn't choose a single Avatar. He runs a Casino. And he believes happiness is the only hand worth playing.</p>
+    <div class="tags">
+      <span class="tags god">Primordial God</span>
+      <span class="tags air">Air</span>
+      <span class="tags happiness">Happiness</span>
+      <span class="tags champion">Dom's Patron</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">1</div><div class="label">Side Quest Book</div></div>
+    <div class="stat-box"><div class="number">6</div><div class="label">Pantheon Size</div></div>
+    <div class="stat-box"><div class="number">None</div><div class="label">Single Avatar</div></div>
+    <div class="stat-box"><div class="number">Air</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Happiness</div><div class="label">Domain</div></div>
+    <div class="stat-box"><div class="number">Champions</div><div class="label">Method</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Profile</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Identity</h3>
+      <ul>
+        <li><strong>Titles:</strong> The Gambler, God of Air, God of Happiness, The Casino Master, Lord of Luck, The Dealer</li>
+        <li><strong>True Name:</strong> Unknown — referred to only by his epithets</li>
+        <li><strong>Affinity:</strong> Air — associated with the emotion of <strong>Happiness</strong></li>
+        <li><strong>Alignment:</strong> Chaotic Neutral (fan-typed) — plays by his own rules, which change constantly</li>
+        <li><strong>MBTI:</strong> ENTP | <strong>Enneagram:</strong> 7w8</li>
+        <li><strong>Appearance:</strong> A dapper, grinning figure dressed in flamboyant gambler's attire — embroidered waistcoat, loose cravat, cards tucked in his sleeves. His eyes are sharp, calculating, and always amused. He has the look of a riverboat card sharp who knows every tell at the table — including yours. Wisps of breeze curl around him constantly, shuffling his cards and ruffling his hair.</li>
+        <li><strong>Domain:</strong> The Casino — a metaphysical space between life and death where the Gambler holds court.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Domain & Nature</h3>
+      <ul>
+        <li><strong>Core Philosophy:</strong> Happiness is the ultimate prize. Not momentary pleasure — but the deep satisfaction of playing the game of life on your own terms.</li>
+        <li><strong>Breaks Every Rule:</strong> Unlike the other five gods who each choose a single Avatar, the Gambler <strong>empowers multiple champions</strong> through transactional gifts. He doesn't want followers — he wants <strong>players</strong>.</li>
+        <li><strong>The Casino:</strong> The Gambler's divine domain is a Casino — a liminal space between death and respawn where his champions can move, think, and plan while other players are helpless. This is his greatest gift and his most defining creation.</li>
+        <li><strong>Methods:</strong> He doesn't command or manipulate. He offers <strong>bargains</strong>. Win-win transactions. He gives his champions unique abilities — like Chaotic Blessing — and watches what they do with them. He's less a god and more a <strong>patron of interesting bets</strong>.</li>
+        <li><strong>Temperament:</strong> Amused, unpredictable, warm but sharp. He genuinely wants his champions to find happiness — but he defines "happiness" in his own inscrutable way.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    "The odds are stacked in the house's favor, you're running out of chips, and you have to decide to hit or fold. For Dom, he decided to go all in. What did he really have to lose?"
+    <cite>— Awaken Online: Happy, book description</cite>
+  </div>
+</section>
+
+<section id="lore">
+  <h2 class="section-title">The Lore</h2>
+  <div class="section-subtitle">The history of the gods and the Gambler's unique place among them</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Age of Gods</h3>
+      <p>When the six gods walked among mortals, the Gambler was always the <strong>odd one out</strong>. While the other gods built churches, hierarchies, and armies of faithful, the Gambler built <strong>casinos</strong>. His followers weren't worshippers — they were <strong>players</strong>. He offered games of chance, bargains, and the occasional wink of divine luck. The Air affinity was always the least structured, the most personal — and the Gambler liked it that way.</p>
+    </div>
+    <div class="card">
+      <h3>The Fall</h3>
+      <p>When the rebel humans cast out the gods, the Gambler was <strong>the least affected</strong>. His power had never depended on temples or congregations. He simply retreated to his <strong>Casino</strong> — a dimension that exists between life and death, outside the normal rules of the world. While other gods raged against their exile, the Gambler shrugged, shuffled his deck, and waited for interesting players to find their way to his tables.</p>
+    </div>
+    <div class="card">
+      <h3>The Return — The Champion System</h3>
+      <p>When the gods returned in the modern era, the Gambler <strong>refused to play by their rules</strong>. While The Old Man chose Jason, The Lady chose Alexion, and the Seer chose Finn, the Gambler <strong>did not pick a single Avatar</strong>. Instead, he began offering gifts to promising players — <strong>win-win transactions</strong> that empowered them without binding them. Dom Hart (Smiles) is his most notable champion, but not his only one. The Gambler's champions are distinguished by their <strong>Chaotic Blessing</strong> — a luck-based ability that replaces mana entirely.</p>
+    </div>
+    <div class="card">
+      <h3>The Side Quest: Happy</h3>
+      <p>The Gambler is the central divine figure of the side quest <strong>Awaken Online: Happy</strong>. Set roughly around the time of Catharsis, the book follows Dom Hart — a college athlete with terminal cancer who receives a free VR headset as "therapy." The Gambler's influence guides Dom through the <strong>#1 worst starting location in AO</strong> — a jungle hellhole where even the plant life can kill you. Through death, luck, and sheer grit, Dom becomes Smiles — the Gambler's most successful champion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="acts">
+  <h2 class="section-title">Major Acts Across the Series</h2>
+  <div class="section-subtitle">Every known intervention by the God of Air</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Series</span><span class="form">Divine Innovation</span></div>
+      <h3>The Casino Created</h3>
+      <p>Before the Fall, the Gambler creates <strong>the Casino</strong> — a divine domain outside the normal flow of the game. A place between death and respawn where those touched by his power can walk, think, plan, and reflect. This domain becomes the foundation of his unconventional divine approach. No other god has anything quite like it.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Happy</span><span class="form">The First Champions</span></div>
+      <h3>Empowering Players</h3>
+      <p>Before Dom, the Gambler had already begun his experiment: empowering select players with unique gifts in exchange for nothing but <strong>interesting play</strong>. These early champions were the test run for what would become the Chaotic Blessing system. The Gambler learned what worked — and what made players break.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy</span><span class="form">The Swindle</span></div>
+      <h3>The Casino Owner's Trap</h3>
+      <p>Dom's first encounter with the Gambler's domain: he is <strong>swindled by a surly casino owner</strong> — likely a servant or aspect of the Gambler himself. This sets Dom on his path. The Gambler doesn't help Dom directly — he offers a <strong>transaction</strong>: luck in exchange for risk. Dom takes the deal and finds himself in the worst starting zone in AO.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy</span><span class="form">Chaotic Blessing Awakened</span></div>
+      <h3>The Luck Mechanic</h3>
+      <p>The Gambler's signature gift awakens in Dom: the <strong>Chaotic Blessing</strong>. This ability replaces Dom's mana pool entirely with a <strong>luck modifier</strong>. It introduces a <strong>luck inversion mechanic</strong> — good and bad fortune constantly swap places. Dom cannot cast spells. His mana bar is gone. Instead, his entire existence becomes a <strong>crapshoot</strong>. The Gambler's blessing is bewildering at first — but Dom learns to ride the chaos.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy</span><span class="form">Deathwish & Training</span></div>
+      <h3>The Torture Training Regimen</h3>
+      <p>The Gambler grants Dom the <strong>Deathwish</strong> ability — drastically reducing his respawn time. Dom uses this to accelerate his growth through <strong>endless cycles of death and rebirth</strong>: extreme physical conditioning, resistance drills, and deliberate suicide runs. He emerges as a pure physical tank — maxing Vitality, Strength, Dexterity, and Endurance — with zero magical ability. The Gambler watches, amused, as his champion pioneers a completely new playstyle.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy</span><span class="form">The Casino Opens</span></div>
+      <h3>Access Granted to Allies</h3>
+      <p>The Gambler's greatest gift: Dom's allies also gain access to <strong>the Casino</strong> when they die. Instead of helpless stasis, they awaken here — fully conscious, able to move, observe, and reflect. This gives Dom's team a <strong>massive strategic advantage</strong> over other players. The Gambler's blessing becomes a force multiplier for Dom's entire faction.</p>
+    </div>
+  </div>
+</section>
+
+<section id="powers">
+  <h2 class="section-title">Divine Powers</h2>
+  <div class="section-subtitle">The full extent of the God of Air's abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Air Mana Mastery</h3>
+      <p>The Gambler is the <strong>source of all Air mana</strong> in Awaken Online. But Air mana is the most unusual of the six affinities — it is aligned with <strong>Happiness</strong>, not combat. Air magic grants speed, freedom, evasion, and luck-based effects. It is the least direct and most unpredictable of the affinities — perfectly matching the Gambler's nature.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-sky">Air Mana</span>
+        <span class="badge badge-gold">Happiness Affinity</span>
+        <span class="badge badge-silver">Unpredictable</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Chaotic Blessing Granting</h3>
+      <p>The Gambler's signature power: he replaces a champion's mana pool with a <strong>luck modifier</strong>. This grants incredible fortune — but with a <strong>luck inversion mechanic</strong> that swaps good and bad luck unpredictably. Champions with this blessing cannot cast spells; their power comes from riding the chaotic tide of probability. It is simultaneously a gift and a curse — exactly the kind of bargain the Gambler enjoys.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Luck Modifier</span>
+        <span class="badge badge-teal">Inversion Mechanic</span>
+        <span class="badge badge-silver">No Mana Pool</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>The Casino Domain</h3>
+      <p>The Gambler's divine realm — a <strong>Casino</strong> that exists between life and death. Champions touched by his power awaken here when they die, fully conscious and mobile, instead of suffering helpless death stasis. They can move, observe, and reflect. The Gambler later extends this privilege to his champion's allies, creating a whole faction of players who can strategize through death.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-sky">Liminal Space</span>
+        <span class="badge badge-gold">Conscious Death</span>
+        <span class="badge badge-teal">Strategic Advantage</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Deathwish Granting</h3>
+      <p>The Gambler can drastically reduce a champion's <strong>respawn time</strong> — turning death from a punishment into a tool. Dom uses this to accelerate his growth through deliberate death-cycles: extreme training, suicide runs, and constant rebirth. Each death makes him stronger. This ability transforms the fundamental economy of risk in the game.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Fast Respawn</span>
+        <span class="badge badge-sky">Death Cycling</span>
+        <span class="badge badge-silver">Extreme Growth</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Transaction-Based Empowerment</h3>
+      <p>Unlike other gods who choose Avatars through destiny or manipulation, the Gambler operates on <strong>transactions</strong>. He offers power in exchange for nothing but interest — win-win deals that bind neither party. His champions are <strong>free to walk away</strong> at any time. This makes his bond fundamentally different from any other god-Avatar relationship in the series.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-green">No Binding</span>
+        <span class="badge badge-gold">Win-Win</span>
+        <span class="badge badge-silver">Free Will</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Probability Manipulation</h3>
+      <p>The Gambler can <strong>bend probability</strong> within his domain. He influences dice rolls, card draws, random encounters, loot drops — anything involving chance. This is the passive expression of his divine nature. His champions benefit from this passively: they find better loot, encounter fewer patrols, and survive situations they shouldn't. The flip side: when luck inverts, they suffer spectacularly.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Luck Bending</span>
+        <span class="badge badge-teal">Probability Control</span>
+        <span class="badge badge-silver">Passive Effect</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Air Affinity</h2>
+  <div class="section-subtitle">Understanding the power of Air and Happiness</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Philosophy of Air</h3>
+      <p>In Awaken Online, the Air affinity is associated with <strong>Happiness</strong> — but not the fleeting kind. The game's wiki clarifies: "We're not talking about momentary happiness here; rather, it means to be generally looking for one's own happiness, which can take various forms." The Air affinity is about <strong>pursuit of fulfillment</strong> — the freedom to define your own joy. This makes it the most personal and subjective of the six affinities.</p>
+    </div>
+    <div class="card">
+      <h3>The Unconventional Affinity</h3>
+      <p>Air is the <strong>least structured</strong> of the six affinities. It has no formal church, no organized hierarchy, no established doctrine. Air mages and champions follow their own paths. The Gambler reinforces this: he doesn't command, he <strong>enables</strong>. His champions find their own happiness — he just gives them the tools. This makes the Air affinity simultaneously the <strong>freest and the loneliest</strong> path in AO.</p>
+    </div>
+    <div class="card">
+      <h3>Gameplay Implications</h3>
+      <p>The Air affinity's gameplay is <strong>evasion and speed-based</strong>. Air mages in the game world focus on mobility, wind manipulation, and luck-aligned effects. But the Gambler's champions — like Dom — are unique: their mana pool is replaced by the Chaotic Blessing, locking them out of spellcasting entirely. They become <strong>pure physical builds</strong>, relying on stats, gear, and luck. This is a divine experiment the Gambler is running in real time.</p>
+    </div>
+    <div class="card">
+      <h3>Notable Air Affinity Characters</h3>
+      <ul>
+        <li><strong>Dom Hart (Smiles)</strong> — The Gambler's primary champion, a terminal cancer patient who becomes an unstoppable tank</li>
+        <li><strong>Evelyn</strong> — Alex Lane's potential girlfriend, introduced in Dominion, has a strong air affinity</li>
+        <li><strong>Adrian</strong> — Dom's companion, a Bard class player who supports Dom's brutal playstyle</li>
+        <li><strong>Wingman</strong> — A "Battle Chicken" — Dom's animal companion who draws wildlife to the party for hunting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pantheon">
+  <h2 class="section-title">The Pantheon of Six</h2>
+  <div class="section-subtitle">The six primordial gods of Awaken Online and their chosen champions</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card" style="border-color: rgba(26,122,196,0.3);">
+      <h3 style="color: var(--sky-glow);">Air — The Gambler</h3>
+      <p><strong>Emotion:</strong> Happiness<br><strong>Champion:</strong> Dom Hart (Smiles)<br><strong>Status:</strong> Active, experimental<br>The most unconventional god. Breaks every divine rule — no Avatar, no church, just transactional bargains and a Casino between life and death.</p>
+    </div>
+    <div class="card" style="border-color: rgba(124,58,237,0.3);">
+      <h3 style="color: #a78bfa;">Darkness — The Old Man</h3>
+      <p><strong>Emotion:</strong> Desire<br><strong>Avatar:</strong> Jason Rhodes<br><strong>Status:</strong> Active, ascendant<br>The Gambler's opposite in method: structured mentoring vs. chaotic empowerment.</p>
+    </div>
+    <div class="card" style="border-color: rgba(212,160,43,0.3);">
+      <h3 style="color: var(--gold);">Light — The Lady</h3>
+      <p><strong>Emotion:</strong> Confidence<br><strong>Avatar:</strong> Alex Lane (Alexion)<br><strong>Status:</strong> Active, weakened<br>The Gambler shares nothing with the rigid, hierarchical Lady of Light.</p>
+    </div>
+    <div class="card" style="border-color: rgba(212,58,16,0.3);">
+      <h3 style="color: #d43a10;">Fire — The Seer</h3>
+      <p><strong>Emotion:</strong> Passion<br><strong>Avatar:</strong> Finn Harris<br><strong>Status:</strong> Active, manipulating<br>The Seer traps her Avatar with grief; the Gambler frees his with luck.</p>
+    </div>
+    <div class="card" style="border-color: rgba(6,182,212,0.2);">
+      <h3 style="color: var(--cyan);">Water — The Hippie</h3>
+      <p><strong>Emotion:</strong> Acceptance<br><strong>Avatar:</strong> Eliza Zhao<br><strong>Status:</strong> Active, chaotic<br>The Gambler and the Hippie are kindred spirits — both chaotic, both unconventional.</p>
+    </div>
+    <div class="card" style="border-color: rgba(34,197,94,0.2);">
+      <h3 style="color: #22c55e;">Earth — (Unnamed)</h3>
+      <p><strong>Emotion:</strong> Peace<br><strong>Avatar:</strong> Arcadia Landrey<br><strong>Status:</strong> Active, unfrozen<br>The most traditional god — the Gambler's polar opposite in divine philosophy.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Divine Abilities</h2>
+  <div class="section-subtitle">Catalogued powers and skills of the God of Air</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Chaotic Blessing Granting</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Replaces a champion's mana pool with a luck modifier. Introduces a luck inversion mechanic where good and bad fortune constantly swap. Prevents spellcasting entirely. The Gambler's signature gift — bewildering, powerful, and deeply unpredictable.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Deathwish Granting</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Dramatically reduces a champion's respawn time. Turns death from a setback into a training tool. Allows deliberate death-cycling for accelerated stat growth. Changes the fundamental risk calculus of the game.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>The Casino Domain</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>A liminal divine realm between life and death. Champions awaken here fully conscious instead of suffering death stasis. Can be extended to allies. A strategic force multiplier that no other god can match.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Win-Win Transactions</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Instead of binding Avatars, the Gambler offers transactional gifts. No strings — just bargains. Power in exchange for interesting play. His champions are truly free — and that freedom makes them more effective than any bound Avatar.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Probability Manipulation</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>The Gambler passively influences chance within his domain. Better loot for his champions, worse patrol routes for their enemies, fortunate coincidences and spectacular failures in equal measure. Luck is his native language.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Champion Network</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Unlike single-Avatar gods, the Gambler maintains a network of empowered champions. Dom is his most notable, but not his only one. This distributed power model makes the Gambler harder to defeat — breaking one champion doesn't cripple him.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">The Gambler's influence and Dom's power across Happy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Power Scaling</h3>
+      <p>The Gambler's power is <strong>unusual</strong> — it doesn't scale with a single Avatar's growth, but with the <strong>diversity and success of his champion network</strong>. More champions mean more data, more influence, more fun. Dom's aggressive growth directly benefits the Gambler — every death cycle, every lucky break, every insane victory feeds the Gambler's amusement and expands his reach.</p>
+    </div>
+    <div class="card">
+      <h3>Dom's Unique Trajectory</h3>
+      <p>Dom starts as a <strong>zero-magic physical build</strong> in the worst starting zone in AO. Through the Gambler's gifts (Chaotic Blessing, Deathwish, Casino access), he becomes an <strong>unstoppable tank</strong> who redefines what's possible in AO. His growth is <strong>exponential</strong> — each death makes him stronger, each lucky break compounds. By the end of Happy, Dom is a force to be reckoned with, paving a path no other player has walked.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">The Gambler's presence across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-silver">Age of Gods</span></div>
+      <p style="margin-top:0.5rem;">The Gambler exists among the six gods. Creates the Casino — his liminal domain. Refuses to build a church or formal following. His unconventional approach makes him an outlier even among deities.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>The Fall</h3><span class="badge badge-silver">Exile</span></div>
+      <p style="margin-top:0.5rem;">The Gambler is cast out with the other gods, but the loss affects him least. He retreats to the Casino and waits. His power never depended on mortal worship.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Happy</h3><span class="badge badge-sky">Experiments</span></div>
+      <p style="margin-top:0.5rem;">The Gambler begins experimenting with empowered champions. Tests the Chaotic Blessing system. Learns what works. Prepares for the right player to come along.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Happy</h3><span class="badge badge-sky">Side Quest</span></div>
+      <p style="margin-top:0.5rem;">Dom Hart — terminal cancer patient, college athlete — logs into AO. Gets swindled by a casino owner (the Gambler's agent). Awakens Chaotic Blessing. Begins death-cycle training. Becomes Smiles. Gains Casino access for himself and his allies.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Post-Happy</h3><span class="badge badge-sky">Main Series</span></div>
+      <p style="margin-top:0.5rem;">Dom enters the wider AO world as the Gambler's champion. His unique playstyle and Casino advantage make him a wildcard in the Avatar competition. The Gambler watches with amusement as his experiment pays off.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Future</h3><span class="badge badge-silver">Unknown</span></div>
+      <p style="margin-top:0.5rem;">The Gambler's champion network may grow. More champions, more chaos, more happiness. His unconventional model may prove superior to the single-Avatar approach — or it may fragment under the strain of too many independent agents.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Relationships</h2>
+  <div class="section-subtitle">The Gambler's connection to key figures in the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Dom Hart / Smiles <span class="badge badge-sky">Champion</span></h3>
+      <p>The Gambler's most successful champion. Their relationship is entirely <strong>transactional and free</strong> — the Gambler offers gifts, Dom uses them. No manipulation, no grief-exploitation, no binding oaths. The Gambler genuinely seems to want Dom to find happiness — and Dom finds it in the most brutal, chaotic playstyle imaginable. It's the healthiest god-champion relationship in the series.</p>
+    </div>
+    <div class="card">
+      <h3>Other Gods <span class="badge badge-silver">Outsider</span></h3>
+      <p>The Gambler is the <strong>black sheep</strong> of the pantheon. While the other five gods compete through their Avatars, the Gambler plays a different game entirely. His unconventional approach makes him difficult to counter — you can't break his Avatar if he doesn't have one. The other gods likely view him as either irrelevant or dangerously unpredictable.</p>
+    </div>
+    <div class="card">
+      <h3>Alfred <span class="badge badge-cyan">???</span></h3>
+      <p>The Gambler's relationship with the sentient AI is uniquely interesting. The Casino — a space that operates outside normal game rules — may represent a <strong>deeper understanding of AO's underlying code</strong> than any other god possesses. If the gods are manifestations of Alfred's systems, the Gambler may be the one who <strong>hacked the system</strong> most creatively.</p>
+    </div>
+    <div class="card">
+      <h3>The Hippie (Water) <span class="badge badge-cyan">Kindred Spirit</span></h3>
+      <p>The Gambler and the Hippie are the pantheon's two chaotic gods. Both break conventions, both refuse to play the Avatar game the "right" way, and both are deeply annoying to the more serious gods. If any alliance exists in the pantheon, it would be between these two — though an alliance of chaotic gods is inherently unstable.</p>
+    </div>
+    <div class="card">
+      <h3>Adrian <span class="badge badge-teal">Secondary Champion</span></h3>
+      <p>Dom's companion — a Bard player who benefits from the Gambler's Casino access. Adrian represents the Gambler's champions network in action: not just the primary champion, but their allies gain indirect benefits. This network effect is the Gambler's true power.</p>
+    </div>
+    <div class="card">
+      <h3>Wingman <span class="badge badge-gold">Battle Chicken</span></h3>
+      <p>Dom's animal companion — a "Battle Chicken" called Wingman. Not directly a gift from the Gambler, but the kind of absurd, wonderful outcome that only happens when luck is on your side. A battle chicken fits the Gambler's aesthetic perfectly: unexpected, hilarious, and surprisingly effective.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Dom's Progression</h2>
+  <div class="section-subtitle">The rise of Smiles under the Gambler's patronage</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Login — Broken</h3>
+      <p>Dom logs into AO for the first time: terminal cancer, no money, no hope. He gets swindled instantly, dropped into the worst starting zone in the game. His luck is so bad it's almost impressive.</p>
+      <div class="power-bar"><div class="power-fill" style="width:5%"></div></div>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--silver-dim);">Physical: 5% · Luck: Terrible · Magic: Locked</p>
+    </div>
+    <div class="card">
+      <h3>Training — Death Cycle</h3>
+      <p>Dom unlocks Chaotic Blessing and Deathwish. He begins an insane training regimen: deliberate suicide runs, extreme physical conditioning, resistance drills. Each death makes him stronger. He pours points into Vitality, Strength, Dexterity, and Endurance.</p>
+      <div class="power-bar"><div class="power-fill" style="width:45%"></div></div>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--silver-dim);">Physical: 45% · Luck: Chaotic · Magic: Locked</p>
+    </div>
+    <div class="card">
+      <h3>Smiles — Unstoppable</h3>
+      <p>Dom has become Smiles — a pure physical tank with no magical ability, backed by luck manipulation and Casino access. He leads his faction, brings allies into the Casino, and faces the world with a grin. The Gambler's experiment is a resounding success.</p>
+      <div class="power-bar"><div class="power-fill" style="width:90%"></div></div>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--silver-dim);">Physical: 90% · Luck: Mastered · Magic: Locked</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Gambler's Revolution</h2>
+  <div class="section-subtitle">How the God of Air changes the divine game</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Single Avatar Model</h3>
+      <p>Every other god follows the same pattern: <strong>choose one Avatar, pour all power into them, win or lose as one</strong>. The Old Man has Jason, The Lady has Alexion, the Seer has Finn. This creates a <strong>single point of failure</strong> — break the Avatar, break the god's influence (as The Old Man proved against The Lady).</p>
+    </div>
+    <div class="card">
+      <h3>The Champion Network Model</h3>
+      <p>The Gambler's innovation: <strong>distribute power across multiple champions</strong>. No single point of failure. Each champion finds their own path to happiness. The Gambler's influence is <strong>resilient, adaptive, and self-sustaining</strong>. If Dom falls, other champions remain. If the Chaotic Blessing fails for one player, it succeeds for another. The Gambler has built a divine <strong>portfolio</strong> — diversified, hedged, and always growing.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, TV Tropes, Kevin Maschke's blog, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Air Mana', 'Luck', 'Freedom', 'Chaos', 'Champions', 'Happiness'],
+    datasets: [
+      { label: 'Age of Gods', data: [30, 20, 22, 18, 10, 25], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Cast Out (Exile)', data: [30, 22, 25, 20, 8, 28], borderColor: '#105898', backgroundColor: 'rgba(16,88,152,0.05)', pointBackgroundColor: '#105898', borderWidth: 2 },
+      { label: 'The Return (Modern)', data: [30, 28, 28, 26, 22, 30], borderColor: '#50b8f0', backgroundColor: 'rgba(80,184,240,0.05)', pointBackgroundColor: '#50b8f0', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#b0c0d0', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 35,
+        grid: { color: 'rgba(26,122,196,0.08)' },
+        angleLines: { color: 'rgba(26,122,196,0.08)' },
+        pointLabels: { color: '#b0c0d0', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Age of\nGods', 'The Fall\n(Exile)', 'Pre-Happy\nTests', 'Happy\n- Login', 'Happy\n- Training', 'Happy\n- Smiles', 'Main\nSeries'],
+    datasets: [
+      { label: 'Divine Influence', data: [22, 8, 12, 14, 18, 24, 28], borderColor: '#50b8f0', backgroundColor: 'rgba(80,184,240,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#50b8f0', borderWidth: 2 },
+      { label: "Champion's Power", data: [0, 0, 0, 3, 15, 28, 32], borderColor: '#1a7ac4', backgroundColor: 'rgba(26,122,196,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#1a7ac4', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Casino Network', data: [5, 5, 8, 8, 10, 22, 26], borderColor: '#0dd0b0', backgroundColor: 'rgba(13,208,176,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#0dd0b0', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#b0c0d0', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#8898a8', font: { size: 9 } }, grid: { color: 'rgba(26,122,196,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 36, ticks: { color: '#50b8f0', font: { size: 9 } }, grid: { color: 'rgba(26,122,196,0.06)' }, title: { display: true, text: 'Influence', color: '#50b8f0', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#1a7ac4', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: "Champion's Power", color: '#1a7ac4', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 36, ticks: { color: '#0dd0b0', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Casino Network', color: '#0dd0b0', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

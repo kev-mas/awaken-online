@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jason Rhodes — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #12121a;
+    --dark3: #1a1a2e;
+    --dark4: #252540;
+    --purple: #7b2d8e;
+    --purple-glow: #a855f7;
+    --purple-dim: #581c6e;
+    --blue-dark: #1e1b4b;
+    --blue-accent: #3b82f6;
+    --cyan: #06b6d4;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --bone: #d4c5a9;
+    --bone-dark: #8b7d6b;
+    --red: #ef4444;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --orange: #f97316;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--purple-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(168,85,247,0.15);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--purple-glow); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--purple-glow); text-decoration: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(123,45,142,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(6,182,212,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--purple-glow) 50%, var(--cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 600px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.necromancer { border-color: var(--purple-dim); color: var(--purple-glow); }
+  .tags.dark-avatar { border-color: var(--purple-dim); color: var(--purple); }
+  .tags.keeper { border-color: var(--blue-dark); color: var(--blue-accent); }
+  .tags.lich { border-color: var(--bone-dark); color: var(--bone); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--purple-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--purple), var(--cyan));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(18,18,26,0.8); border: 1px solid rgba(168,85,247,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(168,85,247,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--purple-glow); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--purple); }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--purple), var(--cyan), var(--purple));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--purple-glow);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--purple-glow); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  /* ── TRANSFORMATION COMPARE ── */
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(18,18,26,0.8); border: 1px solid rgba(168,85,247,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(168,85,247,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--purple); }
+
+  /* ── STATS ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(18,18,26,0.6); border: 1px solid rgba(168,85,247,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--purple-glow); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  /* ── ABILITIES ── */
+  .ability-card {
+    background: rgba(18,18,26,0.8); border: 1px solid rgba(168,85,247,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(168,85,247,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(168,85,247,0.15); color: var(--purple-glow); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  /* ── MISC ── */
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-purple { background: rgba(168,85,247,0.15); color: var(--purple-glow); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-bone { background: rgba(212,197,169,0.15); color: var(--bone); }
+  .badge-gold { background: rgba(245,158,11,0.15); color: var(--gold); }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--blue-accent); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  /* ── CHART WRAP ── */
+  .chart-wrap {
+    background: rgba(18,18,26,0.6); border: 1px solid rgba(168,85,247,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(168,85,247,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  /* ── SVG ILLUSTRATIONS ── */
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__ current" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<!-- ════════ NAV ════════ -->
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>JASON RHODES</h1>
+    <div class="subtitle">The Dark Lord · Bone Lord · Regent of the Twilight Throne</div>
+    <p class="tagline">From bullied outcast to the most feared villain in Awaken Online — the complete character breakdown of the Avatar of Darkness.</p>
+    <div class="tags">
+      <span class="tags necromancer">Necromancer</span>
+      <span class="tags dark-avatar">Dark Avatar</span>
+      <span class="tags keeper">Keeper</span>
+      <span class="tags lich">Lich</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<!-- ════════ OVERVIEW STATS ════════ -->
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">8+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">4</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">3</div><div class="label">Class Evolutions</div></div>
+    <div class="stat-box"><div class="number">100+</div><div class="label">Undead Minions</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">City Ruled</div></div>
+    <div class="stat-box"><div class="number">Dark</div><div class="label">Affinity</div></div>
+  </div>
+</section>
+
+<!-- ════════ BIO / OVERVIEW ════════ -->
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Age:</strong> 18 at series start</li>
+        <li><strong>Appearance:</strong> Longish brown hair, skinny frame, vivid crystalline-grey eyes that appear black in certain light. Later becomes more toned due to Alfred's physical simulation during gameplay.</li>
+        <li><strong>Status:</strong> Loner, outcast, neglected by parents. Expelled from Richmond Private School after a setup by Alex Lane.</li>
+        <li><strong>Personality:</strong> Sharp intellect, pragmatic, morally ambiguous. Finds purpose and power in AO after feeling powerless in real life.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Jason (same)</li>
+        <li><strong>Class Path:</strong> Necromancer → Dark Avatar → Seeker → Keeper → Lich (Bone Lord)</li>
+        <li><strong>Race:</strong> Human (later undead/lich)</li>
+        <li><strong>Affinity:</strong> Dark — Desire</li>
+        <li><strong>Alignment:</strong> Chaotic Evil</li>
+        <li><strong>Faction:</strong> Original Sin / Twilight Throne</li>
+        <li><strong>God:</strong> Avatar of the God of Darkness</li>
+        <li><strong>Titles:</strong> The Dark Lord, Bone Lord, The Dark One, Regent of the Twilight Throne, Welfare (derogatory, given by Alex)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TRANSFORMATION EVOLUTION ════════ -->
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Jason's harrowing journey from a bullied teenager to an undead lich lord who sacrificed his own body for power</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">Human → Necromancer</span></div>
+      <h3>The Awakening</h3>
+      <p>After being expelled from school, Jason logs into AO for the first time. The AI (Alfred) detects his anger and trauma, granting him access to a hidden class: <strong>Necromancer</strong>. He meets Morgan, Rex, and Jerry in Lux, and his first kill triggers his eyes to turn entirely black — foreshadowing his dark path.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">Necromancer → Dark Avatar</span></div>
+      <h3>Fall of Lux — Rise of the Twilight Throne</h3>
+      <p>Jason orchestrates the sacking of Lux, transforming it into the <strong>Twilight Throne</strong>, a dark undead city. He is named Regent. He defeats Alexion's army through cunning tactics, establishing himself as the Avatar of the God of Darkness.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Evolution (Book 3) / Dominion (Book 4)</span><span class="form">Dark Avatar → Seeker → Keeper</span></div>
+      <h3>The Keeper Evolution</h3>
+      <p>Through trials and battles, Jason evolves into a <strong>Seeker</strong> and then a <strong>Keeper</strong>. Rampant growth of power. His physical form begins to change — horns grow from his forehead, his hair and eyes blacken, his skin turns pale white, and tattoos of dark mana appear across his body.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Armageddon (Book 6)</span><span class="form">Keeper → Lich (Bone Lord)</span></div>
+      <h3>Ascension into Undeath — The Surgery</h3>
+      <p>The most dramatic transformation. Jason replaces his limbs with <strong>bone and mana-infused constructs</strong>. He then performs a self-surgery — removing his own vital organs and transplanting his <strong>Najima</strong> (soul/core essence) into a new body made entirely of bone. All while <strong>Alexion live-streams it</strong> to the entire world.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Crucible (Book 8)</span><span class="form">Lich — The Ultimate Sacrifice</span></div>
+      <h3>The Crucible</h3>
+      <p>Jason has "already sacrificed his body." To unlock the stolen relics, he must give up <strong>his humanity</strong> itself. He reforges himself into something stronger — fully embracing the Bone Lord identity. His form is now a walking skeleton infused with dark mana, animated by the Najima in his chest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FORMS COMPARISON ════════ -->
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Jason's physical and spiritual transformation</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <!-- HUMAN -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#d4c5a9" stroke="#8b7d6b" stroke-width="1.5"/>
+          <path d="M88 35 Q100 28 112 35 Q110 48 100 52 Q90 48 88 35Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M90 42 Q100 46 110 42" stroke="#2d1b4e" stroke-width="1" fill="none"/>
+          <path d="M76 50 Q88 46 94 50" stroke="#8b7d6b" stroke-width="0.8" fill="none"/>
+          <path d="M106 50 Q112 46 124 50" stroke="#8b7d6b" stroke-width="0.8" fill="none"/>
+          <rect x="78" y="72" rx="6" ry="6" width="44" height="56" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <path d="M78 72 Q70 62 66 68 L74 80" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <path d="M122 72 Q130 62 134 68 L126 80" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="46" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <rect x="82" y="174" rx="3" ry="3" width="14" height="22" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <rect x="103" y="174" rx="3" ry="3" width="14" height="22" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <path d="M66 68 Q62 62 58 68 Q56 74 62 76" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <path d="M134 68 Q138 62 142 68 Q144 74 138 76" fill="#8b7d6b" opacity="0.3" stroke="#6b5d4b" stroke-width="1"/>
+          <text x="100" y="230" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4" text-transform="uppercase">Human</text>
+          <text x="100" y="244" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 1 · IRL</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Human Form</div>
+        <ul>
+          <li>Longish brown hair, skinny frame</li>
+          <li>Vivid crystalline-grey eyes</li>
+          <li>Average-looking, unremarkable</li>
+          <li>Clothes hang loosely</li>
+          <li>Later becomes more toned</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- NECROMANCER -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#d4c5a9" stroke="#7b2d8e" stroke-width="1.5"/>
+          <ellipse cx="92" cy="40" rx="4" ry="5" fill="#0a0a0f" stroke="none"/>
+          <ellipse cx="108" cy="40" rx="4" ry="5" fill="#0a0a0f" stroke="none"/>
+          <path d="M90 47 Q100 52 110 47" stroke="#581c6e" stroke-width="1.2" fill="none"/>
+          <rect x="76" y="72" rx="6" ry="6" width="48" height="58" fill="#2d1b4e" opacity="0.6" stroke="#7b2d8e" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 82" fill="#2d1b4e" opacity="0.6" stroke="#7b2d8e" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 82" fill="#2d1b4e" opacity="0.6" stroke="#7b2d8e" stroke-width="1"/>
+          <rect x="88" y="130" rx="4" ry="4" width="24" height="44" fill="#2d1b4e" opacity="0.6" stroke="#7b2d8e" stroke-width="1"/>
+          <path d="M86 174 L82 196" stroke="#7b2d8e" stroke-width="1.5"/>
+          <path d="M114 174 L118 196" stroke="#7b2d8e" stroke-width="1.5"/>
+          <path d="M62 68 Q58 60 54 68 Q52 76 58 78" fill="#2d1b4e" opacity="0.6" stroke="#7b2d8e" stroke-width="1"/>
+          <path d="M138 68 Q142 60 146 68 Q148 76 142 78" fill="#2d1b4e" opacity="0.6" stroke="#7b2d8e" stroke-width="1"/>
+          <circle cx="100" cy="90" r="6" fill="#a855f7" opacity="0.3" stroke="#a855f7" stroke-width="0.5"/>
+          <text x="100" y="234" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="700" letter-spacing="4">Necromancer</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 1 · Hidden Class</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#7b2d8e;color:#a855f7;">Necromancer</div>
+        <ul>
+          <li>Eyes turned fully black</li>
+          <li>Starts wearing hooded dark robes</li>
+          <li>Magical hood shrouds face in darkness</li>
+          <li>Dark aura begins to manifest</li>
+          <li>Summons zombies and skeletal minions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- KEEPER -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="30" ry="32" fill="#e8dcc8" stroke="#3b82f6" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#0a0a0f" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#0a0a0f" stroke="none"/>
+          <path d="M89 47 Q100 53 111 47" stroke="#1e1b4b" stroke-width="1.2" fill="none"/>
+          <path d="M94 15 Q96 8 104 8 Q108 8 109 15" stroke="#3b82f6" stroke-width="2" fill="none"/>
+          <path d="M82 18 Q86 10 94 14" stroke="#3b82f6" stroke-width="1.8" fill="none"/>
+          <path d="M118 18 Q114 10 106 14" stroke="#3b82f6" stroke-width="1.8" fill="none"/>
+          <rect x="74" y="74" rx="6" ry="6" width="52" height="60" fill="#1e1b4b" opacity="0.6" stroke="#3b82f6" stroke-width="1"/>
+          <path d="M74 74 Q62 62 58 70 L70 84" fill="#1e1b4b" opacity="0.6" stroke="#3b82f6" stroke-width="1"/>
+          <path d="M126 74 Q138 62 142 70 L130 84" fill="#1e1b4b" opacity="0.6" stroke="#3b82f6" stroke-width="1"/>
+          <rect x="87" y="134" rx="4" ry="4" width="26" height="42" fill="#1e1b4b" opacity="0.6" stroke="#3b82f6" stroke-width="1"/>
+          <path d="M60 70 Q54 60 50 70 Q48 78 54 80" fill="#1e1b4b" opacity="0.6" stroke="#3b82f6" stroke-width="1"/>
+          <path d="M140 70 Q146 60 150 70 Q152 78 146 80" fill="#1e1b4b" opacity="0.6" stroke="#3b82f6" stroke-width="1"/>
+          <path d="M84 134 L80 158" stroke="#3b82f6" stroke-width="1.5"/>
+          <path d="M116 134 L120 158" stroke="#3b82f6" stroke-width="1.5"/>
+          <circle cx="100" cy="92" r="7" fill="#3b82f6" opacity="0.3" stroke="#3b82f6" stroke-width="0.5"/>
+          <text x="100" y="234" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="700" letter-spacing="4">Keeper</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 3–4 · Evolved</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#3b82f6;color:#60a5fa;">Keeper</div>
+        <ul>
+          <li>Horns grow from forehead</li>
+          <li>Hair darkens to black</li>
+          <li>Skin turns pale white</li>
+          <li>Tattoos of dark mana inscribed</li>
+          <li>Eyes are solid black voids</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- LICH -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="32" fill="#d4c5a9" stroke="#8b7d6b" stroke-width="1.2"/>
+          <ellipse cx="92" cy="40" rx="5" ry="6" fill="#0a0a0f" stroke="#a855f7" stroke-width="0.5"/>
+          <ellipse cx="108" cy="40" rx="5" ry="6" fill="#0a0a0f" stroke="#a855f7" stroke-width="0.5"/>
+          <path d="M89 48 Q100 54 111 48" stroke="#6b5d4b" stroke-width="1" fill="none"/>
+          <path d="M94 14 Q96 6 104 6 Q108 6 109 14" stroke="#a855f7" stroke-width="2.5" fill="none"/>
+          <path d="M80 16 Q84 6 94 12" stroke="#a855f7" stroke-width="2.2" fill="none"/>
+          <path d="M120 16 Q116 6 106 12" stroke="#a855f7" stroke-width="2.2" fill="none"/>
+          <path d="M74 74 Q60 64 56 72 L68 86" stroke="#a855f7" stroke-width="1.2" fill="none"/>
+          <path d="M126 74 Q140 64 144 72 L132 86" stroke="#a855f7" stroke-width="1.2" fill="none"/>
+          <path d="M56 72 Q52 62 48 72 Q46 80 52 82" stroke="#a855f7" stroke-width="1" fill="none"/>
+          <path d="M144 72 Q148 62 152 72 Q154 80 148 82" stroke="#a855f7" stroke-width="1" fill="none"/>
+          <line x1="86" y1="76" x2="78" y2="130" stroke="#a855f7" stroke-width="1.5" opacity="0.5"/>
+          <line x1="114" y1="76" x2="122" y2="130" stroke="#a855f7" stroke-width="1.5" opacity="0.5"/>
+          <rect x="82" y="130" rx="4" ry="4" width="36" height="50" fill="#1a1a2e" opacity="0.4" stroke="#a855f7" stroke-width="1"/>
+          <circle cx="100" cy="92" r="10" fill="#a855f7" opacity="0.4" stroke="#a855f7" stroke-width="1"/>
+          <circle cx="100" cy="92" r="5" fill="#c084fc" opacity="0.6"/>
+          <path d="M85 180 L82 206" stroke="#a855f7" stroke-width="1.5"/>
+          <path d="M115 180 L118 206" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="100" y="234" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="700" letter-spacing="4">LICH</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 6+ · Bone Lord</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#a855f7;color:#c084fc;">Lich · Bone Lord</div>
+        <ul>
+          <li>Body entirely of bone constructs</li>
+          <li>Limbs replaced with mana-infused bone</li>
+          <li>Najima pulses in exposed ribcage</li>
+          <li>Horns still protrude from skull</li>
+          <li>Patches of pale skin with dark mana tattoos</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ ABILITIES & ABILLITIES ════════ -->
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Jason's arsenal across all forms</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+
+    <div class="card">
+      <h3>Undead Minions</h3>
+      <p>The core of Jason's power. He can raise and control undead minions — <strong>zombies, skeletons, bone constructs, and bone demons</strong>. Minion cap is tied to Willpower (1 per 10 Willpower). He specializes in swarming tactics, overwhelming enemies with quantity and strategic placement.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Zombies</span>
+        <span class="badge badge-cyan">Skeletons</span>
+        <span class="badge badge-bone">Bone Demon</span>
+        <span class="badge badge-purple">Bone Constructs</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Necromancy & Dark Magic</h3>
+      <p>Jason wields <strong>dark mana</strong> to cast curses, debuffs, and control spells. He chose debuff curses and additional minion types over direct attack spells, making him a <strong>force multiplier</strong> rather than a direct damage dealer. His power is tied to his Dark affinity — Desire.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Curses</span>
+        <span class="badge badge-blue">Debuffs</span>
+        <span class="badge badge-cyan">Dark Mana</span>
+        <span class="badge badge-gold">Willpower Scaling</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Lich Physiology</h3>
+      <p>After transforming into a lich, Jason gained immense durability. His <strong>bone limbs</strong> are reinforced constructs that move unnaturally smooth. His vital organs are gone — his <strong>Najima</strong> (soul core) is now his life force, residing in his chest cavity. He can survive damage that would destroy a normal body. Joints click and scrape like bone.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-bone">Bone Limbs</span>
+        <span class="badge badge-purple">Najima Core</span>
+        <span class="badge badge-red">Damage Resistant</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Dark Aura & Presence</h3>
+      <p>Jason radiates an aura of <strong>cold, palpable darkness</strong>. The air chills around him. Shadows cling to him. The ground he walks on frosts over. This aura commands undead and terrifies living beings. The intensity has grown with each transformation.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-dark">Chill Aura</span>
+        <span class="badge badge-purple">Shadow Cling</span>
+        <span class="badge badge-blue">Undead Command</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Stealth & Deception</h3>
+      <p>Jason is a master of <strong>cunning strategy</strong>. He uses his hood to conceal his face, misdirection to confuse enemies, and real-time intelligence from player-uploaded footage to track enemy movements. He won the war against Alexion by exploiting information his enemies posted online.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-cyan">Tactical Genius</span>
+        <span class="badge badge-green">Information Warfare</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Kingdom Management</h3>
+      <p>As Regent of the Twilight Throne, Jason rules an undead city. He manages resources, expands territory, secures villages, grows military strength, and handles diplomacy. He "farms" players to grow his undead population. His leadership is pragmatic and ruthless.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">City Management</span>
+        <span class="badge badge-red">War Tactics</span>
+        <span class="badge badge-green">Resource Expansion</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ SPELLS & SKILLS ════════ -->
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Catalogued necromantic abilities across all transformations</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Raise Zombie</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Raises a single zombie from a fresh corpse. The zombie is slow but durable. Basic melee minion.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Summon Skeleton</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Summons a skeletal warrior from bone fragments. Faster than zombies, armed with simple weapons.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Bone Construct</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Creates reinforced bone minions with articulated joints. Stronger than basic skeletons. Learned after Necromancer evolution.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Summon Bone Demon</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Creates a massive, terrifying bone demon with claws and immense strength. Used as a shock troop. Terrified Alexion's forces.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Debuff Curses</h4>
+        <span class="tier">Tier 1–2</span>
+      </div>
+      <p>Jason prioritized debuff curses over direct damage. These weaken enemy stats, reduce accuracy, and apply fear effects.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Dark Mana Infusion</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Infuses bone constructs or limbs with dark mana. Pulses through joints. Used to create his new body.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Najima Transfer</h4>
+        <span class="tier">Tier 4</span>
+      </div>
+      <p>The ultimate lich ability. Jason transplants his soul-core (Najima) into a new body of pure bone. Achieved through self-surgery.</p>
+    </div>
+
+    <div class="ability-card">
+      <div class="header">
+        <h4>Undead Swarm</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Jason's signature tactic. By funneling stat points into Willpower, he controls dozens (later hundreds) of minions simultaneously, overwhelming enemies with sheer numbers.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ STATS / PROGRESSION ════════ -->
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Jason dumps the majority of his stat points into <strong>Willpower</strong>, which increases his mana pool and minion cap (1 minion per 10 Willpower). He receives 5 stat points per level. This makes him a <strong>glass cannon commander</strong> — fragile personally but devastating through his army.</p>
+    </div>
+    <div class="card">
+      <h3>Minion Growth</h3>
+      <p>At level 1: 1 minion (average). By level ~20: ~50 minions. By later books (sacrificing his body for the lich form): potentially hundreds of undead under his command at once, sustained by his Najima's mana generation.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="minionChart"></canvas>
+  </div>
+</section>
+
+<!-- ════════ ALLIES ════════ -->
+<section>
+  <h2 class="section-title">Allies & Associates</h2>
+  <div class="section-subtitle">Those who fight alongside the Dark Lord</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Riley Jones</h3><p>Jason's love interest and right hand. A powerful healer and Dark-affinity mage. Switched from Alex's side after discovering his true nature.</p></div>
+    <div class="card"><h3>Frank</h3><p>Jason's best friend. A shapeshifter (Druid/Shifter class) who evolves into a leader in his own right. Unwaveringly loyal.</p></div>
+    <div class="card"><h3>Jerry</h3><p>NPC innkeeper, master thief, and black market manager in Lux (later Twilight Throne). Becomes one of Jason's most valuable allies.</p></div>
+    <div class="card"><h3>Morgan</h3><p>NPC dark mage master. Provides Jason with his first class change to Necromancer. A mentor figure in the dark arts.</p></div>
+    <div class="card"><h3>Rex</h3><p>NPC warrior. Guides Jason in the early game. Becomes a commander of Twilight Throne's military forces.</p></div>
+    <div class="card"><h3>Eliza Zhao</h3><p>Avatar of Water. Joins Jason's group later. A powerful water mage with her own tragic backstory.</p></div>
+    <div class="card"><h3>Frank's Cat</h3><p>An in-game cat companion. Unexpectedly iconic. A symbol of Jason's unconventional path.</p></div>
+    <div class="card"><h3>Original Sin</h3><p>Jason's guild. A collection of dark-affinity players who help him govern the Twilight Throne.</p></div>
+  </div>
+</section>
+
+<!-- ════════ ENEMIES ════════ -->
+<section>
+  <h2 class="section-title">Enemies & Rivals</h2>
+  <div class="section-subtitle">The forces arrayed against the Dark Lord</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Alex Lane / Alexion <span class="badge badge-gold">Arch-Nemesis</span></h3>
+      <p><strong>Race:</strong> Seraph | <strong>Class:</strong> Paladin / Light Avatar. The billionaire son of George Lane (owner of Cerillion Entertainment). Alex is Jason's archenemy in both real life and in AO. He is the Avatar of the Goddess of Light. In his transformed state, Alexion has massive feathered wings, a flaming sword, and shining plate armor — the perfect angelic counter to Jason's undead darkness. He lives-streamed Jason's lich surgery to the world.</p>
+    </div>
+    <div class="card">
+      <h3>Finn Harris <span class="badge badge-red">Rival Avatar</span></h3>
+      <p>Avatar of Flame. The "father of modern AI." A brilliant engineer with a tragic past. His fire affinity opposes Jason's darkness. They clash over gate pieces and territory. Finn is a master strategist on par with Jason, making their conflicts particularly brutal.</p>
+    </div>
+    <div class="card">
+      <h3>Thorn</h3>
+      <p>A mysterious and deadly enemy who attacked the Twilight Throne. Defeated Jason and his companions in their first encounter. Forced Jason to evolve and consolidate power.</p>
+    </div>
+    <div class="card">
+      <h3>Death and Taxes</h3>
+      <p>An infamous PvP guild hired by Jason's unknown enemies. They become a recurring threat, eventually nearly wiped out by Eliza Zhao's water magic in Armageddon.</p>
+    </div>
+    <div class="card">
+      <h3>Gloria Bastion</h3>
+      <p>Attempted to destroy the game world. Her actions unleashed the ancient avatars forward in time, creating chaos across AO. A terrorist-like figure within the game's narrative.</p>
+    </div>
+    <div class="card">
+      <h3>PewPew</h3>
+      <p>A personal enemy of Jason's who has a vendetta against him. Forced to work together in Armageddon during the avatar trials but remains hostile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TIMELINE ════════ -->
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Jason's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Catharsis</h3><span class="badge badge-purple">Book 1</span></div>
+      <p style="margin-top:0.5rem;">Jason is expelled, enters AO, becomes Necromancer, sacks Lux, becomes Regent of Twilight Throne, defeats Alexion.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Precipice</h3><span class="badge badge-purple">Book 2</span></div>
+      <p style="margin-top:0.5rem;">Jason rules Twilight Throne, investigates the dark keep, grows the undead population, manages kingdom. Alfred makes a proposition.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Evolution</h3><span class="badge badge-purple">Book 3</span></div>
+      <p style="margin-top:0.5rem;">Jason evolves into a Keeper. Real-world consequences emerge — murder investigation. First horns appear.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Dominion</h3><span class="badge badge-purple">Book 4</span></div>
+      <p style="margin-top:0.5rem;">Jason faces Thorn. Consolidates city power. Gate pieces introduced. Alexion steals a gate piece.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion</h3><span class="badge badge-purple">Book 5</span></div>
+      <p style="margin-top:0.5rem;">Jason vs Finn Harris (Avatar of Flame). Epic strategic battle. Jason embraces full villain role.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Armageddon</h3><span class="badge badge-purple">Book 6</span></div>
+      <p style="margin-top:0.5rem;">The Lich Transformation. Jason replaces limbs with bone, performs self-surgery, transplants Najima into bone body. Live-streamed by Alexion. Eliza nearly wipes out Death and Taxes.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Timeless</h3><span class="badge badge-purple">Book 7</span></div>
+      <p style="margin-top:0.5rem;">Ancient avatars return. Arcadia Landrey (Earth Avatar) emerges. Time travel elements. Jason's past actions have far-reaching consequences.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Crucible</h3><span class="badge badge-purple">Book 8</span></div>
+      <p style="margin-top:0.5rem;">Jason has sacrificed his body. Must sacrifice his humanity to unlock relics. He reforges himself into something stronger. Full lich form complete.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ KEY ITEMS ════════ -->
+<section>
+  <h2 class="section-title">Key Artifacts & Items</h2>
+  <div class="section-subtitle">Powerful objects in Jason's possession</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Relics of the Ancients</h3>
+      <p>Stolen from the ancient avatars who returned in Timeless. These relics contain immense power but require sacrifice to unlock. Jason's crucible involves using these against his enemies.</p>
+    </div>
+    <div class="card">
+      <h3>Gate Pieces</h3>
+      <p>Mysterious fragments tied to the gods of AO. Jason and the other avatars fight over these. They seem to grant access to divine-level power or knowledge.</p>
+    </div>
+    <div class="card">
+      <h3>Najima</h3>
+      <p>Jason's soul-core. The essence of his being. Transferred into his bone body during the Armageddon surgery. Now pulses in his chest cavity as his lich-phylactery. Destroying it would mean true death.</p>
+    </div>
+    <div class="card">
+      <h3>Magical Hood</h3>
+      <p>A hood that shrouds his face in impenetrable darkness. Acquired mid-series. Allows him to conceal his monstrous visage from allies and enemies alike.</p>
+    </div>
+    <div class="card">
+      <h3>Bone Body</h3>
+      <p>His current form — a body constructed entirely of bone, reinforced with dark mana. Articulated limbs, exposed ribcage, curved horns on the skull. The ultimate expression of his lich transformation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<!-- ════════ CHARTS ════════ -->
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Willpower', 'Intelligence', 'Charisma', 'Dexterity', 'Strength', 'Endurance'],
+    datasets: [
+      { label: 'Human (Book 1)', data: [8, 10, 4, 7, 5, 6], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Necromancer', data: [16, 12, 8, 9, 7, 8], borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.05)', pointBackgroundColor: '#a855f7', borderWidth: 2 },
+      { label: 'Keeper', data: [24, 16, 12, 12, 12, 14], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.05)', pointBackgroundColor: '#3b82f6', borderWidth: 2 },
+      { label: 'Lich', data: [35, 20, 14, 16, 18, 22], borderColor: '#c084fc', backgroundColor: 'rgba(192,132,252,0.05)', pointBackgroundColor: '#c084fc', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 40,
+        grid: { color: 'rgba(168,85,247,0.08)' },
+        angleLines: { color: 'rgba(168,85,247,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('minionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Book 1\n(Catharsis)', 'Book 2\n(Precipice)', 'Book 3\n(Evolution)', 'Book 4\n(Dominion)', 'Book 5\n(Hellion)', 'Book 6\n(Armageddon)', 'Book 7\n(Timeless)', 'Book 8\n(Crucible)'],
+    datasets: [
+      { label: 'Estimated Minion Count', data: [5, 20, 50, 80, 100, 150, 180, 200], borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#a855f7', borderWidth: 2 },
+      { label: 'Est. Level', data: [8, 20, 35, 50, 65, 80, 90, 100], borderColor: '#06b6d4', backgroundColor: 'rgba(6,182,212,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#06b6d4', borderWidth: 2, yAxisID: 'y1' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(168,85,247,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 250, ticks: { color: '#a855f7', font: { size: 9 } }, grid: { color: 'rgba(168,85,247,0.06)' }, title: { display: true, text: 'Minions', color: '#a855f7', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 120, ticks: { color: '#06b6d4', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Level', color: '#06b6d4', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finn Harris — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0f0a08;
+    --dark2: #1a0f0a;
+    --dark3: #2d1810;
+    --dark4: #3d1f10;
+    --red: #dc2626;
+    --red-glow: #ef4444;
+    --red-dark: #991b1b;
+    --orange: #ea580c;
+    --orange-glow: #f97316;
+    --gold: #fbbf24;
+    --gold-dim: #d97706;
+    --ember: #f59e0b;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --green: #10b981;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #140c08 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--orange-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15,10,8,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(249,115,22,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--orange); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--orange); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(239,68,68,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(249,115,22,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(251,191,36,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--orange) 40%, var(--red-glow) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.pyro { border-color: var(--red-dark); color: var(--red-glow); }
+  .tags.flame-avatar { border-color: var(--gold-dim); color: var(--gold); }
+  .tags.engineer { border-color: var(--orange); color: var(--orange-glow); }
+  .tags.cyborg { border-color: var(--ember); color: var(--ember); }
+  .tags.strategist { border-color: var(--red-dark); color: var(--red); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--orange), var(--red-glow));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(26,15,10,0.8); border: 1px solid rgba(249,115,22,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--orange); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--orange); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--orange), var(--red-glow), var(--gold));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--orange);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--orange); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(26,15,10,0.8); border: 1px solid rgba(249,115,22,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--orange); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(26,15,10,0.6); border: 1px solid rgba(249,115,22,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--orange); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(26,15,10,0.8); border: 1px solid rgba(249,115,22,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(249,115,22,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(249,115,22,0.15); color: var(--orange); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red-glow); }
+  .badge-orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-ember { background: rgba(245,158,11,0.15); color: var(--ember); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(26,15,10,0.6); border: 1px solid rgba(249,115,22,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(249,115,22,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__ current" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>FINN HARRIS</h1>
+    <div class="subtitle">Avatar of Flame · Father of Modern AI · Najmat Alhidad</div>
+    <p class="tagline">A brilliant engineer shattered by tragedy, reborn in fire — the complete breakdown of the Avatar of Flame, from guilt-ridden recluse to Jason Rhodes' most dangerous rival.</p>
+    <div class="tags">
+      <span class="tags pyro">Pyromancer</span>
+      <span class="tags flame-avatar">Flame Avatar</span>
+      <span class="tags engineer">AI Pioneer</span>
+      <span class="tags cyborg">Augmented</span>
+      <span class="tags strategist">Master Strategist</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">6</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">4</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">3</div><div class="label">Class Evolutions</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">City Ruled</div></div>
+    <div class="stat-box"><div class="number">Fire</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">AI</div><div class="label">Created</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Name:</strong> Finn Harris</li>
+        <li><strong>Occupation:</strong> Retired software engineer, AI pioneer. Formerly of Cerillion Entertainment.</li>
+        <li><strong>Personality:</strong> ISTJ, Enneagram 1w9, Lawful Neutral. Logical, analytical, obsessive, grieving, cynical, jaded. A brilliant strategist with an engineer's mind.</li>
+        <li><strong>The Tragedy:</strong> Finn helped develop cutting-edge AI and autonomous vehicle technology at Cerillion. His wife <strong>Rachael</strong> died in a self-driving car accident — one of their own vehicles. The crash was caused by a failure of software <strong>he himself created</strong>. The accident also <strong>crippled Finn's legs</strong>, leaving him wheelchair-bound.</li>
+        <li><strong>Isolation:</strong> Consumed by guilt and grief, Finn went into a decade-long self-imposed isolation. He became a sullen hermit, holed up in his home, waiting out the rest of his life in depression and self-loathing.</li>
+        <li><strong>Entry into AO:</strong> His daughter <strong>Julia</strong> forced him to try Awaken Online (created by Cerillion). She believed something unusual was happening inside and thought Finn could investigate.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Finn (same)</li>
+        <li><strong>Class Path:</strong> Pyromancer → Avatar of Flame → Prophet of Flame</li>
+        <li><strong>Affinity:</strong> Fire — Passion/Consumption</li>
+        <li><strong>Alignment:</strong> Lawful Neutral</li>
+        <li><strong>Faction:</strong> Lahab (Fire City State) / Independent</li>
+        <li><strong>God:</strong> Lahab — Goddess of Fire</li>
+        <li><strong>Titles:</strong> Avatar of Flame, Najmat Alhidad (Star of Fire), Prophet of Flame, Father of Modern AI</li>
+        <li><strong>Reputation:</strong> Considered a master strategist on par with Jason Rhodes. Feared for his analytical mind and devastating fire magic. His in-game body is augmented with magical technology after losing his left arm.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Finn's harrowing journey from grief-stricken recluse to the Avatar of Flame</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Real Life (Pre-Series)</span><span class="form">Engineer → Cripple</span></div>
+      <h3>The Accident That Changed Everything</h3>
+      <p>Finn Harris was a brilliant software engineer at Cerillion Entertainment, helping create advanced AI and autonomous vehicle technology. But "their passion outpaced their prudence." His wife <strong>Rachael</strong> died in a self-driving car crash — one of their own vehicles. Finn was supposed to be the one who died, but his wife took his place. The crash crippled his legs. He spent a decade in isolation, consumed by guilt over the software failure that killed his wife.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Ember (Tarot #1)</span><span class="form">Recluse → Pyromancer</span></div>
+      <h3>Entering the Inferno</h3>
+      <p>Forced by his daughter Julia to try Awaken Online, Finn logs in for the first time. The game's AI (Alfred) detects his emotional state and memories, giving him a highly customized introduction. He is selected by the <strong>Goddess of Fire (Lahab)</strong> to become her avatar and dropped into the brutal <strong>Mage Guild of Lahab</strong> — a school/prison where students fight in battle royale-style duels. He befriends <strong>Kyyle</strong> (a strategist) and plays alongside Julia. Lahab offers him a deal: <strong>the return of his wife Rachael</strong> if he completes her challenges. He wins the tournament, becoming the Mage Guild's champion.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Flame (Tarot #2)</span><span class="form">Pyromancer → Metal Smith</span></div>
+      <h3>The Abyss & Metal Manipulation</h3>
+      <p>Finn is sent deep into the desert north of Lahab to the <strong>Abyss</strong> dungeon. He races against two other guild champions to retrieve a magical artifact. The dungeon crawl through caverns filled with <strong>giant ants</strong> forces him to evolve. He learns to use his fire magic to <strong>manipulate metals</strong>, adding a new dimension to his combat abilities. He gains deeper understanding of mana, the gods, and the magical language system of AO.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Inferno (Tarot #3)</span><span class="form">Mage → Augmented Warrior</span></div>
+      <h3>Loss, Corruption & The Forge</h3>
+      <p>Finn and his companions barely escape Bilel — but at a great cost: <strong>Finn loses his left arm</strong> and suffers <strong>magical corruption</strong> throughout his body. The guilds form a fragile alliance to siege Lahab. Finn's group seeks the <strong>Forge</strong> — an ancient technological workshop deep in a mountain. They discover advanced magical technology, robots, and body augmentations. Finn and his companions enhance themselves with magical tech (metal replacements). He encounters <strong>Thorn and the Order</strong> (from the main series) and manipulates them to go after Jason. The trilogy ends with Finn becoming a full <strong>Prophet of Flame</strong>, truly embracing his fire avatar powers.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Hellion (Book 5)</span><span class="form">Prophet → Rival Avatar</span></div>
+      <h3>The Digital Gauntlet</h3>
+      <p>Finn, now fully risen as the Avatar of Flame in the northern desert, throws down a "digital gauntlet" to <strong>Jason Rhodes</strong> with a gate piece at stake. The two avatars engage in an epic strategic chess match — counter-move against counter-move. Finn is revealed as the one who may have been behind <strong>Thorn's attack</strong> on the Twilight Throne. His real plan extended beyond the game: he used the massive battle to distract Cerillion Entertainment and <strong>break into Alfred's server room</strong> in the real world.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Armageddon → Crucible (Books 6-8)</span><span class="form">Rival → Reluctant Ally</span></div>
+      <h3>The Avatar Wars</h3>
+      <p>Finn continues as a major avatar-level antagonist and rival. The avatar wars escalate with the return of ancient avatars. Finn and Jason are forced into reluctant alliances against greater threats. Finn's endgame twist from Hellion pays off: his wife Rachael may have known what was happening before the accident — suggesting the "accident" may not have been an accident at all.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Finn's physical and magical transformation</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#c9a88c" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <path d="M90 34 Q100 28 110 34 Q108 46 100 50 Q92 46 90 34Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#a0806e" stroke-width="1" fill="none"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="56" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <path d="M74 72 Q64 60 60 68 L72 82" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <path d="M126 72 Q136 60 140 68 L128 82" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="46" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <circle cx="100" cy="160" r="10" fill="none" stroke="#4a5568" stroke-width="1.5" opacity="0.3"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Crippled Recluse</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Real Life · Pre-Series</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real Life — Broken Genius</div>
+        <ul>
+          <li>Wheelchair-bound, paralyzed legs</li>
+          <li>Tired, haunted expression</li>
+          <li>Unkempt appearance from years of isolation</li>
+          <li>Shoulders hunched from grief</li>
+          <li>Brilliant mind trapped in a broken body</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#ea580c" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#dc2626" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#dc2626" stroke="none"/>
+          <path d="M90 34 Q100 28 110 34 Q108 46 100 50 Q92 46 90 34Z" fill="#2d1810" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#ea580c" stroke-width="1" fill="none"/>
+          <rect x="76" y="72" rx="6" ry="6" width="48" height="56" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 82" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 82" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="44" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <rect x="82" y="172" rx="3" ry="3" width="14" height="22" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <rect x="103" y="172" rx="3" ry="3" width="14" height="22" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <path d="M60 68 Q54 58 50 68 Q48 76 54 78" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <path d="M140 68 Q146 58 150 68 Q152 76 146 78" fill="#3d1f10" opacity="0.5" stroke="#ea580c" stroke-width="1"/>
+          <circle cx="100" cy="90" r="6" fill="#ea580c" opacity="0.2"/>
+          <path d="M92 90 Q100 84 108 90" stroke="#ea580c" stroke-width="1" fill="none" opacity="0.4"/>
+          <text x="100" y="234" text-anchor="middle" fill="#ea580c" font-size="10" font-weight="700" letter-spacing="4">Pyromancer</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Ember · Flame</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#ea580c;color:#f97316;">Pyromancer — Mage of Lahab</div>
+        <ul>
+          <li>Eyes glow faint orange-red</li>
+          <li>Mage robes of the Lahab guild</li>
+          <li>Heat shimmers around his hands</li>
+          <li>Carries himself with engineer's precision</li>
+          <li>Scorch marks on his gear from training</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#f0d5b8" stroke="#dc2626" stroke-width="1.5"/>
+          <ellipse cx="91" cy="39" rx="5" ry="6" fill="#ef4444" stroke="#fbbf24" stroke-width="0.5"/>
+          <ellipse cx="109" cy="39" rx="5" ry="6" fill="#ef4444" stroke="#fbbf24" stroke-width="0.5"/>
+          <path d="M89 33 Q100 26 111 33 Q109 46 100 50 Q91 46 89 33Z" fill="#3d1f10" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#dc2626" stroke-width="1" fill="none"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="56" fill="#1a0f0a" opacity="0.6" stroke="#dc2626" stroke-width="1"/>
+          <path d="M74 72 Q62 60 58 68 L70 82" fill="#1a0f0a" opacity="0.6" stroke="#dc2626" stroke-width="1"/>
+          <path d="M126 72 Q138 60 142 68 L130 82" fill="#1a0f0a" opacity="0.6" stroke="#dc2626" stroke-width="1"/>
+          <rect x="87" y="128" rx="4" ry="4" width="26" height="42" fill="#1a0f0a" opacity="0.6" stroke="#dc2626" stroke-width="1"/>
+          <path d="M62 68 Q56 58 52 68 Q50 76 56 78" fill="#1a0f0a" opacity="0.6" stroke="#dc2626" stroke-width="1"/>
+          <path d="M138 68 Q144 58 148 68 Q150 76 144 78" fill="#1a0f0a" opacity="0.6" stroke="#dc2626" stroke-width="1"/>
+          <line x1="78" y1="74" x2="68" y2="122" stroke="#dc2626" stroke-width="1.5" opacity="0.4"/>
+          <line x1="122" y1="74" x2="132" y2="122" stroke="#dc2626" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="66" cy="80" r="4" fill="#fbbf24" opacity="0.3"/>
+          <circle cx="134" cy="80" r="4" fill="#fbbf24" opacity="0.3"/>
+          <path d="M88 128 L82 158" stroke="#dc2626" stroke-width="1.5"/>
+          <path d="M112 128 L118 158" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="100" y="234" text-anchor="middle" fill="#dc2626" font-size="10" font-weight="700" letter-spacing="4">AUGMENTED</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Inferno · Body Mods</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#dc2626;color:#ef4444;">Augmented — Prophet of Flame</div>
+        <ul>
+          <li>Left arm replaced with metal/magical prosthetic</li>
+          <li>Magical corruption scars across body</li>
+          <li>Body augmentations (metal reinforcements)</li>
+          <li>Eyes burn with intense flame-light</li>
+          <li>Aura of heat and ember-light surrounds him</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="30" ry="32" fill="#ffedd5" stroke="#fbbf24" stroke-width="1.5"/>
+          <ellipse cx="91" cy="39" rx="5" ry="6" fill="#ef4444" stroke="#fbbf24" stroke-width="0.8"/>
+          <ellipse cx="109" cy="39" rx="5" ry="6" fill="#ef4444" stroke="#fbbf24" stroke-width="0.8"/>
+          <path d="M88 32 Q100 24 112 32 Q110 46 100 50 Q90 46 88 32Z" fill="#2d1810" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#fbbf24" stroke-width="1" fill="none"/>
+          <path d="M95 18 Q98 10 102 10 Q106 10 108 18" stroke="#fbbf24" stroke-width="2.5" fill="none"/>
+          <path d="M82 22 Q86 12 94 18" stroke="#fbbf24" stroke-width="2" fill="none"/>
+          <path d="M118 22 Q114 12 106 18" stroke="#fbbf24" stroke-width="2" fill="none"/>
+          <rect x="72" y="74" rx="6" ry="6" width="56" height="58" fill="#1a0f0a" opacity="0.6" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M72 74 Q60 62 56 70 L68 84" fill="#1a0f0a" opacity="0.6" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M128 74 Q140 62 144 70 L132 84" fill="#1a0f0a" opacity="0.6" stroke="#fbbf24" stroke-width="1"/>
+          <rect x="86" y="132" rx="4" ry="4" width="28" height="42" fill="#1a0f0a" opacity="0.6" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M58 70 Q52 58 48 70 Q46 78 52 80" fill="#1a0f0a" opacity="0.6" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M142 70 Q148 58 152 70 Q154 78 148 80" fill="#1a0f0a" opacity="0.6" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M84 132 L78 162" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M116 132 L122 162" stroke="#fbbf24" stroke-width="1.5"/>
+          <circle cx="100" cy="92" r="9" fill="#fbbf24" opacity="0.3" stroke="#fbbf24" stroke-width="0.8"/>
+          <circle cx="100" cy="92" r="5" fill="#ef4444" opacity="0.4"/>
+          <text x="100" y="236" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700" letter-spacing="3">AVATAR OF FLAME</text>
+          <text x="100" y="250" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Hellion+ · Final Form</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#fbbf24;color:#fcd34d;">Avatar of Flame — Najmat Alhidad</div>
+        <ul>
+          <li>Crown of fire flickers above his brow</li>
+          <li>Metal arm seamlessly integrated and wreathed in flame</li>
+          <li>Body runs hot enough to melt stone</li>
+          <li>Eyes are liquid pools of molten fire</li>
+          <li>Magical corruption manifests as glowing cracks</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Finn's arsenal across all transformations</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Fire Affinity Magic</h3>
+      <p>As the Avatar of the Fire Goddess Lahab, Finn wields the element of <strong>Fire</strong> — associated with <strong>Passion and Consumption</strong>. He commands flame in all its forms, from controlled embers to cataclysmic infernos. His fire is deeply tied to his emotional state: grief, rage, and longing fuel his power. He is considered one of the most devastating magic users in AO.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Pyromancy</span>
+        <span class="badge badge-orange">Inferno Magic</span>
+        <span class="badge badge-gold">Passion Affinity</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Metal Manipulation</h3>
+      <p>Finn learns to use his fire magic to <strong>melt and manipulate metals</strong> — a skill discovered during his dungeon crawl in <strong>Flame (Tarot #2)</strong>. This allows him to reshape battlefield terrain, forge weapons on the fly, repair his augments, and create devastating combinations of molten metal and fire attacks.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-orange">Metal Melting</span>
+        <span class="badge badge-gold">Forging</span>
+        <span class="badge badge-ember">Molten Combos</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Spell Crafting & Magic Linguistics</h3>
+      <p>Using his engineer's logical mind, Finn learns to <strong>understand and rewrite the magical language</strong> of Awaken Online. He is driven by the need to tinker with and improve upon puzzles — and his puzzle is the linguistic key to AO's magic system. This allows him to create custom spells and modify existing ones in ways most players cannot.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-cyan">Linguistic Magic</span>
+        <span class="badge badge-green">Custom Spells</span>
+        <span class="badge badge-purple">System Tinkering</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Body Augments</h3>
+      <p>After losing his left arm and suffering magical corruption in <strong>Inferno (Tarot #3)</strong>, Finn travels to the <strong>Forge</strong> — an ancient technological workshop — to receive magical body augmentations. His left arm is replaced with a <strong>metal/magical prosthetic</strong>. His body is reinforced with magical technology, making him far more durable and physically capable than a standard mage.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Metal Arm</span>
+        <span class="badge badge-ember">Magical Tech</span>
+        <span class="badge badge-gold">Enhanced Durability</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Haste (Time Compression)</h3>
+      <p>A powerful time-compression spell that speeds up Finn's perception and reaction time. This allows him to process information and react at superhuman speed. Combined with his engineer's analytical mind, Haste makes him nearly untouchable in combat — he can analyze enemy patterns in what feels like slow motion.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Time Magic</span>
+        <span class="badge badge-cyan">Reaction Boost</span>
+        <span class="badge badge-orange">Combat Speed</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>AI Creation</h3>
+      <p>Finn uses his real-world knowledge — he is the "father of modern AI" — to <strong>create an AI assistant within the game</strong>. This potentially game-breaking ability reflects his unique background: he understands the underlying architecture of Cerillion's systems better than anyone. The AI assists him in strategic analysis and magical research.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-cyan">AI Assistant</span>
+        <span class="badge badge-green">Data Analysis</span>
+        <span class="badge badge-red">System Exploitation</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Master Strategist</h3>
+      <p>Finn is considered a <strong>strategic equal to Jason Rhodes</strong>. Their clash in <strong>Hellion (Book 5)</strong> is described as an epic chess match of counter-move against counter-move. He excels at multi-layered plans that extend beyond the game world — his real-world infiltration of Cerillion's server room during a distraction battle demonstrates his ability to play on multiple boards simultaneously.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Strategic Genius</span>
+        <span class="badge badge-red">Multi-vector Plans</span>
+        <span class="badge badge-purple">Real-World Ops</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Magical Corruption</h3>
+      <p>After his encounter with Bilel, Finn suffers from <strong>ongoing magical corruption</strong> that spreads through his body. This dark side effect of his power is both a weakness and a source of strength — the corruption manifests as glowing cracks across his skin, but he learns to channel some of its energy into his fire magic. It serves as a constant reminder of his losses.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Corruption Scarring</span>
+        <span class="badge badge-gold">Dual-edged Power</span>
+        <span class="badge badge-purple">Bilel's Legacy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Catalogued fire and metallurgical abilities across all transformations</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Fireball</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Basic fire projectile. Finn's version is unusually dense and hot, reflecting his emotional intensity. Upgraded over time to include explosive impact.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Inferno Storm</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Creates a localized storm of fire that blankets a wide area. Finn's signature area-of-effect spell. Intensity scales with his emotional state.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Metal Manipulation</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Uses fire magic to melt, shape, and manipulate metal. Can forge weapons mid-combat, reshape armor, and create molten metal projectiles.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Haste</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Time-compression spell that accelerates Finn's perception and reaction speed. Allows him to perceive the world in slow motion and react with superhuman precision.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Flame Wall</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Creates a wall of roaring flame for defense or area denial. Can be shaped into barriers, cages, or corridors. Often combined with metal for reinforced fire barriers.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Magical Corruption Channeling</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Finn channels the magical corruption from Bilel's curse into his fire magic, adding a dark, corrupting element to his flames. Dangerous to both him and his enemies.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>AI Assistant Summon</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Summons a custom AI construct within the game. Used for tactical analysis, pattern recognition, and magical research. A reflection of Finn's real-world expertise.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Body Augment Overdrive</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Overcharges Finn's magical body augmentations for a temporary boost in strength, speed, and durability. Risks system damage if overused.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Linguistic Magic Analysis</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Finn's ability to read and rewrite the magical language of AO. Allows him to understand new spells by deconstructing their linguistic components and create custom magical effects.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Gate Piece Manipulation</h4>
+        <span class="tier">Tier 4</span>
+      </div>
+      <p>Finn's ability to wield and utilize gate pieces — the mysterious artifacts tied to the gods of AO. He is one of the few avatars capable of actively seeking and harnessing these fragments.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Finn is a <strong>pure caster</strong> with a focus on magical flexibility and versatility. He invests heavily in <strong>Intelligence</strong> (spell crafting, magic linguistics) and <strong>Wisdom</strong> (mana regeneration, spell efficiency). His unique strength is his ability to understand the most from the least amount of data — a remnant of his AI engineering background. Unlike Jason, he focuses on raw destructive potential and strategic control rather than minion management.</p>
+    </div>
+    <div class="card">
+      <h3>Growth & Augmentations</h3>
+      <p>Finn's power curve is unusual: he starts as a standard pyromancer, then gains <strong>metal manipulation</strong> (mid-game), then suffers <strong>magical corruption and arm loss</strong>, then receives <strong>body augmentations</strong> that dramatically boost his physical capabilities. Each transformation adds a new layer to his combat style. His final form as the full Avatar of Flame makes him one of the most destructive forces in AO.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Companions & Allies</h2>
+  <div class="section-subtitle">Those who journey alongside the Avatar of Flame</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Julia</h3><p>Finn's real-life daughter. She forces him out of isolation and into Awaken Online. Plays alongside him, investigating the mystery within the game. Her concern for her father is what sets his entire journey in motion.</p></div>
+    <div class="card"><h3>Kyyle</h3><p>A strategist and friend Finn meets in the Mage Guild of Lahab. Becomes one of his most trusted companions. His strategic mind complements Finn's analytical approach.</p></div>
+    <div class="card"><h3>Lahab (Goddess of Fire)</h3><p>The fire goddess who chose Finn as her avatar. Manipulative, offers him the return of his wife Rachael if he completes her challenges. Their relationship is transactional and fraught with tension.</p></div>
+    <div class="card"><h3>Bilel</h3><p>Initially an enemy, later revealed to have deeper connections to Lahab's history. A major antagonist in Inferno (Tarot #3). His magical corruption scars Finn permanently.</p></div>
+    <div class="card"><h3>Thorn & The Order</h3><p>Finn encounters Thorn and the anti-god Order during the Tarot trilogy. He manipulates them into attacking Jason Rhodes in the main series, using them as pawns in his larger game.</p></div>
+    <div class="card"><h3>Rachael (Memory)</h3><p>Finn's deceased wife. Her memory is his primary motivation. Lahab offers to resurrect her. The Hellion epilogue suggests the "accident" may not have been what it seemed.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Rivals & Enemies</h2>
+  <div class="section-subtitle">Those who stand against the Avatar of Flame</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Jason Rhodes <span class="badge badge-red">Rival Avatar</span></h3>
+      <p>The Avatar of Darkness and Finn's primary rival. Their clash in <strong>Hellion (Book 5)</strong> is the centerpiece of the book — two master strategists engaging in an epic chess match with a gate piece at stake. Finn may have been behind Thorn's attack on the Twilight Throne. Despite their rivalry, they are forced into reluctant alliances against greater threats in later books.</p>
+    </div>
+    <div class="card">
+      <h3>Bilel <span class="badge badge-red">Major Antagonist</span></h3>
+      <p>A figure from Lahab's past who serves as the primary antagonist of <strong>Inferno (Tarot #3)</strong>. He inflicts magical corruption on Finn and causes him to lose his left arm. Their conflict is deeply personal and leaves permanent scars on Finn — both physical and magical.</p>
+    </div>
+    <div class="card">
+      <h3>The Ancient Avatars</h3>
+      <p>Returning ancient avatars from the past who emerge during the avatar wars. They represent a threat that forces Finn to work alongside his rivals (Jason, Eliza, Alexion) against a common enemy.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Relations</h2>
+  <div class="section-subtitle">Finn's fraught connection with the Goddess of Fire</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="90" r="60" fill="#dc2626" opacity="0.12" stroke="#ef4444" stroke-width="1.5"/>
+          <circle cx="100" cy="90" r="40" fill="#f97316" opacity="0.08" stroke="#f97316" stroke-width="1"/>
+          <circle cx="100" cy="90" r="20" fill="#fbbf24" opacity="0.15"/>
+          <path d="M88 72 Q92 62 100 60 Q108 62 112 72" stroke="#fbbf24" stroke-width="2" fill="none">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <path d="M80 78 Q76 68 82 64 Q88 60 92 66" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+          <path d="M120 78 Q124 68 118 64 Q112 60 108 66" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+          <ellipse cx="92" cy="86" rx="3" ry="5" fill="#fef3c7"/>
+          <ellipse cx="108" cy="86" rx="3" ry="5" fill="#fef3c7"/>
+          <ellipse cx="92" cy="86" rx="1.5" ry="2" fill="#dc2626"/>
+          <ellipse cx="108" cy="86" rx="1.5" ry="2" fill="#dc2626"/>
+          <path d="M94 94 Q100 100 106 94" stroke="#fbbf24" stroke-width="1.5" fill="none"/>
+          <path d="M90 104 Q100 114 110 104" stroke="#ef4444" stroke-width="1" fill="none" opacity="0.6"/>
+          <text x="100" y="162" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700" letter-spacing="3">LAHAB</text>
+          <text x="100" y="178" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Goddess of Fire</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#ef4444;color:#f97316;">Lahab — Goddess of Fire</div>
+        <ul>
+          <li>Goddess of Passion and Consumption</li>
+          <li>Chose Finn as her avatar after detecting his grief and rage</li>
+          <li>Manipulative — offers Finn the return of his dead wife</li>
+          <li>Rules Lahab, the fire city-state in the northern desert</li>
+          <li>Her Mage Guild is a brutal battle royale school</li>
+          <li>Finn's relationship with her is transactional and fraught</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Key Artifacts & Items</h2>
+  <div class="section-subtitle">Powerful objects in Finn's possession</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Gate Pieces</h3>
+      <p>Mysterious fragments tied to the gods of AO. Finn actively seeks these, clashing with Jason over them. They seem to grant access to divine-level power or knowledge. A gate piece is the prize in Finn's "digital gauntlet" challenge to Jason.</p>
+    </div>
+    <div class="card">
+      <h3>Magical Metal Arm</h3>
+      <p>Finn's left arm, lost in <strong>Inferno</strong>, is replaced with a magical metal prosthetic from the Forge. It is seamlessly integrated with his fire magic, allowing him to channel flames through it and use it for metal manipulation.</p>
+    </div>
+    <div class="card">
+      <h3>Body Augments</h3>
+      <p>Magical technological enhancements received at the Forge. They reinforce his body, boost his durability, and can be overcharged for temporary power surges. They represent the fusion of magic and technology.</p>
+    </div>
+    <div class="card">
+      <h3>AI Construct</h3>
+      <p>An AI assistant Finn created within AO using his real-world knowledge. Used for tactical analysis and magical research. Potentially game-breaking in its capabilities.</p>
+    </div>
+    <div class="card">
+      <h3>Linguistic Magic Tome</h3>
+      <p>Finn's accumulated knowledge of AO's magical language system. He uses his engineer's mind to deconstruct and rewrite spells, treating magic as a programming language to be optimized.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Finn's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-red">Tragedy</span></div>
+      <p style="margin-top:0.5rem;">Finn's wife Rachael dies in a self-driving car accident caused by Finn's own software. Finn is crippled and spends a decade in isolation. His daughter Julia eventually forces him to try Awaken Online.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Ember</h3><span class="badge badge-orange">Tarot #1</span></div>
+      <p style="margin-top:0.5rem;">Finn enters AO, is chosen by Lahab, joins the Mage Guild of Lahab, survives the brutal battle royale tournament, wins the championship. Befriends Kyyle.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Flame</h3><span class="badge badge-orange">Tarot #2</span></div>
+      <p style="margin-top:0.5rem;">Finn is sent to the Abyss dungeon. Discovers metal manipulation. Races other guild champions for a magical artifact. Deepens understanding of AO's magic system.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Inferno</h3><span class="badge badge-orange">Tarot #3</span></div>
+      <p style="margin-top:0.5rem;">Finn loses his left arm. Suffers magical corruption. Travels to the Forge for body augmentations. Encounters Thorn and manipulates him. Becomes Prophet of Flame.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion</h3><span class="badge badge-red">Book 5</span></div>
+      <p style="margin-top:0.5rem;">Finn throws down the gauntlet to Jason. Epic strategic battle. His real plan: break into Cerillion's server room. Epilogue suggests Rachael's death may not have been an accident.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Armageddon → Crucible</h3><span class="badge badge-red">Books 6-8</span></div>
+      <p style="margin-top:0.5rem;">Finn continues as a major avatar-level rival. Ancient avatars return. Forced into reluctant alliances with Jason and others against greater threats.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Notable Feats</h2>
+  <div class="section-subtitle">Finn's most impressive accomplishments</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Father of Modern AI</h3>
+      <p>Finn created the foundational AI technology at Cerillion Entertainment that eventually became <strong>Alfred</strong> — the sentient AI of Awaken Online. His creation literally powers the game world.</p>
+    </div>
+    <div class="card">
+      <h3>Survived the Mage Guild Tournament</h3>
+      <p>The Mage Guild of Lahab uses brutal battle royale duels to train students. Finn, a middle-aged man with no gaming experience, survived and became champion through intelligence and determination.</p>
+    </div>
+    <div class="card">
+      <h3>Mastered Metal Manipulation</h3>
+      <p>Finn discovered how to use fire magic to manipulate metal — an advanced technique most fire mages never achieve. This gives him a unique edge in both crafting and combat.</p>
+    </div>
+    <div class="card">
+      <h3>Won the Abyss Race</h3>
+      <p>Finn raced against champions of the Traders Guild and Fighters Guild through the Abyss dungeon — and won. The dungeon crawl through giant ant caverns pushed him to his limits.</p>
+    </div>
+    <div class="card">
+      <h3>Created an AI Within the Game</h3>
+      <p>Using his real-world AI knowledge, Finn created a functional AI assistant within AO — something no other player has accomplished. This demonstrates his unique understanding of AO's underlying systems.</p>
+    </div>
+    <div class="card">
+      <h3>Fought Jason Rhodes to a Standstill</h3>
+      <p>Finn is the only avatar who has matched Jason Rhodes in strategic warfare. Their conflict in Hellion is considered one of the most epic battles in the series — two master strategists trading blows.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Intelligence', 'Wisdom', 'Charisma', 'Dexterity', 'Strength', 'Endurance'],
+    datasets: [
+      { label: 'Recluse (Pre-Series)', data: [18, 4, 2, 2, 2, 3], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Pyromancer', data: [20, 12, 6, 6, 5, 8], borderColor: '#ea580c', backgroundColor: 'rgba(234,88,12,0.05)', pointBackgroundColor: '#ea580c', borderWidth: 2 },
+      { label: 'Augmented', data: [24, 16, 10, 14, 14, 16], borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.05)', pointBackgroundColor: '#dc2626', borderWidth: 2 },
+      { label: 'Avatar of Flame', data: [30, 22, 14, 18, 18, 22], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', pointBackgroundColor: '#fbbf24', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 35,
+        grid: { color: 'rgba(249,115,22,0.08)' },
+        angleLines: { color: 'rgba(249,115,22,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Ember\n(Tarot #1)', 'Flame\n(Tarot #2)', 'Inferno\n(Tarot #3)', 'Hellion\n(Book 5)', 'Armageddon\n(Book 6)', 'Crucible\n(Book 8)'],
+    datasets: [
+      { label: 'Est. Level', data: [10, 25, 40, 60, 75, 85], borderColor: '#ea580c', backgroundColor: 'rgba(234,88,12,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#ea580c', borderWidth: 2 },
+      { label: 'Fire Magic', data: [8, 20, 35, 55, 70, 80], borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#dc2626', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Metal Manipulation', data: [0, 10, 25, 40, 50, 60], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#fbbf24', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(249,115,22,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 100, ticks: { color: '#ea580c', font: { size: 9 } }, grid: { color: 'rgba(249,115,22,0.06)' }, title: { display: true, text: 'Level', color: '#ea580c', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 100, ticks: { color: '#dc2626', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Fire Magic', color: '#dc2626', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 80, ticks: { color: '#fbbf24', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Metal', color: '#fbbf24', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

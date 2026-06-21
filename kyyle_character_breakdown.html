@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyyle — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0f0a;
+    --dark2: #0f1a0f;
+    --dark3: #142814;
+    --dark4: #1a3a1a;
+    --sage: #84cc16;
+    --sage-glow: #a3e635;
+    --sage-dim: #4d7c0f;
+    --olive: #65a30d;
+    --moss: #3f6212;
+    --amber: #d97706;
+    --amber-dim: #92400e;
+    --gold: #fbbf24;
+    --stone: #78716c;
+    --stone-light: #a8a29e;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #0c140c 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--sage); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,15,10,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(132,204,22,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--sage); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--sage); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(132,204,22,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(65,163,13,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(217,119,6,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--sage) 50%, var(--amber) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.earth { border-color: var(--sage-dim); color: var(--sage); }
+  .tags.strategist { border-color: var(--amber); color: var(--amber); }
+  .tags.mage { border-color: var(--olive); color: var(--sage-glow); }
+  .tags.companion { border-color: var(--stone); color: var(--stone-light); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--sage));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--sage), var(--amber));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(15,26,15,0.8); border: 1px solid rgba(132,204,22,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(132,204,22,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--sage); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--sage); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--sage), var(--olive), var(--amber));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--sage);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--amber); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--sage); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(15,26,15,0.8); border: 1px solid rgba(132,204,22,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(132,204,22,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--sage); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(15,26,15,0.6); border: 1px solid rgba(132,204,22,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--sage); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(15,26,15,0.8); border: 1px solid rgba(132,204,22,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(132,204,22,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(132,204,22,0.15); color: var(--sage); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-sage { background: rgba(132,204,22,0.15); color: var(--sage); }
+  .badge-amber { background: rgba(217,119,6,0.15); color: var(--amber); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-stone { background: rgba(120,113,108,0.15); color: var(--stone-light); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(15,26,15,0.6); border: 1px solid rgba(132,204,22,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(132,204,22,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__ current" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>KYYLE</h1>
+    <div class="subtitle">The Earth Mage · The Strategist · Finn's First Friend in AO</div>
+    <p class="tagline">A sharp-minded strategist and earth mage who became the anchor of Finn Harris's party — the complete breakdown of the man who never died, never quit, and always had a plan.</p>
+    <div class="tags">
+      <span class="tags earth">Earth Mage</span>
+      <span class="tags strategist">Strategist</span>
+      <span class="tags mage">Mage</span>
+      <span class="tags companion">Trusted Companion</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">3</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">2</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">Earth</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">0</div><div class="label">Deaths (In-Game)</div></div>
+    <div class="stat-box"><div class="number">Peace</div><div class="label">Trait</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Trilogy</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Name:</strong> Kyyle (surname unknown)</li>
+        <li><strong>Personality:</strong> Great strategist with high attention to detail. Analytical, methodical, calm under pressure. The kind of person who thinks three moves ahead while everyone else is still reacting.</li>
+        <li><strong>Playstyle:</strong> Methodical, patient, precise. Keeps the party grounded and on track. The anchor of Finn's group.</li>
+        <li><strong>Note:</strong> There is a Goodreads user named Kyyle who reviewed Ember saying "I'm as biased as can be, and absolutely loved it. Thank you for all the enjoyment your books have brought." — suggesting the character may be named after a real person (possibly a friend or patron of Travis Bagwell).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>Class:</strong> Earth Mage</li>
+        <li><strong>Affinity:</strong> Earth — Peace</li>
+        <li><strong>Starting Zone:</strong> Lahab — Mage Guild school/prison in the northern desert</li>
+        <li><strong>Role:</strong> Strategist, earth magic caster, party anchor</li>
+        <li><strong>Faction:</strong> Lahab resistance / Khamsin alliance</li>
+        <li><strong>Status:</strong> Survived all three Tarot books without dying. He, Finn, and Julia always escape with exactly 1% health remaining.</li>
+        <li><strong>Notable:</strong> Performed a ritual with an earth elemental that served as a non-aggressive guide. His strategic mind is considered equal to the task of complementing Finn's analytical genius.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Kyyle's journey from a fellow student to the tactical backbone of Finn's party</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Ember (Tarot #1)</span><span class="form">Student → Friend</span></div>
+      <h3>Meeting in the Crucible</h3>
+      <p>Kyyle meets Finn inside the brutal <strong>Mage Guild of Lahab</strong> — a school/prison where students are forced to fight in battle royale-style duels. In this pressure cooker environment, Kyyle becomes <strong>Finn's first friend in Awaken Online</strong>. His strategic mind and calm demeanor make him a natural complement to Finn's analytical brilliance. Together with Julia, they survive the tournament and Finn becomes the Mage Guild's champion.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Flame (Tarot #2)</span><span class="form">Friend → Strategist</span></div>
+      <h3>The Abyss — Forging the Bond</h3>
+      <p>Kyyle accompanies Finn and Julia into the <strong>Abyss</strong> dungeon beneath the desert. The expedition tests them to their limits — fighting through hordes of giant ants, using enemy materials to craft and upgrade gear. Kyyle's strategic planning becomes essential for survival. He experiences significant <strong>personal evolution</strong>, learning new abilities and more about his earth magic. The three of them <strong>never die</strong> — always escaping with exactly 1% health.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Inferno (Tarot #3)</span><span class="form">Strategist → Brother-in-Arms</span></div>
+      <h3>The Forge, the Elemental & the Siege</h3>
+      <p>Kyyle ventures with Finn and Julia to the <strong>Forge</strong> — an ancient technological workshop deep in a mountain. Here, he performs a <strong>ritual with an earth elemental</strong> that guides the party toward a critical weapon. The elemental is non-aggressive, recognizing Kyyle's peaceful earth affinity. He then participates in the <strong>Siege of Lahab</strong>, fighting through chaos as Finn loses his arm. After the war, he helps <strong>hack websites and forums</strong> to delete evidence of Lahab's existence, and even discusses hacking Cerillion Entertainment itself.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Kyyle's magical and personal growth</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#c9a88c" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <path d="M90 34 Q100 28 110 34 Q108 46 100 50 Q92 46 90 34Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#a0806e" stroke-width="0.8" fill="none"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="56" fill="#4a5a4a" opacity="0.3" stroke="#3a4a3a" stroke-width="1"/>
+          <path d="M74 72 Q64 60 60 68 L72 82" fill="#4a5a4a" opacity="0.3" stroke="#3a4a3a" stroke-width="1"/>
+          <path d="M126 72 Q136 60 140 68 L128 82" fill="#4a5a4a" opacity="0.3" stroke="#3a4a3a" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="44" fill="#4a5a4a" opacity="0.3" stroke="#3a4a3a" stroke-width="1"/>
+          <rect x="82" y="172" rx="3" ry="3" width="14" height="22" fill="#4a5a4a" opacity="0.3" stroke="#3a4a3a" stroke-width="1"/>
+          <rect x="103" y="172" rx="3" ry="3" width="14" height="22" fill="#4a5a4a" opacity="0.3" stroke="#3a4a3a" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Apprentice</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Ember · Mage Guild</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Apprentice Earth Mage</div>
+        <ul>
+          <li>Simple earth-toned mage robes</li>
+          <li>Calm, observant expression</li>
+          <li>Carries himself with quiet confidence</li>
+          <li>Already thinking three moves ahead</li>
+          <li>A steady presence in chaos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#f0d5b8" stroke="#84cc16" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="5" ry="5" fill="#3f6212" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="5" ry="5" fill="#3f6212" stroke="none"/>
+          <path d="M88 33 Q100 26 112 33 Q110 46 100 50 Q90 46 88 33Z" fill="#142814" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#84cc16" stroke-width="1" fill="none"/>
+          <rect x="72" y="74" rx="6" ry="6" width="56" height="58" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <path d="M72 74 Q60 60 56 70 L68 84" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <path d="M128 74 Q140 60 144 70 L132 84" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <rect x="86" y="132" rx="4" ry="4" width="28" height="44" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <rect x="80" y="176" rx="3" ry="3" width="16" height="22" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <rect x="104" y="176" rx="3" ry="3" width="16" height="22" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <path d="M56 70 Q50 58 46 70 Q44 78 50 80" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <path d="M144 70 Q150 58 154 70 Q156 78 150 80" fill="#1a3a1a" opacity="0.5" stroke="#84cc16" stroke-width="1"/>
+          <circle cx="100" cy="92" r="7" fill="#84cc16" opacity="0.15" stroke="#84cc16" stroke-width="0.8"/>
+          <text x="100" y="236" text-anchor="middle" fill="#84cc16" font-size="10" font-weight="700" letter-spacing="3">EARTH MAGE</text>
+          <text x="100" y="250" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Flame · Inferno</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#84cc16;color:#a3e635;">Earth Mage — The Strategist</div>
+        <ul>
+          <li>Battle-hardened earth-toned robes</li>
+          <li>Eyes calm and calculating</li>
+          <li>Stone dust clings to his gear</li>
+          <li>Carries the weight of the party's survival</li>
+          <li>His presence brings stability and peace</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Kyyle's earth magic and strategic talents</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Earth Affinity Magic</h3>
+      <p>Kyyle wields the element of <strong>Earth</strong> — associated with the trait of <strong>Peace</strong> in AO's affinity system. His earth magic is patient, steady, and enduring. Unlike Finn's explosive fire or Jason's consuming darkness, Kyyle's magic is about <strong>foundation, stability, and quiet strength</strong>. He shapes stone, raises barriers, and commands the earth with a calm precision that reflects his personality.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-sage">Earth Manipulation</span>
+        <span class="badge badge-stone">Stone Shaping</span>
+        <span class="badge badge-amber">Peace Affinity</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Elemental Communion</h3>
+      <p>In <strong>Inferno (Tarot #3)</strong>, Kyyle performs a <strong>ritual with an earth elemental</strong> that guides his party toward a critical weapon. The elemental is non-aggressive — it recognizes Kyyle's peaceful earth affinity and responds to him as an ally. This ability to commune with earth spirits sets Kyyle apart from typical earth mages, suggesting a deeper connection to his element.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-sage">Elemental Ritual</span>
+        <span class="badge badge-gold">Spirit Communion</span>
+        <span class="badge badge-amber">Peaceful Connection</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Strategic Genius</h3>
+      <p>Kyyle is described as a <strong>great strategist with high attention to detail</strong>. His strategic mind <strong>complements Finn's analytical approach</strong> and Julia's sharp instincts. While Finn deconstructs problems through logic and engineering, Kyyle sees the battlefield as a chessboard — anticipating enemy moves, positioning the party for advantage, and finding escape routes when all seems lost. He is the one who keeps them alive.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-amber">Battlefield Analysis</span>
+        <span class="badge badge-sage">Party Coordination</span>
+        <span class="badge badge-stone">Risk Assessment</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Survivability (1% Club)</h3>
+      <p>Kyyle is part of a unique trio (Finn, Julia, Kyyle) who <strong>never die in-game</strong> across all three books of the Tarot trilogy. They always escape with exactly <strong>1% health</strong> remaining. This is a remarkable feat given the deadly tournaments, the Abyss dungeon, giant ants, and the siege of Lahab. Kyyle's strategic planning is a major factor in this survival record — he finds the path that keeps everyone alive by the thinnest of margins.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-green">Zero Deaths</span>
+        <span class="badge badge-gold">1% Escapes</span>
+        <span class="badge badge-sage">Survival Planning</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Crafting & Resourcefulness</h3>
+      <p>During the Abyss expedition in <strong>Flame</strong>, the party fights through hordes of giant ants and uses enemy materials to <strong>craft and upgrade gear</strong>. Kyyle's methodical nature makes him well-suited to this work — he tracks resources, plans upgrades, and ensures the party is equipped for each new challenge. His earth magic also aids in refining raw materials.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-stone">Resource Tracking</span>
+        <span class="badge badge-sage">Gear Crafting</span>
+        <span class="badge badge-amber">Material Refinement</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Information Warfare</h3>
+      <p>After the siege of Lahab, Kyyle helps <strong>hack websites and forums</strong> to delete evidence of Lahab's existence. He even discusses <strong>hacking Cerillion Entertainment</strong> itself. This shows a willingness to extend the battle beyond the game world — a strategic flexibility that mirrors Finn's real-world infiltration plans.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Data Deletion</span>
+        <span class="badge badge-cyan">Forum Hacking</span>
+        <span class="badge badge-stone">Strategic Cover-up</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Catalogued earth magic and strategic abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Stone Spike</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Raises a spike of stone from the ground. Kyyle's precision allows him to place spikes with surgical accuracy, controlling the battlefield rather than just dealing damage.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Earth Barrier</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Raises a wall of compacted earth and stone. Durable and reliable. Kyyle's barriers are noted for lasting longer than expected — reflecting the endurance of his earth affinity.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Elemental Communion Ritual</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Kyyle's ability to commune with earth elementals. Used in Inferno to gain guidance from a non-aggressive earth spirit. Requires a peaceful mindset and deep connection to the earth affinity.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Strategic Assessment</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Kyyle's passive ability to assess battlefield conditions, enemy positions, and escape routes. He processes information quickly and communicates clear plans to the party under pressure.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Quicksand Trap</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Softens the ground into a quicksand-like morass. Used for area denial and crowd control. Combines with Finn's fire for devastating earth-fire combos.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Resource Assessment</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Kyyle's practiced eye for useful materials. During the Abyss expedition, he identifies which ant parts can be crafted into gear and which are worthless. Maximizes the party's resource efficiency.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Earth Shield</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Encases Kyyle's arm or body in a layer of living stone. Provides personal protection while leaving his hands free for casting. The stone moves with him rather than restricting mobility.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Party Coordination</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Kyyle's ability to direct the party mid-combat. He positions Finn (offense), Julia (support/flex), and himself (control/defense) to maximize their combined effectiveness. The reason they never die.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory across the Tarot trilogy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Kyyle is a <strong>control mage and strategist</strong>. He invests in <strong>Wisdom</strong> (mana efficiency, sustained casting for barriers), <strong>Intelligence</strong> (tactical analysis, spell precision), and <strong>Endurance</strong> (sustaining earth magic over long fights). His earth affinity favors patience over burst damage — he shapes the battlefield to control the flow of combat.</p>
+    </div>
+    <div class="card">
+      <h3>Steady Growth</h3>
+      <p>Unlike characters who spike in power through transformation (Jason's lich surgery, Finn's augments, Dom's death-grinding), Kyyle's growth is <strong>steady and consistent</strong>. He improves incrementally through training, experience, and deepening his understanding of earth magic. The one exception is his elemental communion in Inferno, which represents a breakthrough in his connection to the earth affinity.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Allies & Companions</h2>
+  <div class="section-subtitle">Those who journey alongside the strategist</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Finn Harris</h3><p>Kyyle's closest friend in AO. They meet in the Mage Guild and bond over their shared determination to survive. Finn's analytical fire and Kyyle's patient earth create a perfect tactical balance. Kyyle is Finn's first real friend in the game.</p></div>
+    <div class="card"><h3>Julia Harris</h3><p>Finn's daughter and Kyyle's fellow party member. Julia's sharp instincts and Kyyle's strategic planning create a strong working relationship. They anchor opposite ends of Finn's emotional spectrum — Julia the catalyst, Kyyle the steady hand.</p></div>
+    <div class="card"><h3>Lahab Resistance</h3><p>The network of mages and rebels working against Lahab's corrupt leadership. Kyyle fights alongside them during the siege, contributing his strategic talents to the larger war effort.</p></div>
+    <div class="card"><h3>The Khamsin</h3><p>Desert rebels who ally with Finn's group in Inferno. Kyyle coordinates with their forces during the siege of Lahab, proving his strategic value extends beyond the party level.</p></div>
+    <div class="card"><h3>Earth Elemental</h3><p>A non-aggressive earth spirit that responds to Kyyle's communion ritual in Inferno. It guides the party toward a critical weapon. Represents Kyyle's deepening connection to his element.</p></div>
+    <div class="card"><h3>Mage Guild of Lahab</h3><p>The brutal school where Kyyle met Finn. Despite being a prison-like environment, it forged the bonds that carried them through the trilogy. Kyyle's strategic mind was honed in its deadly tournaments.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Key Events in the Tarot Trilogy</h2>
+  <div class="section-subtitle">Kyyle's role across all three books</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Ember</h3>
+      <p>Kyyle meets Finn in the Mage Guild. They bond over survival. Together with Julia, they navigate the deadly battle royale tournaments. Kyyle's strategic mind helps them all survive. Finn becomes champion.</p>
+    </div>
+    <div class="card">
+      <h3>Flame</h3>
+      <p>The Abyss expedition. Kyyle's planning is essential through the giant ant caverns. He learns new abilities, grows in power, and helps the party escape every encounter alive — always at 1% health.</p>
+    </div>
+    <div class="card">
+      <h3>Inferno</h3>
+      <p>The Forge, the elemental ritual, the siege of Lahab. Kyyle reaches a new level of connection with his earth affinity. He helps hack Cerillion systems after the war. His bond with Finn and Julia is unbreakable.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Kyyle's journey across the Tarot trilogy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Ember</h3><span class="badge badge-sage">Tarot #1</span></div>
+      <p style="margin-top:0.5rem;">Kyyle meets Finn in the Mage Guild of Lahab. They survive the battle royale tournament together. Kyyle becomes Finn's first friend in AO. The trio (Finn, Julia, Kyyle) is formed.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Flame</h3><span class="badge badge-sage">Tarot #2</span></div>
+      <p style="margin-top:0.5rem;">Abyss expedition. Giant ants. Resource crafting. Kyyle's strategic planning keeps everyone alive. Personal evolution and new earth magic abilities. Zero deaths — always 1% HP escapes.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Inferno</h3><span class="badge badge-sage">Tarot #3</span></div>
+      <p style="margin-top:0.5rem;">The Forge. Elemental communion ritual. Siege of Lahab. Finn loses his arm. Kyyle helps hack Cerillion. The trio emerges victorious, forever changed but unbroken.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Notable Feats</h2>
+  <div class="section-subtitle">Kyyle's most impressive accomplishments</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Never Died In-Game</h3>
+      <p>Kyyle is one of only three characters (with Finn and Julia) to survive an entire trilogy without a single in-game death. They always escape with <strong>exactly 1% health</strong> — a feat no other Awaken Online protagonist has matched.</p>
+    </div>
+    <div class="card">
+      <h3>Communed with an Earth Elemental</h3>
+      <p>Kyyle performed a ritual that summoned a <strong>non-aggressive earth elemental</strong> that guided his party. This peaceful communion reflects his deep connection to the earth affinity and the trait of Peace.</p>
+    </div>
+    <div class="card">
+      <h3>Survived the Mage Guild</h3>
+      <p>The Mage Guild of Lahab is a brutal battle royale death school. Kyyle not only survived but <strong>thrived</strong>, using his strategic mind to navigate the deadly tournaments.</p>
+    </div>
+    <div class="card">
+      <h3>Strategic Backbone of the Party</h3>
+      <p>Kyyle's strategic mind kept Finn and Julia alive through the Abyss, the Forge, and the siege of Lahab. His planning is the <strong>unseen force behind their survival</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Helped Erase Lahab from History</h3>
+      <p>After the war, Kyyle helped <strong>hack websites and forums</strong> to delete evidence of Lahab's existence. He even discussed hacking Cerillion Entertainment, showing strategic reach beyond the game.</p>
+    </div>
+    <div class="card">
+      <h3>Became Finn's First Friend</h3>
+      <p>Finn Harris — a grieving, isolated, brilliant engineer — found his <strong>first true friend in Awaken Online</strong> in Kyyle. That bond was forged in the crucible of the Mage Guild and lasted through the entire trilogy.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Intelligence', 'Wisdom', 'Charisma', 'Dexterity', 'Strength', 'Endurance'],
+    datasets: [
+      { label: 'Apprentice (Ember)', data: [12, 10, 8, 7, 8, 10], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Earth Mage (Flame)', data: [16, 16, 10, 10, 10, 14], borderColor: '#65a30d', backgroundColor: 'rgba(101,163,13,0.05)', pointBackgroundColor: '#65a30d', borderWidth: 2 },
+      { label: 'Master Strategist', data: [22, 22, 12, 14, 12, 20], borderColor: '#84cc16', backgroundColor: 'rgba(132,204,22,0.05)', pointBackgroundColor: '#84cc16', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 28,
+        grid: { color: 'rgba(132,204,22,0.08)' },
+        angleLines: { color: 'rgba(132,204,22,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Ember\n(Start)', 'Ember\n(End)', 'Flame\n(Start)', 'Flame\n(End)', 'Inferno\n(End)'],
+    datasets: [
+      { label: 'Est. Level', data: [5, 10, 15, 22, 35], borderColor: '#84cc16', backgroundColor: 'rgba(132,204,22,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#84cc16', borderWidth: 2 },
+      { label: 'Earth Mastery', data: [5, 10, 14, 22, 30], borderColor: '#65a30d', backgroundColor: 'rgba(101,163,13,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#65a30d', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Strategy Rating', data: [10, 14, 18, 22, 28], borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#d97706', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(132,204,22,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 45, ticks: { color: '#84cc16', font: { size: 9 } }, grid: { color: 'rgba(132,204,22,0.06)' }, title: { display: true, text: 'Level', color: '#84cc16', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#65a30d', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Earth', color: '#65a30d', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 35, ticks: { color: '#d97706', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Strategy', color: '#d97706', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

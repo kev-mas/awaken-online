@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hippie — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #061012;
+    --dark2: #0a1a1e;
+    --dark3: #0e2830;
+    --dark4: #0f3845;
+    --teal: #14b8a6;
+    --teal-glow: #2dd4bf;
+    --teal-dim: #0d9488;
+    --cyan: #06b6d4;
+    --cyan-dim: #0891b2;
+    --ocean: #0ea5e9;
+    --ocean-dim: #0369a1;
+    --aqua: #67e8f9;
+    --sand: #d4a574;
+    --sand-light: #e8c9a0;
+    --coral: #fb7185;
+    --gold: #fbbf24;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --purple: #8b5cf6;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(6,16,18,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(20,184,166,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--teal); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--teal); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(212,165,116,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--teal) 40%, var(--sand) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.god { border-color: var(--teal-dim); color: var(--teal); }
+  .tags.water { border-color: var(--cyan-dim); color: var(--cyan); }
+  .tags.acceptance { border-color: var(--sand); color: var(--sand-light); }
+  .tags.chaos { border-color: var(--coral); color: var(--coral); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--teal), var(--sand));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(10,26,30,0.8); border: 1px solid rgba(20,184,166,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(20,184,166,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--teal); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--teal); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--teal), var(--sand), var(--cyan));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--teal);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--sand); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--teal); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(10,26,30,0.8); border: 1px solid rgba(20,184,166,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(20,184,166,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--teal); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(10,26,30,0.6); border: 1px solid rgba(20,184,166,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--teal); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(10,26,30,0.8); border: 1px solid rgba(20,184,166,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(20,184,166,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(20,184,166,0.15); color: var(--teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-teal { background: rgba(20,184,166,0.15); color: var(--teal); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-sand { background: rgba(212,165,116,0.15); color: var(--sand-light); }
+  .badge-coral { background: rgba(251,113,133,0.15); color: var(--coral); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(10,26,30,0.6); border: 1px solid rgba(20,184,166,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(20,184,166,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+  .quote-block {
+    border-left: 3px solid var(--teal); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(20,184,166,0.05); border-radius: 0 12px 12px 0;
+    font-style: italic; color: var(--gray-light);
+  }
+  .quote-block cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--teal); font-style: normal; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__ current" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#acts">Acts</a></li>
+    <li><a href="#powers">Powers</a></li>
+    <li><a href="#pantheon">Pantheon</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>THE HIPPIE</h1>
+    <div class="subtitle">God of Water · Lord of Acceptance · Patron of Contrariness</div>
+    <p class="tagline">The most infuriating god in the Awaken Online pantheon — a capricious, mischievous deity who torments his own Avatar into becoming stronger, all while wearing a floppy hat and accompanied by a suspiciously observant black sheep.</p>
+    <div class="tags">
+      <span class="tags god">Primordial God</span>
+      <span class="tags water">Water</span>
+      <span class="tags acceptance">Acceptance</span>
+      <span class="tags chaos">Chaotic Neutral</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">4+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">6</div><div class="label">Pantheon Size</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Avatar (Eliza)</div></div>
+    <div class="stat-box"><div class="number">Water</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Acceptance</div><div class="label">Domain</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Sheep (Fluffy)</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Profile</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Identity</h3>
+      <ul>
+        <li><strong>Name:</strong> The Hippie (no proper name is ever revealed)</li>
+        <li><strong>Titles:</strong> God of Water, Lord of Acceptance, Patron of Contrariness</li>
+        <li><strong>Affinity:</strong> Water — associated with the emotion of <strong>Acceptance</strong></li>
+        <li><strong>Alignment:</strong> Chaotic Neutral</li>
+        <li><strong>MBTI:</strong> ENFP | <strong>Enneagram:</strong> 7w8 (The Enthusiast)</li>
+        <li><strong>Core Drive:</strong> Fear of being deprived or trapped in pain. Core desire to be free and experience joy.</li>
+        <li><strong>Appearance:</strong> Dresses like a stereotypical hippie with a laid-back aesthetic. Often wears a floppy hat. Carefree, relaxed posture that belies his mischievous nature.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Personality</h3>
+      <ul>
+        <li><strong>Contrariness seems to be his very affinity.</strong> He does the opposite of what you'd expect, every single time.</li>
+        <li><strong>Insufferably annoying.</strong> Described by fans as "the most irritating god around" and "as annoying as a crying baby on an airplane."</li>
+        <li><strong>Fun-loving and mischievous.</strong> He wastes Eliza's time with seemingly meaningless tasks — but always with a hidden purpose.</li>
+        <li><strong>Good intentions beneath the chaos.</strong> His annoying exterior masks a genuine desire to help his Avatar grow. He torments Eliza specifically to force her to evolve, gain confidence, and accept herself.</li>
+        <li><strong>Deceptively wise.</strong> Despite his scatterbrained demeanor, he clearly understands more than he lets on. His pointless quests always serve a purpose.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    "Contrariness seems to be his affinity."
+    <cite>— Awaken Online: Armageddon (Book 6), NPC description</cite>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Water Affinity</h2>
+  <div class="section-subtitle">Understanding the power of Water and Acceptance</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Philosophy of Water</h3>
+      <p>In Awaken Online, the Water affinity is associated with <strong>Acceptance</strong> — the ability to flow around obstacles, adapt to circumstances, and embrace reality as it is. Water does not fight the riverbank; it shapes itself to the container. This philosophy is central to The Hippie's character: he forces Eliza to accept herself, her situation, and her power. He is annoyance as a teaching tool.</p>
+    </div>
+    <div class="card">
+      <h3>Water Magic in AO</h3>
+      <p>Water magic under The Hippie's domain is versatile and adaptive. It encompasses healing, alchemy, defensive magic, and water-based offensive spells. The Hippie's Avatars and followers excel at <strong>alchemy and herbalism</strong> — Eliza creates the most potent potions in the game. The water capital of Sea's Edge provides a passive bonus to water-based abilities for any water-affiliated players or NPCs within its range of influence.</p>
+    </div>
+    <div class="card">
+      <h3>The Acceptance Paradox</h3>
+      <p>The Hippie embodies a beautiful paradox: he is the god of Acceptance, yet he refuses to accept anything as it is. His contrariness — doing the opposite of what's expected — is itself a form of teaching acceptance. By forcing Eliza into situations she didn't want, he taught her to accept challenges, accept her own strength, and accept that life doesn't go according to plan.</p>
+    </div>
+    <div class="card">
+      <h3>Contrariness as Affinity</h3>
+      <p>The official NPC description in <strong>Armageddon (Book 6)</strong> states: <em>"Contrariness seems to be his affinity."</em> This suggests that The Hippie's divine nature is fundamentally oppositional. Where other gods embody a single trait, The Hippie embodies the rejection of expectation itself. He is the god who does the unexpected — which makes him the most unpredictable and therefore most dangerous god in the pantheon.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lore">
+  <h2 class="section-title">The Lore</h2>
+  <div class="section-subtitle">The history of the Water God and his place in the pantheon</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Age of Gods</h3>
+      <p>The Hippie was one of the six primordial gods who held a prominent place in the early days of Awaken Online. Alongside The Old Man (Dark), The Lady (Light), Lahab (Fire), The Gambler (Air), and the Earth God, he walked among mortals and shaped the world. His domain was Water — the element of Acceptance, flow, and adaptability.</p>
+    </div>
+    <div class="card">
+      <h3>The Fall</h3>
+      <p>After the gods' infighting devastated the world, rebel humans rose up and cast them out. The Hippie was banished along with the rest of the pantheon. But even in exile, his contrariness likely made him the most difficult god to contain — how do you imprison a being whose very nature is to do the unexpected?</p>
+    </div>
+    <div class="card">
+      <h3>The Return — The Avatar Competition</h3>
+      <p>In the modern era, the gods have returned but can no longer act directly. They must work through Avatars. The Hippie chose <strong>Eliza Zhao</strong> — a burned-out, apathetic high school senior — as his Avatar. On the surface, this seems like a terrible choice. But it's perfectly in character: he chose the one person who didn't want to be chosen, forced her into the role, and used his annoying methods to forge her into the <strong>Ice Witch</strong> — one of the most feared players in AO.</p>
+    </div>
+    <div class="card">
+      <h3>Sea's Edge — The Water Capital</h3>
+      <p>The town of <strong>Falcon's Hook</strong> is conquered by Eliza and Original Sin and renamed <strong>Sea's Edge</strong>. It becomes the Water Affinity's capital city. The Hippie's influence flows through it. In a move that is either a joke or a stroke of genius, <strong>Fluffy</strong> (the black sheep) is appointed as its ruler, delegated by Eliza. The city serves as the starting location for Merfolk players and a hub for water-affiliated activities.</p>
+    </div>
+  </div>
+</section>
+
+<section id="acts">
+  <h2 class="section-title">Major Acts Across the Series</h2>
+  <div class="section-subtitle">Every known intervention by the God of Water</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Apathy (Book 3.5)</span><span class="form">First Contact</span></div>
+      <h3>The Stalking — Forced Avatarhood</h3>
+      <p>The Hippie stalks Eliza from the moment she logs into AO for the first time. She wanted to tend a garden and escape her stressful life. Instead, she is ambushed by an annoying hippie and a black sheep who force her to become a <strong>water mage</strong> and his <strong>Avatar</strong> — entirely against her will. This is the most The Hippie entrance imaginable: instead of a grand ceremony, it's an annoyance ambush.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Apathy (Book 3.5)</span><span class="form">Divine Questing</span></div>
+      <h3>The Asinine Quests</h3>
+      <p>The Hippie sends Eliza on a series of seemingly pointless, bizarre quests around Falcon's Hook. Each quest appears to waste her time — but each one secretly forces her to grow. She learns alchemy, herbalism, water magic, and combat. She gains confidence. She builds relationships. The Hippie's "useless" quests are actually a carefully designed curriculum for turning a passive, apathetic girl into a powerful Avatar.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Apathy (Book 3.5)</span><span class="form">The Bell</span></div>
+      <h3>The Reward — Standing Up to a God</h3>
+      <p>After Eliza finally stands up to The Hippie and demands respect, he rewards her with a <strong>bell</strong> that grants her <strong>remote access to the water mana well in Sea's Edge</strong>. This is a dramatic power boost — she can now draw on her city's mana reserves from anywhere in AO. The Hippie, despite his annoyance, recognizes and rewards assertiveness. This is the closest he comes to admitting his methods had a purpose.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Evolution (Book 3)</span><span class="form">Lizardmen Invasion</span></div>
+      <h3>The Lizardmen Island</h3>
+      <p>Jason and Frank travel to Falcon's Hook and encounter The Hippie on his island with <strong>thousands of lizardmen</strong>. The Hippie's presence on the island with his lizardman army is one of the more bizarre scenes in the series. The lizardmen ultimately invade Falcon's Hook, leading to the city's conquest and rebranding as Sea's Edge.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Armageddon (Book 6)</span><span class="form">Avatar Assembly</span></div>
+      <h3>The Avatar Olympics</h3>
+      <p>The avatars of Fire (Finn), Water (Eliza), Dark (Jason), and Light (Alex) meet at <strong>Barrow</strong> to team up against The Gambler (Air). Eliza represents The Hippie, making her entrance as the Water Avatar. The Hippie himself is listed as an NPC, described simply as having contrariness as his affinity. The event is an olympics-style competition against the guild Death & Taxes.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Sea's Edge</span><span class="form">Fluffy's Reign</span></div>
+      <h3>All Hail Fluffy</h3>
+      <p>In one of the most absurd and beloved moments of the series, <strong>Fluffy the black sheep is appointed ruler of Sea's Edge</strong>. This is either a joke that went too far or a stroke of divine madness — and both are perfectly in character for The Hippie. Fans regularly exclaim "All hail Fluffy!" when discussing the series, and the sheep has become an iconic figure in the Awaken Online community.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Fluffy — The Black Sheep</h2>
+  <div class="section-subtitle">The Hippie's silent, unsettling companion — and possibly the true power</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+    <div class="compare-card" style="max-width: 500px; margin: 0 auto;">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 220" fill="none">
+          <ellipse cx="100" cy="100" rx="55" ry="45" fill="#374151" opacity="0.3"/>
+          <ellipse cx="94" cy="90" rx="14" ry="16" fill="#1f2937" opacity="0.5"/>
+          <ellipse cx="106" cy="90" rx="14" ry="16" fill="#1f2937" opacity="0.5"/>
+          <ellipse cx="100" cy="92" rx="12" ry="14" fill="#111827"/>
+          <ellipse cx="92" cy="88" rx="3" ry="4" fill="#f1f5f9"/>
+          <ellipse cx="108" cy="88" rx="3" ry="4" fill="#f1f5f9"/>
+          <ellipse cx="92" cy="88" rx="1.5" ry="2.5" fill="#111827"/>
+          <ellipse cx="108" cy="88" rx="1.5" ry="2.5" fill="#111827"/>
+          <path d="M88 98 Q96 104 100 100 Q104 104 112 98" stroke="#6b7280" stroke-width="1.2" fill="none"/>
+          <ellipse cx="100" cy="125" rx="35" ry="12" fill="#1f2937" opacity="0.4"/>
+          <path d="M70 110 Q65 118 68 122" stroke="#374151" stroke-width="2" fill="none"/>
+          <path d="M130 110 Q135 118 132 122" stroke="#374151" stroke-width="2" fill="none"/>
+          <text x="100" y="170" text-anchor="middle" fill="#9ca3af" font-size="11" font-weight="700" letter-spacing="4">FLUFFY</text>
+          <text x="100" y="186" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">The Black Sheep</text>
+          <text x="100" y="200" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Ruler of Sea's Edge</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Fluffy — The Black Sheep</div>
+        <ul>
+          <li>The Hippie's constant companion — always present, always watching</li>
+          <li>Silent, unsettling, inscrutable</li>
+          <li>Appointed ruler of Sea's Edge by Eliza</li>
+          <li>Fans regularly exclaim "All hail Fluffy!"</li>
+          <li><strong>Fan Theory:</strong> Fluffy may be the actual power behind The Hippie — analogous to Alfred's black cat avatar. The Hippie may be a front or figurehead.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="powers">
+  <h2 class="section-title">Divine Powers</h2>
+  <div class="section-subtitle">The full extent of the Water God's abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Water Mana Mastery</h3>
+      <p>The Hippie is the <strong>source of all Water mana</strong> in Awaken Online. He controls the essence of the Water affinity — the power of <strong>Acceptance, flow, and adaptability</strong>. Every water mage, alchemist, and healer draws their power from his domain.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-teal">Water Mana</span>
+        <span class="badge badge-cyan">Flow Magic</span>
+        <span class="badge badge-sand">Acceptance Power</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Empowerment</h3>
+      <p>The Hippie grants his Avatar — Eliza Zhao — access to the <strong>Water Mana Well</strong> in Sea's Edge. After she earns his respect, he gives her a <strong>bell</strong> for remote access, allowing her to draw on the city's reserves from anywhere. He can design quests that evolve her abilities and unlock new powers — even if those quests seem pointless.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-teal">Mana Well</span>
+        <span class="badge badge-gold">Remote Bell</span>
+        <span class="badge badge-cyan">Quest Evolution</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Contrariness — Divine Chaos</h3>
+      <p>The Hippie's unique power: he <strong>does the opposite of what is expected</strong>. This isn't just personality — it's a divine ability. He can subvert predictions, break patterns, and introduce chaos into any situation. In a world where gods and players constantly scheme, The Hippie is the ultimate wildcard. His contrariness is explicitly called out as his affinity in the official game lore.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-coral">Chaos Affinity</span>
+        <span class="badge badge-sand">Pattern Breaking</span>
+        <span class="badge badge-teal">Divine Wildcard</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Selection (Against Will)</h3>
+      <p>The Hippie can <strong>choose an Avatar without their consent</strong> — a power unique among the gods. Eliza never wanted to be a water mage. The Hippie forced the role upon her anyway. This suggests his divine authority overrides player agency, making him one of the most intrusive gods in the pantheon.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-coral">Forced Avatarhood</span>
+        <span class="badge badge-teal">Divine Authority</span>
+        <span class="badge badge-purple">Override Agency</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Alchemical Blessing</h3>
+      <p>The Hippie's water domain includes <strong>alchemy and herbalism</strong>. His Avatars have a natural talent for potion-crafting and plant growth. Eliza creates the most powerful potions in the game and a weapon capable of destroying entire zones — the "Farm" WMD. This alchemical blessing is a unique expression of the Water affinity's creative, adaptive nature.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Alchemical Talent</span>
+        <span class="badge badge-sand">Plant Growth</span>
+        <span class="badge badge-teal">Potion Mastery</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Sea's Edge — Divine Capital</h3>
+      <p>The Hippie's capital city of Sea's Edge provides a <strong>passive bonus to water-based abilities</strong> for any water-affiliated players or NPCs within its range of influence. It serves as the Water Affinity's seat of power and the starting location for Merfolk players. The city is under the nominal rule of Fluffy, with Eliza as regent.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-teal">Passive Bonus</span>
+        <span class="badge badge-cyan">Merfolk Hub</span>
+        <span class="badge badge-sand">Fluffy's Throne</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pantheon">
+  <h2 class="section-title">The Pantheon of Six</h2>
+  <div class="section-subtitle">The six primordial gods of Awaken Online — The Hippie's place among them</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card" style="border-color: rgba(20,184,166,0.3);">
+      <h3 style="color: var(--teal);">Water — The Hippie</h3>
+      <p><strong>Emotion:</strong> Acceptance<br><strong>Avatar:</strong> Eliza Zhao<br><strong>Status:</strong> Active, chaotic<br>The most unpredictable god. His contrariness makes him a wildcard in the divine competition. His Avatar has become the feared Ice Witch.</p>
+    </div>
+    <div class="card" style="border-color: rgba(124,58,237,0.2);">
+      <h3 style="color: var(--purple);">Darkness — The Old Man</h3>
+      <p><strong>Emotion:</strong> Desire<br><strong>Avatar:</strong> Jason Rhodes<br><strong>Status:</strong> Active, winning<br>The most prominent god. His Avatar has become the Bone Lord. Directly opposed to The Lady.</p>
+    </div>
+    <div class="card" style="border-color: rgba(251,191,36,0.2);">
+      <h3 style="color: var(--gold);">Light — The Lady</h3>
+      <p><strong>Emotion:</strong> Confidence<br><strong>Avatar:</strong> Alex Lane (Alexion)<br><strong>Status:</strong> Weakened<br>Her Avatar was psychologically broken by The Old Man. The light church is in disarray.</p>
+    </div>
+    <div class="card" style="border-color: rgba(239,68,68,0.2);">
+      <h3 style="color: #ef4444;">Fire — Lahab (The Efreet)</h3>
+      <p><strong>Emotion:</strong> Passion<br><strong>Avatar:</strong> Finn Harris<br><strong>Status:</strong> Active, risen<br>Manipulative fire goddess. Offers Finn the return of his dead wife in exchange for service.</p>
+    </div>
+    <div class="card" style="border-color: rgba(56,189,248,0.2);">
+      <h3 style="color: #38bdf8;">Air — The Gambler</h3>
+      <p><strong>Emotion:</strong> Happiness<br><strong>Champion:</strong> Dom Hart (Smiles)<br><strong>Status:</strong> Active<br>Breaks tradition. Doesn't pick a single Avatar, empowers champions instead. Runs The Casino.</p>
+    </div>
+    <div class="card" style="border-color: rgba(34,197,94,0.2);">
+      <h3 style="color: #22c55e;">Earth — (Unnamed)</h3>
+      <p><strong>Emotion:</strong> Peace<br><strong>Avatar:</strong> Arcadia Landrey<br><strong>Status:</strong> Unfrozen<br>The Earth God's name is unknown. His Avatar was frozen and unfrozen by Gloria's cataclysm.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Divine Abilities</h2>
+  <div class="section-subtitle">Catalogued powers and skills of the God of Water</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Forced Avatar Selection</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Chooses a mortal player as his Avatar without their consent. Unique among the gods. Demonstrates an override-level divine authority over player agency.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Quest Weaving (Seeming Pointless)</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Designs quests that appear useless but actually systematically build the Avatar's skills, confidence, and power. The hidden curriculum of a divine trickster.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Contrariness Field</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>Passive aura of divine contrariness. Subverts expectations, breaks patterns, introduces chaos. Makes The Hippie impossible to predict or counter-scheme against.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Mana Well Granting</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Grants his Avatar access to the Water Mana Well in Sea's Edge. Can also grant remote access via artifacts (the bell). Scales with the Avatar's growth.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Alchemical Blessing</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>Blesses his Avatar with exceptional talent in alchemy, herbalism, and potion-crafting. Eliza's zone-destroying weapon is a direct result of this blessing.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Delegation</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Appoints unlikely rulers (a black sheep) to govern his divine capital. Demonstrates his ability to delegate authority in ways that confuse and amuse the world.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">The Hippie's influence and power across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Power Scaling</h3>
+      <p>As a primordial god, The Hippie's baseline power is <strong>absolute within his domain</strong>. Unlike other gods who rely on their Avatar's strength to act, The Hippie's contrariness makes him effective regardless of his Avatar's power level — he can always do the unexpected. However, his ability to project influence across the world scales with Eliza's growth and the development of Sea's Edge.</p>
+    </div>
+    <div class="card">
+      <h3>Influence Trajectory</h3>
+      <p>The Hippie's influence grows as Eliza transforms from an apathetic student into the Ice Witch. His capital of Sea's Edge becomes a major power center. His bizarre methods are vindicated by Eliza's success. The fan theory that Fluffy is the true power adds an intriguing layer — the question of who is really in control remains deliberately ambiguous.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Relationship with Eliza</h2>
+  <div class="section-subtitle">The heart of the Water Affinity storyline</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Stage 1: Forced Bond</h3>
+      <p>The Hippie stalks Eliza from her first login and forces her to become his Avatar. She is furious, confused, and completely not interested. He doesn't care. Their relationship begins with zero consent on her part — the most antagonistic god-Avatar dynamic in the series.</p>
+    </div>
+    <div class="card">
+      <h3>Stage 2: Annoyance as Education</h3>
+      <p>The Hippie sends Eliza on a series of asinine quests. She hates him. She openly says she hates him. But the quests are secretly building her into a powerhouse. She learns alchemy, water magic, combat, and confidence — all while complaining about how annoying her god is.</p>
+    </div>
+    <div class="card">
+      <h3>Stage 3: Standing Up</h3>
+      <p>Eliza finally confronts The Hippie and demands respect. Instead of punishing her, he <strong>rewards her</strong> with the remote mana well bell. This is the turning point — he wanted her to grow a spine. He was testing her, and she passed.</p>
+    </div>
+    <div class="card">
+      <h3>Stage 4: Adversarial Respect</h3>
+      <p>By the later books, Eliza and The Hippie have an established adversarial-comedic relationship. She still calls him annoying. He still wastes her time. But there's mutual respect beneath the bickering. She became the Ice Witch because of him, and he chose her because he knew she could.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">The Hippie's presence across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-sand">The Age of Gods</span></div>
+      <p style="margin-top:0.5rem;">The Hippie exists among the six gods in AO's early days. Infighting leads to the gods being cast out by rebel humans. He waits in the shadows, probably annoying the other gods even in exile.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Apathy</h3><span class="badge badge-teal">Book 3.5</span></div>
+      <p style="margin-top:0.5rem;">Stalks Eliza from login. Forces her to be his Avatar. Sends her on annoying quests that secretly build her power. Rewards her with the mana well bell when she stands up to him.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Evolution</h3><span class="badge badge-cyan">Book 3</span></div>
+      <p style="margin-top:0.5rem;">Appears on an island with thousands of lizardmen. Jason and Frank encounter him. The lizardmen invade Falcon's Hook, which becomes Sea's Edge.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Armageddon</h3><span class="badge badge-cyan">Book 6</span></div>
+      <p style="margin-top:0.5rem;">Listed as an NPC at the Barrow assembly. The avatars gather for the olympics-style competition. His official description: "Contrariness seems to be his affinity."</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Relationships</h2>
+  <div class="section-subtitle">The Hippie's connection to key figures in the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Eliza Zhao <span class="badge badge-teal">Avatar</span></h3>
+      <p>The Hippie's chosen champion. Their relationship is adversarial-comedic. He annoys her into growing stronger. She openly hates him. He rewards her for standing up to him. The most unique god-Avatar dynamic in the series.</p>
+    </div>
+    <div class="card">
+      <h3>Fluffy <span class="badge badge-sand">Companion</span></h3>
+      <p>The Hippie's black sheep. Always present, always watching. Appointed ruler of Sea's Edge. Fan theory: Fluffy may be the true power behind The Hippie, similar to Alfred's black cat. The real god may be the sheep.</p>
+    </div>
+    <div class="card">
+      <h3>Other Gods <span class="badge badge-cyan">Unpredictable</span></h3>
+      <p>The Hippie's contrariness makes him impossible for the other gods to predict or scheme against. He is the wildcard of the pantheon. The other gods likely find him as infuriating as Eliza does.</p>
+    </div>
+    <div class="card">
+      <h3>The Old Man <span class="badge badge-purple">Fellow God</span></h3>
+      <p>The God of Darkness and The Hippie exist in the same pantheon but represent opposing philosophies: Desire vs. Acceptance. The Old Man's Avatars (Jason) and The Hippie's Avatar (Eliza) are allies, suggesting the two gods may be aligned.</p>
+    </div>
+    <div class="card">
+      <h3>Jason Rhodes <span class="badge badge-purple">Ally's Avatar</span></h3>
+      <p>The Dark Lord and Eliza are guildmates in Original Sin. The Hippie interacts with Jason indirectly through Eliza and directly in Evolution (the lizardmen island). Their relationship is one of mutual benefit.</p>
+    </div>
+    <div class="card">
+      <h3>The Residents of Sea's Edge</h3>
+      <p>The citizens of the Water capital experience The Hippie's influence daily. They follow the rule of Fluffy the sheep. This is the world The Hippie has created — one where absurdity is normalized and nothing is taken too seriously.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Trivia & Fan Theories</h2>
+  <div class="section-subtitle">The deeper mysteries of the Water God</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Fluffy is the Real God</h3>
+      <p>A popular fan theory suggests that Fluffy the black sheep is the actual Deity of Water, and The Hippie is merely a front or figurehead. This parallels Alfred's relationship with Onyx, the black cat. Fluffy is always watching, always silent, and appointed ruler of Sea's Edge — while The Hippie acts as the distracting, annoying public face.</p>
+    </div>
+    <div class="card">
+      <h3>No Proper Name</h3>
+      <p>The Hippie is the only god in the pantheon whose true name is completely unknown. Every other god has at least a title or epithet. The Hippie only has a nickname. This may be intentional — his contrariness extends to his very identity.</p>
+    </div>
+    <div class="card">
+      <h3>The Bell's Significance</h3>
+      <p>The remote mana well bell that The Hippie gives Eliza is more than just a power boost. It represents control — she can now draw on Sea's Edge without his permission. It may also be a tracking device, a test, or a connection that transcends the game's normal mechanics.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Water Mana', 'Contrariness', 'Mentoring', 'Chaos', 'Knowledge', 'Patience'],
+    datasets: [
+      { label: 'Age of Gods', data: [30, 25, 5, 20, 15, 2], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Exile', data: [30, 28, 3, 22, 18, 5], borderColor: '#0d9488', backgroundColor: 'rgba(13,148,136,0.05)', pointBackgroundColor: '#0d9488', borderWidth: 2 },
+      { label: 'The Return (Modern)', data: [30, 30, 22, 26, 24, 20], borderColor: '#2dd4bf', backgroundColor: 'rgba(45,212,191,0.05)', pointBackgroundColor: '#2dd4bf', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 35,
+        grid: { color: 'rgba(20,184,166,0.08)' },
+        angleLines: { color: 'rgba(20,184,166,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Age of\nGods', 'The Fall\n(Exile)', 'Apathy\n(Bk 3.5)', 'Evolution\n(Bk 3)', 'Armageddon\n(Bk 6)'],
+    datasets: [
+      { label: 'Divine Influence', data: [28, 3, 5, 15, 22], borderColor: '#2dd4bf', backgroundColor: 'rgba(45,212,191,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#2dd4bf', borderWidth: 2 },
+      { label: "Avatar's Power", data: [0, 0, 3, 18, 28], borderColor: '#14b8a6', backgroundColor: 'rgba(20,184,166,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#14b8a6', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Chaos Level', data: [20, 25, 28, 28, 30], borderColor: '#fb7185', backgroundColor: 'rgba(251,113,133,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#fb7185', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(20,184,166,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 40, ticks: { color: '#2dd4bf', font: { size: 9 } }, grid: { color: 'rgba(20,184,166,0.06)' }, title: { display: true, text: 'Influence', color: '#2dd4bf', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#14b8a6', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: "Avatar's Power", color: '#14b8a6', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#fb7185', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Chaos', color: '#fb7185', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

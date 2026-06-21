@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexion — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #0f0f1a;
+    --dark3: #1a1a2e;
+    --dark4: #2a2a45;
+    --gold: #f5d742;
+    --gold-glow: #fbbf24;
+    --gold-dim: #92400e;
+    --white-blue: #e0e7ff;
+    --blue-light: #93c5fd;
+    --blue-accent: #3b82f6;
+    --cyan: #06b6d4;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --orange: #f97316;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #0c0c1a 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--gold-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(251,191,36,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--gold-glow); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--gold-glow); text-decoration: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(251,191,36,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(147,197,253,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900; letter-spacing: 6px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--gold-glow) 40%, var(--blue-light) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 600px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.paladin { border-color: var(--gold-dim); color: var(--gold); }
+  .tags.seraph { border-color: var(--gold-dim); color: var(--gold-glow); }
+  .tags.light-avatar { border-color: var(--blue-dark); color: var(--blue-light); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--gold-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blue-light));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card-grid-5 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+  .card {
+    background: rgba(15,15,26,0.8); border: 1px solid rgba(251,191,36,0.08);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(251,191,36,0.25); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--gold-glow); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--gold); }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--gold-dim), var(--gold-glow), var(--blue-light));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--gold-glow);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--gold); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  /* ── FORMS ── */
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(15,15,26,0.8); border: 1px solid rgba(251,191,36,0.08);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(251,191,36,0.25); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--gold); }
+
+  /* ── STATS ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(15,15,26,0.6); border: 1px solid rgba(251,191,36,0.08);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--gold-glow); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  /* ── ABILITIES ── */
+  .ability-card {
+    background: rgba(15,15,26,0.8); border: 1px solid rgba(251,191,36,0.08);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(251,191,36,0.25); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(251,191,36,0.12); color: var(--gold-glow); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  /* ── MISC ── */
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-gold { background: rgba(251,191,36,0.12); color: var(--gold-glow); }
+  .badge-blue { background: rgba(147,197,253,0.12); color: var(--blue-light); }
+  .badge-cyan { background: rgba(6,182,212,0.12); color: var(--cyan); }
+  .badge-red { background: rgba(239,68,68,0.12); color: var(--red); }
+  .badge-green { background: rgba(16,185,129,0.12); color: var(--green); }
+  .badge-gray { background: rgba(148,163,184,0.12); color: var(--gray); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  /* ── CHART ── */
+  .chart-wrap {
+    background: rgba(15,15,26,0.6); border: 1px solid rgba(251,191,36,0.08);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(251,191,36,0.08);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__ current" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>ALEXION</h1>
+    <div class="subtitle">The Light Avatar · Seraph of the Grey Keep · Alex Lane</div>
+    <p class="tagline">Billionaire heir, sociopathic rival, and Avatar of the Goddess of Light — the complete breakdown of Jason's archnemesis.</p>
+    <div class="tags">
+      <span class="tags paladin">Paladin</span>
+      <span class="tags seraph">Seraph</span>
+      <span class="tags light-avatar">Light Avatar</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">8+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">3</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">Light</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">2</div><div class="label">Class Evolutions</div></div>
+    <div class="stat-box"><div class="number">Grey</div><div class="label">Keep Faction</div></div>
+    <div class="stat-box"><div class="number">∞</div><div class="label">Family Wealth</div></div>
+  </div>
+</section>
+
+<!-- ═══ BIO ═══ -->
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life — Alex Lane</h3>
+      <ul>
+        <li><strong>Age:</strong> 18 at series start (same class as Jason)</li>
+        <li><strong>Appearance:</strong> Blonde hair, striking blue eyes, athletic physique, stunningly good-looking. "Angelic expression" that warps into a cruel smirk.</li>
+        <li><strong>Family:</strong> Son of <strong>George Lane</strong>, billionaire owner of Cerillion Entertainment (creator of Awaken Online). Family on the board of several Fortune 500 companies.</li>
+        <li><strong>Personality:</strong> Sociopathic tendencies from childhood — began killing small animals "to see what happens." Parents paid off authorities and threw money at the problem. Feels a constant void-like emptiness, fills it with cruelty and video game power.</li>
+        <li><strong>School:</strong> Richmond Private School. Star quarterback. Popular and wealthy. Bullies Jason relentlessly, orchestrates his expulsion, derisively nicknames him "Welfare."</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game — Alexion</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Alexion</li>
+        <li><strong>Class Path:</strong> Paladin → Light Avatar (Avatar of the Goddess of Light)</li>
+        <li><strong>Race:</strong> Seraph (winged angelic race)</li>
+        <li><strong>Affinity:</strong> Light — Confidence (not morality; pure narcissistic certainty)</li>
+        <li><strong>Alignment:</strong> Chaotic Evil (despite angelic appearance)</li>
+        <li><strong>Faction:</strong> Grey Keep (opposing faction to Jason's Twilight Throne)</li>
+        <li><strong>God:</strong> Avatar of the Goddess of Light</li>
+        <li><strong>Personality in AO:</strong> Cruel, arrogant, believes himself invulnerable. Post-loss to Jason, becomes listless, hollow, and desperate for redemption/vengeance.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRANSFORMATION ═══ -->
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Alexion's journey from golden-boy bully to the Seraph of Light</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">Human → Paladin</span></div>
+      <h3>The Rise of Alexion</h3>
+      <p>Alex enters Awaken Online and, true to his competitive nature, quickly rises as a powerful <strong>Paladin</strong>. He establishes himself as a leader of the <strong>Grey Keep</strong>, the premier Light-aligned city. His fame grows as he leads armies against dark-aligned players. He becomes the <strong>Avatar of the Goddess of Light</strong>, chosen for his supreme Confidence — the core trait of the Light affinity.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">Paladin → Light Avatar</span></div>
+      <h3>The War for Lux</h3>
+      <p>When Jason sacks Lux and transforms it into the Twilight Throne, Alexion responds with righteous fury. He mobilizes a massive army of players and NPCs. He posts videos and screenshots of his march, believing himself invulnerable. Jason exploits his arrogance — launching harassment attacks, exploiting his lack of sentries, and ultimately defeating him in a climactic battle. Riley's intervention saves Jason, but Alexion is <strong>humiliated and hollowed</strong> by the loss.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Precipice / Evolution (Books 2–3)</span><span class="form">The Hollow Period</span></div>
+      <h3>Listless & Angry</h3>
+      <p>After his defeat, Alex re-enters the game listless and angry. His reputation is in tatters. He drowns his emptiness in alcohol at real-world parties, assaults partygoers who mock him. In AO, he plots revenge against Jason but struggles to find his footing. His motivations are described as "childish" — simply angry he isn't the best, without deeper development.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Dominion (Book 4)</span><span class="form">The Gate Piece</span></div>
+      <h3>Outmaneuvered — But Escapes</h3>
+      <p>Alexion fights Frank for a <strong>Gate Piece</strong> — a powerful artifact tied to the gods. He is defeated and imprisoned, but manages to escape in a plot twist many fans found too convenient. He steals the Gate Piece anyway, keeping himself relevant in the avatar power struggle.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Armageddon (Book 6)</span><span class="form">The Live-Streamer</span></div>
+      <h3>Witness to the Lich</h3>
+      <p>In perhaps his most iconic moment, Alexion <strong>live-streams Jason's horrific self-surgery</strong> to the entire world. As Jason replaces his limbs with bone, removes his organs, and transplants his Najima into a skeletal body, Alexion broadcasts it all — cementing his role as the angelic observer to Jason's dark apotheosis. Their rivalry deepens as opposing affinities (Light vs Dark).</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Timeless / Crucible (Books 7–8)</span><span class="form">Seraph Ascended</span></div>
+      <h3>Fully Realized Light Avatar</h3>
+      <p>By the later books, Alexion has fully transformed into his Seraph form — massive feathered wings, glowing armor, flaming sword. He and Jason are forced into reluctant cooperation against greater threats (ancient avatars, Death and Taxes), but their fundamental opposition remains. His Light affinity makes him a powerful counter to Jason's darkness, but his arrogance and hollow emptiness still define him.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FORMS ═══ -->
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Alexion's physical transformation</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <!-- HUMAN -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#e8dcc8" stroke="#94a3b8" stroke-width="1.2"/>
+          <ellipse cx="92" cy="40" rx="5" ry="5" fill="#3b82f6" stroke="none"/>
+          <ellipse cx="108" cy="40" rx="5" ry="5" fill="#3b82f6" stroke="none"/>
+          <path d="M90 47 Q100 52 110 47" stroke="#6b7280" stroke-width="1" fill="none"/>
+          <rect x="190" y="20" rx="10" ry="10" width="10" height="20" fill="#f5d742" opacity="0.8"/>
+          <rect x="76" y="72" rx="6" ry="6" width="48" height="58" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 82" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 82" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <rect x="88" y="130" rx="4" ry="4" width="24" height="44" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M86 174 L82 196" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M114 174 L118 196" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M62 68 Q58 60 54 68 Q52 76 58 78" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M138 68 Q142 60 146 68 Q148 76 142 78" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Human</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 1 · Richmond</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Human Form</div>
+        <ul>
+          <li>Blonde hair, blue eyes</li>
+          <li>Athletic quarterback build</li>
+          <li>Stunningly good-looking</li>
+          <li>"Angelic" features</li>
+          <li>Expensive clothing, confident posture</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PALADIN -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#e8dcc8" stroke="#fbbf24" stroke-width="1.2"/>
+          <ellipse cx="92" cy="40" rx="5" ry="5" fill="#f5d742" stroke="none"/>
+          <ellipse cx="108" cy="40" rx="5" ry="5" fill="#f5d742" stroke="none"/>
+          <path d="M90 47 Q100 52 110 47" stroke="#92400e" stroke-width="1" fill="none"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="60" fill="#fef3c7" opacity="0.3" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M74 72 Q64 60 60 68 L70 84" fill="#fef3c7" opacity="0.3" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M126 72 Q136 60 140 68 L130 84" fill="#fef3c7" opacity="0.3" stroke="#fbbf24" stroke-width="1.5"/>
+          <rect x="86" y="132" rx="4" ry="4" width="28" height="42" fill="#fef3c7" opacity="0.3" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M60 70 Q54 60 50 70 Q48 78 54 80" fill="#fef3c7" opacity="0.3" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M140 70 Q146 60 150 70 Q152 78 146 80" fill="#fef3c7" opacity="0.3" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M84 132 L80 156" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M116 132 L120 156" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M95 100 L100 85 L105 100" fill="#fbbf24" opacity="0.15" stroke="#fbbf24" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700" letter-spacing="4">Paladin</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 1 · Grey Keep</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#fbbf24;color:#fde68a;">Paladin</div>
+        <ul>
+          <li>Shining plate armor, gold-trimmed</li>
+          <li>Flowing blonde hair, radiant</li>
+          <li>Blue eyes glow with light</li>
+          <li>Flaming sword as signature weapon</li>
+          <li>Heroic aura — a mask for cruelty</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SERAPH / LIGHT AVATAR -->
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="30" fill="#e8dcc8" stroke="#fde68a" stroke-width="1"/>
+          <ellipse cx="92" cy="40" rx="5" ry="5" fill="#f5d742" stroke="#fbbf24" stroke-width="0.5"/>
+          <ellipse cx="108" cy="40" rx="5" ry="5" fill="#f5d742" stroke="#fbbf24" stroke-width="0.5"/>
+          <path d="M89 48 Q100 54 111 48" stroke="#92400e" stroke-width="0.8" fill="none"/>
+          <rect x="72" y="74" rx="6" ry="6" width="56" height="62" fill="#fef3c7" opacity="0.3" stroke="#fde68a" stroke-width="1.5"/>
+          <path d="M72 74 Q60 62 56 70 L68 86" stroke="#fde68a" stroke-width="1.5"/>
+          <path d="M128 74 Q140 62 144 70 L132 86" stroke="#fde68a" stroke-width="1.5"/>
+          <path d="M82 136 L78 160" stroke="#fde68a" stroke-width="1.5"/>
+          <path d="M118 136 L122 160" stroke="#fde68a" stroke-width="1.5"/>
+          <rect x="84" y="136" rx="4" ry="4" width="32" height="44" fill="none" stroke="#fde68a" stroke-width="1.5"/>
+          <!-- wings -->
+          <path d="M72 75 Q40 40 30 70 Q35 50 56 68" fill="#fef3c7" opacity="0.2" stroke="#fde68a" stroke-width="1"/>
+          <path d="M60 82 Q30 60 22 90 Q28 72 48 80" fill="#fef3c7" opacity="0.15" stroke="#fde68a" stroke-width="0.8"/>
+          <path d="M128 75 Q160 40 170 70 Q165 50 144 68" fill="#fef3c7" opacity="0.2" stroke="#fde68a" stroke-width="1"/>
+          <path d="M140 82 Q170 60 178 90 Q172 72 152 80" fill="#fef3c7" opacity="0.15" stroke="#fde68a" stroke-width="0.8"/>
+          <!-- halo -->
+          <circle cx="100" cy="30" r="14" fill="none" stroke="#fbbf24" stroke-width="1" opacity="0.3"/>
+          <circle cx="100" cy="30" r="16" fill="none" stroke="#fbbf24" stroke-width="0.5" opacity="0.15"/>
+          <!-- sword -->
+          <path d="M130 80 L145 40 L148 42 L133 84" fill="#fde68a" opacity="0.3" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M143 38 L148 34 L150 36 L145 40" fill="#fbbf24" opacity="0.4" stroke="none"/>
+          <path d="M144 34 Q145 28 143 28 Q141 28 142 34" fill="#fbbf24" opacity="0.5" stroke="none"/>
+          <text x="100" y="234" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700" letter-spacing="3">SERAPH</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Light Avatar · Books 4+</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#fde68a;color:#fde68a;">Seraph · Light Avatar</div>
+        <ul>
+          <li>Massive feathered white-gold wings</li>
+          <li>Shining celestial plate armor</li>
+          <li>Flaming longsword — Light-fire</li>
+          <li>Wings fully functional for flight</li>
+          <li>Golden halo of light behind head</li>
+          <li>Blonde hair luminous like sunlight</li>
+          <li>Eyes glow golden-white when powering up</li>
+          <li>Oppressive radiant aura, shadows flee</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ABILITIES ═══ -->
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">Alexion's arsenal of Light-aligned abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Light Magic (Affinity: Confidence)</h3>
+      <p>Alexion wields <strong>Light affinity magic</strong>, which in Awaken Online is associated with <strong>Confidence</strong> — not morality. This makes his "holy" abilities a reflection of his narcissistic certainty rather than actual goodness. His magic manifests as <strong>golden-white energy</strong>, searing light, and radiant blasts that are especially effective against undead and dark-aligned enemies.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-gold">Light Magic</span>
+        <span class="badge badge-blue">Confidence Affinity</span>
+        <span class="badge badge-red">Anti-Undead</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Flaming Sword</h3>
+      <p>His signature weapon — a <strong>longsword wreathed in golden-white flames</strong> of pure Light mana. Described by witnesses as "ridiculous" and "a serious badass." The flames are not physical fire but <strong>condensed Light energy</strong>, capable of burning through dark magic and undead flesh. He wields it one-handed, often with a shield in the other.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-gold">Flaming Sword</span>
+        <span class="badge badge-cyan">Light-Fire</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Angelic Flight</h3>
+      <p>As a Seraph, Alexion has <strong>massive feathered wings</strong> that allow him to fly. In combat, he uses aerial superiority to dominate ground-based enemies. The wings are <strong>white with golden luminescence</strong>, shedding light particles as he moves. He can hover, dive, and engage in aerial combat.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-blue">Flight</span>
+        <span class="badge badge-gold">Feathered Wings</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Radiant Aura</h3>
+      <p>Alexion radiates an <strong>oppressive aura of light and heat</strong>. The air shimmers around him. Shadows flee. A golden halo forms behind his head when he channels power. This aura <strong>bolsters allies and weakens dark-aligned enemies</strong>. Despite the holy appearance, the aura is purely a weapon of confidence and domination.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-gold">Radiant Aura</span>
+        <span class="badge badge-cyan">Ally Buff</span>
+        <span class="badge badge-red">Enemy Debuff</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Divine Smite</h3>
+      <p>A powerful paladin ability that channels Light energy into a weapon strike. Alexion's version is especially devastating due to his Light Avatar status. The strike leaves trails of golden light in the air and can cleave through undead with single blows.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-gold">Divine Smite</span>
+        <span class="badge badge-red">High Damage</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Light Avatar Empowerment</h3>
+      <p>As the chosen Avatar of the Goddess of Light, Alexion has access to <strong>divine-level abilities</strong> that normal paladins do not. This includes enhanced stats, unique skills tied to his Light affinity, and the ability to call upon his goddess's power in desperate moments. However, his arrogance often prevents him from using these effectively.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-blue">Avatar Powers</span>
+        <span class="badge badge-gold">Divine Boon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPELLS ═══ -->
+<section>
+  <h2 class="section-title">Known Abilities & Skills</h2>
+  <div class="section-subtitle">Catalogued paladin and Light Avatar abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Flaming Blade</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Summons a longsword wreathed in golden-white Light-fire. The blade sears undead and dark creatures on contact. Leaves trails of light in the air with each swing.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Holy Radiance</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Emits a burst of blinding golden light from his body, damaging nearby dark-aligned enemies and healing allies. The light is so intense it can temporarily blind opponents.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Light's Ward</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Creates a shimmering golden barrier that absorbs damage. Particularly effective against dark magic. The ward radiates a warm glow.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Seraphic Dive</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>From flight, Alexion dive-bombs his target with his flaming sword extended. The impact creates a shockwave of golden light. Requires his Seraph wings.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Judgment Strike</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>A devastating overhead strike that channels all of Alexion's Light affinity into a single blow. The attack leaves a trail of golden energy and can shatter undead constructs.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Intervention</h4>
+        <span class="tier">Avatar</span>
+      </div>
+      <p>Calls upon the Goddess of Light for a momentary boost of power. Reserves this for dire situations. The sky above him splits with golden radiance when used.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRESSION ═══ -->
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Alexion's stat growth and power trajectory</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Alexion's build is a <strong>front-line paladin</strong> — high Strength for melee damage, high Endurance for survivability, high Charisma for leadership. Unlike Jason's commander build, Alexion is a <strong>personal combat powerhouse</strong> who leads from the front. His Light affinity enhances his damage output against dark enemies. Stat priority: Strength > Endurance > Charisma > Intelligence.</p>
+    </div>
+    <div class="card">
+      <h3>Strengths & Weaknesses</h3>
+      <p><strong>Strengths:</strong> Devastating melee damage, excellent survivability, powerful against undead/dark, flight mobility, morale-boosting aura for allies. <strong>Weaknesses:</strong> Arrogance leads to tactical blind spots, emotionally unstable (hollow emptiness), poor strategic thinking compared to Jason, vulnerable to cunning tactics and deception.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="powerChart"></canvas>
+  </div>
+</section>
+
+<!-- ═══ ALLIES ═══ -->
+<section>
+  <h2 class="section-title">Allies & Associates</h2>
+  <div class="section-subtitle">Those who fight alongside the Light Avatar</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>George Lane</h3><p>Alex's father. Billionaire owner of Cerillion Entertainment. Enables Alex's behavior. A truly despicable man according to later revelations.</p></div>
+    <div class="card"><h3>Grey Keep Forces</h3><p>The Light-aligned city and its player/NPC army. Alexion's power base. Significantly larger than Jason's forces during the first war.</p></div>
+    <div class="card"><h3>Caerus</h3><p>One of Alex's allies. Has a strong Light affinity. Works with Alexion in various campaigns against dark-aligned players.</p></div>
+    <div class="card"><h3>Emma</h3><p>Appears in Retribution. A Light-affinity ally aligned with Alex's faction.</p></div>
+  </div>
+</section>
+
+<!-- ═══ ENEMIES ═══ -->
+<section>
+  <h2 class="section-title">Enemies & Rivals</h2>
+  <div class="section-subtitle">Those who oppose the Avatar of Light</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Jason Rhodes / The Dark Lord <span class="badge badge-red">Arch-Nemesis</span></h3>
+      <p><strong>Class:</strong> Necromancer → Lich | <strong>Affinity:</strong> Dark (opposing). Alexion's polar opposite in every way. Jason is everything Alex fears — someone from nothing who clawed his way to power through cunning, strategy, and sacrifice. Their conflict is the central rivalry of the series. Light vs Dark. Confidence vs Desire. Jason defeated Alexion in Book 1 and has only grown more powerful since.</p>
+    </div>
+    <div class="card">
+      <h3>Riley Jones</h3>
+      <p>Formerly on Alexion's side (they attended the same school), Riley discovered Alex's true sociopathic nature and <strong>switched sides</strong> to join Jason. Her betrayal still stings Alexion and represents his inability to command genuine loyalty.</p>
+    </div>
+    <div class="card">
+      <h3>Frank Cross</h3>
+      <p>Jason's best friend and a powerful shapeshifter. Frank directly fought Alexion for a Gate Piece in Dominion. Though Alexion was imprisoned, he escaped and stole the piece, but the loss in direct combat was still a humiliation.</p>
+    </div>
+    <div class="card">
+      <h3>Original Sin</h3>
+      <p>Jason's guild. A collection of dark-affinity players who oppose the Grey Keep at every turn. They represent the faction war that defines Alexion's existence in AO.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Alexion's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Catharsis</h3><span class="badge badge-gold">Book 1</span></div>
+      <p style="margin-top:0.5rem;">Alex establishes the Grey Keep as a Paladin/Light Avatar. Mobilizes army against Jason's Twilight Throne. Defeated in the final battle due to arrogance and lack of sentries. Humiliated, hollowed.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Precipice</h3><span class="badge badge-gold">Book 2</span></div>
+      <p style="margin-top:0.5rem;">Alex re-enters AO listless and angry. Struggles with his loss. His real life spirals — drowning in alcohol, violent outbursts at parties. Faces a choice about his path forward.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Evolution</h3><span class="badge badge-gold">Book 3</span></div>
+      <p style="margin-top:0.5rem;">Alexion and his patron deity (Goddess of Light) make larger appearances. Plots against Jason with new methods. His motivations are described as childish — simply angry he's not the best.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Dominion</h3><span class="badge badge-gold">Book 4</span></div>
+      <p style="margin-top:0.5rem;">Fights Frank for a Gate Piece. Loses and is imprisoned. Escapes (controversially) and steals the Gate Piece. Keeps himself relevant in the avatar power struggle.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion</h3><span class="badge badge-gold">Book 5</span></div>
+      <p style="margin-top:0.5rem;">Alexion has a smaller role as the focus shifts to Jason vs Finn. Continues to scheme in the background of the avatar conflicts.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Armageddon</h3><span class="badge badge-gold">Book 6</span></div>
+      <p style="margin-top:0.5rem;">Alexion live-streams Jason's lich transformation surgery to the world. He and Jason are paired as opposing affinities in the avatar trials, forced into uneasy cooperation.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Timeless</h3><span class="badge badge-gold">Book 7</span></div>
+      <p style="margin-top:0.5rem;">Ancient avatars return. Alexion is caught in the chaos. His position as Light Avatar is tested as the game world is transformed by time-traveling threats.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Crucible</h3><span class="badge badge-gold">Book 8</span></div>
+      <p style="margin-top:0.5rem;">Alexion's fully realized Seraph form is on display as Jason sacrifices his humanity. The rivalry continues at full intensity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KEY ITEMS ═══ -->
+<section>
+  <h2 class="section-title">Key Artifacts & Assets</h2>
+  <div class="section-subtitle">Alexion's most notable possessions</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Flaming Longsword</h3>
+      <p>His signature weapon. Wreathed in golden-white Light-fire. Deals bonus damage to undead and dark-aligned enemies. Leaves trails of light in the air. An extension of his Light Avatar status.</p>
+    </div>
+    <div class="card">
+      <h3>Seraph Wings</h3>
+      <p>Massive feathered wings granting flight. White with golden luminescence. Shed light particles in flight. A mark of his elevated Seraph race and Light Avatar transformation.</p>
+    </div>
+    <div class="card">
+      <h3>Celestial Plate Armor</h3>
+      <p>Ornate silvery-gold plate armor with sunburst and celestial motifs. Radiates a soft inner light. Provides excellent protection while marking him as the champion of Light.</p>
+    </div>
+    <div class="card">
+      <h3>Gate Piece</h3>
+      <p>Stolen from Frank in Dominion after losing their fight and escaping imprisonment. A mysterious fragment tied to the gods. Grants access to divine-level power or knowledge.</p>
+    </div>
+    <div class="card">
+      <h3>Lane Family Fortune</h3>
+      <p>Billionaire wealth from his father George Lane, owner of Cerillion Entertainment. Has funded his rise and protected him from consequences of his sociopathic behavior.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PSYCHOLOGICAL PROFILE ═══ -->
+<section>
+  <h2 class="section-title">Psychological Profile</h2>
+  <div class="section-subtitle">Understanding the mind of Alex Lane</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>The Void</h3>
+      <p>Alex describes a constant <strong>"void-like emptiness"</strong> inside him. Nothing fills it — not alcohol, not cruelty, not video game glory. The only brief relief comes from the adulation of others when he succeeds. He is hollow, searching for something real in a world where everything has been given to him.</p>
+    </div>
+    <div class="card">
+      <h3>Childhood Cruelty</h3>
+      <p>As a child, Alex began <strong>killing small animals</strong> "to see what happens." His parents responded not with intervention but with money — paying off authorities, covering up his behavior. This pattern of consequence-free cruelty shaped his adult sociopathy.</p>
+    </div>
+    <div class="card">
+      <h3>Jealousy of Jason</h3>
+      <p>Alex's hatred of Jason is fueled by more than rivalry — Jason <strong>earned everything</strong> through struggle and sacrifice, while Alex was given everything. Jason's genuine power (even if dark) is something Alex can never replicate through his inherited wealth and position. Jason is free; Alex is trapped in his golden cage.</p>
+    </div>
+    <div class="card">
+      <h3>The Mask of Light</h3>
+      <p>His Light affinity — <strong>Confidence</strong> — is a perfect fit. Alex projects an image of angelic perfection and moral superiority, but it is entirely a mask. He uses the aesthetic of holiness to justify cruelty. In this, he is more dangerous than Jason: Jason owns his darkness; Alexion hides behind light.</p>
+    </div>
+    <div class="card">
+      <h3>The Hollow Heir</h3>
+      <p>Unlike Jason, Riley, Frank, and Eliza — who all found purpose, community, and growth in AO — Alex remains <strong>stagnant</strong>. He doesn't change. He doesn't evolve emotionally. He just finds new ways to be powerful and cruel. He is the tragic cautionary tale of privilege without purpose.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<!-- ═══ CHARTS ═══ -->
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Strength', 'Endurance', 'Charisma', 'Intelligence', 'Wisdom', 'Dexterity'],
+    datasets: [
+      { label: 'Human', data: [10, 10, 12, 8, 4, 9], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Paladin', data: [16, 14, 18, 10, 6, 12], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', pointBackgroundColor: '#fbbf24', borderWidth: 2 },
+      { label: 'Light Avatar (Seraph)', data: [22, 18, 24, 12, 8, 16], borderColor: '#93c5fd', backgroundColor: 'rgba(147,197,253,0.05)', pointBackgroundColor: '#93c5fd', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 30,
+        grid: { color: 'rgba(251,191,36,0.06)' },
+        angleLines: { color: 'rgba(251,191,36,0.06)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('powerChart'), {
+  type: 'line',
+  data: {
+    labels: ['Book 1\n(Catharsis)', 'Book 2\n(Precipice)', 'Book 3\n(Evolution)', 'Book 4\n(Dominion)', 'Book 5\n(Hellion)', 'Book 6\n(Armageddon)', 'Book 7\n(Timeless)', 'Book 8\n(Crucible)'],
+    datasets: [
+      { label: 'Combat Power', data: [25, 28, 35, 40, 45, 55, 60, 65], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#fbbf24', borderWidth: 2 },
+      { label: 'Reputation / Influence', data: [50, 15, 25, 30, 35, 45, 50, 55], borderColor: '#93c5fd', backgroundColor: 'rgba(147,197,253,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#93c5fd', borderWidth: 2, borderDash: [5,3] },
+      { label: 'Psychological Stability', data: [20, 5, 10, 8, 12, 15, 18, 20], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#ef4444', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(251,191,36,0.05)' } },
+      y: { min: 0, max: 80, ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(251,191,36,0.05)' }, title: { display: true, text: 'Rating (0–80)', color: '#94a3b8', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

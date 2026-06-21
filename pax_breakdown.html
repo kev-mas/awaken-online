@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAX — The Living City | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #e5e7eb;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #14532d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #22c55e; }
+
+a { color: #4ade80; text-decoration: none; transition: color .3s; }
+a:hover { color: #22c55e; }
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f1a0f 30%, #1a2e1a 60%, #0f1a0f 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 40%, rgba(34,197,94,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 60%, rgba(217,119,6,0.04) 0%, transparent 50%);
+  animation: heroGlow 12s ease-in-out infinite alternate;
+}
+@keyframes heroGlow {
+  0% { transform: translate(0,0) scale(1); }
+  100% { transform: translate(-2%,-2%) scale(1.05); }
+}
+.hero-content { position: relative; z-index: 1; }
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 900;
+  color: #22c55e;
+  text-shadow: 0 0 40px rgba(34,197,94,0.3), 0 0 120px rgba(34,197,94,0.1);
+  letter-spacing: 0.15em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.hero .subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  color: #4ade80;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.hero .tagline {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  color: #d97706;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.hero .slogan {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+  color: #6b7280;
+  font-style: italic;
+  margin-top: 1.5rem;
+  max-width: 600px;
+  opacity: 0.8;
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+.stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 4rem;
+  padding: 2rem 1.5rem;
+  background: rgba(0,0,0,0.5);
+  border-top: 1px solid rgba(34,197,94,0.2);
+  border-bottom: 1px solid rgba(34,197,94,0.2);
+  margin-top: 2rem;
+  width: 100%;
+}
+.stat-item { text-align: center; }
+.stat-value {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #22c55e;
+}
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+.stat-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+
+.section {
+  padding: 5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.section-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #22c55e;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+.section-header h2 .icon { margin-right: 0.4rem; }
+.section-header p {
+  color: #9ca3af;
+  font-size: 1.05rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.section-dark {
+  background: linear-gradient(180deg, #0a0a0a 0%, #0f1a0f 100%);
+  border-top: 1px solid rgba(34,197,94,0.1);
+  border-bottom: 1px solid rgba(34,197,94,0.1);
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #14532d, #22c55e, #d97706, #22c55e, #4ade80);
+  border-radius: 2px;
+}
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.timeline-item:nth-child(odd) { flex-direction: row; }
+.timeline-item:nth-child(even) { flex-direction: row-reverse; }
+.timeline-content {
+  width: 42%;
+  background: rgba(20,83,45,0.15);
+  border: 1px solid rgba(34,197,94,0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all .3s;
+  backdrop-filter: blur(4px);
+}
+.timeline-content:hover {
+  border-color: rgba(34,197,94,0.4);
+  background: rgba(20,83,45,0.25);
+  transform: translateY(-2px);
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 3px solid #0a0a0a;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(34,197,94,0.3);
+}
+.timeline-item:nth-child(1) .timeline-dot { background: #14532d; }
+.timeline-item:nth-child(2) .timeline-dot { background: #22c55e; }
+.timeline-item:nth-child(3) .timeline-dot { background: #d97706; }
+.timeline-item:nth-child(4) .timeline-dot { background: #6b7280; }
+.timeline-item:nth-child(5) .timeline-dot { background: #4ade80; }
+.timeline-item:nth-child(6) .timeline-dot { background: #22c55e; }
+.timeline-date {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  color: #d97706;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+.timeline-content h3 {
+  font-family: 'Cinzel', serif;
+  color: #22c55e;
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+.timeline-content p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.timeline-spacer { width: 42%; }
+
+/* DISTRICTS GRID */
+.district-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.district-card {
+  background: rgba(20,83,45,0.1);
+  border: 1px solid rgba(34,197,94,0.12);
+  border-radius: 14px;
+  padding: 1.75rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.district-card:hover {
+  border-color: rgba(34,197,94,0.35);
+  background: rgba(20,83,45,0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(34,197,94,0.08);
+}
+.district-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #22c55e, #14532d);
+  border-radius: 0 4px 4px 0;
+}
+.district-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.district-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #4ade80;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+.district-card p {
+  color: #9ca3af;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* MAP LAYOUT */
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  padding: 3rem 1rem;
+}
+.map-svg {
+  width: 100%;
+  height: auto;
+}
+.map-node {
+  cursor: pointer;
+  transition: all .3s;
+}
+.map-node circle {
+  transition: all .3s;
+}
+.map-node:hover circle {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 12px rgba(34,197,94,0.5));
+}
+.map-node text {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  fill: #4ade80;
+  text-anchor: middle;
+  pointer-events: none;
+}
+.map-connection {
+  stroke: rgba(34,197,94,0.2);
+  stroke-width: 2;
+  fill: none;
+}
+
+/* DEFENSES */
+.defenses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.defense-card {
+  background: rgba(20,83,45,0.1);
+  border: 1px solid rgba(34,197,94,0.12);
+  border-radius: 14px;
+  padding: 2rem;
+  text-align: center;
+  transition: all .3s;
+}
+.defense-card:hover {
+  border-color: rgba(34,197,94,0.35);
+  background: rgba(20,83,45,0.2);
+  transform: translateY(-3px);
+}
+.defense-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.defense-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #22c55e;
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+.defense-card p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* INHABITANTS */
+.inhabitant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.inhabitant-card {
+  background: rgba(20,83,45,0.1);
+  border: 1px solid rgba(34,197,94,0.12);
+  border-radius: 14px;
+  padding: 2rem;
+  transition: all .3s;
+  text-align: center;
+}
+.inhabitant-card:hover {
+  border-color: rgba(217,119,6,0.3);
+  background: rgba(20,83,45,0.2);
+  transform: translateY(-3px);
+}
+.inhabitant-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border: 2px solid rgba(34,197,94,0.3);
+}
+.inhabitant-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #4ade80;
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+.inhabitant-card .title {
+  font-size: 0.8rem;
+  color: #d97706;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+.inhabitant-card p {
+  color: #9ca3af;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* TERRITORIES */
+.territory-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.territory-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(20,83,45,0.1);
+  border: 1px solid rgba(34,197,94,0.12);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  transition: all .3s;
+}
+.territory-item:hover {
+  border-color: rgba(34,197,94,0.35);
+  background: rgba(20,83,45,0.2);
+}
+.territory-icon { font-size: 1.8rem; flex-shrink: 0; }
+.territory-info { flex: 1; }
+.territory-info h3 {
+  font-family: 'Cinzel', serif;
+  color: #4ade80;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+.territory-info p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+.territory-tag {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.2);
+  flex-shrink: 0;
+}
+
+/* CHARTS */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.chart-card {
+  background: rgba(20,83,45,0.08);
+  border: 1px solid rgba(34,197,94,0.1);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+.chart-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #22c55e;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.chart-wrapper { position: relative; height: 280px; width: 100%; }
+
+/* EVENTS */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.event-item {
+  display: flex;
+  gap: 1.2rem;
+  background: rgba(20,83,45,0.08);
+  border: 1px solid rgba(34,197,94,0.08);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  transition: all .3s;
+  align-items: flex-start;
+}
+.event-item:hover {
+  border-color: rgba(34,197,94,0.25);
+  background: rgba(20,83,45,0.15);
+}
+.event-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.event-info { flex: 1; }
+.event-info .event-date {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  color: #d97706;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+.event-info h3 {
+  font-family: 'Cinzel', serif;
+  color: #4ade80;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+.event-info p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+/* ECONOMY */
+.economy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.economy-card {
+  background: rgba(20,83,45,0.1);
+  border: 1px solid rgba(34,197,94,0.12);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all .3s;
+}
+.economy-card:hover {
+  border-color: rgba(34,197,94,0.35);
+  background: rgba(20,83,45,0.2);
+}
+.economy-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+.economy-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #22c55e;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+.economy-card p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+/* QUOTE */
+.quote-block {
+  max-width: 750px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem;
+  border-left: 3px solid #22c55e;
+  border-right: 3px solid #22c55e;
+}
+.quote-block blockquote {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: #4ade80;
+  font-style: italic;
+  line-height: 1.7;
+}
+.quote-block cite {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+
+/* FOOTER */
+footer {
+  background: linear-gradient(180deg, #0f1a0f, #0a0a0a);
+  border-top: 1px solid rgba(34,197,94,0.1);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+footer .footer-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  color: #22c55e;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+footer p {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+footer .footer-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #22c55e, transparent);
+  margin: 1rem auto;
+}
+
+@media (max-width: 768px) {
+  .timeline::before { left: 20px; }
+  .timeline-item, .timeline-item:nth-child(even) { flex-direction: row !important; }
+  .timeline-content { width: calc(100% - 50px); margin-left: 50px; }
+  .timeline-spacer { display: none; }
+  .timeline-dot { left: 20px; }
+  .stats-bar { gap: 1rem 2rem; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .map-container { padding: 1rem 0; }
+}
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__ current" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>PAX</h1>
+    <div class="subtitle">&#9872; The Living City &#9872;</div>
+    <div class="tagline">Capital of the Earth Affinity</div>
+    <p class="slogan">"From stone and root, a city was grown — not built. Forged in an age before the Throne, frozen in time, and unleashed upon a world that had forgotten her name."</p>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-icon">&#9968;</div>
+      <div class="stat-value" id="statFounding">~7</div>
+      <div class="stat-label">Era Founded</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">&#9872;</div>
+      <div class="stat-value">8</div>
+      <div class="stat-label">Districts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">&#9876;</div>
+      <div class="stat-value" id="statArmy">10K+</div>
+      <div class="stat-label">Elemental Guard</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">&#9879;</div>
+      <div class="stat-value">100%</div>
+      <div class="stat-label">Self-Sufficient</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">&#9851;</div>
+      <div class="stat-value" id="statFrozen">~12yr</div>
+      <div class="stat-label">Frozen in Code</div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <span>&#9650;</span>
+  </div>
+</section>
+
+<!-- ===== HISTORY TIMELINE ===== -->
+<section class="section" id="history">
+  <div class="section-header">
+    <h2><span class="icon">&#9851;</span>The History of Pax</h2>
+    <p>From the dawn of AO's early era through the present — a city that refused to die.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-date">&#9733; Early Game Era</div>
+        <h3>Founding of Pax</h3>
+        <p>Arcadia Landrey — known as Cady — one of the early avatars, discovers the Earth affinity and establishes Pax as its capital. The city is grown from living stone and earth, a sanctuary of resilience in the untamed wilds of AO's first generation.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-date">&#9873; Rise of Pax</div>
+        <h3>The Golden Age</h3>
+        <p>Pax flourishes. The Verdant Spire rises at the city's heart. The Stone Market becomes a hub of earth-forged goods. Terraced farms line the outer slopes. Cady's power grows as the Earth God's chosen — a force to be reckoned with before the age of Cerillion's Twilight Throne.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-date">&#9888; The Freezing</div>
+        <h3>Account Frozen — Preserved in Code</h3>
+        <p>Cady's account is locked and frozen by circumstances beyond her control. Everything — her avatar, her city, her army, her entire legacy — is preserved as static data within AO's codebase. Pax becomes a ghost city, unreachable, sleeping in the depths of the game's memory.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-date">&#9888; The Lost Years</div>
+        <h3>Forgotten by the World</h3>
+        <p>While Jason, Cerillion, and the Twilight Throne rise to power — while the Heretic and the Dark Finance reshape AO — Pax remains frozen. The city becomes legend, a rumor passed between early players. The age of the ancient avatars fades into myth.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-date">&#128293; Timeless (Book 7)</div>
+        <h3>The Unfreezing</h3>
+        <p>When Cady is finally unfrozen in the Timeless expansion, her entire city and army are transported from the ancient past to the present day. Pax emerges from static code into living reality — a wildcard no faction anticipated. The old world crashes into the new.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-date">&#9829; Present Day</div>
+        <h3>Uneasy Alliance</h3>
+        <p>Cady becomes an uneasy ally of Jason. Pax now stands as a third force — not aligned with the Twilight Throne, the Heretic's shadow, or any other power. The city represents the "old world" of AO, built before Cerillion's rules rewrote the game.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CITY LAYOUT ===== -->
+<section class="section section-dark" id="layout">
+  <div class="section-header">
+    <h2><span class="icon">&#9961;</span>City Layout &amp; Districts</h2>
+    <p>Pax is not built — it is grown. Living stone and root form a city that breathes.</p>
+  </div>
+
+  <div class="map-container">
+    <svg class="map-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+      <line class="map-connection" x1="400" y1="80" x2="300" y2="200" />
+      <line class="map-connection" x1="400" y1="80" x2="500" y2="200" />
+      <line class="map-connection" x1="400" y1="80" x2="400" y2="200" />
+      <line class="map-connection" x1="300" y1="200" x2="150" y2="320" />
+      <line class="map-connection" x1="300" y1="200" x2="250" y2="340" />
+      <line class="map-connection" x1="400" y1="200" x2="400" y2="350" />
+      <line class="map-connection" x1="400" y1="200" x2="520" y2="340" />
+      <line class="map-connection" x1="500" y1="200" x2="650" y2="320" />
+      <line class="map-connection" x1="400" y1="350" x2="400" y2="430" />
+      <line class="map-connection" x1="250" y1="340" x2="150" y2="320" />
+      <line class="map-connection" x1="520" y1="340" x2="650" y2="320" />
+
+      <g class="map-node">
+        <circle cx="400" cy="80" r="28" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+        <text x="400" y="70" font-size="16">&#9819;</text>
+        <text x="400" y="116" font-size="9">Verdant Spire</text>
+      </g>
+      <g class="map-node">
+        <circle cx="300" cy="200" r="22" fill="#1a3a1a" stroke="#4ade80" stroke-width="2"/>
+        <text x="300" y="195" font-size="14">&#9873;</text>
+        <text x="300" y="232" font-size="9">Stone Market</text>
+      </g>
+      <g class="map-node">
+        <circle cx="500" cy="200" r="22" fill="#1a3a1a" stroke="#4ade80" stroke-width="2"/>
+        <text x="500" y="195" font-size="14">&#9879;</text>
+        <text x="500" y="232" font-size="9">Root Warrens</text>
+      </g>
+      <g class="map-node">
+        <circle cx="400" cy="200" r="22" fill="#1a3a1a" stroke="#4ade80" stroke-width="2"/>
+        <text x="400" y="195" font-size="14">&#9968;</text>
+        <text x="400" y="232" font-size="9">Earthworks</text>
+      </g>
+      <g class="map-node">
+        <circle cx="150" cy="320" r="20" fill="#1a3a1a" stroke="#d97706" stroke-width="2"/>
+        <text x="150" y="315" font-size="13">&#9788;</text>
+        <text x="150" y="350" font-size="9">The Terraces</text>
+      </g>
+      <g class="map-node">
+        <circle cx="250" cy="340" r="20" fill="#1a3a1a" stroke="#d97706" stroke-width="2"/>
+        <text x="250" y="335" font-size="13">&#9881;</text>
+        <text x="250" y="370" font-size="9">Stonecraft</text>
+      </g>
+      <g class="map-node">
+        <circle cx="400" cy="350" r="20" fill="#1a3a1a" stroke="#a16207" stroke-width="2"/>
+        <text x="400" y="345" font-size="13">&#9760;</text>
+        <text x="400" y="380" font-size="9">Deep Halls</text>
+      </g>
+      <g class="map-node">
+        <circle cx="520" cy="340" r="20" fill="#1a3a1a" stroke="#d97706" stroke-width="2"/>
+        <text x="520" y="335" font-size="13">&#9752;</text>
+        <text x="520" y="370" font-size="9">Grove of Rem.</text>
+      </g>
+      <g class="map-node">
+        <circle cx="650" cy="320" r="20" fill="#1a3a1a" stroke="#5c4033" stroke-width="2"/>
+        <text x="650" y="315" font-size="13">&#9876;</text>
+        <text x="650" y="350" font-size="9">East Garrison</text>
+      </g>
+      <g class="map-node">
+        <circle cx="400" cy="430" r="18" fill="#1a3a1a" stroke="#6b7280" stroke-width="2"/>
+        <text x="400" y="426" font-size="12">&#9766;</text>
+        <text x="400" y="456" font-size="9">Root Gate</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="district-grid">
+    <div class="district-card">
+      <div class="district-icon">&#9819;</div>
+      <h3>Verdant Spire</h3>
+      <p>The seat of Arcadia Landrey and the heart of Pax. This colossal spire of living stone and crystalline earth rises at the city's center, wrapped in vines and glowing with ambient earth-mana. Cady's personal chambers and the war council reside here.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9873;</div>
+      <h3>The Stone Market</h3>
+      <p>The trade and commerce hub where earth-forged goods are exchanged. Though Pax is largely self-sufficient, the Stone Market remains the social heart of the city — where stonecraft, alchemical reagents, and rare minerals change hands.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9879;</div>
+      <h3>The Root Warrens</h3>
+      <p>Underground residential and crafting district. A maze of root-lined tunnels and earthen chambers where the city's craftsmen, alchemists, and artisans live and work. Lit by bioluminescent moss and earth-crystals.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9788;</div>
+      <h3>The Terraces</h3>
+      <p>Terraced farms carved into the slopes surrounding Pax. Magically enriched soil and controlled irrigation from underground aquifers allow year-round cultivation. The city never wants for food.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9968;</div>
+      <h3>The Earthworks</h3>
+      <p>The defensive fortifications of Pax — living walls of regenerating stone, raised battlements, and earth-elemental watchposts. The Earthworks encircle the entire city and are the first line of defense against any invader.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9760;</div>
+      <h3>The Deep Halls</h3>
+      <p>An ancient repository carved into the bedrock beneath Pax. Contains records, artifacts, and knowledge from the earliest days of AO — much of it predating the Twilight Throne. The Deep Halls are a library of forgotten history.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9752;</div>
+      <h3>Grove of Remembrance</h3>
+      <p>A sacred grove at the edge of the city where massive stone trees stand as monuments to those lost in Pax's history. Each tree is carved with names and stories. The Earth God's presence is said to be strongest here.</p>
+    </div>
+    <div class="district-card">
+      <div class="district-icon">&#9876;</div>
+      <h3>East Garrison</h3>
+      <p>The military training grounds and barracks. Earth-elemental guardians are shaped and awakened here. The garrison trains both human NPC defenders and coordinates the elemental sentinels that patrol the city walls.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEFENSES ===== -->
+<section class="section" id="defenses">
+  <div class="section-header">
+    <h2><span class="icon">&#9876;</span>Defenses &amp; Military</h2>
+    <p>Pax was designed to endure. Its defenses are as old as the city itself — grown from the earth, not built.</p>
+  </div>
+  <div class="defenses-grid">
+    <div class="defense-card">
+      <div class="defense-icon">&#9968;</div>
+      <h3>Living Stone Walls</h3>
+      <p>The walls of Pax are not static — they are alive. Grown from enchanted stone seeded with earth-mana, they regenerate damage over time, sealing breaches and reforming under assault. A siege against Pax is a siege against the mountain itself.</p>
+    </div>
+    <div class="defense-card">
+      <div class="defense-icon">&#9763;</div>
+      <h3>Earth-Elemental Guardians</h3>
+      <p>Awakened constructs of stone and crystal, bound to defend the city. Ranging from small sentinels to colossal golems the size of buildings, they are tireless, fearless, and respond directly to Cady's will through the Earth affinity.</p>
+    </div>
+    <div class="defense-card">
+      <div class="defense-icon">&#9851;</div>
+      <h3>Root Networks</h3>
+      <p>Beneath the surface, an immense network of enchanted roots lies dormant — until invaders arrive. These roots can entangle entire battalions, pull enemies underground, or create barriers in seconds. The very ground beneath an invader's feet is a weapon.</p>
+    </div>
+    <div class="defense-card">
+      <div class="defense-icon">&#9872;</div>
+      <h3>Underground Chokepoints</h3>
+      <p>Every approach to Pax above or below ground is a kill zone. Tunnel networks collapse on command. Caverns flood with earth-mana, petrifying anything inside. The interior of Pax is a labyrinth designed to confound and destroy organized military formations.</p>
+    </div>
+  </div>
+  <div class="quote-block">
+    <blockquote>"They did not build walls. They grew them. And what the earth grows, it does not easily surrender."</blockquote>
+    <cite>&#9733; — Recorded in the Deep Halls, Era of the First Avatars</cite>
+  </div>
+</section>
+
+<!-- ===== KEY INHABITANTS ===== -->
+<section class="section section-dark" id="inhabitants">
+  <div class="section-header">
+    <h2><span class="icon">&#9822;</span>Key Inhabitants</h2>
+    <p>The people — and the presence — that give Pax its soul.</p>
+  </div>
+  <div class="inhabitant-grid">
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar" style="border-color:#22c55e; background:rgba(34,197,94,0.1);">&#9813;</div>
+      <h3>Arcadia Landrey</h3>
+      <div class="title">&#9819; The Earth Queen — "Cady"</div>
+      <p>The founder and ruler of Pax. An ancient avatar frozen in AO's code for years, unfrozen in Timeless. Cady is a morally grey character — neither hero nor villain, driven by survival and the protection of her people. Her loyalty is to Pax first, above all factions.</p>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar" style="border-color:#d97706; background:rgba(217,119,6,0.1);">&#9774;</div>
+      <h3>The Earth God</h3>
+      <div class="title">&#8734; The Unnamed — Balance &amp; Endurance</div>
+      <p>The genderless, nameless deity of the Earth affinity — associated with balance, endurance, and the natural cycle of growth and decay. The Earth God's power flows through Pax, granting the city its regenerating walls, fertile terraces, and living stone. A presence more than a person.</p>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar" style="border-color:#6b7280; background:rgba(107,114,128,0.1);">&#9875;</div>
+      <h3>Ancient NPCs of Pax</h3>
+      <div class="title">&#9873; The First Generation</div>
+      <p>The NPC citizens of Pax are among the oldest in AO — scripted and leveled in the game's early era. They remember a world before the Twilight Throne. Their knowledge of forgotten lore, lost crafting techniques, and ancient magic is unmatched in the present day.</p>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar" style="border-color:#4ade80; background:rgba(74,222,128,0.1);">&#9733;</div>
+      <h3>The Elemental Elders</h3>
+      <div class="title">&#9879; Greater Awakened Constructs</div>
+      <p>The oldest and most powerful earth elementals bound to Pax. Each embodies a facet of the city — the Wall-Elder, the Root-Elder, the Deep-Elder. They possess limited sentience and have guarded Pax since its founding, older than any mortal inhabitant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TERRITORIES & INFLUENCE ===== -->
+<section class="section" id="territories">
+  <div class="section-header">
+    <h2><span class="icon">&#127760;</span>Territories &amp; Influence</h2>
+    <p>Pax does not conquer — it endures. But its reach extends beyond its walls.</p>
+  </div>
+  <div class="territory-list">
+    <div class="territory-item">
+      <div class="territory-icon">&#9968;</div>
+      <div class="territory-info">
+        <h3>The Verdant Domain</h3>
+        <p>The immediate region surrounding Pax — rolling hills, fertile valleys, and stone outcroppings saturated with earth-mana. Patrolled by earth-elemental sentinels.</p>
+      </div>
+      <span class="territory-tag">Heartland</span>
+    </div>
+    <div class="territory-item">
+      <div class="territory-icon">&#9968;</div>
+      <div class="territory-info">
+        <h3>The Stonebridge Corridor</h3>
+        <p>A network of living stone bridges connecting Pax to the eastern mountain ranges. Trade routes and military access corridors carved from the bedrock itself.</p>
+      </div>
+      <span class="territory-tag">Trade Route</span>
+    </div>
+    <div class="territory-item">
+      <div class="territory-icon">&#9879;</div>
+      <div class="territory-info">
+        <h3>The Deep Quarries</h3>
+        <p>Underground mining operations that extend for miles beneath the surface. Source of rare earth-mana crystals, obsidian, and mineral reagents for alchemy.</p>
+      </div>
+      <span class="territory-tag">Resource</span>
+    </div>
+    <div class="territory-item">
+      <div class="territory-icon">&#9752;</div>
+      <div class="territory-info">
+        <h3>The Rootway Tunnels</h3>
+        <p>Ancient underground passages that connect Pax to distant locations. Lined with enchanted roots, they serve as secret transit routes known only to Cady and her inner circle.</p>
+      </div>
+      <span class="territory-tag">Strategic</span>
+    </div>
+    <div class="territory-item">
+      <div class="territory-icon">&#9788;</div>
+      <div class="territory-info">
+        <h3>The Amber Hills</h3>
+        <p>Territory to the southwest, covered in terraced farms and grazing lands. Provides the bulk of Pax's agricultural output. The soil here is enriched by centuries of earth-mana cultivation.</p>
+      </div>
+      <span class="territory-tag">Agriculture</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EVOLUTION CHARTS ===== -->
+<section class="section section-dark" id="evolution">
+  <div class="section-header">
+    <h2><span class="icon">&#9851;</span>Evolution Across Eras</h2>
+    <p>Pax's journey through AO's history — a city that experienced time in two separate ages.</p>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3>&#9872; Population Growth</h3>
+      <div class="chart-wrapper">
+        <canvas id="popChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>&#9876; Military Strength</h3>
+      <div class="chart-wrapper">
+        <canvas id="milChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>&#9879; Economic Output</h3>
+      <div class="chart-wrapper">
+        <canvas id="ecoChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>&#9766; Influence &amp; Alliances</h3>
+      <div class="chart-wrapper">
+        <canvas id="infChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ECONOMY ===== -->
+<section class="section" id="economy">
+  <div class="section-header">
+    <h2><span class="icon">&#9881;</span>Economy &amp; Resources</h2>
+    <p>Pax is entirely self-sufficient — its economy is one of growth and refinement, not trade.</p>
+  </div>
+  <div class="economy-grid">
+    <div class="economy-card">
+      <div class="economy-icon">&#9968;</div>
+      <h3>Stonecraft</h3>
+      <p>Master artisans shape living stone into weapons, armor, tools, and architecture. Items from Pax are infused with earth-mana, granting durability and regenerative properties.</p>
+    </div>
+    <div class="economy-card">
+      <div class="economy-icon">&#9879;</div>
+      <h3>Earth-Mana Forging</h3>
+      <p>A unique crafting discipline that combines raw earth-mana with rare minerals to create items that grow stronger with the user. Exclusive to Pax's master forgers.</p>
+    </div>
+    <div class="economy-card">
+      <div class="economy-icon">&#10022;</div>
+      <h3>Mineral Alchemy</h3>
+      <p>The Deep Quarries yield rare crystalized mana ores, obsidian, and mineral reagents. Cady's alchemists brew potions and elixirs with effects undiscovered by modern AO crafters.</p>
+    </div>
+    <div class="economy-card">
+      <div class="economy-icon">&#9788;</div>
+      <h3>Terraced Farming</h3>
+      <p>Magically enriched soil and ancient irrigation techniques allow year-round cultivation. Pax produces more food than it consumes, with reserves that could last a decade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAJOR EVENTS ===== -->
+<section class="section section-dark" id="events">
+  <div class="section-header">
+    <h2><span class="icon">&#128293;</span>Major Events</h2>
+    <p>The key moments that shaped Pax across two eras of AO history.</p>
+  </div>
+  <div class="events-list">
+    <div class="event-item">
+      <div class="event-icon">&#10022;</div>
+      <div class="event-info">
+        <div class="event-date">ERA 1 — THE FOUNDING</div>
+        <h3>The Groundbreaking</h3>
+        <p>Cady channels the Earth God's power for the first time, raising the Verdant Spire from raw stone. The founding of Pax marks the establishment of the Earth affinity's capital and the first major Earth-aligned city in AO.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">&#9873;</div>
+      <div class="event-info">
+        <div class="event-date">ERA 1 — THE GOLDEN AGE</div>
+        <h3>The Conclave of Stone</h3>
+        <p>The first gathering of earth-aligned players and NPCs. Cady formalizes the city's government, establishes the Deep Halls as a repository, and awakens the first Elemental Elders. Pax becomes a true capital.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">&#9888;</div>
+      <div class="event-info">
+        <div class="event-date">ERA 1 — THE FREEZING</div>
+        <h3>The Sundering of Cady</h3>
+        <p>Cady's account is frozen due to circumstances beyond her control. The entire city — every NPC, every structure, every elemental — is locked in a static state within AO's code. Pax vanishes from the living world.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">&#9888;</div>
+      <div class="event-info">
+        <div class="event-date">ERA 2 — THE DARK AGE</div>
+        <h3>The Forgotten City</h3>
+        <p>Through the rise of the Twilight Throne, the Heretic, and the great wars of AO — Pax is nothing but a rumor. Old players speak of a city of living stone, but no one can find it. The city sleeps in code.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">&#128293;</div>
+      <div class="event-info">
+        <div class="event-date">ERA 2 — TIMELESS (BOOK 7)</div>
+        <h3>The Return</h3>
+        <p>The Timeless expansion shatters the barriers keeping Cady's account frozen. When she logs in, her entire city and army come with her — transported from the ancient past to the present day. The world of AO reels as an entire civilization materializes.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">&#9829;</div>
+      <div class="event-info">
+        <div class="event-date">ERA 2 — PRESENT DAY</div>
+        <h3>The Uneasy Pact</h3>
+        <p>Cady forms a tentative alliance with Jason and the Twilight Throne. Neither fully trusts the other, but both recognize the value of friendship in a world of enemies. Pax becomes a wildcard in the balance of power — answerable to no one but itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-title">&#9872; PAX &#9872;</div>
+  <div class="footer-divider"></div>
+  <p>&#9733; The Living City — Capital of the Earth Affinity — Awaken Online by Travis Bagwell &#9733;</p>
+  <p style="margin-top:0.5rem; font-size:0.75rem; color:#4b5563;">
+    &#9873; "Stone and root. Endurance and growth. The old world endures." &#9873;
+  </p>
+  <div class="footer-divider"></div>
+  <p style="font-size:0.7rem; color:#374151;">Fan resource. No copyright infringement intended. All rights belong to Travis Bagwell.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+function getChartDefaults() {
+  const isDark = true;
+  return {
+    color: '#9ca3af',
+    gridColor: 'rgba(34,197,94,0.06)',
+    borderColor: 'rgba(34,197,94,0.15)',
+    fontFamily: "'Inter', sans-serif",
+  };
+}
+
+const def = getChartDefaults();
+
+const frozenLabel = { label: 'Frozen (inaccessible)', type: 'line', data: null };
+
+// ---- POPULATION ----
+const popCtx = document.getElementById('popChart').getContext('2d');
+new Chart(popCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Founding', 'Golden Age', 'Frozen', 'Lost Years', 'Timeless', 'Present'],
+    datasets: [
+      {
+        label: 'Population',
+        data: [500, 4200, null, null, 4200, 12400],
+        backgroundColor: [
+          'rgba(20,83,45,0.7)',
+          'rgba(34,197,94,0.7)',
+          'rgba(107,114,128,0.2)',
+          'rgba(107,114,128,0.2)',
+          'rgba(217,119,6,0.7)',
+          'rgba(74,222,128,0.8)'
+        ],
+        borderColor: [
+          '#14532d', '#22c55e', '#6b7280', '#6b7280', '#d97706', '#4ade80'
+        ],
+        borderWidth: 2,
+        borderRadius: 4,
+        barPercentage: 0.6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      },
+      x: {
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      }
+    }
+  }
+});
+
+// ---- MILITARY ----
+const milCtx = document.getElementById('milChart').getContext('2d');
+new Chart(milCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Founding', 'Golden Age', 'Frozen', 'Lost Years', 'Timeless', 'Present'],
+    datasets: [
+      {
+        label: 'Elemental Guardians',
+        data: [80, 1200, null, null, 1200, 4800],
+        backgroundColor: [
+          'rgba(20,83,45,0.7)',
+          'rgba(34,197,94,0.7)',
+          'rgba(107,114,128,0.2)',
+          'rgba(107,114,128,0.2)',
+          'rgba(217,119,6,0.7)',
+          'rgba(74,222,128,0.8)'
+        ],
+        borderColor: ['#14532d', '#22c55e', '#6b7280', '#6b7280', '#d97706', '#4ade80'],
+        borderWidth: 2,
+        borderRadius: 4,
+        barPercentage: 0.6,
+      },
+      {
+        label: 'NPC Soldiers',
+        data: [30, 800, null, null, 800, 3200],
+        backgroundColor: [
+          'rgba(162,7,7,0.3)',
+          'rgba(162,7,7,0.5)',
+          'rgba(107,114,128,0.1)',
+          'rgba(107,114,128,0.1)',
+          'rgba(162,7,7,0.5)',
+          'rgba(162,7,7,0.6)'
+        ],
+        borderColor: ['#5c4033', '#5c4033', '#6b7280', '#6b7280', '#5c4033', '#5c4033'],
+        borderWidth: 1.5,
+        borderRadius: 4,
+        barPercentage: 0.6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: def.color, font: { family: def.fontFamily, size: 10 } } }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      },
+      x: {
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      }
+    }
+  }
+});
+
+// ---- ECONOMIC OUTPUT ----
+const ecoCtx = document.getElementById('ecoChart').getContext('2d');
+new Chart(ecoCtx, {
+  type: 'line',
+  data: {
+    labels: ['Founding', 'Golden Age', 'Frozen', 'Lost Years', 'Timeless', 'Present'],
+    datasets: [
+      {
+        label: 'Economic Output',
+        data: [10, 85, null, null, 85, 190],
+        borderColor: '#22c55e',
+        backgroundColor: 'rgba(34,197,94,0.1)',
+        fill: true,
+        tension: 0.3,
+        pointBackgroundColor: ['#14532d', '#22c55e', '#6b7280', '#6b7280', '#d97706', '#4ade80'],
+        pointBorderColor: '#0a0a0a',
+        pointBorderWidth: 2,
+        pointRadius: 6,
+        borderWidth: 3,
+        spanGaps: false,
+      },
+      {
+        label: 'Frozen Period',
+        data: [null, null, 0, 0, null, null],
+        borderColor: 'rgba(107,114,128,0.3)',
+        backgroundColor: 'rgba(107,114,128,0.05)',
+        borderDash: [6, 4],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: def.color, font: { family: def.fontFamily, size: 10 } } }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      },
+      x: {
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      }
+    }
+  }
+});
+
+// ---- INFLUENCE & ALLIANCES ----
+const infCtx = document.getElementById('infChart').getContext('2d');
+new Chart(infCtx, {
+  type: 'line',
+  data: {
+    labels: ['Founding', 'Golden Age', 'Frozen', 'Lost Years', 'Timeless', 'Present'],
+    datasets: [
+      {
+        label: 'Political Influence',
+        data: [15, 78, null, null, 78, 92],
+        borderColor: '#d97706',
+        backgroundColor: 'rgba(217,119,6,0.1)',
+        fill: true,
+        tension: 0.3,
+        pointBackgroundColor: ['#14532d', '#22c55e', '#6b7280', '#6b7280', '#d97706', '#4ade80'],
+        pointBorderColor: '#0a0a0a',
+        pointBorderWidth: 2,
+        pointRadius: 6,
+        borderWidth: 3,
+        spanGaps: false,
+      },
+      {
+        label: 'Alliance Strength',
+        data: [10, 65, null, null, 5, 55],
+        borderColor: '#4ade80',
+        backgroundColor: 'rgba(74,222,128,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointBackgroundColor: ['#14532d', '#22c55e', '#6b7280', '#6b7280', '#d97706', '#4ade80'],
+        pointBorderColor: '#0a0a0a',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        borderWidth: 2,
+        borderDash: [4, 3],
+        spanGaps: false,
+      },
+      {
+        label: 'Frozen Period',
+        data: [null, null, 0, 0, null, null],
+        borderColor: 'rgba(107,114,128,0.3)',
+        backgroundColor: 'rgba(107,114,128,0.05)',
+        borderDash: [6, 4],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: def.color, font: { family: def.fontFamily, size: 10 } } }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      },
+      x: {
+        grid: { color: def.gridColor },
+        ticks: { color: def.color, font: { family: def.fontFamily, size: 10 } }
+      }
+    }
+  }
+});
+
+});
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

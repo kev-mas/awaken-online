@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Julia Harris — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0f0a0c;
+    --dark2: #1a1012;
+    --dark3: #2a1518;
+    --dark4: #3a1a1e;
+    --coral: #f43f5e;
+    --coral-glow: #fb7185;
+    --coral-dim: #be123c;
+    --amber: #f97316;
+    --amber-dim: #c2410c;
+    --gold: #fbbf24;
+    --gold-glow: #fcd34d;
+    --rose: #fda4af;
+    --rose-light: #ffe4e6;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --green: #10b981;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #140a0d 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--coral); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15,10,12,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(244,63,94,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--coral); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--coral); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(244,63,94,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(251,191,36,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(251,113,133,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--coral) 40%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.mage { border-color: var(--coral-dim); color: var(--coral); }
+  .tags.daughter { border-color: var(--gold); color: var(--gold); }
+  .tags.catalyst { border-color: var(--amber-dim); color: var(--amber); }
+  .tags.survivor { border-color: var(--rose); color: var(--rose); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--coral));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--coral), var(--gold));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(26,16,18,0.8); border: 1px solid rgba(244,63,94,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(244,63,94,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--coral); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--coral); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--coral), var(--gold), var(--rose));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--coral);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--coral); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(26,16,18,0.8); border: 1px solid rgba(244,63,94,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(244,63,94,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--coral); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(26,16,18,0.6); border: 1px solid rgba(244,63,94,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--coral); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(26,16,18,0.8); border: 1px solid rgba(244,63,94,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(244,63,94,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(244,63,94,0.15); color: var(--coral); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-coral { background: rgba(244,63,94,0.15); color: var(--coral); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-amber { background: rgba(249,115,22,0.15); color: var(--amber); }
+  .badge-rose { background: rgba(253,164,175,0.15); color: var(--rose); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(26,16,18,0.6); border: 1px solid rgba(244,63,94,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(244,63,94,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__ current" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>JULIA HARRIS</h1>
+    <div class="subtitle">The Catalyst · Finn's Daughter · The One Who Pulled Him Back</div>
+    <p class="tagline">The brilliant, lonely daughter who refused to let her father drown in grief — the complete breakdown of the young mage who set the entire Tarot trilogy in motion and fought alongside Finn through fire, loss, and redemption.</p>
+    <div class="tags">
+      <span class="tags mage">Mage</span>
+      <span class="tags daughter">Daughter</span>
+      <span class="tags catalyst">Catalyst</span>
+      <span class="tags survivor">Survivor</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">3</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">2</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Class Path</div></div>
+    <div class="stat-box"><div class="number">0</div><div class="label">Deaths (In-Game)</div></div>
+    <div class="stat-box"><div class="number">Mage</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Trilogy</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Name:</strong> Julia Harris</li>
+        <li><strong>Family:</strong> Daughter of Finn Harris and Rachael Harris (deceased). Has a younger brother named Grayson.</li>
+        <li><strong>Personality:</strong> Hilarious, intelligent, snarky, lonely, emotionally neglected. A brilliant young woman whose father was too consumed by grief to see what she was capable of.</li>
+        <li><strong>Background:</strong> After her mother Rachael's death, Julia was "pretty much alone with a grieving father deep in his own pain." Her desire to act out stemmed from this emotional abandonment. Finn never really sat there and saw what his brilliant daughter was capable of.</li>
+        <li><strong>Entry into AO:</strong> Nearly a decade after Rachael's death, Julia forces Finn to try Awaken Online. She suspects something unusual is going on inside the game — created by Finn's former employer Cerillion Entertainment — and believes his insider knowledge makes him uniquely suited to investigate.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Julia (same)</li>
+        <li><strong>Class:</strong> Magic user (specific affinity unclear from available sources)</li>
+        <li><strong>Starting Zone:</strong> Lahab — the Mage Guild school/prison in the northern desert</li>
+        <li><strong>Faction:</strong> Lahab resistance / Khamsin alliance</li>
+        <li><strong>Playstyle:</strong> Never dies in-game across all three books. She, Finn, and Kyyle always escape with exactly 1% health remaining — a notable contrast to the main series where death is frequent.</li>
+        <li><strong>Status:</strong> Mana stripped at a critical juncture (in Flame), then learns new powers and evolves alongside Finn and Kyyle.</li>
+        <li><strong>Gameplay:</strong> She and Finn are permanently logged into AO — with time compression, logging off equals only ~3 days out-of-game.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Julia's journey from a neglected daughter to a powerful mage who helped save a city</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Series</span><span class="form">Daughter → Caretaker</span></div>
+      <h3>Growing Up in the Shadow of Grief</h3>
+      <p>After Rachael's death, Finn descended into a decade of self-imposed isolation. Julia was left to grow up "pretty much alone with a grieving father deep in his own pain." She developed a sharp, snarky exterior to cope with the emotional neglect. She became the one who had to manage her father's life while he withered away in guilt. Her desire to act out was a cry for attention that Finn never heard.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Series</span><span class="form">Caretaker → Intervention</span></div>
+      <h3>The Intervention</h3>
+      <p>Nearly a decade after the accident, Julia makes a decision that changes everything. She <strong>forces Finn to try Awaken Online</strong> — the VRMMO created by Cerillion Entertainment. She suspects something strange is happening inside the game and knows Finn's insider knowledge of the company's technology is the key to investigating it. This intervention is the <strong>catalyst for the entire Tarot trilogy</strong>. Without Julia's push, Finn would have remained a hermit forever.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Ember (Tarot #1)</span><span class="form">New Player → Mage</span></div>
+      <h3>Entering the Inferno Together</h3>
+      <p>Julia plays alongside Finn from the very beginning. They enter the brutal <strong>Mage Guild of Lahab</strong> — a school/prison where students fight in battle royale-style duels. Julia proves herself as a capable magic user, surviving the deadly tournament alongside Finn and their new friend <strong>Kyyle</strong>. Their relationship at this point is at its worst — Finn is still consumed by his obsession with resurrecting Rachael, leaving Julia emotionally abandoned even as they fight side by side.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Flame (Tarot #2)</span><span class="form">Mage → Stripped → Resurgent</span></div>
+      <h3>The Abyss — Loss and Resilience</h3>
+      <p>Julia joins Finn on the expedition to the <strong>Abyss</strong> dungeon. At a critical moment, <strong>her mana is stripped away</strong> — a devastating blow that robs her of her magical abilities. Despite this, she continues to fight and contribute. Meanwhile, Finn begins to <strong>remember Julia's childhood</strong> and finally opens up to her as a father. Their relationship begins to heal. Julia learns <strong>new powers</strong> to replace what was lost, growing stronger through adversity.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Inferno (Tarot #3)</span><span class="form">Survivor → Warrior</span></div>
+      <h3>The Siege of Lahab</h3>
+      <p>Julia is part of the climax of the Tarot trilogy: the <strong>siege of Lahab</strong>. The guilds and Khamsin (desert rebels) form a fragile alliance to take down the corrupt city. Finn loses his left arm and suffers magical corruption. Julia fights through the chaos, witnessing her father's transformation into the <strong>Prophet of Flame</strong>. Despite everything, Julia, Finn, and Kyyle <strong>never die in-game</strong> across all three books — always escaping with exactly 1% health remaining.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Julia's journey</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="24" ry="26" fill="#f0d5b8" stroke="#c9a88c" stroke-width="1.5"/>
+          <ellipse cx="92" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <ellipse cx="108" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <path d="M90 36 Q100 30 110 36 Q108 46 100 50 Q92 46 90 36Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#a0806e" stroke-width="0.8" fill="none"/>
+          <rect x="76" y="72" rx="6" ry="6" width="48" height="56" fill="#4a4a5a" opacity="0.3" stroke="#3a3a4a" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 82" fill="#4a4a5a" opacity="0.3" stroke="#3a3a4a" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 82" fill="#4a4a5a" opacity="0.3" stroke="#3a3a4a" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="44" fill="#4a4a5a" opacity="0.3" stroke="#3a3a4a" stroke-width="1"/>
+          <rect x="82" y="172" rx="3" ry="3" width="14" height="22" fill="#4a4a5a" opacity="0.3" stroke="#3a3a4a" stroke-width="1"/>
+          <rect x="103" y="172" rx="3" ry="3" width="14" height="22" fill="#4a4a5a" opacity="0.3" stroke="#3a3a4a" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Neglected Daughter</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Real Life · Pre-Series</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real Life — The Lonely Catalyst</div>
+        <ul>
+          <li>Young, sharp, emotionally worn</li>
+          <li>Snarky exterior, lonely interior</li>
+          <li>Takes care of a father who can't see her</li>
+          <li>Desperate for connection</li>
+          <li>The one who refuses to give up on Finn</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#f43f5e" stroke-width="1.5"/>
+          <ellipse cx="92" cy="40" rx="4" ry="5" fill="#be123c" stroke="none"/>
+          <ellipse cx="108" cy="40" rx="4" ry="5" fill="#be123c" stroke="none"/>
+          <path d="M90 34 Q100 28 110 34 Q108 46 100 50 Q92 46 90 34Z" fill="#2a1518" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#f43f5e" stroke-width="1" fill="none"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="56" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <path d="M74 72 Q62 60 58 70 L70 84" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <path d="M126 72 Q138 60 142 70 L130 84" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <rect x="87" y="128" rx="4" ry="4" width="26" height="44" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <rect x="81" y="172" rx="3" ry="3" width="15" height="22" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <rect x="104" y="172" rx="3" ry="3" width="15" height="22" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <path d="M58 70 Q54 58 50 70 Q48 78 54 80" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <path d="M142 70 Q146 58 150 70 Q152 78 146 80" fill="#3a1a1e" opacity="0.5" stroke="#f43f5e" stroke-width="1"/>
+          <circle cx="100" cy="90" r="5" fill="#f43f5e" opacity="0.2"/>
+          <text x="100" y="234" text-anchor="middle" fill="#f43f5e" font-size="10" font-weight="700" letter-spacing="4">Mage of Lahab</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Ember · Early Game</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#f43f5e;color:#fb7185;">Apprentice Mage</div>
+        <ul>
+          <li>Mage robes of the Lahab guild — coral accents</li>
+          <li>Eyes sharp and observant</li>
+          <li>Carries herself with defiant confidence</li>
+          <li>Magical aura flickers with untapped potential</li>
+          <li>Fights alongside Finn in the tournament</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#ffe4e6" stroke="#fbbf24" stroke-width="1.5"/>
+          <ellipse cx="92" cy="40" rx="5" ry="6" fill="#be123c" stroke="#fbbf24" stroke-width="0.5"/>
+          <ellipse cx="108" cy="40" rx="5" ry="6" fill="#be123c" stroke="#fbbf24" stroke-width="0.5"/>
+          <path d="M89 33 Q100 26 111 33 Q109 46 100 50 Q91 46 89 33Z" fill="#2a1518" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#fbbf24" stroke-width="1" fill="none"/>
+          <rect x="72" y="74" rx="6" ry="6" width="56" height="58" fill="#2a1518" opacity="0.5" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M72 74 Q60 60 56 70 L68 84" fill="#2a1518" opacity="0.5" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M128 74 Q140 60 144 70 L132 84" fill="#2a1518" opacity="0.5" stroke="#fbbf24" stroke-width="1"/>
+          <rect x="86" y="132" rx="4" ry="4" width="28" height="42" fill="#2a1518" opacity="0.5" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M58 70 Q52 58 48 70 Q46 78 52 80" fill="#2a1518" opacity="0.5" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M142 70 Q148 58 152 70 Q154 78 148 80" fill="#2a1518" opacity="0.5" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M84 132 L78 162" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M116 132 L122 162" stroke="#fbbf24" stroke-width="1.5"/>
+          <circle cx="100" cy="92" r="7" fill="#fbbf24" opacity="0.2" stroke="#f43f5e" stroke-width="0.5"/>
+          <path d="M94 92 L100 86 L106 92 L100 98 Z" fill="#fbbf24" opacity="0.3"/>
+          <text x="100" y="236" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700" letter-spacing="3">RESURGENT</text>
+          <text x="100" y="250" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Flame · Inferno</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#fbbf24;color:#fcd34d;">Resurgent Mage</div>
+        <ul>
+          <li>Battle-worn gear — scarred and repaired</li>
+          <li>Eyes burn with renewed determination</li>
+          <li>Relearned magic after being stripped</li>
+          <li>Mana signature stronger than before</li>
+          <li>Stands as Finn's equal, not just his daughter</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Julia's magical talents</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Arcane Magic</h3>
+      <p>Julia is a capable magic user trained at the <strong>Mage Guild of Lahab</strong>. While her specific affinity is less documented than Finn's fire mastery, she demonstrates versatility in magical combat. She holds her own in the brutal battle royale-style duels of the Mage Guild and contributes significantly in the Abyss dungeon crawl and the siege of Lahab.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-coral">Mage Training</span>
+        <span class="badge badge-gold">Combat Magic</span>
+        <span class="badge badge-rose">Guild Duelist</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Resilience & Adaptability</h3>
+      <p>Julia's most defining trait. When her <strong>mana was stripped away</strong> in <strong>Flame (Tarot #2)</strong>, she didn't give up — she learned <strong>new powers</strong> to replace what was lost. This ability to adapt, rebuild, and come back stronger defines her character arc. She is the only one of Finn's group to suffer such a loss, and her recovery from it is a testament to her strength.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Adaptability</span>
+        <span class="badge badge-coral">Mana Recovery</span>
+        <span class="badge badge-amber">Growth Through Loss</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Strategic Insight</h3>
+      <p>Julia possesses a sharp, analytical mind inherited from her father. She's the one who <strong>suspected something was wrong with AO</strong> before Finn even logged in, and she convinced him to investigate. Her intelligence is often underestimated by those around her — Finn "never really sat there and saw what his brilliant daughter was capable of." She reads situations quickly and adapts her tactics on the fly.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Analytical Mind</span>
+        <span class="badge badge-cyan">Situation Reading</span>
+        <span class="badge badge-coral">Quick Adaptation</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Survivability</h3>
+      <p>Across all three books of the Tarot trilogy, Julia, Finn, and Kyyle <strong>never die in-game</strong>. They always escape with exactly 1% health remaining. This is a remarkable feat given the deadly tournaments, the Abyss dungeon, and the siege of Lahab. Whether this is skill, luck, or something unique about their connection to AO remains an open question.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-green">Zero Deaths</span>
+        <span class="badge badge-gold">1% Escapes</span>
+        <span class="badge badge-rose">Permanent Login</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Catalogued magical abilities across the Tarot trilogy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Arcane Bolt</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Basic magic projectile. Julia's go-to offensive spell during her early training at the Mage Guild. Versatile and reliable.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Mage Shield</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>A defensive magical barrier. Julia's shield is noted for being unusually resilient — reflecting her stubborn refusal to go down.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Mana Recovery (Post-Stripping)</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>After having her mana stripped in the Abyss, Julia learns to regenerate and rebuild her magical reserves from scratch. A painful but transformative process.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Combat Awareness</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Julia's sharp situational awareness in combat. She reads enemy patterns, identifies threats, and coordinates with Finn and Kyyle to survive encounters that should kill them.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Guild Duel Techniques</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Techniques learned from surviving the Mage Guild's brutal battle royale tournaments. Includes feinting, environmental usage, and pressure management.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Khamsin Alliance Tactics</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Learned during the siege preparations in Inferno. Coordinated combat techniques used by the Khamsin (desert rebels) and their allies.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory across the Tarot trilogy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Julia is a <strong>versatile mage</strong> who balances offense, defense, and utility. She invests in <strong>Intelligence</strong> (spell power, magical knowledge) and <strong>Wisdom</strong> (mana efficiency, recovery rate). Her time at the Mage Guild forced her to become a well-rounded combatant — the tournament system doesn't reward specialists. Her resilience stat is unusually high for a mage, reflecting her refusal to die.</p>
+    </div>
+    <div class="card">
+      <h3>Growth Through Crisis</h3>
+      <p>Julia's power curve is defined by her <strong>mana being stripped</strong> in <strong>Flame</strong>. Her power drops dramatically, then rebuilds to surpass its original level. This V-shaped trajectory makes her unique among the Tarot characters — she experienced a total loss of ability and had to claw her way back through sheer determination.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Allies & Companions</h2>
+  <div class="section-subtitle">Those who journey alongside Julia</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Finn Harris</h3><p>Julia's father. Their relationship is the emotional core of the Tarot trilogy. Strained at the start (Finn consumed by grief), healing in Flame as Finn remembers her childhood. By Inferno, they stand as equals — father and daughter reunited through shared struggle.</p></div>
+    <div class="card"><h3>Kyyle</h3><p>A strategist and friend from the Mage Guild. Kyyle becomes a trusted companion to both Finn and Julia. His strategic mind complements Julia's sharp instincts and Finn's analytical approach.</p></div>
+    <div class="card"><h3>Rachael (Memory)</h3><p>Julia's deceased mother. Her death is the wound that broke the family. Finn's obsessive quest to resurrect her creates tension with Julia, who just wants her father back.</p></div>
+    <div class="card"><h3>Grayson</h3><p>Julia's younger brother. Barely mentioned in the series (an "absent parent" failure on Finn's part). His existence highlights how consumed Finn was by grief — he had two children, but the narrative barely acknowledges the second.</p></div>
+    <div class="card"><h3>Lahab (Goddess of Fire)</h3><p>The fire goddess who chose Finn as her avatar. Julia interacts with her indirectly through Finn's quests. Lahab's manipulative influence is a constant presence in Julia's AO experience.</p></div>
+    <div class="card"><h3>The Khamsin</h3><p>Desert rebels who ally with Finn's group in Inferno. Julia fights alongside them during the siege of Lahab, contributing to the liberation of the city.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Key Events in the Tarot Trilogy</h2>
+  <div class="section-subtitle">Julia's role in the story of Finn and the fall of Lahab</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Ember</h3>
+      <p>Julia forces Finn into AO. They enter the Mage Guild of Lahab together. She survives the deadly tournament. Her relationship with Finn is at its lowest — he's fixated on resurrecting Rachael and doesn't see his daughter standing right next to him.</p>
+    </div>
+    <div class="card">
+      <h3>Flame</h3>
+      <p>Julia joins the Abyss expedition. Her mana is stripped — a devastating loss. But she refuses to give up, learning new powers. Finn begins to remember her childhood and opens up to her. Their relationship starts healing.</p>
+    </div>
+    <div class="card">
+      <h3>Inferno</h3>
+      <p>Julia participates in the siege of Lahab. Finn loses his arm and suffers magical corruption. The Khamsin alliance forms. Julia fights through the chaos and emerges stronger. She witnesses her father become the Prophet of Flame.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Julia's journey across the Awaken Online Tarot trilogy</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-rose">Childhood</span></div>
+      <p style="margin-top:0.5rem;">Julia grows up in the shadow of her mother's death. Finn falls into a decade of isolation. Julia becomes the caretaker, emotionally neglected. She develops a sharp, snarky exterior to cope.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Intervention</h3><span class="badge badge-coral">Catalyst</span></div>
+      <p style="margin-top:0.5rem;">Julia forces Finn to try Awaken Online. She suspects Cerillion's game hides something strange. This intervention starts the entire Tarot trilogy.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Ember</h3><span class="badge badge-amber">Tarot #1</span></div>
+      <p style="margin-top:0.5rem;">Julia and Finn enter the Mage Guild of Lahab. Survive the battle royale tournament. Relationship at its worst — Finn obsessed with resurrecting Rachael.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Flame</h3><span class="badge badge-amber">Tarot #2</span></div>
+      <p style="margin-top:0.5rem;">Abyss expedition. Julia's mana stripped. Learns new powers. Finn opens up. Their relationship begins to heal. She rebuilds herself from nothing.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Inferno</h3><span class="badge badge-amber">Tarot #3</span></div>
+      <p style="margin-top:0.5rem;">Siege of Lahab. Finn loses his arm. Julia fights in the climactic battle. Never dies in-game across all three books. Emerges as Finn's equal.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Notable Feats</h2>
+  <div class="section-subtitle">Julia's most impressive accomplishments</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Saved Her Father</h3>
+      <p>Julia pulled Finn out of a decade of grief-stricken isolation. Without her intervention, he would have wasted away in his home, consumed by guilt. She literally <strong>saved his life</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Survived the Mage Guild</h3>
+      <p>The Mage Guild of Lahab is a brutal battle royale school designed to break students. Julia, with no combat experience, <strong>survived and thrived</strong> alongside Finn and Kyyle.</p>
+    </div>
+    <div class="card">
+      <h3>Rebuilt After Mana Loss</h3>
+      <p>Having her mana stripped would have ended most mages. Julia <strong>learned new powers from scratch</strong> and came back stronger. Her resilience in the face of total loss is her defining trait.</p>
+    </div>
+    <div class="card">
+      <h3>Zero Deaths Across Three Books</h3>
+      <p>Julia, Finn, and Kyyle are the only characters in the Awaken Online universe who <strong>never die in-game</strong> across an entire trilogy. They always escape with exactly 1% health.</p>
+    </div>
+    <div class="card">
+      <h3>Fought in the Siege of Lahab</h3>
+      <p>Julia participated in the climactic battle to liberate Lahab — a city-wide siege against corrupt forces and the demon king Bilel's armies. She held her own alongside the most powerful mages in the desert.</p>
+    </div>
+    <div class="card">
+      <h3>Reunited Her Family</h3>
+      <p>By the end of the Tarot trilogy, Julia had <strong>brought her father back from the brink</strong> and restored their relationship. Finn finally saw what his brilliant daughter was capable of.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Intelligence', 'Wisdom', 'Charisma', 'Dexterity', 'Strength', 'Resilience'],
+    datasets: [
+      { label: 'Pre-AO (Real Life)', data: [12, 4, 10, 6, 4, 8], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Apprentice Mage', data: [14, 10, 12, 8, 6, 12], borderColor: '#f43f5e', backgroundColor: 'rgba(244,63,94,0.05)', pointBackgroundColor: '#f43f5e', borderWidth: 2 },
+      { label: 'Resurgent', data: [20, 16, 14, 12, 8, 22], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', pointBackgroundColor: '#fbbf24', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 28,
+        grid: { color: 'rgba(244,63,94,0.08)' },
+        angleLines: { color: 'rgba(244,63,94,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Pre-AO', 'Ember\n(Tarot #1)', 'Flame\n(Start)', 'Flame\n(End)', 'Inferno\n(Tarot #3)'],
+    datasets: [
+      { label: 'Est. Level', data: [0, 8, 15, 5, 30], borderColor: '#f43f5e', backgroundColor: 'rgba(244,63,94,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#f43f5e', borderWidth: 2 },
+      { label: 'Mana Capacity', data: [0, 20, 30, 0, 35], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#fbbf24', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Combat Skill', data: [0, 10, 18, 8, 28], borderColor: '#fda4af', backgroundColor: 'rgba(253,164,175,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#fda4af', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(244,63,94,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 40, ticks: { color: '#f43f5e', font: { size: 9 } }, grid: { color: 'rgba(244,63,94,0.06)' }, title: { display: true, text: 'Level', color: '#f43f5e', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 50, ticks: { color: '#fbbf24', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Mana', color: '#fbbf24', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#fda4af', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Combat', color: '#fda4af', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

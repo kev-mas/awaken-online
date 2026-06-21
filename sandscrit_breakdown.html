@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandscrit — City of Flame</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--fire:#ef4444;--amber:#d97706;--orange:#f97316;--gold:#f5c040;--obsidian:#0f0a0a;--sand:#e8dcc8;--ember:#78350f;--crimson:#7f1d1d;--flame:#ea580c;--glass:#fef3c7;--shadow:rgba(0,0,0,0.7);--glow:rgba(239,68,68,0.3);--lava:#b91c1c}
+body{background:var(--obsidian);color:var(--sand);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+h1,h2,h3,h4{font-family:'Cinzel',serif;font-weight:700;letter-spacing:0.05em}
+.orbitron{font-family:'Orbitron',monospace;letter-spacing:0.15em}
+.garamond{font-family:'Cormorant Garamond',serif;font-style:italic}
+::selection{background:var(--fire);color:var(--obsidian)}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--fire)}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--obsidian)}
+::-webkit-scrollbar-thumb{background:var(--ember);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--fire)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at center bottom,var(--ember) 0%,var(--obsidian) 70%);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23f97316' opacity='0.3'/%3E%3C/svg%3E") repeat;animation:dustDrift 60s linear infinite;pointer-events:none}
+@keyframes dustDrift{0%{transform:translate(0,0)}100%{transform:translate(100px,100px)}}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.particle{position:absolute;width:4px;height:4px;background:var(--fire);border-radius:50%;opacity:0;animation:rise 4s ease-out infinite}
+@keyframes rise{0%{opacity:0;transform:translateY(0) scale(0)}20%{opacity:0.8}80%{opacity:0.4}100%{opacity:0;transform:translateY(-400px) scale(1.5)}}
+.hero-flame{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(0deg,var(--fire) 0%,transparent 100%);opacity:0.08;pointer-events:none}
+.hero-title{font-size:clamp(4rem,12vw,9rem);font-weight:900;color:var(--gold);text-shadow:0 0 40px var(--glow),0 0 80px var(--glow),0 4px 8px var(--shadow);letter-spacing:0.2em;line-height:1;position:relative;z-index:1}
+.hero-title .alt-spelling{display:block;font-size:clamp(1rem,2.5vw,2rem);font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--amber);letter-spacing:0.3em;opacity:0.6;font-weight:400;margin-top:0.25rem}
+.hero-subtitle{font-size:clamp(1.2rem,3vw,2.5rem);color:var(--orange);margin-top:1rem;text-shadow:0 2px 12px var(--glow);position:relative;z-index:1}
+.hero-tagline{font-size:clamp(0.9rem,1.5vw,1.2rem);color:var(--gold);opacity:0.7;margin-top:0.75rem;font-style:italic;position:relative;z-index:1}
+.hero-stats{display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;justify-content:center;position:relative;z-index:1}
+.stat-item{text-align:center;padding:1rem 1.5rem;background:rgba(120,53,15,0.2);border:1px solid rgba(239,68,68,0.2);border-radius:0.5rem;min-width:120px;backdrop-filter:blur(4px)}
+.stat-item .label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);font-family:'Orbitron',monospace}
+.stat-item .value{font-size:1.1rem;font-weight:700;color:var(--gold);margin-top:0.25rem;font-family:'Cinzel',serif}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--amber);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;animation:bob 2s ease-in-out infinite;z-index:1;font-family:'Orbitron',monospace}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* SECTIONS */
+.section{padding:5rem 1.5rem;max-width:1200px;margin:0 auto;position:relative}
+.section-dark{background:linear-gradient(180deg,var(--obsidian) 0%,#120808 50%,var(--obsidian) 100%);border-top:1px solid rgba(239,68,68,0.1);border-bottom:1px solid rgba(239,68,68,0.1)}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-header h2{font-size:clamp(1.8rem,4vw,3rem);color:var(--gold);text-shadow:0 0 20px var(--glow);position:relative;display:inline-block}
+.section-header h2::after{content:'';display:block;width:60%;height:2px;background:linear-gradient(90deg,transparent,var(--fire),transparent);margin:0.75rem auto 0}
+.section-header p{color:var(--amber);margin-top:0.5rem;font-size:1rem}
+
+/* TIMELINE */
+.timeline{position:relative;padding:2rem 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,var(--fire),var(--gold),var(--fire),transparent);transform:translateX(-50%)}
+.timeline-item{position:relative;display:flex;align-items:flex-start;margin-bottom:2.5rem;width:100%}
+.timeline-item:nth-child(odd){flex-direction:row}
+.timeline-item:nth-child(even){flex-direction:row-reverse}
+.timeline-dot{position:absolute;left:50%;transform:translateX(-50%);width:18px;height:18px;background:var(--fire);border:3px solid var(--gold);border-radius:50%;z-index:2;box-shadow:0 0 16px var(--glow);top:0.5rem}
+.timeline-content{width:calc(50% - 3rem);padding:1.25rem 1.5rem;background:rgba(120,53,15,0.12);border:1px solid rgba(239,68,68,0.15);border-radius:0.5rem;position:relative}
+.timeline-content .era{font-size:0.7rem;font-family:'Orbitron',monospace;color:var(--fire);letter-spacing:0.1em}
+.timeline-content h3{font-size:1.1rem;color:var(--gold);margin:0.25rem 0 0.5rem}
+.timeline-content p{font-size:0.9rem;color:var(--sand);opacity:0.85;line-height:1.6}
+@media(max-width:768px){.timeline::before{left:18px}.timeline-item:nth-child(odd),.timeline-item:nth-child(even){flex-direction:row}.timeline-dot{left:18px}.timeline-content{width:calc(100% - 3rem);margin-left:3rem}}
+
+/* CITY LAYOUT GRID */
+.layout-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.layout-map{position:relative;width:100%;height:400px;grid-column:1/-1;background:radial-gradient(ellipse at 50% 60%,#1a0808 0%,var(--obsidian) 100%);border:1px solid rgba(239,68,68,0.15);border-radius:0.75rem;overflow:hidden}
+.layout-map .map-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.layout-map .map-label .city-icon{font-size:3rem}
+.layout-map .map-label .name{font-size:1.2rem;color:var(--gold);font-family:'Cinzel',serif;margin-top:0.25rem}
+.layout-map .map-label .sub{font-size:0.75rem;color:var(--amber);opacity:0.7}
+.map-district{position:absolute;padding:0.3rem 0.6rem;font-size:0.65rem;font-family:'Orbitron',monospace;color:var(--sand);background:rgba(15,10,10,0.85);border:1px solid rgba(239,68,68,0.3);border-radius:4px;white-space:nowrap;letter-spacing:0.05em}
+.district-card{background:rgba(120,53,15,0.08);border:1px solid rgba(239,68,68,0.12);border-radius:0.75rem;padding:1.5rem;transition:border-color 0.3s,box-shadow 0.3s}
+.district-card:hover{border-color:var(--fire);box-shadow:0 0 24px var(--glow)}
+.district-card .icon{font-size:1.75rem;margin-bottom:0.5rem}
+.district-card h3{font-size:1rem;color:var(--gold);margin-bottom:0.35rem}
+.district-card p{font-size:0.82rem;color:var(--sand);opacity:0.8;line-height:1.5}
+
+/* DEFENSES */
+.defenses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
+.defense-card{text-align:center;padding:2rem 1.25rem;background:rgba(120,53,15,0.08);border:1px solid rgba(239,68,68,0.12);border-radius:0.75rem;transition:all 0.3s}
+.defense-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 8px 32px var(--glow)}
+.defense-card .icon{font-size:2.5rem;margin-bottom:0.75rem}
+.defense-card h3{font-size:0.95rem;color:var(--gold);margin-bottom:0.5rem}
+.defense-card p{font-size:0.82rem;color:var(--sand);opacity:0.8;line-height:1.5}
+.defense-meter{height:6px;background:rgba(120,53,15,0.3);border-radius:3px;margin-top:0.75rem;overflow:hidden}
+.defense-meter .fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--amber),var(--fire))}
+
+/* INHABITANTS */
+.inhabitants-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
+.inhabitant-card{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:rgba(120,53,15,0.08);border:1px solid rgba(239,68,68,0.12);border-radius:0.75rem;transition:border-color 0.3s}
+.inhabitant-card:hover{border-color:var(--gold)}
+.inhabitant-avatar{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle,var(--ember),var(--obsidian));border:2px solid var(--fire);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gold)}
+.inhabitant-info h3{font-size:0.95rem;color:var(--gold)}
+.inhabitant-info .title{font-size:0.75rem;color:var(--amber);font-family:'Orbitron',monospace;letter-spacing:0.1em;margin:0.15rem 0 0.3rem}
+.inhabitant-info p{font-size:0.82rem;color:var(--sand);opacity:0.8;line-height:1.5}
+
+/* TERRITORIES */
+.territory-list{display:flex;flex-direction:column;gap:0.75rem}
+.territory-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:rgba(120,53,15,0.08);border:1px solid rgba(239,68,68,0.12);border-radius:0.5rem;transition:all 0.3s}
+.territory-item:hover{border-color:var(--orange);background:rgba(239,68,68,0.06)}
+.territory-item .icon{font-size:1.5rem;width:2rem;text-align:center}
+.territory-item .name{font-weight:600;color:var(--gold);flex:1;font-size:0.9rem}
+.territory-item .desc{font-size:0.82rem;color:var(--sand);opacity:0.8;flex:2}
+.territory-item .influence{font-size:0.75rem;font-family:'Orbitron',monospace;color:var(--orange);letter-spacing:0.1em}
+
+/* CHARTS */
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem}
+.chart-card{background:rgba(120,53,15,0.06);border:1px solid rgba(239,68,68,0.1);border-radius:0.75rem;padding:1.5rem}
+.chart-card h3{font-size:0.9rem;color:var(--gold);margin-bottom:1rem;text-align:center;letter-spacing:0.1em}
+.chart-container{position:relative;height:220px;width:100%}
+
+/* EVENTS */
+.events-list{display:flex;flex-direction:column;gap:0.6rem}
+.event-item{display:flex;gap:1rem;padding:0.9rem 1.25rem;background:rgba(120,53,15,0.06);border-left:3px solid var(--fire);border-radius:0 0.5rem 0.5rem 0;align-items:flex-start}
+.event-item .event-era{font-size:0.65rem;font-family:'Orbitron',monospace;color:var(--fire);white-space:nowrap;min-width:70px;padding-top:0.1rem;letter-spacing:0.05em}
+.event-item .event-content{flex:1}
+.event-item .event-content strong{color:var(--gold);font-size:0.9rem}
+.event-item .event-content p{font-size:0.82rem;color:var(--sand);opacity:0.8;margin-top:0.15rem;line-height:1.4}
+
+/* POWER LEVEL CHART */
+.power-timeline{display:flex;flex-direction:column;gap:0.5rem;margin-top:2rem}
+.power-era{display:flex;align-items:center;gap:1rem}
+.power-era .era-label{font-size:0.7rem;font-family:'Orbitron',monospace;color:var(--amber);min-width:90px;text-align:right}
+.power-bar-wrap{flex:1;height:28px;background:rgba(120,53,15,0.15);border-radius:4px;overflow:hidden;position:relative}
+.power-bar-wrap .bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--amber),var(--fire),var(--gold));transition:width 1.5s ease;position:relative}
+.power-bar-wrap .bar .bar-label{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:0.65rem;font-family:'Orbitron',monospace;color:var(--obsidian);font-weight:700}
+.power-era .power-level{font-size:0.7rem;font-family:'Orbitron',monospace;color:var(--gold);min-width:30px}
+
+/* GIFTS TABLE */
+.gifts-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.gifts-table th{font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;padding:0.75rem 1rem;border-bottom:1px solid rgba(239,68,68,0.2);text-align:left}
+.gifts-table td{padding:0.7rem 1rem;border-bottom:1px solid rgba(239,68,68,0.06);font-size:0.85rem;color:var(--sand)}
+.gifts-table tr:hover td{background:rgba(239,68,68,0.04)}
+.gifts-table .gift-icon{font-size:1.2rem;display:inline-block;margin-right:0.5rem}
+
+/* QUOTES */
+.quote-block{max-width:700px;margin:2rem auto 0;padding:2rem;background:rgba(120,53,15,0.08);border:1px solid rgba(239,68,68,0.12);border-radius:0.75rem;text-align:center;position:relative}
+.quote-block::before{content:'\201C';font-size:4rem;color:var(--fire);opacity:0.2;position:absolute;top:-0.5rem;left:1rem;font-family:Georgia,serif}
+.quote-block .quote-text{font-size:1.1rem;font-style:italic;color:var(--gold);line-height:1.6;font-family:'Cormorant Garamond',serif}
+.quote-block .quote-attribution{font-size:0.8rem;color:var(--amber);margin-top:0.75rem;font-family:'Orbitron',monospace;letter-spacing:0.1em}
+
+/* QUICK FACTS */
+.facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
+.fact-box{padding:1.25rem;background:rgba(120,53,15,0.06);border:1px solid rgba(239,68,68,0.08);border-radius:0.5rem;text-align:center}
+.fact-box .fact-icon{font-size:1.5rem;margin-bottom:0.5rem}
+.fact-box .fact-value{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:'Cinzel',serif}
+.fact-box .fact-label{font-size:0.7rem;color:var(--amber);margin-top:0.25rem;font-family:'Orbitron',monospace;text-transform:uppercase;letter-spacing:0.1em}
+
+/* ARCHITECTURE GALLERY */
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-top:1.5rem}
+.arch-item{padding:1.5rem;background:rgba(120,53,15,0.06);border:1px solid rgba(239,68,68,0.08);border-radius:0.5rem;text-align:center;transition:all 0.3s}
+.arch-item:hover{border-color:var(--fire);box-shadow:0 0 16px var(--glow)}
+.arch-item .arch-icon{font-size:2rem;margin-bottom:0.5rem}
+.arch-item h4{font-size:0.85rem;color:var(--gold);margin-bottom:0.3rem}
+.arch-item p{font-size:0.75rem;color:var(--sand);opacity:0.75;line-height:1.4}
+
+/* FOOTER */
+.footer{background:linear-gradient(180deg,var(--obsidian),#050303);border-top:1px solid rgba(239,68,68,0.1);padding:3rem 1.5rem;text-align:center}
+.footer .footer-title{font-size:1.5rem;color:var(--gold);font-family:'Cinzel',serif;letter-spacing:0.2em}
+.footer .footer-subtitle{font-size:0.85rem;color:var(--amber);margin-top:0.5rem;font-family:'Cormorant Garamond',serif;font-style:italic}
+.footer .footer-divider{width:60px;height:2px;background:var(--fire);margin:1.5rem auto;border-radius:1px}
+.footer .footer-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:1rem}
+.footer .footer-links a{font-size:0.8rem;color:var(--sand);opacity:0.6;transition:opacity 0.3s}
+.footer .footer-links a:hover{opacity:1;color:var(--gold)}
+.footer .copyright{font-size:0.7rem;color:var(--sand);opacity:0.4;font-family:'Orbitron',monospace;letter-spacing:0.1em}
+
+@media(max-width:600px){.hero-stats{gap:0.75rem}.stat-item{min-width:90px;padding:0.75rem}.layout-map{height:280px}.charts-grid{grid-template-columns:1fr}.territory-item{flex-wrap:wrap}.power-era .era-label{min-width:60px;font-size:0.6rem}}
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__ current" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-particles">
+    <div class="particle" style="left:5%;animation-delay:0s"></div>
+    <div class="particle" style="left:12%;animation-delay:1.2s"></div>
+    <div class="particle" style="left:20%;animation-delay:2.5s"></div>
+    <div class="particle" style="left:28%;animation-delay:0.7s"></div>
+    <div class="particle" style="left:35%;animation-delay:3.2s"></div>
+    <div class="particle" style="left:42%;animation-delay:1.8s"></div>
+    <div class="particle" style="left:50%;animation-delay:4.0s"></div>
+    <div class="particle" style="left:58%;animation-delay:0.3s"></div>
+    <div class="particle" style="left:65%;animation-delay:2.0s"></div>
+    <div class="particle" style="left:72%;animation-delay:3.7s"></div>
+    <div class="particle" style="left:80%;animation-delay:1.0s"></div>
+    <div class="particle" style="left:88%;animation-delay:2.8s"></div>
+    <div class="particle" style="left:95%;animation-delay:0.5s"></div>
+  </div>
+  <div class="hero-flame"></div>
+  <h1 class="hero-title">
+    SANDSCRIT
+    <span class="alt-spelling">also known as Sandskrit</span>
+  </h1>
+  <p class="hero-subtitle">&#128293; City of Flame &#128293;</p>
+  <p class="hero-tagline">Capital of the Fire Affinity &mdash; Forged in the Heart of the Desert</p>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="label">&#9873; Founded</div><div class="value">Early Game Era</div></div>
+    <div class="stat-item"><div class="label">&#9961; Affinity</div><div class="value">Fire</div></div>
+    <div class="stat-item"><div class="label">&#9788; Patron</div><div class="value">The Seer</div></div>
+    <div class="stat-item"><div class="label">&#9876; Status</div><div class="value">Active</div></div>
+    <div class="stat-item"><div class="label">&#9851; Era</div><div class="value">Post-Awakening</div></div>
+    <div class="stat-item"><div class="label">&#9971; Ruler</div><div class="value">Prophet Finn</div></div>
+  </div>
+  <div class="scroll-indicator">&#9650; Scroll</div>
+</section>
+
+<!-- QUICK FACTS -->
+<section class="section" id="facts">
+  <div class="section-header">
+    <h2>&#10022; City Overview</h2>
+    <p>Essential facts about the Fire Affinity capital</p>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-box"><div class="fact-icon">&#9872;</div><div class="fact-value">8 Districts</div><div class="fact-label">Major Zones</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9876;</div><div class="fact-value">6 Defense Layers</div><div class="fact-label">Fortification Rings</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9819;</div><div class="fact-value">50,000+</div><div class="fact-label">Population (Combined)</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9881;</div><div class="fact-value">Level 98</div><div class="fact-label">Current City Level</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9879;</div><div class="fact-value">Fire</div><div class="fact-label">Primary Mana Type</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9968;</div><div class="fact-value">Desert</div><div class="fact-label">Terrain Biome</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9875;</div><div class="fact-value">3 Trilogies</div><div class="fact-label">Connected Story Arcs</div></div>
+    <div class="fact-box"><div class="fact-icon">&#128293;</div><div class="fact-value">Perpetual</div><div class="fact-label">Great Brazier Flame</div></div>
+  </div>
+  <div class="quote-block">
+    <div class="quote-text">Sandscrit is not merely a city of stone and fire. It is a living testament to the will of the Seer &mdash; a flame that refused to die, even when the world forgot it.</div>
+    <div class="quote-attribution">&mdash; Finn Harris, Prophet of the Flame</div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section class="section section-dark" id="history">
+  <div class="section-header">
+    <h2>&#128293; History of Sandscrit</h2>
+    <p>The chronicle of the Fire Capital from its forging to its triumphant return</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#9873; EARLY GAME ERA</span>
+        <h3>Foundation of the Fire Capital</h3>
+        <p>Deep in the unforgiving desert, the Fire affinity capital was constructed from red sandstone and black obsidian. The Seer blessed the city with an eternal flame at the Great Brazier, and Sandscrit rose as one of the original elemental capitals — a bastion of fire, forge, and glass. Master architects designed towering spires that would glow with inner heat, and the first forges were carved into the volcanic bedrock.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#9888; ANCIENT WARS</span>
+        <h3>The Avatar Wars &amp; the Freezing</h3>
+        <p>During the ancient avatar wars, Sandscrit's flames were extinguished as the city was frozen — locked away in temporal stasis, its fiery heart encased in ice and silence. The city became legend, a whispered name among veteran players. The Seer's presence faded from the world, and the desert reclaimed the land above the frozen capital.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#9872; EVOLUTION (BOOK 3)</span>
+        <h3>Rediscovery by Players</h3>
+        <p>Sandscrit was reported going "live" in the game during the Evolution expansion. Adventurers discovered the frozen Fire Capital buried beneath the dunes, its obsidian spires still glowing with residual heat. The race to unfreeze and claim the city drew players from across the world, and the first expeditions into the ice-locked streets began.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#128293; EMBER (TAROT I)</span>
+        <h3>Finn Harris &amp; the Ember Court</h3>
+        <p>Finn Harris, a fire-affinity player with a mysterious connection to the Seer, rose through the ranks of Sandscrit. He uncovered the city's ancient power, activated the Great Brazier, and united the fractured NPC factions under the Ember Court. The city's flame returned, and Sandscrit became a living city once more.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#9829; FLAME (TAROT II)</span>
+        <h3>The Seer's Trial</h3>
+        <p>Julia Harris, Finn's sister, discovered her own fire affinity and walked the path of the Seer. Together with Finn and the fire-mage Kyyle, they defended Sandscrit from the forces of darkness and passed the Seer's trial, rekindling the city's true flame and purifying the Spire of the Seer from corruption.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#8734; INFERNO (TAROT III)</span>
+        <h3>The Prophet of the Flame</h3>
+        <p>Finn Harris became the Prophet of the Flame and the Avatar of the Seer. With his newfound power, he purged the final remnants of corruption from the Spire of the Seer and established Sandscrit as an unbreachable fortress. The city's military might reached its peak, and fire-aligned players flocked to its banner.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="era">&#9851; TIMELESS (BOOK 7)</span>
+        <h3>Return of the Ancient Avatars</h3>
+        <p>When the ancient avatars returned in the Timeless arc, Sandscrit — like the other elemental capitals — stirred from its second frozen slumber. The city's flames roared back to life as the Fire Capital took its place among the awakened powers of the world, its spires burning brighter than ever before.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" id="architecture">
+  <div class="section-header">
+    <h2>&#9872; Architecture &amp; Design</h2>
+    <p>The distinctive building styles and materials that define Sandscrit</p>
+  </div>
+  <div class="arch-grid">
+    <div class="arch-item">
+      <div class="arch-icon">&#9872;</div>
+      <h4>Obsidian Spires</h4>
+      <p>Towering black volcanic glass structures that dominate the skyline, their surfaces polished to a mirror sheen by centuries of sand and wind.</p>
+    </div>
+    <div class="arch-item">
+      <div class="arch-icon">&#9968;</div>
+      <h4>Red Sandstone Walls</h4>
+      <p>The outer walls are built from compressed red sandstone that radiates warmth. The stone glows from within as fire-mana courses through its structure.</p>
+    </div>
+    <div class="arch-item">
+      <div class="arch-icon">&#10022;</div>
+      <h4>Flame-Lit Streets</h4>
+      <p>Braziers line every thoroughfare, burning with eternal fire. The streets are paved with heat-absorbing obsidian tiles that shimmer in the firelight.</p>
+    </div>
+    <div class="arch-item">
+      <div class="arch-icon">&#9959;</div>
+      <h4>Glass Domes</h4>
+      <p>Intricate stained-glass and crystal domes cap many of the city's major buildings, filtering sunlight into colored patterns across the interior spaces.</p>
+    </div>
+    <div class="arch-item">
+      <div class="arch-icon">&#9876;</div>
+      <h4>Magma-Fed Forges</h4>
+      <p>The Crucible and surrounding forges tap directly into volcanic magma veins, reaching temperatures impossible with conventional fuels.</p>
+    </div>
+    <div class="arch-item">
+      <div class="arch-icon">&#9879;</div>
+      <h4>Emberglass Windows</h4>
+      <p>Windows crafted from solidified fire-mana-infused glass that glows softly at night, casting amber light into the streets below.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CITY LAYOUT -->
+<section class="section section-dark" id="layout">
+  <div class="section-header">
+    <h2>&#9961; City Districts &amp; Layout</h2>
+    <p>The geography of flame — Sandscrit's major districts and landmarks</p>
+  </div>
+  <div class="layout-grid">
+    <div class="layout-map">
+      <div class="map-label">
+        <div class="city-icon">&#128293;</div>
+        <div class="name">Sandscrit</div>
+        <div class="sub">Fire Affinity Capital</div>
+      </div>
+      <div class="map-district" style="top:10%;left:25%;">&#9872; Spire of the Seer</div>
+      <div class="map-district" style="top:8%;left:60%;">&#9873; Ember Court</div>
+      <div class="map-district" style="top:30%;left:8%;">&#9876; The Crucible</div>
+      <div class="map-district" style="top:33%;left:72%;">&#9959; Glass Quarter</div>
+      <div class="map-district" style="top:55%;left:10%;">&#9971; Bazaar of Embers</div>
+      <div class="map-district" style="top:58%;left:65%;">&#9785; Ash Gardens</div>
+      <div class="map-district" style="top:75%;left:20%;">&#9888; Lava Moats</div>
+      <div class="map-district" style="top:78%;left:55%;">&#9872; Garrison</div>
+      <div class="map-district" style="top:22%;left:42%;">&#10022; Great Brazier</div>
+    </div>
+
+    <div class="district-card">
+      <div class="icon">&#9872;</div>
+      <h3>The Spire of the Seer</h3>
+      <p>The towering temple at Sandscrit's heart. A spiraling structure of obsidian and flame where the Seer's presence is strongest. The inner sanctum houses the Prophet's throne and the ember that binds the city's soul. Pilgrims climb its 999 steps to pay homage.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#9873;</div>
+      <h3>The Ember Court</h3>
+      <p>The ruling district of Sandscrit. Here the Fire-affinity NPC hierarchy governs alongside the human Prophet. Court sessions are held in the Hall of Ashes, where laws are inscribed on slabs of cooled magma. Ambassadors from allied factions negotiate trade and military pacts.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#9876;</div>
+      <h3>The Crucible</h3>
+      <p>The arena and forge district — Sandscrit's beating heart. Warriors test their mettle in flame-lit combat while master smiths craft legendary weapons in the magma-fed forges. The Crucible's champions are feared across the land, and the arena draws spectators from every corner of the game.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#9959;</div>
+      <h3>The Glass Quarter</h3>
+      <p>Master artisans shape the desert sands into exquisite glasswork using fire-mana techniques. From stained-glass windows that adorn noble halls to enchanted glass armor that shimmers with inner fire, this district is the city's creative soul. The Glassmarket is a maze of dazzling stalls.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#9971;</div>
+      <h3>The Bazaar of Embers</h3>
+      <p>Sandscrit's bustling market district. Merchants hawk forged weapons, volcanic crystals, fire-mana potions, and rare glass artifacts. The air shimmers with heat and the clamor of haggling in a dozen languages. Night markets are lit by hundreds of floating flame-orbs.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#9785;</div>
+      <h3>The Ash Gardens</h3>
+      <p>A somber memorial district where the ash of fallen heroes is interred. Petrified trees stand amid silent courtyards, their branches adorned with ember-glass memorials. The flames here burn low and blue in perpetual remembrance of those who gave their lives for the city.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#9872;</div>
+      <h3>The Garrison</h3>
+      <p>The military headquarters of Sandscrit. Barracks, armories, and war councils are housed in a fortress-like complex near the eastern wall. The Garrison trains all city guardians and houses the elite Fireguard Regiment.</p>
+    </div>
+    <div class="district-card">
+      <div class="icon">&#10022;</div>
+      <h3>The Great Brazier Plaza</h3>
+      <p>The central square of Sandscrit, dominated by the Great Brazier — a perpetual flame that has burned since the city's founding. The plaza serves as a gathering point for festivals, announcements, and the daily kindling ceremony.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEFENSES -->
+<section class="section" id="defenses">
+  <div class="section-header">
+    <h2>&#9888; City Defenses</h2>
+    <p>The intricate web of flame, stone, and magic that shields the Fire Capital</p>
+  </div>
+  <div class="defenses-grid">
+    <div class="defense-card">
+      <div class="icon">&#128293;</div>
+      <h3>Flame Barriers</h3>
+      <p>Curtains of searing fire that encircle the city, rising on approach of hostile forces. These barriers are woven from pure fire-mana and can incinerate anything below a certain level threshold instantly. They are maintained by a circle of dedicated fire-mages.</p>
+      <div class="defense-meter"><div class="fill" style="width:94%"></div></div>
+    </div>
+    <div class="defense-card">
+      <div class="icon">&#9968;</div>
+      <h3>Sandstorm Walls</h3>
+      <p>Conjured walls of whirling sand and obsidian shards that surround the outer perimeter. Guided by fire-mage guardians, these storms blind and flay invading armies before they reach the inner city. The sand itself is charged with fire-mana.</p>
+      <div class="defense-meter"><div class="fill" style="width:88%"></div></div>
+    </div>
+    <div class="defense-card">
+      <div class="icon">&#9888;</div>
+      <h3>Lava Moats</h3>
+      <p>Channels of molten rock drawn from deep volcanic vents ring the city's most vulnerable approaches. The heat alone is enough to deter all but the most fire-resistant invaders, and the lava itself is deadly. Bridges of magically-hardened glass span the channels.</p>
+      <div class="defense-meter"><div class="fill" style="width:91%"></div></div>
+    </div>
+    <div class="defense-card">
+      <div class="icon">&#9822;</div>
+      <h3>Fire-Mage Guardians</h3>
+      <p>An elite cadre of fire-affinity NPC mages and player defenders who patrol the walls and towers. Each is capable of conjuring infernos, and they fight with coordinated fire-mana discipline unmatched anywhere in the game.</p>
+      <div class="defense-meter"><div class="fill" style="width:96%"></div></div>
+    </div>
+    <div class="defense-card">
+      <div class="icon">&#9876;</div>
+      <h3>Crucible Champions</h3>
+      <p>The arena's finest warriors serve as the city's ultimate defense. When Sandscrit is threatened, the Crucible's champions take the field — battle-hardened veterans whose prowess in combat is legendary. They are led by Champion Korr.</p>
+      <div class="defense-meter"><div class="fill" style="width:97%"></div></div>
+    </div>
+    <div class="defense-card">
+      <div class="icon">&#9872;</div>
+      <h3>Obsidian Fortifications</h3>
+      <p>The city's walls and towers are built from magically-reinforced obsidian that absorbs and channels fire damage. Siege weapons find their projectiles turned to molten slag before they strike. Walls are 40 feet thick at their narrowest.</p>
+      <div class="defense-meter"><div class="fill" style="width:85%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY INHABITANTS -->
+<section class="section section-dark" id="inhabitants">
+  <div class="section-header">
+    <h2>&#9813; Key Inhabitants</h2>
+    <p>The legendary figures who shaped the destiny of Sandscrit</p>
+  </div>
+  <div class="inhabitants-grid">
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9788;</div>
+      <div class="inhabitant-info">
+        <h3>The Seer</h3>
+        <div class="title">Goddess of Fire</div>
+        <p>The patron deity of the Fire affinity and the spiritual heart of Sandscrit. The Seer guides the city from her temple spire, speaking through visions and the eternal flame of the Great Brazier. Her avatar form is wreathed in white fire.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9819;</div>
+      <div class="inhabitant-info">
+        <h3>Finn Harris</h3>
+        <div class="title">Prophet of the Flame / Avatar of the Seer</div>
+        <p>The central figure of the Tarot trilogy. Finn rose from a fire-affinity player to become the living embodiment of the Seer's will. He leads Sandscrit as the first human Prophet of the Flame, wielding power over fire and fate itself.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9829;</div>
+      <div class="inhabitant-info">
+        <h3>Julia Harris</h3>
+        <div class="title">Fire Affinity Seeker</div>
+        <p>Finn's sister, who discovered her own fire affinity during the events of the Tarot trilogy. She walked the Seer's path alongside her brother and became a powerful force in Sandscrit's defense. Her bond with the Seer rivals even Finn's.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9879;</div>
+      <div class="inhabitant-info">
+        <h3>Kyyle</h3>
+        <div class="title">Master Fire-Mage of the Crucible</div>
+        <p>A gifted fire-affinity mage who accompanied Finn and Julia through the Tarot trilogy. Kyyle's mastery of flame magic was instrumental in defending Sandscrit and purifying the Spire of the Seer. He now trains the next generation of fire-mages.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9872;</div>
+      <div class="inhabitant-info">
+        <h3>Lord Ember-Voss</h3>
+        <div class="title">NPC Steward of the Ember Court</div>
+        <p>The senior NPC administrator of Sandscrit's ruling district. Lord Ember-Voss has served the city since the early game era and was instrumental in helping Finn navigate the political landscape of the Fire Capital during the Ember Court's formation.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9876;</div>
+      <div class="inhabitant-info">
+        <h3>Champion Korr</h3>
+        <div class="title">Master of the Crucible / Commander of the Garrison</div>
+        <p>The undefeated champion of the Crucible arena and the commander of Sandscrit's military forces. Korr is an NPC of immense martial skill who trains the city's guardians and leads its defenses. His tactical mind is as sharp as his blade.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9959;</div>
+      <div class="inhabitant-info">
+        <h3>Mistress Shalan</h3>
+        <div class="title">Glass Quarter Guildmaster</div>
+        <p>The master glass-artisan who leads the Glass Quarter's guild. Shalan discovered the technique of infusing glass with fire-mana during crafting, creating items of unparalleled beauty and power that are sought after across the entire game world.</p>
+      </div>
+    </div>
+    <div class="inhabitant-card">
+      <div class="inhabitant-avatar">&#9971;</div>
+      <div class="inhabitant-info">
+        <h3>Trade-Prime Vex</h3>
+        <div class="title">Bazaar of Embers Authority</div>
+        <p>The shrewd NPC who oversees the Bazaar of Embers. Trade-Prime Vex controls the flow of goods in and out of Sandscrit, negotiating trade routes across the desert and ensuring the city's economy remains robust.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERRITORIES & INFLUENCE -->
+<section class="section" id="territories">
+  <div class="section-header">
+    <h2>&#127760; Territories &amp; Influence</h2>
+    <p>The reach of Sandscrit's flame across the desert and beyond</p>
+  </div>
+  <p style="text-align:center;color:var(--amber);margin-bottom:1.5rem;font-size:0.9rem">Core territories are directly controlled by the Ember Court. Strong influence indicates active alliances or protectorates. Growing influence marks expanding frontiers.</p>
+  <div class="territory-list">
+    <div class="territory-item">
+      <span class="icon">&#9968;</span>
+      <span class="name">The Burning Dunes</span>
+      <span class="desc">The vast desert expanse surrounding Sandscrit, rich in volcanic minerals and fire-mana nodes. Sandscrit patrols these dunes rigorously.</span>
+      <span class="influence">&#10022; Core</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9971;</span>
+      <span class="name">Oasis Trade Routes</span>
+      <span class="desc">A network of desert oases connected by Sandscrit-controlled caravans, funneling goods and resources to the Fire Capital from distant lands.</span>
+      <span class="influence">&#9733; Strong</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9968;</span>
+      <span class="name">The Ash Wastes</span>
+      <span class="desc">A volcanically active region to the east where the city sources its obsidian and raw metals for forging. Dotted with mining outposts and guard towers.</span>
+      <span class="influence">&#10022; Core</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9879;</span>
+      <span class="name">Fire-Mana Conclaves</span>
+      <span class="desc">Remote towers and outposts where fire-mages train and research advanced flame magic, owing allegiance to the Spire of the Seer.</span>
+      <span class="influence">&#9733; Strong</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9876;</span>
+      <span class="name">Crucible Satellite Arenas</span>
+      <span class="desc">Smaller arena-outposts in allied towns where Sandscrit-trained champions test recruits and spread martial influence across the region.</span>
+      <span class="influence">&#9650; Growing</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9881;</span>
+      <span class="name">Volcanic Forge-Holds</span>
+      <span class="desc">Underground dwarf-forged strongholds allied with Sandscrit, supplying masterwork weapons and armor in exchange for protection and resources.</span>
+      <span class="influence">&#9733; Strong</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9832;</span>
+      <span class="name">The Ember Fleet</span>
+      <span class="desc">Fire-mana powered vessels that navigate the inland sea, projecting Sandscrit's power across the water and securing maritime trade routes.</span>
+      <span class="influence">&#9650; Growing</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9872;</span>
+      <span class="name">The Obsidian Gate</span>
+      <span class="desc">A fortress outpost guarding the primary mountain pass leading to Sandscrit. All overland trade must pass through this heavily fortified checkpoint.</span>
+      <span class="influence">&#10022; Core</span>
+    </div>
+    <div class="territory-item">
+      <span class="icon">&#9961;</span>
+      <span class="name">Scorch-Edge Encampments</span>
+      <span class="desc">Forward operating bases along the frontier of the Burning Dunes, serving as first-response points against incursions from hostile factions.</span>
+      <span class="influence">&#9650; Growing</span>
+    </div>
+  </div>
+</section>
+
+<!-- ECONOMY & TRADE -->
+<section class="section section-dark" id="economy">
+  <div class="section-header">
+    <h2>&#9881; Economy &amp; Trade</h2>
+    <p>The commercial lifeblood of the Fire Capital</p>
+  </div>
+  <table class="gifts-table">
+    <thead>
+      <tr><th>&#9971; Export</th><th>&#9879; Source</th><th>&#9733; Quality</th><th>&#127760; Destinations</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="gift-icon">&#9876;</span> Forged Weapons</td><td>The Crucible Forges</td><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td><td>All major capitals</td></tr>
+      <tr><td><span class="gift-icon">&#9959;</span> Fire-Glass Artifacts</td><td>Glass Quarter</td><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td><td>Noble houses worldwide</td></tr>
+      <tr><td><span class="gift-icon">&#9879;</span> Fire-Mana Crystals</td><td>Burning Dunes Mines</td><td>&#9733;&#9733;&#9733;&#9733;</td><td>Mage guilds, enchanters</td></tr>
+      <tr><td><span class="gift-icon">&#9881;</span> Volcanic Metals</td><td>Ash Wastes</td><td>&#9733;&#9733;&#9733;&#9733;</td><td>Blacksmiths, armorers</td></tr>
+      <tr><td><span class="gift-icon">&#9879;</span> Potions &amp; Elixirs</td><td>Alchemists' Guildhall</td><td>&#9733;&#9733;&#9733;&#9733;</td><td>Adventurers, healers</td></tr>
+      <tr><td><span class="gift-icon">&#9872;</span> Obsidian Building Materials</td><td>Quarries outside the city</td><td>&#9733;&#9733;&#9733;</td><td>Construction guilds</td></tr>
+    </tbody>
+  </table>
+  <div class="quote-block" style="margin-top:2rem">
+    <div class="quote-text">The Bazaar of Embers never sleeps. When the sun sets, the flames rise, and the real trade begins. I have seen fortunes made and lost before the first morning bell.</div>
+    <div class="quote-attribution">&mdash; Trade-Prime Vex</div>
+  </div>
+</section>
+
+<!-- CULTURE & TRADITIONS -->
+<section class="section" id="culture">
+  <div class="section-header">
+    <h2>&#10022; Culture &amp; Traditions</h2>
+    <p>The customs, festivals, and way of life in the Fire Capital</p>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-box"><div class="fact-icon">&#128293;</div><div class="fact-value">Kindling Ceremony</div><div class="fact-label">Daily dawn ritual at Great Brazier</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9876;</div><div class="fact-value">The Crucible Games</div><div class="fact-label">Quarterly arena tournament</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9788;</div><div class="fact-value">Feast of the Seer</div><div class="fact-label">Annual city-wide celebration</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9829;</div><div class="fact-value">Bonding of Flame</div><div class="fact-label">Fire-affinity marriage rite</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9752;</div><div class="fact-value">Ashen Vigil</div><div class="fact-label">Memorial day at the Ash Gardens</div></div>
+    <div class="fact-box"><div class="fact-icon">&#9851;</div><div class="fact-value">Ember Moon Festival</div><div class="fact-label">Night market under red moon</div></div>
+  </div>
+  <p style="text-align:center;color:var(--sand);opacity:0.75;margin-top:1.5rem;font-size:0.9rem;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.6">Life in Sandscrit revolves around fire. Every dawn, the city gathers at the Great Brazier for the Kindling Ceremony — a moment of unity where the flames are blessed by the Prophet or his representatives. The Crucible Games draw competitors from across the realm, while the Feast of the Seer fills the streets with music, dance, and the glow of a million floating embers. The people of Sandscrit are hardy, proud, and deeply spiritual, their culture forged by centuries of flame and sand.</p>
+  <div class="quote-block" style="margin-top:1.5rem">
+    <div class="quote-text">Here, the fire does not consume — it purifies. Every flame in Sandscrit is a prayer, every ember a memory, every spark a promise to the Seer that we will endure.</div>
+    <div class="quote-attribution">&mdash; Traditional Sandscrit saying</div>
+  </div>
+</section>
+
+<!-- EVOLUTION CHARTS -->
+<section class="section section-dark" id="evolution">
+  <div class="section-header">
+    <h2>&#9851; Evolution of Power</h2>
+    <p>Statistical growth of Sandscrit through the ages — measured across key metrics</p>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3>&#9876; Military Strength</h3>
+      <div class="chart-container"><canvas id="militaryChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>&#127760; Territorial Control</h3>
+      <div class="chart-container"><canvas id="territorialChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>&#9961; Population Growth</h3>
+      <div class="chart-container"><canvas id="populationChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>&#9881; Economic Output</h3>
+      <div class="chart-container"><canvas id="economyChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-top:3rem">
+    <h2>&#9872; Power Level Timeline</h2>
+    <p>Overall city power rating through the eras (city level equivalent)</p>
+  </div>
+  <div class="power-timeline">
+    <div class="power-era">
+      <span class="era-label">Foundation</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:30%"><span class="bar-label">30</span></div></div>
+      <span class="power-level">Lv 30</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Avatar Wars</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:65%"><span class="bar-label">65</span></div></div>
+      <span class="power-level">Lv 65</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Frozen</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:5%"><span class="bar-label">5</span></div></div>
+      <span class="power-level">Lv 5</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Rediscovery</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:40%"><span class="bar-label">40</span></div></div>
+      <span class="power-level">Lv 40</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Ember Era</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:60%"><span class="bar-label">60</span></div></div>
+      <span class="power-level">Lv 60</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Flame Era</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:78%"><span class="bar-label">78</span></div></div>
+      <span class="power-level">Lv 78</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Inferno / Prophet</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:92%"><span class="bar-label">92</span></div></div>
+      <span class="power-level">Lv 92</span>
+    </div>
+    <div class="power-era">
+      <span class="era-label">Timeless Return</span>
+      <div class="power-bar-wrap"><div class="bar" style="width:98%"><span class="bar-label">98</span></div></div>
+      <span class="power-level">Lv 98</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAJOR EVENTS -->
+<section class="section section-dark" id="events">
+  <div class="section-header">
+    <h2>&#9872; Major Events</h2>
+    <p>Key moments in the history of the Fire Capital, chronicled across the ages</p>
+  </div>
+  <div class="events-list">
+    <div class="event-item">
+      <span class="event-era">&#9873; FOUND</span>
+      <div class="event-content">
+        <strong>Construction of Sandscrit</strong>
+        <p>The Fire affinity capital is built deep in the desert by master builders and fire-mages. The Seer blesses the Great Brazier with an eternal flame, anchoring the city's power. The first obsidian spires rise from the sands.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9876; WAR</span>
+      <div class="event-content">
+        <strong>The Avatar Wars</strong>
+        <p>Sandscrit is frozen during the ancient avatar wars — locked in temporal stasis, its flames extinguished, the city lost to legend for ages. The Seer's presence fades from the world.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9872; EVOL</span>
+      <div class="event-content">
+        <strong>Rediscovery in Evolution</strong>
+        <p>Players discover the frozen Fire Capital buried beneath the dunes during the Evolution expansion. The race to unfreeze and claim Sandscrit begins, drawing hundreds of adventurers.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#127760; EXPL</span>
+      <div class="event-content">
+        <strong>First Expeditions into the Frozen City</strong>
+        <p>Player-led expeditions breach the ice-locked gates of Sandscrit. They find perfectly preserved streets, frozen flame-braziers, and the silent Spire of the Seer waiting to be reawakened.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#128293; EMBER</span>
+      <div class="event-content">
+        <strong>Activation of the Great Brazier</strong>
+        <p>Finn Harris rekindles the Great Brazier, restoring the city's flame. The Ember Court is established, uniting the NPC factions. Sandscrit awakens from its frozen slumber and becomes a living city once more.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9829; FLAME</span>
+      <div class="event-content">
+        <strong>The Seer's Trial</strong>
+        <p>Finn, Julia, and Kyyle pass the Seer's trial, purifying the Spire of the Seer from ancient corruption. Sandscrit's full power returns, and the city becomes a major faction in the game world.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9876; CRU</span>
+      <div class="event-content">
+        <strong>The Crucible Tournament</strong>
+        <p>The first grand Crucible tournament is held in the newly restored arena. Champions from across the world compete, and Sandscrit's military reputation is cemented as its home champions prevail.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#8734; INF</span>
+      <div class="event-content">
+        <strong>Prophecy of the Flame</strong>
+        <p>Finn is elevated to Prophet of the Flame and Avatar of the Seer. Sandscrit becomes his seat of power, uniting all fire-aligned factions under a single banner for the first time in history.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9881; TRADE</span>
+      <div class="event-content">
+        <strong>Establishment of the Ember Fleet</strong>
+        <p>Sandscrit launches its first naval vessels powered by fire-mana engines, opening maritime trade routes and projecting the city's power across the inland sea for the first time.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9851; TIME</span>
+      <div class="event-content">
+        <strong>Return of the Ancient Avatars</strong>
+        <p>In the Timeless arc, the ancient avatars return and Sandscrit stirs once more from its second slumber. The Fire Capital's flames roar back to life, more powerful than ever before.</p>
+      </div>
+    </div>
+    <div class="event-item">
+      <span class="event-era">&#9851; POST</span>
+      <div class="event-content">
+        <strong>Sandscrit in the Awakened Era</strong>
+        <p>With the ancient avatars restored and the elemental capitals reunited, Sandscrit stands as one of the great powers of the new age. The Prophet of the Flame rules from the Spire of the Seer, and the city's influence continues to expand across the desert and beyond.</p>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;color:var(--amber);opacity:0.5;font-size:0.75rem;margin-top:1rem;font-family:'Orbitron',monospace;letter-spacing:0.1em">Total recorded events: 11 &mdash; spanning from Foundation to the Post-Awakened Era</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-title">&#128293; SANDSCRIT &#128293;</div>
+  <div class="footer-subtitle">Capital of the Fire Affinity &mdash; Awaken Online Universe</div>
+  <div class="footer-divider"></div>
+  <div class="footer-links">
+    <a href="#top">&#9872; Top</a>
+    <a href="#facts">&#10022; Overview</a>
+    <a href="#history">&#9851; History</a>
+    <a href="#architecture">&#9872; Architecture</a>
+    <a href="#layout">&#9961; Districts</a>
+    <a href="#defenses">&#9888; Defenses</a>
+    <a href="#inhabitants">&#9813; Inhabitants</a>
+    <a href="#territories">&#127760; Territories</a>
+    <a href="#economy">&#9881; Economy</a>
+    <a href="#evolution">&#9879; Evolution</a>
+    <a href="#events">&#9872; Events</a>
+  </div>
+  <div class="copyright">&#9873; Fan Resource &mdash; Awaken Online by Travis Bagwell &mdash; Sandscrit / Sandskrit &mdash; Fire Affinity Capital</div>
+  <div style="font-size:0.65rem;color:var(--sand);opacity:0.25;margin-top:0.75rem;font-family:'Orbitron',monospace">Built with &#128293; for the Awaken Online community</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const chartOptions = {
+    responsive:true, maintainAspectRatio:false,
+    color:'#e8dcc8', borderColor:'rgba(239,68,68,0.2)',
+    plugins:{legend:{labels:{color:'#f5c040',font:{family:'Cinzel',size:10}}}}
+  };
+  const defaultDatasetOpts = {
+    fill:true, tension:0.4, pointBackgroundColor:'#f5c040',
+    pointBorderColor:'#ef4444', pointRadius:3,
+    borderWidth:2
+  };
+
+  new Chart(document.getElementById('militaryChart'),{
+    type:'radar',
+    data:{
+      labels:['Warriors','Fire-Mages','Defenses','Siege','Scouts','Champions'],
+      datasets:[{
+        label:'Foundation Era',data:[20,15,25,10,18,12],
+        ...defaultDatasetOpts,backgroundColor:'rgba(120,53,15,0.2)',borderColor:'#78350f'
+      },{
+        label:'Post-Tarot',data:[88,82,94,76,70,97],
+        ...defaultDatasetOpts,backgroundColor:'rgba(239,68,68,0.15)',borderColor:'#ef4444'
+      },{
+        label:'Timeless Return',data:[96,92,98,88,85,99],
+        ...defaultDatasetOpts,backgroundColor:'rgba(245,192,64,0.1)',borderColor:'#f5c040'
+      }]
+    },
+    options:{...chartOptions,scales:{r:{beginAtZero:true,max:100,grid:{color:'rgba(239,68,68,0.1)'},angleLines:{color:'rgba(239,68,68,0.1)'},pointLabels:{color:'#e8dcc8',font:{family:'Inter',size:10}}}}}
+  });
+
+  new Chart(document.getElementById('territorialChart'),{
+    type:'radar',
+    data:{
+      labels:['Burning Dunes','Ash Wastes','Oasis Routes','Trade Network','Forge-Holds','Conclaves'],
+      datasets:[{
+        label:'Foundation Era',data:[30,25,20,15,10,18],
+        ...defaultDatasetOpts,backgroundColor:'rgba(120,53,15,0.2)',borderColor:'#78350f'
+      },{
+        label:'Post-Tarot',data:[90,85,78,82,70,88],
+        ...defaultDatasetOpts,backgroundColor:'rgba(239,68,68,0.15)',borderColor:'#ef4444'
+      },{
+        label:'Timeless Return',data:[95,92,85,90,80,94],
+        ...defaultDatasetOpts,backgroundColor:'rgba(245,192,64,0.1)',borderColor:'#f5c040'
+      }]
+    },
+    options:{...chartOptions,scales:{r:{beginAtZero:true,max:100,grid:{color:'rgba(239,68,68,0.1)'},angleLines:{color:'rgba(239,68,68,0.1)'},pointLabels:{color:'#e8dcc8',font:{family:'Inter',size:10}}}}}
+  });
+
+  new Chart(document.getElementById('populationChart'),{
+    type:'line',
+    data:{
+      labels:['Foundation','Avatar Wars','Frozen','Rediscovery','Ember','Flame','Inferno','Timeless'],
+      datasets:[{
+        label:'NPC Population (thousands)',data:[8,15,0.5,6,18,28,35,42],
+        ...defaultDatasetOpts,borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.15)'
+      },{
+        label:'Player Population',data:[3,5,0,8,22,35,50,68],
+        ...defaultDatasetOpts,borderColor:'#f5c040',backgroundColor:'rgba(245,192,64,0.1)'
+      }]
+    },
+    options:{...chartOptions,scales:{x:{grid:{color:'rgba(239,68,68,0.05)'},ticks:{color:'#e8dcc8',font:{size:9}}},y:{beginAtZero:true,grid:{color:'rgba(239,68,68,0.1)'},ticks:{color:'#e8dcc8',font:{size:9}}}}}
+  });
+
+  new Chart(document.getElementById('economyChart'),{
+    type:'line',
+    data:{
+      labels:['Foundation','Avatar Wars','Frozen','Rediscovery','Ember','Flame','Inferno','Timeless'],
+      datasets:[{
+        label:'Gold Reserve (thousands)',data:[12,25,0.2,15,40,65,90,120],
+        ...defaultDatasetOpts,borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.15)'
+      },{
+        label:'Monthly Trade Volume',data:[8,18,0,10,32,55,78,105],
+        ...defaultDatasetOpts,borderColor:'#d97706',backgroundColor:'rgba(217,119,6,0.1)'
+      },{
+        label:'Crafting Output',data:[5,12,0,8,28,48,70,95],
+        ...defaultDatasetOpts,borderColor:'#f5c040',backgroundColor:'rgba(245,192,64,0.08)'
+      }]
+    },
+    options:{...chartOptions,scales:{x:{grid:{color:'rgba(239,68,68,0.05)'},ticks:{color:'#e8dcc8',font:{size:9}}},y:{beginAtZero:true,grid:{color:'rgba(239,68,68,0.1)'},ticks:{color:'#e8dcc8',font:{size:9}}}}}
+  });
+});
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

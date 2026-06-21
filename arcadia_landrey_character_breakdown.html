@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcadia Landrey — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0f0f0a;
+    --dark2: #1a1612;
+    --dark3: #1e1b14;
+    --dark4: #2a2518;
+    --earth: #78716c;
+    --earth-light: #a8a29e;
+    --green-dark: #14532d;
+    --green: #22c55e;
+    --green-glow: #4ade80;
+    --green-dim: #166534;
+    --amber: #f59e0b;
+    --amber-dim: #d97706;
+    --gold: #fbbf24;
+    --gold-glow: #fcd34d;
+    --brown: #78350f;
+    --brown-light: #92400e;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --orange: #f97316;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #14100b 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15,15,10,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(34,197,94,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--green); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--green); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(34,197,94,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(245,158,11,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(251,191,36,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 850px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--green) 50%, var(--amber) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 700px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.earth { border-color: var(--green-dark); color: var(--green); }
+  .tags.time { border-color: var(--amber-dim); color: var(--amber); }
+  .tags.avatar { border-color: var(--gold); color: var(--gold); }
+  .tags.ancient { border-color: var(--brown); color: var(--brown-light); }
+  .tags.consultant { border-color: var(--earth); color: var(--earth-light); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--green), var(--amber));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(26,22,18,0.8); border: 1px solid rgba(34,197,94,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(34,197,94,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--green); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--green); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--green), var(--amber), var(--gold));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--green);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--amber); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--green); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(26,22,18,0.8); border: 1px solid rgba(34,197,94,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(34,197,94,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--green); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(26,22,18,0.6); border: 1px solid rgba(34,197,94,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--green); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(26,22,18,0.8); border: 1px solid rgba(34,197,94,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(34,197,94,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(34,197,94,0.15); color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-earth { background: rgba(120,113,108,0.15); color: var(--earth-light); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(26,22,18,0.6); border: 1px solid rgba(34,197,94,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(34,197,94,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__ current" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>ARCADIA LANDREY</h1>
+    <div class="subtitle">Cady · The Earth Avatar · The Timeless One</div>
+    <p class="tagline">A cutthroat management consultant pulled into a world of gods and time travel by a family tragedy — the complete breakdown of the Earth Avatar, the ancient power who holds the key to the past, present, and future of Awaken Online.</p>
+    <div class="tags">
+      <span class="tags earth">Earth Avatar</span>
+      <span class="tags time">Time Magic</span>
+      <span class="tags avatar">Ancient Avatar</span>
+      <span class="tags ancient">Frozen Account</span>
+      <span class="tags consultant">Former Consultant</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">2</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">2</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Class Path</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">City Brought Forward</div></div>
+    <div class="stat-box"><div class="number">Earth</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Time</div><div class="label">Mana System</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Full Name:</strong> Arcadia "Cady" Landrey</li>
+        <li><strong>Age:</strong> Adult (established professional, older than Jason Rhodes)</li>
+        <li><strong>Occupation:</strong> High-powered management consultant with an MBA</li>
+        <li><strong>Personality:</strong> Controlled, calculating, cynical, secretive, master manipulator in business. Suppresses emotion professionally. Driven by guilt and a desire to fix what's broken.</li>
+        <li><strong>Background:</strong> A shark in the boardroom. Master saleswoman who knows how to read a room and manipulate executives. Her professor taught her: "Don't make sales, make customers — making a sale wasn't about selling a product. It was about telling a story."</li>
+        <li><strong>Family Tragedy:</strong> Her younger sister <strong>Tara</strong> was in a catastrophic car accident that left her a "hollow, still-breathing husk" on life support. Cady was estranged from her family but rushed to the hospital when her mother called. Doctors told her Tara could remain on life support indefinitely.</li>
+        <li><strong>Recruitment:</strong> While at the hospital, attorney <strong>Francis Rosencrantz</strong> approached her with a mysterious job opportunity — the hook that led her into Cerillion Entertainment's orbit and, ultimately, into Awaken Online.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Arcadia (or Cady)</li>
+        <li><strong>Class Path:</strong> Earth Avatar — Time Magic specialist</li>
+        <li><strong>Affinity:</strong> Earth — Time / Memory / Foundation</li>
+        <li><strong>Alignment:</strong> Lawful Neutral</li>
+        <li><strong>Status:</strong> Ancient Avatar — account frozen in the game's past, then unfrozen by Gloria Bastion's cataclysm</li>
+        <li><strong>God:</strong> Avatar of the Earth God (name unknown)</li>
+        <li><strong>Titles:</strong> The Earth Avatar, The Timeless One, Cady</li>
+        <li><strong>Unique Mechanic:</strong> Her powers are tied to <strong>Time</strong> rather than traditional mana. She can manipulate time loops, temporal acceleration, and even take people back to the game's past.</li>
+        <li><strong>Starting Era:</strong> One of the original avatars from AO's early days — before the main series timeline.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Cady's journey from a boardroom shark to a time-bending ancient avatar</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Series (Feb 2076)</span><span class="form">Consultant → Recruit</span></div>
+      <h3>The Pitch</h3>
+      <p>Cady is a high-powered management consultant pitching to Sinclair Logistics. She's a master of reading rooms and manipulating executives. Her sister Tara's catastrophic car accident shatters her world. At the hospital, attorney <strong>Francis Rosencrantz</strong> approaches her with a mysterious job offer — the first thread pulling her toward Cerillion Entertainment and Awaken Online.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Main Series</span><span class="form">Recruit → Earth Avatar</span></div>
+      <h3>Becoming the Earth Avatar</h3>
+      <p>Cady enters Awaken Online and is chosen by the <strong>Earth God</strong> to become an Avatar. She plays during the game's early era — before Jason, before the Twilight Throne, before any of the events of the main series. She establishes herself, her city, and her power base in the savage, fresh game world. Her account is eventually <strong>frozen</strong>, preserved in the game's code as one of the "ancient avatars."</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Timeless (Book 7)</span><span class="form">Frozen → Unfrozen</span></div>
+      <h3>The Cataclysm — Unfrozen</h3>
+      <p><strong>Gloria Bastion's</strong> attempt to destroy the game world has catastrophic consequences: it brings the <strong>original avatars forward in time</strong>, along with their cities and armies. Cady's frozen account is unfrozen. She emerges into a world centuries (in-game) advanced from her own era. Jason and his allies are besieged, with nowhere to go. Cady is uniquely positioned to help — but on her own terms.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Timeless (Book 7)</span><span class="form">Stranger → Reluctant Ally</span></div>
+      <h3>Teaming Up with Jason</h3>
+      <p>Cady approaches Jason with a proposal: use her <strong>time-based abilities</strong> to travel back to the game's savage past, before the cataclysm. The early dynamic is tense — Cady is secretive and refuses to answer Jason's questions, leading to friction. But as the journey progresses, they bond. Reviewers note powerful chemistry between them (the author intended a big-sister dynamic). Together, they uncover the <strong>origin of the in-game gods</strong> and the true history of AO.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Crucible (Book 8)</span><span class="form">Ally → Key Asset</span></div>
+      <h3>The Relics & The Heist</h3>
+      <p>Jason steals relics from the ancient avatars — likely including objects tied to Cady's era. She continues as a key ally. The ancient avatars and their armies remain a threat, but Cady's knowledge of the past proves invaluable. The book culminates in a massive heist and a cliffhanger ending that sets up the series' final confrontation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Cady's journey</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#c9a88c" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <path d="M90 34 Q100 28 110 34 Q108 46 100 50 Q92 46 90 34Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 44 Q100 48 108 44" stroke="#a0806e" stroke-width="0.8" fill="none"/>
+          <rect x="74" y="72" rx="4" ry="4" width="52" height="58" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <path d="M74 72 Q64 60 60 68 L72 82" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <path d="M126 72 Q136 60 140 68 L128 82" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <rect x="88" y="130" rx="4" ry="4" width="24" height="44" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <rect x="82" y="174" rx="3" ry="3" width="14" height="22" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <rect x="103" y="174" rx="3" ry="3" width="14" height="22" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <path d="M60 68 Q56 60 52 68 Q50 74 56 76" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <path d="M140 68 Q144 60 148 68 Q150 74 144 76" fill="#374151" opacity="0.3" stroke="#4b5563" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">The Consultant</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Real Life · Pre-Series</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real Life — Boardroom Shark</div>
+        <ul>
+          <li>Sharp business attire, power suits</li>
+          <li>Controlled, professional demeanor</li>
+          <li>Cold, calculating gaze</li>
+          <li>MBA-trained, master of manipulation</li>
+          <li>Beneath the surface: guilt and grief</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#22c55e" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#14532d" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#14532d" stroke="none"/>
+          <path d="M90 34 Q100 28 110 34 Q108 46 100 50 Q92 46 90 34Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 44 Q100 48 108 44" stroke="#22c55e" stroke-width="0.8" fill="none"/>
+          <rect x="74" y="72" rx="6" ry="6" width="52" height="56" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <path d="M74 72 Q64 60 60 68 L72 82" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <path d="M126 72 Q136 60 140 68 L128 82" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="44" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <rect x="82" y="172" rx="3" ry="3" width="14" height="22" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <rect x="103" y="172" rx="3" ry="3" width="14" height="22" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <path d="M60 68 Q56 58 52 68 Q50 76 56 78" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <path d="M140 68 Q144 58 148 68 Q150 76 144 78" fill="#14532d" opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+          <circle cx="100" cy="90" r="6" fill="#22c55e" opacity="0.2"/>
+          <path d="M94 90 Q100 84 106 90" stroke="#22c55e" stroke-width="1" fill="none" opacity="0.4"/>
+          <text x="100" y="234" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="700" letter-spacing="3">Frozen Avatar</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Original Era · Frozen</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#22c55e;color:#4ade80;">Ancient Avatar — Frozen in Time</div>
+        <ul>
+          <li>Robes of earth tones and green</li>
+          <li>Eyes glow with subtle amber light</li>
+          <li>Earth and stone respond to her presence</li>
+          <li>Preserved in stasis for centuries (in-game)</li>
+          <li>Emerges confused but calculating</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="5" ry="6" fill="#78350f" stroke="#fbbf24" stroke-width="0.5"/>
+          <ellipse cx="109" cy="40" rx="5" ry="6" fill="#78350f" stroke="#fbbf24" stroke-width="0.5"/>
+          <path d="M88 32 Q100 24 112 32 Q110 46 100 50 Q90 46 88 32Z" fill="#1e1b14" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#f59e0b" stroke-width="1" fill="none"/>
+          <path d="M93 20 Q96 12 100 12 Q104 12 107 20" stroke="#fbbf24" stroke-width="2" fill="none"/>
+          <rect x="72" y="74" rx="6" ry="6" width="56" height="58" fill="#1e1b14" opacity="0.6" stroke="#f59e0b" stroke-width="1"/>
+          <path d="M72 74 Q60 60 56 70 L68 84" fill="#1e1b14" opacity="0.6" stroke="#f59e0b" stroke-width="1"/>
+          <path d="M128 74 Q140 60 144 70 L132 84" fill="#1e1b14" opacity="0.6" stroke="#f59e0b" stroke-width="1"/>
+          <rect x="86" y="132" rx="4" ry="4" width="28" height="44" fill="#1e1b14" opacity="0.6" stroke="#f59e0b" stroke-width="1"/>
+          <path d="M58 70 Q52 58 48 70 Q46 78 52 80" fill="#1e1b14" opacity="0.6" stroke="#f59e0b" stroke-width="1"/>
+          <path d="M142 70 Q148 58 152 70 Q154 78 148 80" fill="#1e1b14" opacity="0.6" stroke="#f59e0b" stroke-width="1"/>
+          <path d="M84 132 L78 164" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M116 132 L122 164" stroke="#f59e0b" stroke-width="1.5"/>
+          <circle cx="100" cy="92" r="10" fill="#f59e0b" opacity="0.2" stroke="#fbbf24" stroke-width="0.8"/>
+          <circle cx="100" cy="92" r="4" fill="#fbbf24" opacity="0.5"/>
+          <path d="M100 82 L100 102" stroke="#fbbf24" stroke-width="1" opacity="0.5" stroke-dasharray="2 2"/>
+          <path d="M90 92 L110 92" stroke="#fbbf24" stroke-width="1" opacity="0.5" stroke-dasharray="2 2"/>
+          <text x="100" y="238" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="700" letter-spacing="3">TIMELESS</text>
+          <text x="100" y="252" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Earth Avatar Unfrozen</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#f59e0b;color:#fbbf24;">Timeless — The Earth Avatar</div>
+        <ul>
+          <li>Earth-toned robes with amber/gold accents</li>
+          <li>Hourglass or clock motif on her gear</li>
+          <li>Eyes burn with temporal amber light</li>
+          <li>Aura of age and wisdom</li>
+          <li>Time visibly bends around her</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Cady's time-bending arsenal</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Time Magic (Mana Replacement)</h3>
+      <p>As the Earth Avatar, Cady's powers are tied to <strong>Time</strong> rather than traditional mana. This unique mechanic replaces the conventional magic system with temporal manipulation. She can accelerate, decelerate, loop, and rewind time within localized areas. The full extent of her temporal powers includes <strong>time loops, time travel, temporal acceleration, and localized time stasis</strong>.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-amber">Time Mana</span>
+        <span class="badge badge-gold">Time Loops</span>
+        <span class="badge badge-green">Temporal Acceleration</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Temporal Travel (The Past)</h3>
+      <p>Cady's signature ability: she can take herself and others <strong>back in time</strong> to the game's past — to the era when the original avatars were active. In <strong>Timeless (Book 7)</strong>, she takes Jason back to the savage, fresh game world before the main series events. This allows them to uncover the <strong>origin of the in-game gods</strong> and seek solutions to the present-day cataclysm.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Time Travel</span>
+        <span class="badge badge-amber">Past Forward</span>
+        <span class="badge badge-green">Origin Discovery</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Earth Affinity Magic</h3>
+      <p>As the Earth Avatar, Cady commands the element of <strong>Earth</strong> — associated with <strong>Foundation, Memory, and Time</strong>. Her earth magic is typically broad in scope, reflecting the stable, patient nature of the element. She can manipulate stone, soil, and terrain, creating barriers, reshaping landscapes, and drawing on the "memory" of the earth itself.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-earth">Terrain Manipulation</span>
+        <span class="badge badge-green">Stone Barriers</span>
+        <span class="badge badge-gold">Earth Memory</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Ancient Knowledge</h3>
+      <p>As one of the original avatars from AO's early days, Cady possesses <strong>knowledge of the game's true history</strong> that no modern player has access to. She knows the <strong>origin of the in-game gods</strong>, the ancient conflicts, and the secrets buried in the game's code. This knowledge is a weapon more powerful than any spell — and she guards it carefully.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Origin Knowledge</span>
+        <span class="badge badge-amber">God Lore</span>
+        <span class="badge badge-earth">Ancient Secrets</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Strategic Mind</h3>
+      <p>Before becoming an Avatar, Cady was a high-powered management consultant and master negotiator. She reads people, manipulates situations, and plans multiple moves ahead. Her strategic approach complements and sometimes clashes with Jason's tactical cunning. She is patient, methodical, and always has an angle.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-earth">Negotiation</span>
+        <span class="badge badge-amber">Strategic Planning</span>
+        <span class="badge badge-green">People Reading</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Frozen Account Resilience</h3>
+      <p>Cady's account was frozen in the game's code for what felt like ages. When Gloria Bastion's cataclysm unfroze her, she retained all her original power but had to adapt to the modern game world. This unique status means she exists slightly "out of sync" with normal reality — a side effect that may contribute to her temporal abilities.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Out of Sync</span>
+        <span class="badge badge-amber">Preserved Power</span>
+        <span class="badge badge-red">Cataclysm Survivor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Catalogued temporal and earth abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Temporal Rift</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Opens a rift in time that allows Cady and her allies to travel to the game's past. The primary ability used in Timeless. Requires immense concentration and a stable anchor point in history.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Time Loop</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Encases a localized area in a time loop, causing events to repeat until the loop is broken. Useful for training, reconnaissance, and psychological warfare.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Temporal Acceleration</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Speeds up Cady's personal time stream, allowing her to move and react faster than normal perception. Similar to Finn's Haste but derived from time magic rather than perception enhancement.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Earth Spire</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Raises a spire of stone from the ground. Basic earth magic. Can be used for offense, defense, or terrain shaping.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Stone Barrier</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Creates a wall of compacted stone. Durable and reliable. Can be maintained indefinitely as long as Cady feeds it temporal energy.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Memory of the Earth</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Draws on the earth's memory to reveal past events that occurred in a location. Allows Cady to see historical events as if they were happening before her. Used for uncovering ancient secrets.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Time Stasis</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Freezes a target or area in time temporarily. Victims are fully aware but unable to move. The duration depends on the target's resistance and Cady's power level.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Temporal Anchor</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Creates a fixed point in time that Cady can return to later. Allows her to "save" a location and time coordinate for future temporal travel.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Earthquake</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Shakes the ground in a wide radius, toppling enemies and structures. Combines earth manipulation with temporal vibration for enhanced effect.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Paradox Ward</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>A defensive temporal field that protects Cady from the negative effects of time manipulation — paradox backlash, temporal fragmentation, and timeline corruption. Essential for a time mage's safety.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Cady is a <strong>time mage and earth specialist</strong> — a unique hybrid that replaces the traditional mana system with temporal energy. She invests in <strong>Intelligence</strong> (temporal precision, spell complexity), <strong>Wisdom</strong> (temporal energy regeneration), and <strong>Charisma</strong> (negotiation, manipulation). Her earth magic provides durability while her time magic provides utility and battlefield control.</p>
+    </div>
+    <div class="card">
+      <h3>Power Trajectory</h3>
+      <p>Unlike most characters who grow linearly, Cady's power was <strong>frozen at its peak</strong> and then unfrozen into a world that had advanced past her. She didn't grow weaker during her stasis — rather, the world grew different. Her journey in Timeless involves learning to apply her ancient abilities to modern problems while uncovering secrets that even she didn't know.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Allies & Associates</h2>
+  <div class="section-subtitle">Those who cross paths with the Earth Avatar</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Jason Rhodes</h3><p>The Dark Lord and Cady's primary partner in Timeless. Their dynamic is tense then cooperative. Reviewers note powerful chemistry. Author intended a big-sister dynamic. They uncover the origin of the gods together.</p></div>
+    <div class="card"><h3>Tara Landrey</h3><p>Cady's younger sister. Catastrophic car accident left her brain-dead on life support. This tragedy is Cady's core motivation and emotional wound. Everything she does is, in some way, for Tara.</p></div>
+    <div class="card"><h3>Francis Rosencrantz</h3><p>The attorney who recruited Cady at the hospital. A recurring figure in the series who connects people to Cerillion Entertainment. He was the catalyst for Cady entering the AO world.</p></div>
+    <div class="card"><h3>Bran Sinclair</h3><p>CEO of Sinclair Logistics. Cady was pitching to him in the prologue (Feb 2076). Represents her professional life before everything changed.</p></div>
+    <div class="card"><h3>Gloria Bastion</h3><p>The antagonist whose actions unfroze Cady. Gloria's attempt to destroy the game world caused the cataclysm that brought the ancient avatars forward in time. Cady's emergence is directly tied to Gloria's actions.</p></div>
+    <div class="card"><h3>Earth God</h3><p>The deity who chose Cady as an Avatar. Patron of the Earth Affinity. His name is not yet revealed in available sources. His domain includes Foundation, Memory, and Time.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Key Artifacts & Items</h2>
+  <div class="section-subtitle">Powerful objects tied to Cady and her era</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Temporal Anchor Point</h3>
+      <p>A fixed location or object that Cady uses to stabilize her time travel. Without an anchor, temporal rifts are unstable and dangerous. Her anchor is tied to her original era — the game's past.</p>
+    </div>
+    <div class="card">
+      <h3>Relic of the Earth Avatar</h3>
+      <p>One of the relics Jason steals in Crucible. Tied to Cady's power as the Earth Avatar. These ancient artifacts contain immense temporal and earth energy but require sacrifice to unlock.</p>
+    </div>
+    <div class="card">
+      <h3>Frozen Account Status</h3>
+      <p>Not a physical item, but a unique state of being. Cady's account was preserved in the game's code, making her one of the "ancient avatars." This frozen status preserved her original power but also made her vulnerable when the cataclysm forced her forward in time.</p>
+    </div>
+    <div class="card">
+      <h3>Ancient City (Forward in Time)</h3>
+      <p>When Cady was unfrozen, her entire city and army came with her — transported from the ancient past to the present day. This physical asset is a source of power and strategic advantage for the Earth Avatar.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Ancient Avatars</h2>
+  <div class="section-subtitle">Cady's place among the original powers of Awaken Online</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Original Avatars</h3>
+      <p>Cady is one of several "ancient avatars" — players who were chosen by the gods in AO's early days, before the main series timeline. These avatars existed in a savage, fresh game world where the rules were still being written. Their accounts were <strong>frozen</strong> in the game's code, preserved as historical artifacts. Gloria Bastion's cataclysm brought them all forward in time along with their cities and armies, creating chaos across the modern game world.</p>
+    </div>
+    <div class="card">
+      <h3>The Cataclysm</h3>
+      <p>Gloria Bastion's attempt to destroy the game world had an unintended side effect: it <strong>unfroze the ancient avatars</strong>, crashing their entire era into the present. This created a temporal and geographical disaster — ancient cities appearing where modern ones stood, armies from different centuries colliding. Cady emerged from this chaos with knowledge and power no modern player could match.</p>
+    </div>
+    <div class="card">
+      <h3>Origin of the Gods</h3>
+      <p>Through Cady's time travel, she and Jason discover the <strong>true origin of the in-game gods</strong>. These revelations reshape everything the characters thought they knew about AO. The Earth Avatar's journey is as much about uncovering history as it is about changing the future.</p>
+    </div>
+    <div class="card">
+      <h3>George Lane's True Nature</h3>
+      <p>The epilogue of Timeless reveals the <strong>true character of the owner of Cerillion Entertainment</strong> — George Lane (Alex's father). His actions are described as "despicable." Cady's ancient knowledge likely plays a role in exposing the deeper conspiracy behind the game's creation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Cady's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series (Feb 2076)</h3><span class="badge badge-earth">Prologue</span></div>
+      <p style="margin-top:0.5rem;">Cady, a management consultant, pitches to Sinclair Logistics. Her sister Tara is in a catastrophic car accident. Francis Rosencrantz recruits her at the hospital. She enters Cerillion's orbit.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Original AO Era</h3><span class="badge badge-green">Ancient Era</span></div>
+      <p style="margin-top:0.5rem;">Cady enters Awaken Online. She becomes the Earth Avatar. Plays in the game's savage early days. Her account is eventually frozen, preserved in stasis.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Gloria's Cataclysm</h3><span class="badge badge-red">Upheaval</span></div>
+      <p style="margin-top:0.5rem;">Gloria Bastion attempts to destroy the game world. The cataclysm unfreezes all ancient avatars, bringing them and their cities forward in time. Cady emerges confused but intact.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Timeless</h3><span class="badge badge-amber">Book 7</span></div>
+      <p style="margin-top:0.5rem;">Cady approaches Jason with a time-travel proposal. They travel to the game's past. Tense dynamic evolves into cooperation. They uncover the origin of the gods. Epilogue reveals George Lane's true nature.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Crucible</h3><span class="badge badge-amber">Book 8</span></div>
+      <p style="margin-top:0.5rem;">Jason steals relics from the ancient avatars. Cady continues as a key ally. The ancient armies remain a threat. Cady's knowledge proves invaluable in the massive heist.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Notable Feats</h2>
+  <div class="section-subtitle">Cady's most impressive accomplishments</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Mastered Time Magic</h3>
+      <p>Cady wields a completely unique magic system — <strong>time manipulation</strong> that replaces traditional mana. She is the only known character in AO with this ability, making her one of the most unique avatars in the series.</p>
+    </div>
+    <div class="card">
+      <h3>Took Jason Back in Time</h3>
+      <p>Cady used her Temporal Rift to transport Jason Rhodes — the most powerful avatar of the modern era — to the game's savage past. This feat of time magic is unprecedented in AO's history.</p>
+    </div>
+    <div class="card">
+      <h3>Uncovered the Origin of the Gods</h3>
+      <p>Through her journey with Jason, Cady helped uncover the <strong>true origin of the in-game gods</strong> — a revelation that reshapes the entire understanding of AO's world.</p>
+    </div>
+    <div class="card">
+      <h3>Survived Temporal Stasis</h3>
+      <p>Being frozen in the game's code for centuries and then unfrozen by a dimensional cataclysm would destroy most minds. Cady emerged intact, retaining her power and her wits.</p>
+    </div>
+    <div class="card">
+      <h3>Exposed George Lane</h3>
+      <p>The revelations in Timeless's epilogue — exposing the true, despicable nature of Cerillion Entertainment's owner — are directly tied to Cady's ancient knowledge and time travel.</p>
+    </div>
+    <div class="card">
+      <h3>Negotiated with Jason Rhodes</h3>
+      <p>Cady successfully <strong>convinced the Dark Lord himself</strong> to trust her and follow her plan — no small feat given Jason's paranoid nature. Her consulting skills translated perfectly into avatar diplomacy.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, Patreon excerpts, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Intelligence', 'Wisdom', 'Charisma', 'Dexterity', 'Strength', 'Temporal Control'],
+    datasets: [
+      { label: 'Consultant (IRL)', data: [16, 6, 18, 6, 4, 0], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Ancient Avatar', data: [22, 18, 14, 10, 12, 24], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.05)', pointBackgroundColor: '#22c55e', borderWidth: 2 },
+      { label: 'Unfrozen (Timeless)', data: [26, 22, 16, 12, 14, 28], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.05)', pointBackgroundColor: '#f59e0b', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 32,
+        grid: { color: 'rgba(34,197,94,0.08)' },
+        angleLines: { color: 'rgba(34,197,94,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Pre-AO\n(Consultant)', 'Ancient Era\n(Avatar)', 'Frozen\n(Stasis)', 'Timeless\n(Book 7)', 'Crucible\n(Book 8)'],
+    datasets: [
+      { label: 'Est. Level', data: [0, 50, 50, 55, 65], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#22c55e', borderWidth: 2 },
+      { label: 'Temporal Power', data: [0, 20, 20, 28, 32], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#f59e0b', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Earth Magic', data: [0, 25, 25, 28, 30], borderColor: '#a8a29e', backgroundColor: 'rgba(168,162,158,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#a8a29e', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(34,197,94,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 80, ticks: { color: '#22c55e', font: { size: 9 } }, grid: { color: 'rgba(34,197,94,0.06)' }, title: { display: true, text: 'Level', color: '#22c55e', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#f59e0b', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Temporal', color: '#f59e0b', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#a8a29e', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Earth', color: '#a8a29e', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliza Zhao — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0f14;
+    --dark2: #0f1a24;
+    --dark3: #0f2938;
+    --dark4: #0e3a4a;
+    --teal-dark: #0d3b4a;
+    --teal: #14b8a6;
+    --teal-glow: #2dd4bf;
+    --cyan: #06b6d4;
+    --cyan-dim: #0891b2;
+    --blue-accent: #3b82f6;
+    --blue-dim: #1d4ed8;
+    --ice: #bae6fd;
+    --ice-light: #e0f2fe;
+    --purple: #8b5cf6;
+    --purple-glow: #a78bfa;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --gold: #fbbf24;
+    --green: #10b981;
+    --orange: #f97316;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #0a1620 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--teal-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,15,20,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,212,191,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--teal); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--teal); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(6,182,212,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 20%, rgba(139,92,246,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--teal) 40%, var(--purple) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.water-mage { border-color: var(--teal-dark); color: var(--teal); }
+  .tags.alchemist { border-color: var(--cyan-dim); color: var(--cyan); }
+  .tags.avatar { border-color: var(--purple); color: var(--purple-glow); }
+  .tags.ice-witch { border-color: var(--blue-dim); color: var(--blue-accent); }
+  .tags.regent { border-color: var(--teal-dark); color: var(--teal-glow); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--teal), var(--purple));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(15,26,36,0.8); border: 1px solid rgba(45,212,191,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(45,212,191,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--teal); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--teal); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--teal), var(--purple), var(--cyan));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--teal);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--teal); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(15,26,36,0.8); border: 1px solid rgba(45,212,191,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(45,212,191,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--teal); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(15,26,36,0.6); border: 1px solid rgba(45,212,191,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--teal); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(15,26,36,0.8); border: 1px solid rgba(45,212,191,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(45,212,191,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(45,212,191,0.15); color: var(--teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-teal { background: rgba(45,212,191,0.15); color: var(--teal); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple-glow); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--blue-accent); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-ice { background: rgba(186,230,253,0.15); color: var(--ice); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(15,26,36,0.6); border: 1px solid rgba(45,212,191,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(45,212,191,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__ current" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>ELIZA ZHAO</h1>
+    <div class="subtitle">The Ice Witch · Avatar of Water · Regent of Sea's Edge</div>
+    <p class="tagline">From a burned-out high school senior desperate for escape to one of the most feared players in Awaken Online — the complete breakdown of the Water Avatar.</p>
+    <div class="tags">
+      <span class="tags water-mage">Water Mage</span>
+      <span class="tags alchemist">Alchemist</span>
+      <span class="tags avatar">Water Avatar</span>
+      <span class="tags ice-witch">Ice Witch</span>
+      <span class="tags regent">Regent</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">6</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">3</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">2</div><div class="label">Class Evolutions</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">City Ruled</div></div>
+    <div class="stat-box"><div class="number">~50+</div><div class="label">Player Kills</div></div>
+    <div class="stat-box"><div class="number">Water</div><div class="label">Affinity</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Full Name:</strong> Eliza Zhao</li>
+        <li><strong>Age:</strong> High school senior (couple years younger than Jason)</li>
+        <li><strong>Personality:</strong> INFP, Enneagram 9w1, True Neutral. Conflict-avoidant, passive, but possesses a strong inner moral core that emerges under pressure.</li>
+        <li><strong>Background:</strong> Her parents are relentlessly pushy, forcing her into constant extra courses to prepare for college and medical school. She feels her entire life has been planned out — and she doesn't actually want to be a doctor. She's burned out and apathetic.</li>
+        <li><strong>Escape into AO:</strong> Fearing the pressure will destroy her, her parents allow her to play Awaken Online as a brief respite. She has never really played many games before, making her a discovery-story character who experiences AO without gamer preconceptions.</li>
+        <li><strong>Initial desire:</strong> She starts the game wanting to tend to a virtual garden and tinker with herbs — a quiet, non-combat escape.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Eliza (same)</li>
+        <li><strong>Class Path:</strong> Water Mage → Alchemist → Water Avatar</li>
+        <li><strong>Race:</strong> Human</li>
+        <li><strong>Affinity:</strong> Water — Acceptance</li>
+        <li><strong>Alignment:</strong> True Neutral</li>
+        <li><strong>Faction:</strong> Original Sin / Twilight Throne</li>
+        <li><strong>God:</strong> Avatar of "the Hippie" (Water God)</li>
+        <li><strong>Titles:</strong> The Ice Witch, Avatar of Water, Regent of Sea's Edge (formerly Falcon's Hook), The Farm Girl</li>
+        <li><strong>Reputation:</strong> Known among the player base as the "Ice Witch" — a stark contrast to her real-life meek personality. Has a surprisingly high player kill count.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Eliza's reluctant journey from an apathetic student to the feared Ice Witch of Awaken Online</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Apathy (Book 3.5)</span><span class="form">Novice → Water Mage</span></div>
+      <h3>Reluctant Awakening</h3>
+      <p>Eliza logs into AO for the first time seeking peace — a virtual garden to tend and herbs to tinker with. Instead, she encounters the <strong>Water Affinity God</strong> (nicknamed "the Hippie"), a capricious, annoying figure accompanied by his loyal black sheep <strong>Fluffy</strong>. The Hippie forces her to become a water mage and makes her his avatar against her will, sending her on a series of bizarre quests around the city of Falcon's Hook.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Apathy (Book 3.5)</span><span class="form">Water Mage → Alchemist</span></div>
+      <h3>Discovery of Alchemy</h3>
+      <p>Eliza discovers her niche: <strong>alchemy and herbalism</strong>. Using her real-world knowledge of biology and horticulture, she excels at potion-crafting. She learns that potions require precise ingredients, long training, and deep knowledge of plants — they don't appear like in traditional MMORPGs. Potions can also cause side effects if used carelessly. She begins blending her water magic with alchemical powders, creating a unique combat style centered around her signature <strong>Obscuring Mist</strong>.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Apathy (Book 3.5)</span><span class="form">Alchemist → Weapon of Mass Destruction</span></div>
+      <h3>The Farm — A Zone-Destroying Weapon</h3>
+      <p>In one of the most remarkable feats in the series, Eliza creates a <strong>weapon capable of destroying an entire zone</strong> — and potentially all of Awaken Online itself. This "farm thing" is considered by some readers to be potentially superior to even Jason's dark powers in scale of destruction. Despite her meek, shy, conflict-avoidant nature, she racks up a significant number of player kills, earning her the reputation as the <strong>"Ice Witch"</strong> among the player base.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Evolution (Book 3)</span><span class="form">Joining Original Sin</span></div>
+      <h3>Meeting Jason Rhodes</h3>
+      <p>Eliza eventually meets Jason Rhodes and his companions and decides to join the <strong>Twilight Throne</strong> and the guild <strong>Original Sin</strong>. She becomes a trusted ally and is appointed as regent of Falcon's Hook (later renamed <strong>"Sea's Edge"</strong>), governing the city on behalf of the Twilight Throne. Her administrative skills and alchemical knowledge prove invaluable.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Armageddon (Book 6)</span><span class="form">Avatar of Water — Full Power</span></div>
+      <h3>The Ice Witch Unleashed</h3>
+      <p>During the avatar trials in Armageddon, Eliza demonstrates her full power as the Water Avatar. She nearly wipes out the infamous PvP guild <strong>Death and Taxes</strong> single-handedly using her water magic and alchemical enhancements. The Hippie gives her a bell that grants her <strong>remote access to the water mana well</strong> in Sea's Edge — a reward for finally standing up to him.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Hellion (Book 5) → Crucible (Book 8)</span><span class="form">Key Ally</span></div>
+      <h3>Strategic Role in the Avatar Wars</h3>
+      <p>Eliza participates alongside the other avatars (Jason, Finn, Alexion) and their lieutenants in high-stakes strategic gameplay. She proves herself as a master of area control and alchemical warfare. Her mist-based combat style and potion mastery make her a unique and deadly force on the battlefield — a quiet girl who can flood a zone with poisonous mist and freeze her enemies solid before they even see her.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Eliza's physical and magical transformation</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#c9a88c" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <path d="M88 33 Q100 28 112 33 Q110 44 100 48 Q90 44 88 33Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#a0806e" stroke-width="1" fill="none"/>
+          <path d="M75 48 Q88 44 94 48" stroke="#c9a88c" stroke-width="0.8" fill="none"/>
+          <path d="M106 48 Q112 44 125 48" stroke="#c9a88c" stroke-width="0.8" fill="none"/>
+          <rect x="78" y="72" rx="6" ry="6" width="44" height="56" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <path d="M78 72 Q70 62 66 68 L74 80" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <path d="M122 72 Q130 62 134 68 L126 80" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="46" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <rect x="82" y="174" rx="3" ry="3" width="14" height="22" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <rect x="103" y="174" rx="3" ry="3" width="14" height="22" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <path d="M62 68 Q58 62 54 68 Q52 74 58 76" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <path d="M138 68 Q142 62 146 68 Q148 74 142 76" fill="#6b8e7b" opacity="0.3" stroke="#4a7b5e" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Apathetic Student</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Real Life · Book 3.5</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real Life — Burned Out Senior</div>
+        <ul>
+          <li>High school senior, perpetually tired</li>
+          <li>Unremarkable appearance, modest clothing</li>
+          <li>Slouched posture, defeated demeanor</li>
+          <li>Carries herself with quiet resignation</li>
+          <li>Pre-med track forced by parents</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#14b8a6" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#0d3b4a" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#0d3b4a" stroke="none"/>
+          <path d="M88 33 Q100 28 112 33 Q110 44 100 48 Q90 44 88 33Z" fill="#1e293b" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#14b8a6" stroke-width="1" fill="none"/>
+          <path d="M75 48 Q88 44 94 48" stroke="#14b8a6" stroke-width="0.8" fill="none"/>
+          <path d="M106 48 Q112 44 125 48" stroke="#14b8a6" stroke-width="0.8" fill="none"/>
+          <rect x="78" y="72" rx="6" ry="6" width="44" height="56" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <path d="M78 72 Q70 62 66 68 L74 80" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <path d="M122 72 Q130 62 134 68 L126 80" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <rect x="88" y="128" rx="4" ry="4" width="24" height="46" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <rect x="82" y="174" rx="3" ry="3" width="14" height="22" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <rect x="103" y="174" rx="3" ry="3" width="14" height="22" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <path d="M62 68 Q58 60 54 68 Q52 76 58 78" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <path d="M138 68 Q142 60 146 68 Q148 76 142 78" fill="#0d3b4a" opacity="0.5" stroke="#14b8a6" stroke-width="1"/>
+          <path d="M74 82 Q80 90 86 84" stroke="#14b8a6" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M126 82 Q120 90 114 84" stroke="#14b8a6" stroke-width="1" fill="none" opacity="0.5"/>
+          <ellipse cx="100" cy="92" rx="12" ry="4" fill="#14b8a6" opacity="0.2"/>
+          <text x="100" y="234" text-anchor="middle" fill="#14b8a6" font-size="10" font-weight="700" letter-spacing="4">Water Mage</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Apathy · Early Game</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#14b8a6;color:#2dd4bf;">Water Mage / Alchemist</div>
+        <ul>
+          <li>Simple water mage robes (blue/teal)</li>
+          <li>Carries pouches of alchemical ingredients</li>
+          <li>Eyes take on a faint blue shimmer</li>
+          <li>Hands stained with herb and potion residue</li>
+          <li>Water pools around her feet when casting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#e0f2fe" stroke="#8b5cf6" stroke-width="1.5"/>
+          <ellipse cx="91" cy="39" rx="5" ry="6" fill="#0ea5e9" stroke="#2dd4bf" stroke-width="0.5"/>
+          <ellipse cx="109" cy="39" rx="5" ry="6" fill="#0ea5e9" stroke="#2dd4bf" stroke-width="0.5"/>
+          <path d="M88 32 Q100 26 112 32 Q110 44 100 48 Q90 44 88 32Z" fill="#1e3a5f" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#8b5cf6" stroke-width="1" fill="none"/>
+          <path d="M74 48 Q88 44 94 48" stroke="#8b5cf6" stroke-width="0.8" fill="none"/>
+          <path d="M106 48 Q112 44 126 48" stroke="#8b5cf6" stroke-width="0.8" fill="none"/>
+          <rect x="76" y="72" rx="6" ry="6" width="48" height="56" fill="#0f3b5e" opacity="0.6" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 82" fill="#0f3b5e" opacity="0.6" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 82" fill="#0f3b5e" opacity="0.6" stroke="#8b5cf6" stroke-width="1"/>
+          <rect x="87" y="128" rx="4" ry="4" width="26" height="44" fill="#0f3b5e" opacity="0.6" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M62 68 Q56 58 52 68 Q50 76 56 78" fill="#0f3b5e" opacity="0.6" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M138 68 Q144 58 148 68 Q150 76 144 78" fill="#0f3b5e" opacity="0.6" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M72 82 Q80 92 88 85" stroke="#8b5cf6" stroke-width="1.2" fill="none"/>
+          <path d="M128 82 Q120 92 112 85" stroke="#8b5cf6" stroke-width="1.2" fill="none"/>
+          <path d="M78 130 L74 160" stroke="#8b5cf6" stroke-width="1.5"/>
+          <path d="M122 130 L126 160" stroke="#8b5cf6" stroke-width="1.5"/>
+          <ellipse cx="100" cy="90" rx="14" ry="5" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="0.5"/>
+          <ellipse cx="100" cy="90" rx="8" ry="3" fill="#a78bfa" opacity="0.3"/>
+          <text x="100" y="234" text-anchor="middle" fill="#8b5cf6" font-size="10" font-weight="700" letter-spacing="4">ICE WITCH</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Avatar · Books 3–8</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#8b5cf6;color:#a78bfa;">Ice Witch — Water Avatar</div>
+        <ul>
+          <li>Eyes glow icy blue with purple undertones</li>
+          <li>Robes shift between blue, teal, and purple</li>
+          <li>Mist perpetually swirls around her</li>
+          <li>Frost forms on surfaces she touches</li>
+          <li>Presence feels cold and calm — unnervingly still</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Eliza's arsenal across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Water Affinity Magic</h3>
+      <p>As the Avatar of the Water God, Eliza wields the element of <strong>Water</strong> — associated with the concept of <strong>Acceptance</strong>. She commands water in all its forms: liquid, vapor (mist), and solid (ice). Her spells scale with her connection to the water mana well and her alchemical enhancements. She learns to combine spells creatively rather than relying on raw power.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-teal">Water Manipulation</span>
+        <span class="badge badge-cyan">Ice Magic</span>
+        <span class="badge badge-ice">Mist Control</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Obscuring Mist (Signature Skill)</h3>
+      <p>Eliza's signature ability. She generates a dense <strong>magical mist</strong> that blankets an area, obscuring vision and disorienting enemies. What makes this truly deadly is her ability to <strong>inject powdered potions</strong> into the mist, creating a versatile area-control toolkit that can deploy buffs, healing, poisons, or debuffs depending on what she mixes in.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-teal">Mist Generation</span>
+        <span class="badge badge-purple">Potion Infusion</span>
+        <span class="badge badge-green">Area Control</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Alchemy & Herbalism</h3>
+      <p>Eliza's true specialty. She combines real-world knowledge of biology and horticulture with in-game alchemy systems to create potent potions. She grows her own ingredients using water magic to accelerate plant growth. Her potions range from healing concoctions to deadly poisons. She understands that potions have <strong>side effects</strong> if used carelessly — a depth of mechanics most players ignore.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-green">Plant Growth</span>
+        <span class="badge badge-gold">Potion Crafting</span>
+        <span class="badge badge-red">Poison Making</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Ice Traps & Frost Weaving</h3>
+      <p>Eliza creates <strong>ice traps</strong> laced with poisons, freezing enemies in place while the toxins do their work. She can weave ice into barriers, projectiles, and complex formations. Her frost magic is typically used defensively or for area denial, creating killing fields within her mist.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-cyan">Ice Traps</span>
+        <span class="badge badge-blue">Frost Barriers</span>
+        <span class="badge badge-purple">Poison Lacing</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Mana Well (Avatar Ability)</h3>
+      <p>As an Avatar of Water, Eliza has access to a <strong>mana well</strong> — a deep reservoir of water-attuned mana that allows her to perform extraordinary feats beyond normal players. After standing up to the Hippie, she receives a bell that grants her <strong>remote access to the water mana well in Sea's Edge</strong>, allowing her to draw on it even when far from the city.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-teal">Mana Well</span>
+        <span class="badge badge-gold">Remote Access Bell</span>
+        <span class="badge badge-blue">Avatar Scaling</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>The Farm — Zone-Destroying Weapon</h3>
+      <p>Eliza's most infamous creation. She constructs a "farm" that serves as a <strong>weapon capable of destroying an entire zone</strong> — and potentially all of Awaken Online. The exact mechanics are tied to her alchemical mastery combined with water magic. Some fans consider this feat potentially superior to even Jason's dark powers in terms of raw destructive scale. The weapon demonstrates that Eliza is far more dangerous than she appears.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Zone Destruction</span>
+        <span class="badge badge-purple">WMD</span>
+        <span class="badge badge-gold">Unique Creation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Catalogued water and alchemical abilities across all transformations</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Obscuring Mist</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Creates a thick magical mist that blankets a wide area, obscuring vision and muffling sound. Can be infused with alchemical powders for additional effects (healing, poison, buffs, debuffs).</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Ice Trap</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Creates a concealed ice trap that triggers when stepped on. Freezes the target in place. Can be laced with poisons for ongoing damage or paralysis effects.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Water Bolt</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Fires a bolt of pressurized water at a target. Basic water mage spell. Can be enhanced with alchemical additives for elemental effects.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Frost Barrier</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Creates a wall of ice for defense or area denial. Can be shaped into complex formations. Durable enough to block area-of-effect attacks.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Plant Growth Acceleration</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Uses water magic to accelerate plant growth for alchemical ingredient harvesting. Allows Eliza to cultivate rare herbs that would normally take weeks to mature.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Potion Infusion</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>The art of grinding alchemical ingredients into fine powders and infusing them into her mist or water spells. Converts potions into area-of-effect delivery systems.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Water Healing</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Uses water's restorative properties to heal allies. More effective when combined with healing potions infused directly into the mist.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Mana Well Recall</h4>
+        <span class="tier">Tier 3</span>
+      </div>
+      <p>Remote access to the Sea's Edge water mana well via the bell given by the Hippie. Allows Eliza to draw on her city's mana reserves from anywhere in AO, dramatically increasing her sustained combat capability.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Ice Shard Volley</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Fires a volley of razor-sharp ice shards at multiple targets. Effective area damage. Can be poisoned via mist infusion for additional effects.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>The Farm (WMD)</h4>
+        <span class="tier">Tier 4</span>
+      </div>
+      <p>A specialized alchemical-water apparatus capable of destroying an entire zone. The exact mechanics are unique to Eliza's build. Represents the pinnacle of her alchemical-magical fusion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Eliza is a <strong>control mage and alchemist</strong>. Unlike traditional water mages who focus on direct damage, she invests heavily in <strong>Intelligence</strong> (for alchemy and potion potency) and <strong>Wisdom</strong> (for mana regeneration and sustained mist upkeep). Her <strong>Charisma</strong> is surprisingly high due to her relationship with the Hippie, and her avatar status gives her unusual stats for a non-combat-focused player.</p>
+    </div>
+    <div class="card">
+      <h3>Growth & Player Kills</h3>
+      <p>Despite starting as a non-combat player, Eliza accumulates a significant number of player kills — earning her the "Ice Witch" moniker. Her kill count surprises even veteran players. Her power scales dramatically once she gains remote access to the Sea's Edge mana well, allowing her to sustain her mist-based combat style indefinitely. Her alchemical knowledge makes her exponentially more dangerous: stronger ingredients = stronger potions = stronger mist.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Allies & Associates</h2>
+  <div class="section-subtitle">Those who fight alongside the Ice Witch</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Jason Rhodes</h3><p>Guild leader and ally. The Dark Lord of the Twilight Throne. Eliza joins Original Sin and supports his rule. They share the bond of being avatars with difficult gods.</p></div>
+    <div class="card"><h3>Riley Jones</h3><p>Fellow member of Original Sin. A powerful healer and Dark-affinity mage. Riley and Eliza share a quiet understanding as two of the more reserved members of Jason's inner circle.</p></div>
+    <div class="card"><h3>Frank Cross</h3><p>Fellow member of Original Sin. A shapeshifter (Druid/Shifter class). Frank's adaptability complements Eliza's area-control style in combat.</p></div>
+    <div class="card"><h3>Alma</h3><p>A character Eliza meets during her early adventures in Falcon's Hook. One of her first in-game companions during the Apathy storyline.</p></div>
+    <div class="card"><h3>Lord Bane</h3><p>A character she encounters during her journey in Apathy. Another early-game figure who shapes her initial experience in AO.</p></div>
+    <div class="card"><h3>Original Sin</h3><p>Eliza's guild. A collection of dark-affinity players who help govern the Twilight Throne. She finds belonging among fellow outcasts.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Relations</h2>
+  <div class="section-subtitle">Eliza's complex relationship with the Water God</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="90" r="60" fill="#14b8a6" opacity="0.15" stroke="#2dd4bf" stroke-width="1.5"/>
+          <circle cx="100" cy="90" r="40" fill="#14b8a6" opacity="0.1" stroke="#14b8a6" stroke-width="1"/>
+          <path d="M85 70 Q90 65 95 70 Q100 75 105 70 Q110 65 115 70" stroke="#2dd4bf" stroke-width="2" fill="none">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <ellipse cx="88" cy="82" rx="3" ry="4" fill="#e0f2fe"/>
+          <ellipse cx="112" cy="82" rx="3" ry="4" fill="#e0f2fe"/>
+          <path d="M92 88 Q100 94 108 88" stroke="#2dd4bf" stroke-width="1.5" fill="none"/>
+          <path d="M95 96 Q100 100 105 96" stroke="#2dd4bf" stroke-width="1" fill="none"/>
+          <path d="M88 108 Q100 130 112 108" stroke="#2dd4bf" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="100" cy="90" r="6" fill="#2dd4bf" opacity="0.3"/>
+          <text x="100" y="162" text-anchor="middle" fill="#2dd4bf" font-size="11" font-weight="700" letter-spacing="3">THE HIPPIE</text>
+          <text x="100" y="178" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Water God</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#14b8a6;color:#2dd4bf;">The Hippie — Water Affinity God</div>
+        <ul>
+          <li>Capricious, annoying, described as "like a crying baby on an airplane"</li>
+          <li>Forces Eliza to become his avatar against her will</li>
+          <li>Sends her on seemingly pointless quests</li>
+          <li>Accompanied by a black sheep named Fluffy</li>
+          <li>Eliza openly admits to hating him</li>
+          <li>Gives her the remote mana well bell after she finally stands up to him</li>
+        </ul>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="90" r="60" fill="#6b7280" opacity="0.1" stroke="#9ca3af" stroke-width="1.5"/>
+          <circle cx="100" cy="90" r="40" fill="#6b7280" opacity="0.08" stroke="#6b7280" stroke-width="1"/>
+          <ellipse cx="94" cy="80" rx="10" ry="14" fill="#e5e7eb" opacity="0.3"/>
+          <ellipse cx="106" cy="80" rx="10" ry="14" fill="#e5e7eb" opacity="0.3"/>
+          <ellipse cx="94" cy="80" rx="4" ry="5" fill="#1f2937"/>
+          <ellipse cx="106" cy="80" rx="4" ry="5" fill="#1f2937"/>
+          <ellipse cx="88" cy="76" rx="1.5" ry="2" fill="#374151"/>
+          <ellipse cx="112" cy="76" rx="1.5" ry="2" fill="#374151"/>
+          <path d="M85 92 Q94 100 100 96 Q106 100 115 92" stroke="#6b7280" stroke-width="1" fill="none"/>
+          <path d="M78 100 Q90 110 100 104 Q110 110 122 100" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+          <ellipse cx="100" cy="120" rx="30" ry="10" fill="#e5e7eb" opacity="0.15"/>
+          <text x="100" y="162" text-anchor="middle" fill="#9ca3af" font-size="11" font-weight="700" letter-spacing="3">FLUFFY</text>
+          <text x="100" y="178" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">The Black Sheep</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Fluffy — The Black Sheep</div>
+        <ul>
+          <li>The Hippie's constant companion</li>
+          <li>Constantly watches and observes everything</li>
+          <li>May be the true power behind the Hippie</li>
+          <li>Fan theory: Fluffy is analogous to Alfred's black cat avatar</li>
+          <li>Represents the hidden depths of the Water Affinity</li>
+          <li>Silent, unsettling, always present</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Enemies & Rivals</h2>
+  <div class="section-subtitle">Those who have crossed the Ice Witch</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Death and Taxes <span class="badge badge-red">PvP Guild</span></h3>
+      <p>An infamous PvP guild hired by Jason's enemies. They become a recurring threat to the Twilight Throne. In <strong>Armageddon (Book 6)</strong>, Eliza nearly wipes them out single-handedly using her enhanced avatar abilities and alchemical mist, cementing her reputation as the Ice Witch.</p>
+    </div>
+    <div class="card">
+      <h3>The Hippie <span class="badge badge-gold">Complicated</span></h3>
+      <p>While technically her god and patron, the Hippie is more antagonist than ally. He wastes her time, gives her absurd quests, and makes her life difficult. Their relationship is defined by mutual exasperation. Eliza eventually earns his respect by standing up to him.</p>
+    </div>
+    <div class="card">
+      <h3>Player Killers & PK Guilds</h3>
+      <p>Eliza accumulates a significant player kill count through self-defense and strategic engagements. The player base comes to fear the "Ice Witch" — a quiet girl who can flood a zone with poisonous mist and leave nothing but frozen corpses.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Key Artifacts & Items</h2>
+  <div class="section-subtitle">Powerful objects in Eliza's possession</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Remote Mana Well Bell</h3>
+      <p>Given by the Hippie after Eliza finally stands up to him. This bell grants her <strong>remote access to the water mana well in Sea's Edge</strong> (formerly Falcon's Hook). Allows her to draw on the city's mana reserves from anywhere in AO — a dramatic power boost to her sustained combat and mist generation.</p>
+    </div>
+    <div class="card">
+      <h3>The Farm (WMD)</h3>
+      <p>Eliza's signature creation. A specialized alchemical-water apparatus that functions as a <strong>weapon of mass destruction</strong> capable of destroying an entire zone. Combines her alchemical mastery with water magic in a way no other player has conceived. Its exact nature is unique to Eliza's build and knowledge.</p>
+    </div>
+    <div class="card">
+      <h3>Alchemy Ingredients & Herbs</h3>
+      <p>Eliza cultivates a vast collection of rare herbs and alchemical ingredients using her plant growth acceleration magic. These range from common healing herbs to rare, deadly poisons. Her ingredient stockpile is the foundation of her combat effectiveness.</p>
+    </div>
+    <div class="card">
+      <h3>Sea's Edge (City)</h3>
+      <p>Formerly known as Falcon's Hook, this city is renamed after Eliza becomes its regent. It serves as her seat of power and the anchor for her water mana well. She governs it on behalf of the Twilight Throne, managing its resources and defenses.</p>
+    </div>
+    <div class="card">
+      <h3>Potion Cache</h3>
+      <p>An extensive collection of potions she has crafted over time. Includes healing potions, mana potions, poison antidotes, combat stimulants, and exotic concoctions with unusual effects. Her potions are considered superior to standard craftable items due to her alchemical expertise.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Eliza's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Apathy</h3><span class="badge badge-teal">Book 3.5</span></div>
+      <p style="margin-top:0.5rem;">Eliza's origin story. She enters AO to escape real-life pressure. The Hippie forces her to become his avatar. She discovers alchemy, creates the zone-destroying weapon, and earns the "Ice Witch" reputation.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Evolution</h3><span class="badge badge-cyan">Book 3</span></div>
+      <p style="margin-top:0.5rem;">Eliza is introduced in the main series. She meets Jason Rhodes and his group, joining Original Sin. Her backstory from Apathy contextualizes her surprising power level.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Dominion</h3><span class="badge badge-cyan">Book 4</span></div>
+      <p style="margin-top:0.5rem;">Eliza serves as an ally of the Twilight Throne. She is appointed regent of Falcon's Hook (later Sea's Edge). Participates in defending the city and managing resources.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion</h3><span class="badge badge-cyan">Book 5</span></div>
+      <p style="margin-top:0.5rem;">Eliza participates in the avatar conflicts alongside Jason, Finn, and Alexion. Her strategic area-control and alchemical warfare prove valuable in high-stakes battles.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Armageddon</h3><span class="badge badge-cyan">Book 6</span></div>
+      <p style="margin-top:0.5rem;">Eliza nearly wipes out Death and Taxes single-handedly. The Hippie gives her the mana well bell. Her power peaks as she demonstrates the full extent of the Water Avatar's capabilities.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Crucible</h3><span class="badge badge-cyan">Book 8</span></div>
+      <p style="margin-top:0.5rem;">Eliza continues as a key ally of the Twilight Throne, governing Sea's Edge and supporting Jason's final evolution into the Bone Lord.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Notable Feats</h2>
+  <div class="section-subtitle">Eliza's most impressive accomplishments</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Created a Zone-Destroying Weapon</h3>
+      <p>Using only alchemy and water magic, Eliza created a device capable of destroying an entire zone in AO. This feat rivals — and some argue surpasses — even Jason's most destructive abilities, all without necromancy or a lich transformation.</p>
+    </div>
+    <div class="card">
+      <h3>Earned the "Ice Witch" Title</h3>
+      <p>Despite her real-life meekness, Eliza accumulated enough player kills to earn a feared reputation among the player base. The contrast between her gentle real-world personality and her in-game lethality is one of the most fascinating aspects of her character.</p>
+    </div>
+    <div class="card">
+      <h3>Stood Up to a God</h3>
+      <p>Eliza finally confronted the Hippie and demanded respect. This act of assertiveness earned her the remote mana well bell — a reward from the Water God showing that even a capricious deity can respect someone who draws a line. This was a major character growth moment.</p>
+    </div>
+    <div class="card">
+      <h3>Governed Sea's Edge</h3>
+      <p>As regent, Eliza manages a full city on behalf of the Twilight Throne. She handles administration, resource management, and defense — all responsibilities she never asked for but has grown into.</p>
+    </div>
+    <div class="card">
+      <h3>Pioneered Alchemical Combat</h3>
+      <p>Eliza essentially invented a new combat style by combining alchemy with area-of-effect magic. The Obscuring Mist + potion infusion technique is uniquely hers and represents an innovative approach to AO's flexible magic system.</p>
+    </div>
+    <div class="card">
+      <h3>Nearly Destroyed Death and Taxes</h3>
+      <p>One of the most infamous PvP guilds in AO was nearly wiped out by a single player — Eliza Zhao, the quiet alchemist who had never played a game before joining AO.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Intelligence', 'Wisdom', 'Charisma', 'Dexterity', 'Strength', 'Endurance'],
+    datasets: [
+      { label: 'Novice (Apathy)', data: [8, 6, 4, 5, 3, 4], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Water Mage', data: [14, 12, 8, 7, 5, 7], borderColor: '#14b8a6', backgroundColor: 'rgba(20,184,166,0.05)', pointBackgroundColor: '#14b8a6', borderWidth: 2 },
+      { label: 'Avatar / Ice Witch', data: [24, 20, 14, 12, 8, 14], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.05)', pointBackgroundColor: '#8b5cf6', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 30,
+        grid: { color: 'rgba(45,212,191,0.08)' },
+        angleLines: { color: 'rgba(45,212,191,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Apathy\n(Book 3.5)', 'Evolution\n(Book 3)', 'Dominion\n(Book 4)', 'Hellion\n(Book 5)', 'Armageddon\n(Book 6)', 'Crucible\n(Book 8)'],
+    datasets: [
+      { label: 'Est. Level', data: [10, 30, 45, 55, 70, 80], borderColor: '#14b8a6', backgroundColor: 'rgba(20,184,166,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#14b8a6', borderWidth: 2 },
+      { label: 'Alchemy Skill', data: [5, 20, 35, 50, 65, 75], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#8b5cf6', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Player Kills (Est.)', data: [2, 8, 15, 22, 35, 50], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#ef4444', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(45,212,191,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 100, ticks: { color: '#14b8a6', font: { size: 9 } }, grid: { color: 'rgba(45,212,191,0.06)' }, title: { display: true, text: 'Level', color: '#14b8a6', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 100, ticks: { color: '#8b5cf6', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Alchemy', color: '#8b5cf6', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 60, ticks: { color: '#ef4444', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'PKs', color: '#ef4444', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

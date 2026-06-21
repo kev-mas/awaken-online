@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dominic Hart — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #0f1120;
+    --dark3: #1a1b2e;
+    --dark4: #1e2040;
+    --gold: #fbbf24;
+    --gold-glow: #fcd34d;
+    --gold-dim: #b8860b;
+    --amber: #f59e0b;
+    --amber-dim: #d97706;
+    --yellow: #eab308;
+    --sky: #38bdf8;
+    --sky-dim: #0284c7;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --purple-glow: #a78bfa;
+    --green: #10b981;
+    --green-dim: #047857;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --orange: #f97316;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(251,191,36,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--gold); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--gold); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(251,191,36,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(56,189,248,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(139,92,246,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 850px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--gold) 40%, var(--sky) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 700px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.tank { border-color: var(--gold-dim); color: var(--gold); }
+  .tags.luck { border-color: var(--purple); color: var(--purple-glow); }
+  .tags.champion { border-color: var(--sky-dim); color: var(--sky); }
+  .tags.gambler { border-color: var(--green-dim); color: var(--green); }
+  .tags.tactician { border-color: var(--amber-dim); color: var(--amber); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--sky));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(15,17,32,0.8); border: 1px solid rgba(251,191,36,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(251,191,36,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--gold); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--gold); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--gold), var(--sky), var(--purple));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--gold);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--sky); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--gold); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(15,17,32,0.8); border: 1px solid rgba(251,191,36,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(251,191,36,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--gold); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(15,17,32,0.6); border: 1px solid rgba(251,191,36,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(15,17,32,0.8); border: 1px solid rgba(251,191,36,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(251,191,36,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(251,191,36,0.15); color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge-sky { background: rgba(56,189,248,0.15); color: var(--sky); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple-glow); }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .badge-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(15,17,32,0.6); border: 1px solid rgba(251,191,36,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(251,191,36,0.1);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__ current" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>DOMINIC HART</h1>
+    <div class="subtitle">Smiles · The Gambler's Champion · Leader of Death or Taxes</div>
+    <p class="tagline">A dying college athlete who gambles everything on a second chance — the complete breakdown of the Air God's luck-blessed champion, from terminal cancer patient to one of the most unique and terrifying players in Awaken Online.</p>
+    <div class="tags">
+      <span class="tags tank">Tank</span>
+      <span class="tags luck">Luck Build</span>
+      <span class="tags champion">Air Champion</span>
+      <span class="tags gambler">Gambler's Blessing</span>
+      <span class="tags tactician">Guild Leader</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">1</div><div class="label">Dedicated Book</div></div>
+    <div class="stat-box"><div class="number">3</div><div class="label">Major Forms</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Class Path</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Guild Founded</div></div>
+    <div class="stat-box"><div class="number">Air</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Luck</div><div class="label">Mana System</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life</h3>
+      <ul>
+        <li><strong>Full Name:</strong> Dominic "Dom" Hart</li>
+        <li><strong>Age:</strong> College age</li>
+        <li><strong>Status:</strong> College athlete (football) on athletic scholarship</li>
+        <li><strong>Diagnosis:</strong> Terminal cancer — given approximately 6-12 months to live</li>
+        <li><strong>Financial Situation:</strong> Cannot afford prohibitively expensive treatment</li>
+        <li><strong>Personality:</strong> ISTP, Enneagram 7w8. Brutal, pragmatic, desperate. Treats NPCs as living beings. Approaches the game with a unique perspective — he has nothing left to lose.</li>
+        <li><strong>Entry into AO:</strong> A nurse at the clinic enrolls him in a clinical trial using the Awaken Online VR headset as "therapy." His father repaired slot machines, so Dom grew up around casinos — an experience that proves strangely relevant to his in-game starting zone.</li>
+        <li><strong>Initial mindset:</strong> Overwhelmed with despair, he approaches the game as a way to pass his final days. He has no expectation of surviving — in real life or the game.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Smiles / Smiley</li>
+        <li><strong>Class Path:</strong> Physical Tank — unconventional luck-based build</li>
+        <li><strong>Affinity:</strong> Air — Happiness / Chaos</li>
+        <li><strong>Alignment:</strong> Chaotic Neutral</li>
+        <li><strong>Faction:</strong> Death or Taxes (Founder & Leader)</li>
+        <li><strong>God:</strong> The Gambler — God of Air / Happiness (not a true Avatar, but a specially empowered champion)</li>
+        <li><strong>Titles:</strong> Smiles, The Gambler's Champion, The Man Who Cannot Die, Leader of Death or Taxes</li>
+        <li><strong>Starting Zone:</strong> Aislen — a jungle sky-island city voted the "#1 worst starting location in Awaken Online." Run by the Jackals, a mafia-like guild that controls new players. Even the plant life can kill you.</li>
+        <li><strong>Build:</strong> Pure physical tank — no mana, no spells. Pours everything into Vitality, Strength, Dexterity, and Endurance.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Dom's relentless journey from a dying cancer patient to an unstoppable force of chaos</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Real Life (Pre-Series)</span><span class="form">Athlete → Patient</span></div>
+      <h3>The Diagnosis</h3>
+      <p>Dominic Hart is a college football player on an athletic scholarship when he's diagnosed with <strong>terminal cancer</strong>. Given 6-12 months to live. He cannot afford the prohibitively expensive treatment. A nurse at the clinic enrolls him in a clinical trial using the <strong>Awaken Online VR headset</strong> as "therapy." He has nothing left to lose.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy (Book 5.5)</span><span class="form">Noob → Unique Build</span></div>
+      <h3>Into the Worst Starting Zone</h3>
+      <p>Dom spawns in <strong>Aislen</strong> — a jungle sky-island city voted the "#1 worst starting location in Awaken Online." Located way south of the Twilight Throne, it's controlled by the <strong>Jackals</strong>, a mafia-like guild that preys on new players. Even the plant life is lethal. Most players are stuck here, unable to escape. Dom, having nothing to lose, refuses to be trapped.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy (Book 5.5)</span><span class="form">The Gambler's Blessing</span></div>
+      <h3>Chaotic Blessing — Luck Over Mana</h3>
+      <p>Dom catches the attention of <strong>The Gambler</strong> (God of Air / Happiness), who breaks tradition by empowering Dom as his champion rather than a true Avatar. The Gambler replaces Dom's <strong>mana pool with a luck modifier</strong>, introducing a luck inversion mechanic where good and bad fortune constantly swap places. Since Dom has no mana, he <strong>cannot cast spells</strong> — forcing him into a pure physical tank build. This confusing blessing becomes one of the most unique mechanics in the series.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy (Book 5.5)</span><span class="form">Deathwish — Grinding Through Death</span></div>
+      <h3>Dying to Get Stronger</h3>
+      <p>Dom discovers the <strong>Deathwish</strong> ability: it drastically reduces his respawn time, allowing him to accelerate growth through <strong>intentional suicide loops</strong>. He dies repeatedly on purpose — using death as a training tool for extreme physical conditioning, resistance training, and stat grinding. This masochistic playstyle is a refreshing contrast to Jason and Finn, who rarely die. Each death makes him stronger.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy (Book 5.5)</span><span class="form">The Casino — Purgatory</span></div>
+      <h3>Access to The Casino</h3>
+      <p>Instead of reliving his death in helpless stasis like other players, Dom awakens in <strong>The Casino</strong> — a purgatory dimension run by The Gambler. Here, he is fully conscious, able to move, observe, and reflect between deaths. Eventually, he <strong>grants his allies access</strong> to The Casino too, giving Death or Taxes a massive strategic advantage. This realm becomes Dom's sanctuary and command center.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Happy (Book 5.5)</span><span class="form">Founding Death or Taxes</span></div>
+      <h3>Building a Family of Outcasts</h3>
+      <p>Dom builds <strong>Death or Taxes</strong> ("Death and Taxes") — a guild of outcasts who all hold grudges against the mainline protagonists. Each member was broken by Jason, Finn, or their allies. Dom gives them purpose, a place to belong, and a leader who refuses to stay dead. His guild is positioned as a <strong>future rival to Jason's Original Sin</strong> — a dark mirror of the Twilight Throne's inner circle.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Every stage of Dom's physical and magical transformation</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="26" ry="28" fill="#f0d5b8" stroke="#c9a88c" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#3d2b1f" stroke="none"/>
+          <path d="M92 34 Q100 28 108 34 Q106 46 100 50 Q94 46 92 34Z" fill="#1a1a2e" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#a0806e" stroke-width="1" fill="none"/>
+          <rect x="76" y="72" rx="6" ry="6" width="48" height="58" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 82" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 82" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <rect x="88" y="130" rx="4" ry="4" width="24" height="44" fill="#4a5568" opacity="0.3" stroke="#2d3748" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Terminal Patient</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Real Life · Pre-Series</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real Life — Dying Athlete</div>
+        <ul>
+          <li>College football player, athletic build</li>
+          <li>Weakened by illness and treatment</li>
+          <li>Haunted, exhausted expression</li>
+          <li>Desperate, nothing-left-to-lose mentality</li>
+          <li>Brutal pragmatism born from imminent death</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="30" ry="30" fill="#f0d5b8" stroke="#b8860b" stroke-width="1.5"/>
+          <ellipse cx="91" cy="40" rx="4" ry="5" fill="#1e2040" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="5" fill="#1e2040" stroke="none"/>
+          <path d="M90 33 Q100 26 110 33 Q108 46 100 50 Q92 46 90 33Z" fill="#1a1b2e" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#b8860b" stroke-width="1" fill="none"/>
+          <rect x="74" y="74" rx="6" ry="6" width="52" height="56" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <path d="M74 74 Q62 62 58 70 L70 84" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <path d="M126 74 Q138 62 142 70 L130 84" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <rect x="87" y="130" rx="4" ry="4" width="26" height="44" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <rect x="82" y="174" rx="3" ry="3" width="14" height="22" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <rect x="104" y="174" rx="3" ry="3" width="14" height="22" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <path d="M58 70 Q54 60 50 70 Q48 78 54 80" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <path d="M142 70 Q146 60 150 70 Q152 78 146 80" fill="#1e2040" opacity="0.5" stroke="#b8860b" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#b8860b" font-size="10" font-weight="700" letter-spacing="4">The Noob</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Happy · Early Game</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#b8860b;color:#fbbf24;">The Noob — Aislen Survivor</div>
+        <ul>
+          <li>Starter gear, scavenged and battered</li>
+          <li>Facial expression shifts to a permanent grin</li>
+          <li>Build starts filling out from constant combat</li>
+          <li>Already marked by the Gambler's blessing</li>
+          <li>Refuses to be trapped in the worst starting zone</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="32" ry="30" fill="#f0d5b8" stroke="#fbbf24" stroke-width="2"/>
+          <ellipse cx="91" cy="40" rx="5" ry="6" fill="#eab308" stroke="#38bdf8" stroke-width="0.5"/>
+          <ellipse cx="109" cy="40" rx="5" ry="6" fill="#eab308" stroke="#38bdf8" stroke-width="0.5"/>
+          <path d="M88 32 Q100 22 112 32 Q110 46 100 50 Q90 46 88 32Z" fill="#1e2040" stroke="none"/>
+          <path d="M92 46 Q100 50 108 46" stroke="#fbbf24" stroke-width="1" fill="none"/>
+          <rect x="72" y="74" rx="6" ry="6" width="56" height="60" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M72 74 Q60 60 56 70 L68 84" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M128 74 Q140 60 144 70 L132 84" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <rect x="86" y="134" rx="4" ry="4" width="28" height="44" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <rect x="80" y="178" rx="3" ry="3" width="16" height="24" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <rect x="104" y="178" rx="3" ry="3" width="16" height="24" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M56 70 Q50 58 46 70 Q44 78 50 80" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <path d="M144 70 Q150 58 154 70 Q156 78 150 80" fill="#0f1120" opacity="0.6" stroke="#fbbf24" stroke-width="1.5"/>
+          <line x1="72" y1="76" x2="68" y2="132" stroke="#fbbf24" stroke-width="1.5" opacity="0.4"/>
+          <line x1="128" y1="76" x2="132" y2="132" stroke="#fbbf24" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="100" cy="94" r="12" fill="#fbbf24" opacity="0.15" stroke="#fbbf24" stroke-width="1"/>
+          <path d="M94 94 L100 88 L106 94 L100 100 Z" fill="#fbbf24" opacity="0.4"/>
+          <text x="100" y="236" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700" letter-spacing="3">SMILES</text>
+          <text x="100" y="250" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Gambler's Champion</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#fbbf24;color:#fcd34d;">Smiles — The Gambler's Champion</div>
+        <ul>
+          <li>Permanent grin — unsettling and defiant</li>
+          <li>Muscular, tank-like physique from endless death-grinding</li>
+          <li>Armor is scarred and repaired — proof of countless deaths</li>
+          <li>Aura of chaotic luck — things bend around him</li>
+          <li>Slot-themed accessories from The Casino</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">A comprehensive catalog of Dom's unique arsenal</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Chaotic Blessing (Passive)</h3>
+      <p>The Gambler replaces Dom's <strong>mana pool with a luck modifier</strong>. This introduces a <strong>luck inversion mechanic</strong> — good and bad fortune constantly swap places unpredictably. Since Dom has no mana, he <strong>cannot cast spells</strong>, forcing him into a pure physical build. This confusing blessing is one of the most unique mechanics in Awaken Online — a constant gamble that makes every moment unpredictable.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Luck Modifier</span>
+        <span class="badge badge-purple">Inversion Mechanic</span>
+        <span class="badge badge-sky">No Mana Pool</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Deathwish (Active)</h3>
+      <p>Drastically reduces Dom's <strong>respawn time</strong>. Allows him to accelerate growth through <strong>intentional suicide loops</strong> — dying repeatedly on purpose. He uses this for extreme physical conditioning, resistance training, and stat grinding. Each death makes him tougher. This masochistic playstyle is unique among the series' protagonists — Jason and Finn avoid death; Dom embraces it.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Fast Respawn</span>
+        <span class="badge badge-amber">Death Grinding</span>
+        <span class="badge badge-gold">Stat Acceleration</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Access to The Casino (Purgatory Realm)</h3>
+      <p>Instead of reliving his death in helpless stasis, Dom awakens in <strong>The Casino</strong> — a purgatory dimension run by The Gambler. Here he is fully conscious, able to move, observe, and reflect between deaths. He can <strong>grant allies access</strong> too, giving Death or Taxes a massive strategic advantage. The Casino serves as Dom's sanctuary, planning room, and command center.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Purgatory Dimension</span>
+        <span class="badge badge-purple">Ally Access</span>
+        <span class="badge badge-green">Strategic Hub</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Unstoppable Tank Build</h3>
+      <p>Dom pours every stat point into <strong>Vitality, Strength, Dexterity, and Endurance</strong>. He is a pure physical powerhouse — no magic, no ranged attacks, no subtlety. Just overwhelming physical force backed by the ability to die and come back stronger. His tank build combined with Deathwish makes him an almost unstoppable force that simply refuses to stay down.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">High Vitality</span>
+        <span class="badge badge-amber">Strength Focus</span>
+        <span class="badge badge-gold">Endurance Grind</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Wingman (Battle Chicken)</h3>
+      <p>Dom's unique companion — a <strong>Battle Chicken</strong> named Wingman. Wingman drains <strong>10% of Dom's stats</strong> in exchange for an ever-growing pet that eats everything. This bizarre trade-off reflects Dom's luck-based playstyle: sacrificing a chunk of his power for a chaotic, unpredictable ally. Wingman grows in proportion to Dom's own growth.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Stat Drain (10%)</span>
+        <span class="badge badge-green">Ever-Growing Pet</span>
+        <span class="badge badge-cyan">Chaos Companion</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Guild Leadership — Death or Taxes</h3>
+      <p>Dom leads <strong>Death or Taxes</strong>, a guild of outcasts who all hold grudges against the mainline protagonists. Each member was broken by Jason, Finn, or their allies. Dom gives them purpose and belonging. His leadership style is direct, brutal, and loyal — he treats his guild as family. The guild is positioned as a future rival to Original Sin.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Founder</span>
+        <span class="badge badge-gold">Guild Leader</span>
+        <span class="badge badge-purple">Outcast Family</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Spells & Skills</h2>
+  <div class="section-subtitle">Dom's non-magical, purely physical arsenal</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Deathwish Activation</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Drastically reduces respawn timer. Allows Dom to accelerate stat growth through intentional death loops. The foundation of his entire build.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Casino Manifestation</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Opens a portal to The Casino purgatory realm. Can grant ally access. Used for strategic planning, resupply, and avoiding death stasis.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Wingman Summon</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Summons Wingman the Battle Chicken. Sacrifices 10% of Dom's stats to maintain this ever-growing companion that can eat almost anything.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Bronze Body (Physical Conditioning)</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Through repeated death-grinding, Dom's body has become unnaturally dense and resistant. Each death hardens his flesh like forged metal.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Luck Surge</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Activates the Chaotic Blessing's luck inversion intentionally. In a burst of fortune, Dom's attacks hit harder, enemies miss more often, and random events favor him. But the payback always comes.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Intimidation Aura</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Dom's permanent grin and relentless approach terrify enemies. The man who smiles while dying is not someone you want to fight. Passively affects enemy morale.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Unarmed Combat Mastery</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Dom fights with brutal, efficient hand-to-hand techniques honed through thousands of deaths. His physique and durability make him a devastating brawler.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Death or Taxes Rally</h4>
+        <span class="tier">Unique</span>
+      </div>
+      <p>Dom's guild leadership skill. Buffs nearby guild members when he's in combat. The more times he's died in a session, the stronger the buff.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Stat analysis and growth trajectory</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Dom is a <strong>pure physical tank</strong> — the anti-mage. With no mana pool and no spellcasting ability, he invests everything into <strong>Vitality</strong> (HP, damage resistance), <strong>Strength</strong> (melee damage), <strong>Endurance</strong> (stamina, physical resilience), and <strong>Dexterity</strong> (movement, reaction speed). His Deathwish ability means every death is an investment — each respawn makes him statistically stronger than before.</p>
+    </div>
+    <div class="card">
+      <h3>Growth Through Death</h3>
+      <p>Dom's power curve is unlike any other character. While Jason relies on minions and Finn on magical mastery, Dom grows through <strong>sheer repetition of dying</strong>. His "training segment" in Happy takes up the first ~35% of the book, showing his transformation from a dying noob to an almost unstoppable force. His ability to grant allies access to The Casino makes his entire guild harder to kill.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Death or Taxes — Guild Roster</h2>
+  <div class="section-subtitle">The family of outcasts Dom built around him</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Adrian</h3>
+      <p><strong>Class:</strong> Failed Bard. Ignored by everyone until Dom gave him a purpose. A testament to Dom's ability to find value in the discarded.</p>
+    </div>
+    <div class="card">
+      <h3>Vanessa</h3>
+      <p><strong>Class:</strong> Ice Mage. Abandoned in the Abyss after Lahab's collapse. <strong>Hates Finn Harris</strong> for the disaster that left her stranded.</p>
+    </div>
+    <div class="card">
+      <h3>Walt</h3>
+      <p><strong>Class:</strong> Earth Mage (gravity/matter control). Escaped the same Abyss disaster as Vanessa. Shares her <strong>hatred for Finn</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Lauren</h3>
+      <p><strong>Class:</strong> Lightning-wielding Fighter. Former guild leader executed by Jason during the Haven massacre. <strong>Hates Jason Rhodes</strong> with a burning passion.</p>
+    </div>
+    <div class="card">
+      <h3>Willow</h3>
+      <p><strong>Class:</strong> Older Fire Mage. Possesses overwhelming destructive power. A veteran who found a new home under Dom's leadership.</p>
+    </div>
+    <div class="card">
+      <h3>Booker (Smokes)</h3>
+      <p>Former antagonist guild leader. Joins Death or Taxes after Dom defeats and spares him. A converted enemy who respects Dom's strength and character.</p>
+    </div>
+    <div class="card">
+      <h3>Wingman</h3>
+      <p><strong>Class:</strong> Battle Chicken. Drains 10% of Dom's stats. Eats everything. Grows endlessly. The most bizarre and beloved member of the guild.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Relations</h2>
+  <div class="section-subtitle">Dom's unique connection with the God of Air</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+    <div class="compare-card" style="max-width: 500px; margin: 0 auto;">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="90" r="60" fill="#38bdf8" opacity="0.1" stroke="#38bdf8" stroke-width="1.5"/>
+          <circle cx="100" cy="90" r="45" fill="#fbbf24" opacity="0.06" stroke="#fbbf24" stroke-width="1"/>
+          <circle cx="100" cy="90" r="30" fill="#8b5cf6" opacity="0.05" stroke="#8b5cf6" stroke-width="1"/>
+          <path d="M85 75 Q90 68 100 66 Q110 68 115 75" stroke="#fbbf24" stroke-width="2" fill="none">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+          </path>
+          <path d="M70 82 Q75 74 85 72" stroke="#38bdf8" stroke-width="1.5" fill="none"/>
+          <path d="M130 82 Q125 74 115 72" stroke="#38bdf8" stroke-width="1.5" fill="none"/>
+          <ellipse cx="92" cy="86" rx="4" ry="5" fill="#fef3c7"/>
+          <ellipse cx="108" cy="86" rx="4" ry="5" fill="#fef3c7"/>
+          <ellipse cx="92" cy="86" rx="2" ry="2.5" fill="#1e2040"/>
+          <ellipse cx="108" cy="86" rx="2" ry="2.5" fill="#1e2040"/>
+          <path d="M92 94 Q100 100 108 94" stroke="#fbbf24" stroke-width="2" fill="none"/>
+          <rect x="90" y="102" rx="2" ry="2" width="20" height="12" fill="#fbbf24" opacity="0.3" stroke="#fbbf24" stroke-width="1"/>
+          <text x="100" y="160" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="700" letter-spacing="3">THE GAMBLER</text>
+          <text x="100" y="176" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">God of Air · Happiness</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#38bdf8;color:#7dd3fc;">The Gambler — God of Air / Happiness</div>
+        <ul>
+          <li>Breaks tradition — does not choose a single Avatar, empowers champions instead</li>
+          <li>Grants Dom the Chaotic Blessing (luck-based mana replacement)</li>
+          <li>Runs The Casino — a purgatory dimension for Dom between deaths</li>
+          <li>His catchphrase: <strong>"Are you afraid to die?"</strong> — which Dom adopts</li>
+          <li>Represents Air Affinity — the concept of Happiness and Freedom</li>
+          <li>Unpredictable, chaotic, but seems to genuinely care for Dom's growth</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Key Artifacts & Items</h2>
+  <div class="section-subtitle">Powerful objects and resources in Dom's possession</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>The Casino Key</h3>
+      <p>Dom's metaphorical and literal access to The Casino purgatory realm. Allows him and his allies to respawn into a conscious planning space rather than helpless stasis. The heart of Death or Taxes' strategic advantage.</p>
+    </div>
+    <div class="card">
+      <h3>Slot-Marked Gear</h3>
+      <p>Dom's armor and equipment are adorned with slot machine and casino motifs — a reflection of his connection to The Gambler. These items may have hidden luck-based properties that activate unpredictably.</p>
+    </div>
+    <div class="card">
+      <h3>Wingman's Feeding Stockpile</h3>
+      <p>An ever-growing supply of materials, items, and enemies that Wingman the Battle Chicken has consumed. The chicken's ability to eat almost anything makes it a mobile disposal and growth engine.</p>
+    </div>
+    <div class="card">
+      <h3>Death-Grind Resistance</h3>
+      <p>Not a physical item, but an accumulated trait: Dom's body has been hardened through thousands of deaths. Each respawn builds resistance, making him progressively harder to kill. This "item" is earned through sheer suffering.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Dom's journey in the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-red">Tragedy</span></div>
+      <p style="margin-top:0.5rem;">Dom is diagnosed with terminal cancer. Given 6-12 months. Cannot afford treatment. Enrolled in AO clinical trial as "therapy." Has nothing left to lose.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Happy</h3><span class="badge badge-gold">Book 5.5</span></div>
+      <p style="margin-top:0.5rem;">Dom spawns in Aislen — the worst starting zone. Receives the Chaotic Blessing from The Gambler. Discovers Deathwish. Grinds through death loops. Accesses The Casino. Founds Death or Taxes (Death and Taxes) with fellow outcasts who hate Jason and Finn.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Notable Feats</h2>
+  <div class="section-subtitle">Dom's most impressive accomplishments</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Survived the Worst Starting Zone</h3>
+      <p>Aislen is voted the "#1 worst starting location in Awaken Online" — controlled by mafia guilds, lethal wildlife, and designed to trap new players. Dom not only survived but <strong>escaped and thrived</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Mastered Death as a Tool</h3>
+      <p>While every other player fears death, Dom <strong>weaponized it</strong>. His Deathwish ability lets him accelerate growth through intentional suicide loops — an approach no other protagonist uses.</p>
+    </div>
+    <div class="card">
+      <h3>Built Death or Taxes From Scratch</h3>
+      <p>Dom built a guild of broken, discarded players who all hold grudges against Jason, Finn, and their allies. He gave them purpose, belonging, and a leader who refuses to die. The guild is positioned as a future rival to Original Sin.</p>
+    </div>
+    <div class="card">
+      <h3>Gained Access to The Casino</h3>
+      <p>Instead of suffering in death stasis, Dom awakens in The Casino — a conscious purgatory dimension. He can <strong>grant this access to allies</strong>, giving his entire guild a massive strategic advantage over every other faction.</p>
+    </div>
+    <div class="card">
+      <h3>Defeated and Converted Booker</h3>
+      <p>Dom defeated a former antagonist guild leader named Booker (Smokes) and <strong>converted him into an ally</strong>. This shows Dom's ability to turn enemies into loyal guild members through respect and strength.</p>
+    </div>
+    <div class="card">
+      <h3>Refused to Break</h3>
+      <p>Given a terminal diagnosis, no money, and a game that starts him in literal hell, Dom <strong>refused to give up</strong>. His relentless, grinning defiance in the face of certain death is his greatest feat.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Vitality', 'Strength', 'Endurance', 'Dexterity', 'Intelligence', 'Luck'],
+    datasets: [
+      { label: 'Pre-Game (IRL)', data: [6, 8, 8, 6, 5, 1], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Early Game (Aislen)', data: [12, 10, 10, 8, 3, 8], borderColor: '#b8860b', backgroundColor: 'rgba(184,134,11,0.05)', pointBackgroundColor: '#b8860b', borderWidth: 2 },
+      { label: 'Gambler\'s Champion', data: [28, 22, 24, 18, 3, 20], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', pointBackgroundColor: '#fbbf24', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 32,
+        grid: { color: 'rgba(251,191,36,0.08)' },
+        angleLines: { color: 'rgba(251,191,36,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Happy\n(Start)', 'Happy\n(Mid)', 'Happy\n(End)'],
+    datasets: [
+      { label: 'Est. Level', data: [1, 25, 50], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#fbbf24', borderWidth: 2 },
+      { label: 'Vitality', data: [5, 18, 30], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#ef4444', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Times Died (Est.)', data: [0, 50, 500], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#8b5cf6', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(251,191,36,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 60, ticks: { color: '#fbbf24', font: { size: 9 } }, grid: { color: 'rgba(251,191,36,0.06)' }, title: { display: true, text: 'Level', color: '#fbbf24', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#ef4444', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Vitality', color: '#ef4444', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 600, ticks: { color: '#8b5cf6', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Deaths', color: '#8b5cf6', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

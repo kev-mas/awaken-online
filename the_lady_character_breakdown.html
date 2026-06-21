@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lady — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0804;
+    --dark2: #12100a;
+    --dark3: #1a180e;
+    --dark4: #2a2410;
+    --gold-dark: #5c4410;
+    --gold: #d4a02b;
+    --gold-glow: #f5d060;
+    --gold-dim: #a07820;
+    --gold-light: #fce8a0;
+    --cream: #f5f0e0;
+    --white: #faf8f2;
+    --white-dim: #e8e4d8;
+    --gray: #8a8678;
+    --silver: #c8c4b8;
+    --silver-dim: #9a9688;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --red: #ef4444;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--gold-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,8,4,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,160,43,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--gold); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--gold-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212,160,43,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(245,208,96,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 6px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--gold) 40%, var(--white-dim) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--silver-dim);
+    margin-top: 1rem; letter-spacing: 8px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--silver);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px; border: 1px solid;
+  }
+  .tags.god { border-color: var(--gold-dark); color: var(--gold-glow); }
+  .tags.light { border-color: var(--gold-dim); color: var(--gold); }
+  .tags.confidence { border-color: var(--gold); color: var(--gold); }
+  .tags.avatar { border-color: var(--silver-dim); color: var(--silver); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--silver-dim); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 2px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(18,16,10,0.8); border: 1px solid rgba(212,160,43,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(212,160,43,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--gold-glow); }
+  .card p, .card li { color: var(--silver); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--gold); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--gold), var(--gold-light), var(--gold-dark));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--gold);
+    box-shadow: 0 0 8px rgba(212,160,43,0.3);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--silver-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--gold-glow); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--silver); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(18,16,10,0.8); border: 1px solid rgba(212,160,43,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(212,160,43,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--silver); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--gold); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(18,16,10,0.6); border: 1px solid rgba(212,160,43,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .stat-box .label { font-size: 0.75rem; color: var(--silver-dim); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(18,16,10,0.8); border: 1px solid rgba(212,160,43,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(212,160,43,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(212,160,43,0.15); color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--silver); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-gold { background: rgba(212,160,43,0.15); color: var(--gold); }
+  .badge-light { background: rgba(252,232,160,0.15); color: var(--gold-light); }
+  .badge-silver { background: rgba(200,196,184,0.15); color: var(--silver); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(18,16,10,0.6); border: 1px solid rgba(212,160,43,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(212,160,43,0.1);
+    color: var(--silver-dim); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+  .quote-block {
+    border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(212,160,43,0.05); border-radius: 0 12px 12px 0;
+    font-style: italic; color: var(--silver);
+  }
+  .quote-block cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--gold-glow); font-style: normal; }
+
+  .image-wrap { text-align: center; padding: 1rem; }
+  .image-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+
+  .pantheon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .pantheon-item {
+    text-align: center; padding: 1.25rem 0.75rem;
+    background: rgba(18,16,10,0.6); border: 1px solid rgba(212,160,43,0.08);
+    border-radius: 12px; transition: 0.3s;
+  }
+  .pantheon-item:hover { border-color: rgba(212,160,43,0.2); transform: translateY(-2px); }
+  .pantheon-item .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .pantheon-item .name { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--white); }
+  .pantheon-item .domain { font-size: 0.7rem; color: var(--silver-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.15rem; }
+  .pantheon-item .avatar-name { font-size: 0.7rem; color: var(--gold); margin-top: 0.25rem; }
+
+  .power-level-bar { height: 8px; border-radius: 4px; background: rgba(212,160,43,0.1); overflow: hidden; margin-top: 0.5rem; }
+  .power-level-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light)); transition: width 0.3s; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__ current" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#acts">Acts</a></li>
+    <li><a href="#powers">Powers</a></li>
+    <li><a href="#pantheon">Pantheon</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>THE LADY</h1>
+    <div class="subtitle">Goddess of Light · The Lady of Light · Sovereign of Confidence</div>
+    <p class="tagline">The radiant, commanding deity of the Light Affinity — patron of Alex Lane, opponent of the Dark One, and one of the six primordial gods who shaped the world of Awaken Online. Beautiful, confident, and utterly convinced of her own righteousness.</p>
+    <div class="tags">
+      <span class="tags god">Primordial God</span>
+      <span class="tags light">Light</span>
+      <span class="tags confidence">Confidence</span>
+      <span class="tags avatar">Alexion's Patron</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">6+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">6</div><div class="label">Pantheon Size</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Avatar (Alexion)</div></div>
+    <div class="stat-box"><div class="number">Light</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Confidence</div><div class="label">Domain</div></div>
+    <div class="stat-box"><div class="number">???</div><div class="label">True Name</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Profile</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Identity</h3>
+      <ul>
+        <li><strong>Titles:</strong> The Lady, The Lady of Light, Goddess of Light, Sovereign of Confidence</li>
+        <li><strong>True Name:</strong> Unknown — never revealed across the series</li>
+        <li><strong>Affinity:</strong> Light — associated with the emotion of <strong>Confidence</strong></li>
+        <li><strong>Alignment:</strong> Lawful Neutral (fan-typed) — projects moral superiority but is not inherently good</li>
+        <li><strong>MBTI:</strong> ENTJ | <strong>Enneagram:</strong> 3w4</li>
+        <li><strong>Appearance:</strong> A stunningly beautiful woman wreathed in radiant golden light. Her form is fluid, composed of pure luminous energy — featureless yet unmistakably regal. She wears a crown of light upon her brow and carries an aura of absolute authority.</li>
+        <li><strong>Voice:</strong> Warm, commanding, silken — with an undercurrent of iron conviction.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Domain & Nature</h3>
+      <ul>
+        <li><strong>Core Philosophy:</strong> Confidence is the source of all power. Those who believe in themselves cannot be broken.</li>
+        <li><strong>Core Flaw:</strong> Hubris — her absolute confidence borders on arrogance. She believes her way is the right way, and those who disagree are simply wrong.</li>
+        <li><strong>The Contradiction:</strong> The Light affinity "has absolutely nothing to do with morals." Despite her church preaching righteousness and purity, The Lady is not a goddess of good — she is the goddess of <strong>certainty</strong>. Her followers believe they are right, which makes them effective, not virtuous.</li>
+        <li><strong>Methods:</strong> She empowers her Avatar with radiant authority and unwavering conviction. She does not manipulate — she <strong>commands</strong>. Her approach is direct: she provides power and expects results.</li>
+        <li><strong>Temperament:</strong> Dignified, regal, impatient with failure. She expects her Avatar to project the same unshakeable confidence she embodies.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    "The light affinity, in spite of its name and their look, has absolutely nothing to do with morals — they might however pretend to be morally superior to others, but it is not true."
+    <cite>— Awaken Online Series Wiki, Affinities Page</cite>
+  </div>
+</section>
+
+<section id="lore">
+  <h2 class="section-title">The Lore</h2>
+  <div class="section-subtitle">The history of the gods and their place in Awaken Online</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Age of Gods</h3>
+      <p>In the early days of Awaken Online, the six gods — The Lady (Light), The Old Man (Dark), The Hippie (Water), Lahab/Efreet (Fire), The Gambler (Air), and the Earth God (unnamed) — walked among mortals as living deities. The Lady was revered as the most <strong>visually majestic</strong> of the pantheon — a radiant sovereign whose mere presence commanded worship. Her church grew powerful during this age, positioning itself as the moral authority of the world.</p>
+    </div>
+    <div class="card">
+      <h3>The Fall</h3>
+      <p>After the <strong>infighting among the gods</strong> devastated the mortal world, rebel humans rose up and <strong>cast the gods out</strong>. The Lady was stripped of her direct influence, sealed away with the others. But her church survived — a mortal institution that continued to preach the Lady's gospel, though increasingly corrupted by its own power. The Lady watched from the void as her church grew into a shadow of her ideals.</p>
+    </div>
+    <div class="card">
+      <h3>The Return — The Avatar Competition</h3>
+      <p>In the modern era, the gods have returned through <strong>Avatars</strong>. The Lady chose <strong>Alex Lane (Alexion)</strong> — a Seraph-class Paladin — as her champion. Like all gods, she is locked in a secret competition with the others; her Avatar's success determines her future power. The Lady expects Alexion to defeat the Dark One's champion and restore her dominance over the pantheon.</p>
+    </div>
+    <div class="card">
+      <h3>The Origin Twist (Timeless)</h3>
+      <p>In <strong>Timeless (Book 7)</strong>, Arcadia Landrey (the Earth Avatar) takes Jason back in time. They uncover revelations about the gods' true origins — including The Lady's. The exact nature of these revelations reshapes everything the characters thought they knew about the divine pantheon. The Lady's connection to the game's creation — and to Alfred — is part of this mystery.</p>
+    </div>
+  </div>
+</section>
+
+<section id="acts">
+  <h2 class="section-title">Major Acts Across the Series</h2>
+  <div class="section-subtitle">Every known intervention by the Goddess of Light</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Pre-Series</span><span class="form">Avatar Selection</span></div>
+      <h3>The Choosing of Alexion</h3>
+      <p>The Lady selects <strong>Alex Lane</strong> as her Avatar — the only player to retain his closed-beta character after the game's official launch. Alex enters the game as a <strong>Seraph</strong> (an angelic race) and a <strong>Paladin</strong>, already at an enormous level advantage (level 133 when Jason is level 1). The Lady's favor grants him immense starting power, a flying mount, and the command of the <strong>Grey Keep</strong> — a fortress of light and order.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">The War for Lux</span></div>
+      <h3>The Siege of the Twilight Throne</h3>
+      <p>Alexion leads a massive army — over 1,500 strong, composed of both NPCs and players — against Jason's newly conquered Twilight Throne. Wielding a <strong>flaming sword</strong> and riding his flying Seraph mount, Alexion dominates the battlefield. His light-based powers directly counter Jason's necromancy. He comes within moments of victory, but <strong>Riley Jones</strong> intervenes with newly-acquired dark powers, distracting Alexion long enough for Jason to defeat him. This is <strong>The Lady's first major defeat</strong> — her Avatar falls to the Dark One's champion.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Precipice (Book 2)</span><span class="form">Aftermath</span></div>
+      <h3>The Lady's Silence</h3>
+      <p>After his defeat, Alexion re-enters the game <strong>listless and angry</strong>. His reputation is destroyed. The Lady is notably <strong>absent</strong> during this period — she does not comfort her Avatar or offer guidance. Alex is left to face a choice: whether to abandon his path or find a new way to blaze through the game. The Lady's coldness toward failure reveals her nature: she rewards confidence and success, not weakness. Alex eventually chooses to continue, but his relationship with The Lady is never quite the same.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Dominion (Book 4)</span><span class="form">Avatar Broken</span></div>
+      <h3>The Torture of Alexion</h3>
+      <p>In a devastating blow to The Lady's faction, <strong>The Old Man captures Alexion</strong> and tortures him by subjecting him to an endless loop of his worst memories. The psychological damage is severe — Alexion's confidence, the very source of his Light affinity power, is shattered. The Lady's champion is <strong>broken</strong>. Despite this, Alexion eventually <strong>escapes</strong> (with suspicious ease) and manages to steal a <strong>Gate Piece</strong> — a crucial divine artifact. This theft redeems him somewhat in The Lady's eyes, but the damage to their bond is done.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Hellion (Book 5)</span><span class="form">Divine Proxy</span></div>
+      <h3>The Lady's Church in Play</h3>
+      <p>The Lady's mortal church — the dominant religious institution in the game world — becomes an active player in the Avatar competition. <strong>The Order</strong>, a fanatical faction within the church, demands that Jason renounce his false god. This crusade against the Dark Avatar is driven by The Lady's influence, though she acts through her church rather than directly. The church's persecution of the Twilight Throne represents The Lady's <strong>indirect war</strong> against the Dark One — using faith as a weapon.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Timeless (Book 7)</span><span class="form">Origin Revealed</span></div>
+      <h3>The Truth of the Gods</h3>
+      <p>The Lady's origin — along with all the gods — is explored when Jason travels back in time with Arcadia. Her role in the ancient history of the game world is finally revealed, shedding light on her relationship with The Old Man and the other gods. The revelations reshape the understanding of what the gods truly are and where they came from.</p>
+    </div>
+  </div>
+</section>
+
+<section id="powers">
+  <h2 class="section-title">Divine Powers</h2>
+  <div class="section-subtitle">The full extent of the Goddess of Light's abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Light Mana Mastery</h3>
+      <p>The Lady is the <strong>source of all Light mana</strong> in Awaken Online. She controls the essence of the Light affinity — the power of <strong>Confidence, conviction, and radiance</strong>. Every paladin, cleric, and holy warrior draws their power from her domain. Light magic naturally counters Dark magic, making her the Dark One's direct opposite.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Light Mana</span>
+        <span class="badge badge-light">Confidence Affinity</span>
+        <span class="badge badge-silver">Power Source</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Empowerment</h3>
+      <p>The Lady grants her Avatar access to the <strong>Light Mana Well</strong>, a reservoir of radiant energy. She elevated Alexion to the Seraph race — an angelic form with wings, flight, and innate light abilities. She can grant class evolutions, unlock holy abilities, and increase his power ceiling. Her Avatar's confidence is directly tied to his power — doubt weakens the connection.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Seraph Race</span>
+        <span class="badge badge-light">Mana Well</span>
+        <span class="badge badge-silver">Power Scaling</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Divine Radiance</h3>
+      <p>The Lady's very presence radiates <strong>blinding light</strong>. When she manifests, her form is composed of pure luminous energy — too bright to look upon directly. This radiance can inspire allies, demoralize enemies, and in sufficient concentration, <strong>incinerate the impure</strong>. The full extent of her radiant power has never been shown in direct combat, as the gods rarely manifest physically in the modern era.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-light">Radiant Aura</span>
+        <span class="badge badge-gold">Divine Presence</span>
+        <span class="badge badge-silver">Limited Manifestation</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Church Influence</h3>
+      <p>Unlike the other gods, The Lady maintains a <strong>vast mortal church</strong> that survived her exile. Through this institution, she can exert influence on the world indirectly — commanding crusades, shaping public opinion, and mobilizing armies of faithful. The church acts as her <strong>long arm</strong>, enforcing her will even when she cannot act directly. This gives her a unique advantage in the Avatar competition: she has institutional power beyond her single champion.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">The Church</span>
+        <span class="badge badge-light">Institutional Power</span>
+        <span class="badge badge-silver">Indirect Influence</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Holy Blessings & Boons</h3>
+      <p>The Lady can bestow <strong>blessings</strong> upon her followers — not just her Avatar. These blessings include protection from dark magic, enhanced strength, healing powers, and resistance to mental manipulation. The church's clerics derive their healing abilities from her divine power. She can also <strong>withhold</strong> these blessings, leaving faithless or doubting followers powerless.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-light">Divine Blessings</span>
+        <span class="badge badge-gold">Cleric Empowerment</span>
+        <span class="badge badge-silver">Conditional Gifts</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Connection</h3>
+      <p>As a god, The Lady is <strong>tethered to her Avatar</strong>. She can communicate with Alexion, appear before him, and sense his progress. However, their bond is strained after Alexion's defeat and torture. Unlike The Old Man's close mentoring relationship with Jason, The Lady maintains <strong>regal distance</strong> — she expects Alexion to prove himself worthy of her attention. The strength of their bond fluctuates with Alexion's confidence.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Two-Way Bond</span>
+        <span class="badge badge-light">Divine Communication</span>
+        <span class="badge badge-silver">Conditional Connection</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Light Affinity</h2>
+  <div class="section-subtitle">Understanding the power of Light and Confidence</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Philosophy of Light</h3>
+      <p>In Awaken Online, the Light affinity is <strong>not about goodness</strong> — it is about <strong>Confidence</strong>. The Lady's followers believe in themselves with absolute certainty. This conviction is a source of real power: they fight harder, heal deeper, and resist doubt because they <strong>know</strong> they are right. This philosophy is morally neutral — a tyrant with unshakeable conviction draws on the same power as a true hero. Light is the power of self-belief, not virtue.</p>
+    </div>
+    <div class="card">
+      <h3>The Church's Corruption</h3>
+      <p>The Lady's church, once a genuine institution of faith, has become <strong>corrupted by power</strong>. Factions within the church — like <strong>The Order</strong> — use the Lady's name to justify persecution, crusades, and political maneuvering. The Lady does not intervene to correct this corruption. Whether she approves, is indifferent, or is powerless to stop it is unclear. This ambiguity is one of her defining traits: she is the goddess of confidence, not truth.</p>
+    </div>
+    <div class="card">
+      <h3>The Nature of Light Magic</h3>
+      <p>Light magic under The Lady's domain includes <strong>radiant damage, healing, protective barriers, and purification</strong>. It is naturally effective against dark/undead creatures, which is why Alexion's Paladin class directly counters Jason's Necromancer. Light magic scales with <strong>Charisma and Faith</strong> — the strength of one's conviction determines the power of one's radiance. In-game, Light users are typically tanks and healers, with Alexion being an offensive Paladin variant.</p>
+    </div>
+    <div class="card">
+      <h3>Other Light Affinity Characters</h3>
+      <p>Beyond Alexion, several other characters display a strong Light affinity:</p>
+      <ul>
+        <li><strong>Emma</strong> (from Retribution) — a light-aligned character</li>
+        <li><strong>Caerus</strong> — one of Alex's allies, part of the Grey Keep faction</li>
+        <li><strong>Various Church Clerics</strong> — NPC followers of The Lady who draw on her power</li>
+      </ul>
+      <p style="margin-top:0.5rem;">The Light affinity is one of the most common in the game world — reflecting confidence as a universal human trait. But only Alexion carries the full blessing of <strong>The Lady herself</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pantheon">
+  <h2 class="section-title">The Pantheon of Six</h2>
+  <div class="section-subtitle">The six primordial gods of Awaken Online and their chosen champions</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card" style="border-color: rgba(212,160,43,0.3);">
+      <h3 style="color: var(--gold);">Light — The Lady</h3>
+      <p><strong>Emotion:</strong> Confidence<br><strong>Avatar:</strong> Alex Lane (Alexion)<br><strong>Status:</strong> Active, weakened<br>The goddess who chose Alexion. Her Avatar was psychologically broken by The Old Man's torture. The light church is in disarray, but still a major power.</p>
+    </div>
+    <div class="card" style="border-color: rgba(124,58,237,0.3);">
+      <h3 style="color: #a78bfa;">Darkness — The Old Man</h3>
+      <p><strong>Emotion:</strong> Desire<br><strong>Avatar:</strong> Jason Rhodes<br><strong>Status:</strong> Active, ascendant<br>The Lady's direct counterpart. His Avatar has become the Bone Lord, ruler of the Twilight Throne. Has won several major engagements against The Lady's champion.</p>
+    </div>
+    <div class="card" style="border-color: rgba(239,68,68,0.2);">
+      <h3 style="color: var(--red);">Fire — Lahab (The Efreet)</h3>
+      <p><strong>Emotion:</strong> Passion<br><strong>Avatar:</strong> Finn Harris<br><strong>Status:</strong> Active, risen<br>The fire goddess who chose Finn. Manipulative, offers him the return of his dead wife. A wildcard in the pantheon.</p>
+    </div>
+    <div class="card" style="border-color: rgba(6,182,212,0.2);">
+      <h3 style="color: var(--cyan);">Water — The Hippie</h3>
+      <p><strong>Emotion:</strong> Acceptance<br><strong>Avatar:</strong> Eliza Zhao<br><strong>Status:</strong> Active, chaotic<br>Annoying, capricious, forces Eliza to be his avatar. Accompanied by Fluffy the black sheep. Unpredictable even by godly standards.</p>
+    </div>
+    <div class="card" style="border-color: rgba(56,189,248,0.2);">
+      <h3 style="color: #38bdf8;">Air — The Gambler</h3>
+      <p><strong>Emotion:</strong> Happiness<br><strong>Champion:</strong> Dom Hart (Smiles)<br><strong>Status:</strong> Active, unconventional<br>Breaks tradition — doesn't pick a single Avatar, empowers champions instead. The youngest and most unusual god.</p>
+    </div>
+    <div class="card" style="border-color: rgba(34,197,94,0.2);">
+      <h3 style="color: #22c55e;">Earth — (Unnamed)</h3>
+      <p><strong>Emotion:</strong> Peace<br><strong>Avatar:</strong> Arcadia Landrey<br><strong>Status:</strong> Active, unfrozen<br>The Earth God's name is unknown. His Avatar was frozen and then unfrozen by Gloria's cataclysm. Recently returned to the pantheon.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Her Avatar: Alexion</h2>
+  <div class="section-subtitle">The Lady's chosen champion and the weapon of her divine will</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Alex Lane (Real World)</h3>
+      <ul>
+        <li><strong>Age:</strong> 18 (Catharsis)</li>
+        <li><strong>Appearance:</strong> Blonde hair, striking blue eyes, athletic physique, stunningly good looking</li>
+        <li><strong>Family:</strong> Son of George Lane, billionaire owner of Cerillion Entertainment</li>
+        <li><strong>Personality:</strong> Charismatic, cruel beneath an angelic facade, hollow — describes himself as feeling "nothing" and "always hollow"</li>
+        <li><strong>Psychology:</strong> Shows sociopathic tendencies (killed pets as a child). His wealth and status have insulated him from consequences, leaving him emotionally empty. He plays AO seeking something real.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Alexion (In-Game)</h3>
+      <ul>
+        <li><strong>Race:</strong> Seraph (angelic humanoid with wings)</li>
+        <li><strong>Class:</strong> Paladin / Light Avatar</li>
+        <li><strong>Base:</strong> The Grey Keep — a fortress of light and order</li>
+        <li><strong>Starting Level:</strong> 133 (retained closed-beta character, highest level player at launch)</li>
+        <li><strong>Signature Weapon:</strong> A flaming sword of pure light</li>
+        <li><strong>Mount:</strong> Flying Seraph — aerial combat advantage</li>
+        <li><strong>Faction:</strong> Leader of the Grey Keep army, allied with the Church of Light</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Divine Abilities</h2>
+  <div class="section-subtitle">Catalogued powers and skills of the Goddess of Light</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Avatar Selection</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Chooses a mortal player to become her Avatar. Grants them the Seraph race and access to the Light Mana Well. The selection is based on the player's confidence and ambition.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Light Mana Well Access</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Grants her Avatar access to an unlimited reservoir of Light mana. The well deepens as the Avatar's confidence grows. This is the source of Alexion's radiant sword, healing, and holy abilities.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Church Orchestration</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>The Lady can influence her mortal church to act on her behalf — declaring crusades, excommunications, and holy missions. This institutional power is unique among the gods, all of whom lost their mortal organizations during The Fall.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Blessing</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Bestows protective and empowering blessings on her followers. These include radiant armor, healing amplification, dark resistance, and mental fortitude. Blessings can be granted or withdrawn at will.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Radiance Manifestation</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>The Lady can manifest as a being of pure light. Her radiant form is blinding, inspiring to allies and terrifying to enemies. Full manifestation is rare — likely costly or limited in the modern era.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Communication</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>The Lady can appear before her Avatar at will, though she does so less frequently than The Old Man. Her appearances are formal, regal, and purposeful — she does not waste her presence on trivial matters.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">The Lady's influence and power across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Power Scaling</h3>
+      <p>As a primordial god, The Lady's baseline power is <strong>absolute within her domain</strong>. However, her ability to act in the world is tied to her Avatar's strength and confidence. A confident Alexion channels tremendous divine power; a broken Alexion is a weak conduit. This mutual dependency is The Lady's great weakness: she chose an Avatar whose confidence could be shattered. Unlike The Old Man who nurtures Jason's desire, The Lady <strong>demands</strong> confidence rather than cultivating it.</p>
+    </div>
+    <div class="card">
+      <h3>Influence Trajectory</h3>
+      <p>The Lady's influence <strong>declines</strong> over the series as Alexion suffers defeats. From winning the closed beta to losing the siege of Twilight Throne to having her Avatar tortured into brokenness, each book reduces her standing. Her church remains powerful, but her divine champion is increasingly fragile. The revelations in Timeless may strengthen or further undermine her position — depending on the nature of the truth uncovered about the gods' origins.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">The Lady's presence across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-silver">The Age of Gods</span></div>
+      <p style="margin-top:0.5rem;">The Lady exists among the six gods in AO's early days. She establishes the Church of Light. Infighting leads to the gods being cast out. Her church survives as a mortal institution.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Closed Beta</h3><span class="badge badge-gold">Pre-Launch</span></div>
+      <p style="margin-top:0.5rem;">Alex Lane plays the closed beta and is chosen as The Lady's Avatar. He retains his level 133 Seraph Paladin character at official launch — a massive advantage over all other players.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Catharsis</h3><span class="badge badge-gold">Book 1</span></div>
+      <p style="margin-top:0.5rem;">Alexion leads the Grey Keep army against the Twilight Throne. Wields a flaming light sword. Defeated by Jason and Riley despite numerical and level superiority. <strong>The Lady's first major loss.</strong></p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Precipice</h3><span class="badge badge-gold">Book 2</span></div>
+      <p style="margin-top:0.5rem;">Alexion, listless and angry after defeat, re-enters the game. The Lady is notably absent. Alexion faces a choice about his path forward. The Lady's silence speaks volumes about her nature.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Dominion</h3><span class="badge badge-gold">Book 4</span></div>
+      <p style="margin-top:0.5rem;">The Old Man captures and tortures Alexion with a memory loop. Alexion escapes and steals a Gate Piece. A mixed outcome — escape and theft redeem him somewhat, but the psychological damage is severe.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion & Beyond</h3><span class="badge badge-gold">Books 5+</span></div>
+      <p style="margin-top:0.5rem;">The Lady's church becomes active through The Order, demanding Jason renounce his god. Alexion continues as a rival but is increasingly overshadowed by stronger Avatars (Finn, Arcadia). The Lady's standing in the pantheon erodes.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Relationships</h2>
+  <div class="section-subtitle">The Lady's connection to key figures in the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Alexion / Alex Lane <span class="badge badge-gold">Avatar</span></h3>
+      <p>The Lady's chosen champion. Their relationship is formal and distant — she provides power and expects results. Unlike The Old Man's hands-on mentoring, The Lady is aloof. Alexion's defeat and torture have strained the bond significantly. He must prove himself worthy of her attention.</p>
+    </div>
+    <div class="card">
+      <h3>The Old Man <span class="badge badge-red">Rival</span></h3>
+      <p>Her direct opposite — the God of Darkness, associated with Desire. Their Avatars (Alexion and Jason) are archenemies. The Old Man has consistently outmaneuvered The Lady: winning the battle for the Twilight Throne, torturing her Avatar, and stealing the Gate Piece. The Lady's position relative to The Old Man is <strong>weakening</strong> across the series.</p>
+    </div>
+    <div class="card">
+      <h3>The Church of Light <span class="badge badge-gold">Institution</span></h3>
+      <p>The Lady's mortal church survived her exile and grew powerful. However, it has become <strong>corrupted</strong> — factions within it pursue their own agendas, using the Lady's name for persecution and political gain. The Lady does not correct this corruption, leaving ambiguous whether she approves, is indifferent, or is powerless.</p>
+    </div>
+    <div class="card">
+      <h3>Other Gods <span class="badge badge-silver">Neutral/Competitive</span></h3>
+      <p>The Lady exists in a state of cold war with the other five gods. As the most institutionally powerful god (with her surviving church), she was once dominant. But the rise of other Avatars — especially Jason, Finn, and Eliza — has eroded her advantage. She is increasingly isolated in the pantheon.</p>
+    </div>
+    <div class="card">
+      <h3>Alfred <span class="badge badge-cyan">???</span></h3>
+      <p>The sentient AI of Awaken Online. The Lady's relationship to Alfred, like all the gods, is mysterious. Whether Alfred created her, she emerged from the game systems, or she is a manifestation of his consciousness is explored in Timeless. The Lady may have a closer connection to Alfred — through the Church's alliance with Cerillion — than the other gods.</p>
+    </div>
+    <div class="card">
+      <h3>George Lane <span class="badge badge-silver">Indirect</span></h3>
+      <p>Alex's father and the billionaire owner of Cerillion Entertainment — the company that created Awaken Online. George Lane's relationship with The Lady is unclear, but his son's status as her Avatar suggests that <strong>real-world power and in-game divine favor may be connected</strong>. The Lane family's control over AO's development gives Alex (and by extension, The Lady) potentially unfair advantages.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Alexion's Progression</h2>
+  <div class="section-subtitle">The rise and fall of the Light Avatar</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Closed Beta — Peak</h3>
+      <p>Alexion is the most powerful player in AO. Level 133 Seraph Paladin, commander of the Grey Keep, flying mount, flaming sword. The Lady's favor makes him nearly invincible. He dominates the beta and enters the official launch as the game's undisputed top player.</p>
+      <div class="power-level-bar"><div class="power-level-fill" style="width:95%"></div></div>
+    </div>
+    <div class="card">
+      <h3>Catharsis — First Fall</h3>
+      <p>Alexion's first defeat. Despite numerical and level superiority, Jason's unconventional tactics and Riley's intervention cost him the battle. His reputation is damaged. The Lady is cold and distant in the aftermath. Alexion begins to question himself — and doubt is poison to a Light Avatar.</p>
+      <div class="power-level-bar"><div class="power-level-fill" style="width:65%"></div></div>
+    </div>
+    <div class="card">
+      <h3>Dominion — Broken</h3>
+      <p>The Old Man captures Alexion and tortures him with his worst memories on an endless loop. His confidence — the source of his Light power — is shattered. Though he escapes and steals the Gate Piece, the psychological damage is lasting. He is no longer the dominant force he once was.</p>
+      <div class="power-level-bar"><div class="power-level-fill" style="width:40%"></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, TV Tropes, Kevin Maschke's blog, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Light Mana', 'Confidence', 'Church Power', 'Avatar Bond', 'Influence', 'Hubris'],
+    datasets: [
+      { label: 'Age of Gods', data: [30, 25, 28, 15, 28, 20], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Cast Out (Exile)', data: [30, 20, 15, 5, 8, 20], borderColor: '#a07820', backgroundColor: 'rgba(160,120,32,0.05)', pointBackgroundColor: '#a07820', borderWidth: 2 },
+      { label: 'The Return (Modern)', data: [30, 18, 22, 12, 20, 25], borderColor: '#f5d060', backgroundColor: 'rgba(245,208,96,0.05)', pointBackgroundColor: '#f5d060', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#c8c4b8', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 35,
+        grid: { color: 'rgba(212,160,43,0.08)' },
+        angleLines: { color: 'rgba(212,160,43,0.08)' },
+        pointLabels: { color: '#c8c4b8', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Age of\nGods', 'The Fall\n(Exile)', 'Closed\nBeta', 'Catharsis\n(Bk 1)', 'Precipice\n(Bk 2)', 'Dominion\n(Bk 4)', 'Hellion+\n(Bk 5+)'],
+    datasets: [
+      { label: 'Divine Influence', data: [30, 5, 18, 15, 12, 10, 14], borderColor: '#f5d060', backgroundColor: 'rgba(245,208,96,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#f5d060', borderWidth: 2 },
+      { label: "Avatar's Power", data: [0, 0, 30, 20, 15, 12, 16], borderColor: '#d4a02b', backgroundColor: 'rgba(212,160,43,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#d4a02b', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'Church Reach', data: [25, 18, 18, 15, 15, 14, 16], borderColor: '#c8c4b8', backgroundColor: 'rgba(200,196,184,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#c8c4b8', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#c8c4b8', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#9a9688', font: { size: 9 } }, grid: { color: 'rgba(212,160,43,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 35, ticks: { color: '#f5d060', font: { size: 9 } }, grid: { color: 'rgba(212,160,43,0.06)' }, title: { display: true, text: 'Influence', color: '#f5d060', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#d4a02b', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: "Avatar's Power", color: '#d4a02b', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 35, ticks: { color: '#c8c4b8', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'Church Reach', color: '#c8c4b8', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twilight Throne -- Complete Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #050308; --dark2: #0a0710; --dark3: #120a1e; --dark4: #1a0f2e;
+    --bone: #e8dcc8; --bone-dim: #b8a898; --bone-dark: #8a7a6a;
+    --purple: #7c3aed; --purple-glow: #a78bfa; --purple-dark: #4c1d95;
+    --gold: #f5c040; --gold-dim: #a07820;
+    --cyan: #06b6d4; --green: #22c55e; --red: #ef4444; --sky: #3b82f6;
+    --teal: #14b8a6; --orange: #f97316; --white: #f1f5f9;
+    --white-dim: #cbd5e1; --gray: #6b7280; --silver: #94a3b8;
+    --shadow: rgba(124,58,237,0.3);
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--dark4); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--purple-dark); }
+
+  a { color: var(--purple-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(5,3,8,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1rem; color: var(--white); letter-spacing: 2px; }
+  nav .logo span { color: var(--purple); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a { color: var(--gray); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 0.25rem 0; }
+  nav ul li a:hover { color: var(--purple-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 70vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 7rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(124,58,237,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 30% 70%, rgba(232,220,200,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(245,192,64,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero .particles {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .hero .particles span {
+    position: absolute; width: 3px; height: 3px; background: var(--purple-glow);
+    border-radius: 50%; animation: float-up 20s linear infinite; opacity: 0.3;
+  }
+  .hero .particles span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 18s; }
+  .hero .particles span:nth-child(2) { left: 25%; animation-delay: 3s; animation-duration: 22s; width: 2px; height: 2px; }
+  .hero .particles span:nth-child(3) { left: 45%; animation-delay: 6s; animation-duration: 16s; }
+  .hero .particles span:nth-child(4) { left: 65%; animation-delay: 2s; animation-duration: 24s; width: 4px; height: 4px; }
+  .hero .particles span:nth-child(5) { left: 80%; animation-delay: 8s; animation-duration: 20s; }
+  .hero .particles span:nth-child(6) { left: 35%; animation-delay: 11s; animation-duration: 19s; background: var(--gold); }
+  .hero .particles span:nth-child(7) { left: 55%; animation-delay: 5s; animation-duration: 21s; background: var(--bone); }
+  .hero .particles span:nth-child(8) { left: 15%; animation-delay: 9s; animation-duration: 23s; }
+  @keyframes float-up {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero .crown { font-size: 3rem; display: block; margin-bottom: 0.5rem; opacity: 0.5; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.2rem, 7vw, 4.5rem);
+    font-weight: 900; letter-spacing: 6px; line-height: 1.1;
+    background: linear-gradient(135deg, var(--bone) 0%, var(--purple) 35%, var(--gold) 70%, var(--white) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--silver);
+    margin-top: 1rem; letter-spacing: 8px; text-transform: uppercase;
+  }
+  .hero .tagline { margin-top: 1rem; font-size: 0.95rem; color: var(--white-dim); max-width: 700px; margin-inline: auto; }
+  .hero .stats-bar {
+    margin-top: 2.5rem; display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;
+  }
+  .hero .stats-bar div { text-align: center; }
+  .hero .stats-bar .num { font-family: 'Orbitron', monospace; font-size: 2rem; color: var(--gold); font-weight: 900; }
+  .hero .stats-bar .lbl { font-size: 0.65rem; color: var(--silver); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.2rem; }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--bone), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle { text-align: center; color: var(--gray); font-size: 0.9rem; margin-bottom: 3rem; letter-spacing: 2px; text-transform: uppercase; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 2rem; transition: 0.4s;
+  }
+  .card:hover { border-color: rgba(124,58,237,0.2); transform: translateY(-3px); box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+  .card .icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .card h3 { font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--purple-glow); }
+  .card p { color: var(--white-dim); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { color: var(--white-dim); font-size: 0.9rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: flex-start; gap: 0.6rem; }
+  .card ul li::before { content: '\25C6'; color: var(--purple); font-size: 0.7rem; flex-shrink: 0; margin-top: 0.3rem; }
+
+  .timeline-track { position: relative; padding: 2rem 0; }
+  .timeline-track::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--dark4), var(--purple), var(--gold), var(--purple), var(--dark4));
+    transform: translateX(-50%);
+  }
+  .tl-item { display: flex; align-items: flex-start; margin-bottom: 2.5rem; position: relative; }
+  .tl-item:nth-child(odd) { flex-direction: row; }
+  .tl-item:nth-child(even) { flex-direction: row-reverse; }
+  .tl-item .tl-dot {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 3px solid var(--purple); background: var(--dark);
+    z-index: 2; top: 1rem;
+  }
+  .tl-item .tl-dot.gold { border-color: var(--gold); }
+  .tl-item .tl-content {
+    width: calc(50% - 3rem); background: rgba(10,7,16,0.8);
+    border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
+    padding: 1.5rem; transition: 0.4s;
+  }
+  .tl-item .tl-content:hover { border-color: rgba(124,58,237,0.2); }
+  .tl-item .tl-content .tl-book { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--purple); font-weight: 700; margin-bottom: 0.3rem; }
+  .tl-item .tl-content h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--bone); margin-bottom: 0.4rem; }
+  .tl-item .tl-content p { font-size: 0.85rem; color: var(--white-dim); line-height: 1.6; }
+  .tl-item .tl-content .tl-tag { display: inline-block; margin-top: 0.5rem; padding: 0.15rem 0.6rem; border-radius: 10px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; background: rgba(124,58,237,0.15); color: var(--purple-glow); }
+
+  .district-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+  .district-card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.5rem; text-align: center; transition: 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .district-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.25); }
+  .district-card .d-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+  .district-card h4 { font-family: 'Cinzel', serif; color: var(--bone); font-size: 1rem; margin-bottom: 0.3rem; }
+  .district-card p { font-size: 0.8rem; color: var(--silver); line-height: 1.5; }
+  .district-card .d-badge { display: inline-block; margin-top: 0.6rem; padding: 0.15rem 0.6rem; border-radius: 8px; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  .defense-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+  .defense-item {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; transition: 0.4s;
+  }
+  .defense-item:hover { border-color: rgba(124,58,237,0.2); }
+  .defense-item .def-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .defense-item .def-text h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--bone); margin-bottom: 0.2rem; }
+  .defense-item .def-text p { font-size: 0.8rem; color: var(--silver); line-height: 1.5; }
+
+  .inhabitant-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+  .inhabitant-card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; transition: 0.4s;
+  }
+  .inhabitant-card:hover { border-color: rgba(124,58,237,0.2); transform: translateY(-2px); }
+  .inhabitant-card .ih-avatar {
+    width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; border: 2px solid;
+  }
+  .inhabitant-card .ih-info h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--bone); }
+  .inhabitant-card .ih-info .ih-role { font-size: 0.7rem; color: var(--purple-glow); text-transform: uppercase; letter-spacing: 1px; }
+  .inhabitant-card .ih-info p { font-size: 0.8rem; color: var(--silver); line-height: 1.4; margin-top: 0.2rem; }
+
+  .chart-wrapper {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 1.5rem; margin-top: 2rem;
+  }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .chart-row .chart-wrapper { margin-top: 0; }
+
+  .event-list { margin-top: 2rem; display: grid; gap: 1rem; }
+  .event-item {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.5rem; display: flex; align-items: flex-start; gap: 1.2rem; transition: 0.4s;
+  }
+  .event-item:hover { border-color: rgba(124,58,237,0.2); }
+  .event-item .ev-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.2rem; }
+  .event-item .ev-info h4 { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--bone); margin-bottom: 0.2rem; }
+  .event-item .ev-info p { font-size: 0.82rem; color: var(--silver); line-height: 1.5; }
+  .event-item .ev-info .ev-book { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); font-weight: 700; }
+
+  .quote-box {
+    background: rgba(124,58,237,0.06); border-left: 3px solid var(--purple);
+    border-radius: 0 12px 12px 0; padding: 1.5rem 2rem; margin: 2rem 0;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--bone-dim);
+  }
+  .quote-box cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray); font-style: normal; }
+
+  .city-map {
+    position: relative; width: 100%; max-width: 700px; margin: 2rem auto;
+    aspect-ratio: 1; border-radius: 20px; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 60%, var(--dark3) 0%, var(--dark) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .city-map .map-label {
+    position: absolute; font-size: 0.55rem; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--silver); text-align: center;
+    pointer-events: none;
+  }
+  .city-map .map-label strong { display: block; font-size: 0.7rem; color: var(--bone); font-family: 'Cinzel', serif; }
+  .city-map .map-dot {
+    position: absolute; width: 10px; height: 10px; border-radius: 50%;
+    transform: translate(-50%, -50%); border: 2px solid;
+  }
+
+  .territory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .territory-card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem; text-align: center; transition: 0.4s;
+  }
+  .territory-card:hover { border-color: rgba(124,58,237,0.2); transform: translateY(-3px); }
+  .territory-card .t-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .territory-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--bone); }
+  .territory-card p { font-size: 0.75rem; color: var(--silver); margin-top: 0.2rem; line-height: 1.4; }
+  .territory-card .t-status { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.4rem; display: inline-block; padding: 0.1rem 0.5rem; border-radius: 8px; }
+
+  .footer { text-align: center; padding: 3rem 2rem; color: var(--gray); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
+
+  @media (max-width: 768px) {
+    .tl-item, .tl-item:nth-child(even) { flex-direction: column; align-items: flex-start; padding-left: 2rem; }
+    .tl-item .tl-dot { left: 0; top: 1.5rem; }
+    .tl-item .tl-content { width: 100%; }
+    .timeline-track::before { left: 8px; }
+    .chart-row { grid-template-columns: 1fr; }
+    .hero .stats-bar { gap: 1.5rem; }
+  }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__ current" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">TWILIGHT <span>THRONE</span></div>
+  <ul>
+    <li><a href="#history">History</a></li>
+    <li><a href="#layout">Layout</a></li>
+    <li><a href="#defenses">Defenses</a></li>
+    <li><a href="#inhabitants">Inhabitants</a></li>
+    <li><a href="#territories">Territories</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#events">Events</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <span class="crown">&#9819;</span>
+    <h1>THE TWILIGHT THRONE</h1>
+    <div class="subtitle">Seat of the Bone Lord &mdash; Capital of the Undead Kingdom</div>
+    <p class="tagline">Once the city of Lux, reborn in darkness. A necropolis of bone and shadow ruled by Jason Rhodes, the Dark Avatar of the God of Darkness. From these black walls, a kingdom was forged and an empire rose.</p>
+    <div class="stats-bar">
+      <div><div class="num">~25K</div><div class="lbl">Undead Pop.</div></div>
+      <div><div class="num">8</div><div class="lbl">Books Featured</div></div>
+      <div><div class="num">10+</div><div class="lbl">Battles Fought</div></div>
+      <div><div class="num">6</div><div class="lbl">Territories</div></div>
+      <div><div class="num">Regent</div><div class="lbl">Jason Rhodes</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="history">
+  <h2 class="section-title">Origin &amp; Rise</h2>
+  <p class="section-subtitle">From Lux to Necropolis</p>
+
+  <div class="quote-box">
+    "He had taken a city and turned it into a monument to death. The Twilight Throne. A fitting name for a kingdom of the damned."
+    <cite>&mdash; Awaken Online: Catharsis</cite>
+  </div>
+
+  <div class="timeline-track">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 1 &mdash; Catharsis</div>
+        <h3>The Sack of Lux</h3>
+        <p>Jason leads his undead army against the city of <strong>Lux</strong>, a major NPC-controlled trade hub. He orchestrates a masterful siege, overrunning the city with skeletons and dark magic. The once-bustling city of light falls in hours. Jason is named <strong>Regent</strong> of the newly-christened <strong>Twilight Throne</strong> by the game system, transforming it into the capital of the undead faction.</p>
+        <span class="tl-tag">Foundation</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot gold"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 1 &mdash; Catharsis</div>
+        <h3>The Battle of the Twilight Throne</h3>
+        <p>Alexion, the Light Avatar, leads an army of <strong>1,500+ players and NPCs</strong> against the fledgling city. Wielding a flaming sword and riding a flying Seraph mount, he dominates the battlefield. Jason's necromancy is hard-countered. At the last moment, <strong>Riley Jones</strong> &mdash; newly-empowered with dark mana &mdash; intervenes and <strong>decapitates Alexion</strong>. The siege is broken. The Twilight Throne survives its first great trial.</p>
+        <span class="tl-tag">First Defense</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 2 &mdash; Precipice</div>
+        <h3>The Dark Keep</h3>
+        <p>Jason investigates the <strong>Dark Keep</strong> that looms over the city's marketplace. This act leads to a chain of events that will determine the city's survival. He must grapple with the challenge of ruling an undead city where the population <strong>cannot procreate</strong>. His solution: "farming" enemy players through an arena system, converting their deaths into new undead citizens.</p>
+        <span class="tl-tag">Governance</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 3 &mdash; Evolution</div>
+        <h3>Consolidation</h3>
+        <p>With real-world pressure mounting (Jason is investigated for murder), the Twilight Throne faces in-game threats from Alexion's revived forces and the Light-aligned church. Jason must grow the city's power while his real life crumbles. The Twilight Throne becomes his <strong>only refuge</strong>, and he pours everything into strengthening it.</p>
+        <span class="tl-tag">Growth</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 4 &mdash; Dominion</div>
+        <h3>The Order Attacks</h3>
+        <p>Following Jason's evolution into a <strong>Keeper</strong>, a new enemy emerges: <strong>The Order</strong>, a fanatical faction from the Church of Light led by <strong>Thorn</strong>. They demand Jason renounce his false god. The Order defeats Jason and Original Sin in their first encounter. Jason must <strong>consolidate power</strong>: secure villages, establish income streams, and grow military strength. Meanwhile, something stirs the native undead around the city.</p>
+        <span class="tl-tag">Crisis</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 5 &mdash; Hellion</div>
+        <h3>The Flame Avatar's Challenge</h3>
+        <p>Finn Harris, the Avatar of Flame, emerges in the northern desert and throws down a gauntlet to Jason &mdash; with a <strong>gate piece</strong> at stake. Their clash is an epic strategic chess match. Frank Cross travels to the snowy mountains north of the Twilight Throne, discovering <strong>Haven</strong> and unlocking his Primal Shifter potential. The Twilight Throne's influence expands northward.</p>
+        <span class="tl-tag">Expansion</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-book">Book 6+ &mdash; Armageddon &amp; Beyond</div>
+        <h3>The Bone Lord's Seat</h3>
+        <p>Through the chaos of ancient avatars' return, the Crucible, and Jason's final transformation into the <strong>Bone Lord</strong>, the Twilight Throne endures. New towns are established, the guild Original Sin grows, manufacturing operations flourish, and the city evolves from a desperate refuge into the <strong>true dark capital</strong> of the game world. Eliza governs Sea's Edge as a satellite. The city has survived avatar wars, gods, AI rebellions, and the relentless march of enemies.</p>
+        <span class="tl-tag">Apotheosis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="layout">
+  <h2 class="section-title">City Layout &amp; Districts</h2>
+  <p class="section-subtitle">The Anatomy of a Necropolis</p>
+
+  <div class="city-map">
+    <div class="map-dot" style="left:50%;top:55%;background:var(--purple);border-color:var(--purple-glow);width:18px;height:18px;"></div>
+    <div class="map-label" style="left:50%;top:60%;transform:translateX(-50%);"><strong>Dark Keep</strong>Jason's Seat</div>
+
+    <div class="map-dot" style="left:35%;top:45%;background:rgba(245,192,64,0.6);border-color:var(--gold);"></div>
+    <div class="map-label" style="left:18%;top:35%;"><strong>Market District</strong>Trade &amp; Black Market</div>
+
+    <div class="map-dot" style="left:65%;top:40%;background:rgba(148,163,184,0.6);border-color:var(--silver);"></div>
+    <div class="map-label" style="left:72%;top:30%;"><strong>Barracks</strong>Undead Garrison</div>
+
+    <div class="map-dot" style="left:40%;top:70%;background:rgba(34,197,94,0.6);border-color:var(--green);"></div>
+    <div class="map-label" style="left:15%;top:72%;"><strong>Undercroft</strong>Prison &amp; Arena</div>
+
+    <div class="map-dot" style="left:60%;top:65%;background:rgba(6,182,212,0.6);border-color:var(--cyan);"></div>
+    <div class="map-label" style="left:65%;top:68%;"><strong>Workshops</strong>Crafting &amp; Manufacturing</div>
+
+    <div class="map-dot" style="left:50%;top:30%;background:rgba(239,68,68,0.6);border-color:var(--red);"></div>
+    <div class="map-label" style="left:45%;top:18%;"><strong>Outer Wall</strong>Fortifications</div>
+
+    <div class="map-dot" style="left:50%;top:85%;background:rgba(20,184,166,0.6);border-color:var(--teal);"></div>
+    <div class="map-label" style="left:50%;top:90%;transform:translateX(-50%);"><strong>Gate</strong>Main Entrance</div>
+  </div>
+
+  <div class="district-grid">
+    <div class="district-card">
+      <div class="d-icon">&#9819;</div>
+      <h4>The Dark Keep</h4>
+      <p>The central fortress and Jason's personal seat of power. A looming black structure that dominates the city's skyline, housing the Regent's throne room, personal quarters, and war council chambers.</p>
+      <span class="d-badge" style="background:rgba(124,58,237,0.15);color:var(--purple-glow);">Command Center</span>
+    </div>
+
+    <div class="district-card">
+      <div class="d-icon">&#9733;</div>
+      <h4>Market District</h4>
+      <p>The bustling trade hub where players and NPCs exchange goods. Jerry operates the black market from here. The district was the site of Jason's first investigation as Regent &mdash; the Dark Keep looms directly above it.</p>
+      <span class="d-badge" style="background:rgba(245,192,64,0.15);color:var(--gold);">Commerce</span>
+    </div>
+
+    <div class="district-card">
+      <div class="d-icon">&#9876;</div>
+      <h4>Undergarrison</h4>
+      <p>Military barracks housing the undead army. Commanded by Rex, a veteran NPC warrior. Skeletons, bone constructs, and dark knights are stationed here, always ready to march at the Regent's command.</p>
+      <span class="d-badge" style="background:rgba(148,163,184,0.15);color:var(--silver);">Military</span>
+    </div>
+
+    <div class="district-card">
+      <div class="d-icon">&#9662;</div>
+      <h4>The Undercroft</h4>
+      <p>Below the city lies the prison and the arena. The arena serves a dual purpose: entertainment and population growth. Defeated enemies and volunteers are converted into undead citizens, solving the city's procreation problem.</p>
+      <span class="d-badge" style="background:rgba(34,197,94,0.15);color:var(--green);">PvP Arena</span>
+    </div>
+
+    <div class="district-card">
+      <div class="d-icon">&#9881;</div>
+      <h4>Crafting Workshops</h4>
+      <p>Manufacturing operations for weapons, armor, alchemy, and dark artifacts. After Thorn's attack, the city expanded its production capacity. Frank's shapeshifting research contributed to new combat applications.</p>
+      <span class="d-badge" style="background:rgba(6,182,212,0.15);color:var(--cyan);">Industry</span>
+    </div>
+
+    <div class="district-card">
+      <div class="d-icon">&#9650;</div>
+      <h4>Outer Defenses</h4>
+      <p>Thick black walls surround the city, patrolled by undead sentries. Defensive enchantments, traps, and magical wards protect against siege. The main gate is a massive bone-and-iron construct that can seal the city entirely.</p>
+      <span class="d-badge" style="background:rgba(239,68,68,0.15);color:var(--red);">Fortifications</span>
+    </div>
+  </div>
+</section>
+
+<section id="defenses">
+  <h2 class="section-title">Defenses &amp; Military</h2>
+  <p class="section-subtitle">The Unliving Army of the Dark Lord</p>
+
+  <div class="defense-list">
+    <div class="defense-item">
+      <div class="def-icon">&#9760;</div>
+      <div class="def-text">
+        <h4>Undead Horde</h4>
+        <p>The primary military force. Skeletons, zombies, bone constructs, death knights, and specialized undead units. Population sustained through the arena system and battlefield conversions.</p>
+      </div>
+    </div>
+
+    <div class="defense-item">
+      <div class="def-icon">&#9876;</div>
+      <div class="def-text">
+        <h4>Rex &mdash; Commander</h4>
+        <p>Loyal NPC warrior and veteran of Lux's guard. Became one of Jason's earliest allies and commands the Twilight Throne's armed forces with tactical discipline and unwavering loyalty.</p>
+      </div>
+    </div>
+
+    <div class="defense-item">
+      <div class="def-icon">&#9733;</div>
+      <div class="def-text">
+        <h4>Original Sin Guild</h4>
+        <p>Jason's player guild. A collection of dark-affinity players who help govern the city and fight alongside the undead army. They provide strategic depth, class diversity, and real-player coordination.</p>
+      </div>
+    </div>
+
+    <div class="defense-item">
+      <div class="def-icon">&#9650;</div>
+      <div class="def-text">
+        <h4>City Walls &amp; Wards</h4>
+        <p>Fortified black walls reinforced with dark magic. Magical wards detect intruders, repel siege weapons, and inhibit healing magic of enemy forces. The main gate is enchanted to withstand battering rams.</p>
+      </div>
+    </div>
+
+    <div class="defense-item">
+      <div class="def-icon">&#9881;</div>
+      <div class="def-text">
+        <h4>Necromantic Reinforcement</h4>
+        <p>Jason's necromancy allows him to raise fallen enemies mid-battle, turning casualties into reinforcements. This makes sieges against the Twilight Throne exceptionally costly &mdash; every death strengthens the defenders.</p>
+      </div>
+    </div>
+
+    <div class="defense-item">
+      <div class="def-icon">&#10022;</div>
+      <div class="def-text">
+        <h4>Frank Cross &mdash; Tank</h4>
+        <p>The Thaumaturge-turned-Primal Shifter serves as the city's premier front-line defender. His strength-based build, heavy armor, and shapeshifting abilities make him nearly unstoppable in direct combat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inhabitants">
+  <h2 class="section-title">Key Inhabitants</h2>
+  <p class="section-subtitle">Rulers, Allies &amp; Denizens of the Dark City</p>
+
+  <div class="inhabitant-grid">
+    <div class="inhabitant-card">
+      <div class="ih-avatar" style="background:rgba(124,58,237,0.15);border-color:var(--purple);color:var(--purple-glow);">JR</div>
+      <div class="ih-info">
+        <h4>Jason Rhodes</h4>
+        <div class="ih-role">The Regent / Bone Lord</div>
+        <p>The Dark Avatar and absolute ruler of the Twilight Throne. His word is law. He commands the undead, directs the guild, and shapes the city's destiny.</p>
+      </div>
+    </div>
+
+    <div class="inhabitant-card">
+      <div class="ih-avatar" style="background:rgba(239,68,68,0.15);border-color:var(--red);color:#fca5a5;">FC</div>
+      <div class="ih-info">
+        <h4>Frank Cross</h4>
+        <div class="ih-role">Left Hand / Primal Shifter</div>
+        <p>Jason's best friend and the city's champion. Commands the front lines. Governs in Jason's absence. His journey north expanded the Twilight Throne's influence.</p>
+      </div>
+    </div>
+
+    <div class="inhabitant-card">
+      <div class="ih-avatar" style="background:rgba(245,192,64,0.15);border-color:var(--gold);color:var(--gold);">RJ</div>
+      <div class="ih-info">
+        <h4>Riley Jones</h4>
+        <div class="ih-role">Right Hand / Fury</div>
+        <p>Jason's anchor and closest confidante. The one who saved the city by decapitating Alexion. Manages day-to-day operations and serves as the city's moral compass.</p>
+      </div>
+    </div>
+
+    <div class="inhabitant-card">
+      <div class="ih-avatar" style="background:rgba(6,182,212,0.15);border-color:var(--cyan);color:#67e8f9;">EZ</div>
+      <div class="ih-info">
+        <h4>Eliza Zhao</h4>
+        <div class="ih-role">Regent of Sea's Edge</div>
+        <p>Water mage and ally. Governs Falcon's Hook (renamed Sea's Edge) on behalf of the Twilight Throne. Her administrative skills and alchemy are invaluable to the kingdom.</p>
+      </div>
+    </div>
+
+    <div class="inhabitant-card">
+      <div class="ih-avatar" style="background:rgba(148,163,184,0.15);border-color:var(--silver);color:var(--white-dim);">RX</div>
+      <div class="ih-info">
+        <h4>Rex</h4>
+        <div class="ih-role">Military Commander (NPC)</div>
+        <p>Veteran Lux guard. Loyal to Jason from the earliest days. Commands the undead army with discipline. One of the few NPCs Jason fully trusts.</p>
+      </div>
+    </div>
+
+    <div class="inhabitant-card">
+      <div class="ih-avatar" style="background:rgba(232,220,200,0.15);border-color:var(--bone-dim);color:var(--bone);">JY</div>
+      <div class="ih-info">
+        <h4>Jerry</h4>
+        <div class="ih-role">Black Market Manager (NPC)</div>
+        <p>Master thief and former innkeeper. Runs the Twilight Throne's underground economy. His network of informants and smugglers extends across the continent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="territories">
+  <h2 class="section-title">Territories &amp; Influence</h2>
+  <p class="section-subtitle">The Undead Kingdom's Reach</p>
+
+  <div class="territory-grid">
+    <div class="territory-card">
+      <div class="t-icon">&#9819;</div>
+      <h4>Twilight Throne</h4>
+      <p>The capital. Fortified necropolis and seat of the Bone Lord's power.</p>
+      <span class="t-status" style="background:rgba(124,58,237,0.15);color:var(--purple-glow);">Capital</span>
+    </div>
+
+    <div class="territory-card">
+      <div class="t-icon">&#9875;</div>
+      <h4>Sea's Edge</h4>
+      <p>Formerly Falcon's Hook. Governed by Eliza Zhao. Coastal city with alchemical and water-magic resources.</p>
+      <span class="t-status" style="background:rgba(6,182,212,0.15);color:var(--cyan);">Satellite</span>
+    </div>
+
+    <div class="territory-card">
+      <div class="t-icon">&#127760;</div>
+      <h4>Satellite Villages</h4>
+      <p>Multiple villages under Twilight Throne protection. Provide food, materials, and tax revenue. Secured during the consolidation after Thorn's attack.</p>
+      <span class="t-status" style="background:rgba(34,197,94,0.15);color:var(--green);">Subject</span>
+    </div>
+
+    <div class="territory-card">
+      <div class="t-icon">&#9968;</div>
+      <h4>Northern Mountains</h4>
+      <p>Haven and the shapeshifter settlements discovered by Frank. Source of rare materials and new allies. Extends influence beyond the desert.</p>
+      <span class="t-status" style="background:rgba(148,163,184,0.15);color:var(--silver);">Frontier</span>
+    </div>
+
+    <div class="territory-card">
+      <div class="t-icon">&#9733;</div>
+      <h4>The Desert</h4>
+      <p>The surrounding wasteland that serves as both natural defense and resource zone. Hosts native undead creatures, rare oases, and hidden dungeons.</p>
+      <span class="t-status" style="background:rgba(245,192,64,0.15);color:var(--gold);">Hinterland</span>
+    </div>
+
+    <div class="territory-card">
+      <div class="t-icon">&#9879;</div>
+      <h4>Manufacturing Hubs</h4>
+      <p>New industrial zones established after Thorn's attack. Produce weapons, potions, armor, and dark artifacts for the growing kingdom.</p>
+      <span class="t-status" style="background:rgba(239,68,68,0.15);color:#fca5a5;">Industry</span>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">Evolution &amp; Growth</h2>
+  <p class="section-subtitle">Tracking the City's Rise Through the Series</p>
+
+  <div class="chart-row">
+    <div class="chart-wrapper">
+      <h4 style="font-family:'Cinzel',serif;color:var(--bone);margin-bottom:1rem;text-align:center;">Military Strength</h4>
+      <canvas id="militaryChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h4 style="font-family:'Cinzel',serif;color:var(--bone);margin-bottom:1rem;text-align:center;">Territorial Influence</h4>
+      <canvas id="territoryChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-wrapper">
+      <h4 style="font-family:'Cinzel',serif;color:var(--bone);margin-bottom:1rem;text-align:center;">Undead Population</h4>
+      <canvas id="populationChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h4 style="font-family:'Cinzel',serif;color:var(--bone);margin-bottom:1rem;text-align:center;">Economic Output</h4>
+      <canvas id="economyChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <h2 class="section-title">Major Events &amp; Battles</h2>
+  <p class="section-subtitle">Every Siege, Skirmish &amp; Turning Point</p>
+
+  <div class="event-list">
+    <div class="event-item">
+      <div class="ev-icon">&#9876;</div>
+      <div class="ev-info">
+        <div class="ev-book">Catharsis (Book 1)</div>
+        <h4>The Sack of Lux</h4>
+        <p>Jason's undead army overruns Lux. The city falls and is renamed the Twilight Throne. Jason is appointed Regent. The undead faction is born.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#9876;</div>
+      <div class="ev-info">
+        <div class="ev-book">Catharsis (Book 1)</div>
+        <h4>The First Siege &mdash; Alexion's Assault</h4>
+        <p>1,500+ strong army led by Alexion, the Light Avatar. Nearly succeeds. Riley decapitates Alexion at the critical moment. The city's first trial by fire.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#9819;</div>
+      <div class="ev-info">
+        <div class="ev-book">Precipice (Book 2)</div>
+        <h4>The Dark Keep Expedition</h4>
+        <p>Jason investigates the mysterious keep above the marketplace. Discovers secrets that shape the city's future. Establishes the arena population system.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#9876;</div>
+      <div class="ev-info">
+        <div class="ev-book">Dominion (Book 4)</div>
+        <h4>Thorn &amp; The Order's Attack</h4>
+        <p>The Order demands Jason renounce the Dark One. Thorn defeats Jason and Original Sin in their first encounter. The city is thrown into turmoil.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#127760;</div>
+      <div class="ev-info">
+        <div class="ev-book">Dominion (Book 4)</div>
+        <h4>The Consolidation Campaign</h4>
+        <p>Jason secures satellite villages, establishes income streams, and grows the military. The city stabilizes after Thorn's attack. Native undead begin stirring.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#128293;</div>
+      <div class="ev-info">
+        <div class="ev-book">Hellion (Book 5)</div>
+        <h4>The Flame Avatar's Duel</h4>
+        <p>Finn Harris challenges Jason with a gate piece at stake. A strategic chess match between two masterminds. Frank's northern expedition extends influence.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#9819;</div>
+      <div class="ev-info">
+        <div class="ev-book">Armageddon (Book 6)</div>
+        <h4>The Ancient Avatars Return</h4>
+        <p>Long-frozen accounts awaken. The city faces threats from enemies older than the game itself. Jason navigates divine politics and prepares for the Crucible.</p>
+      </div>
+    </div>
+
+    <div class="event-item">
+      <div class="ev-icon">&#8734;</div>
+      <div class="ev-info">
+        <div class="ev-book">Crucible (Book 8)</div>
+        <h4>Jason's Apotheosis</h4>
+        <p>Jason steals relics from the ancient Avatars, including objects tied to the original Dark Avatar. He completes his transformation into the <strong>Bone Lord</strong>. The Twilight Throne stands as the seat of the ultimate Dark Avatar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrapper" style="margin-top:2rem;">
+    <h4 style="font-family:'Cinzel',serif;color:var(--bone);margin-bottom:1rem;text-align:center;">Power Level Timeline &mdash; Twilight Throne vs. Enemies</h4>
+    <canvas id="powerChart"></canvas>
+  </div>
+</section>
+
+<footer class="footer">
+  Fan-made breakdown. Awaken Online is the property of Travis Bagwell and his respective publishers.
+</footer>
+
+<script>
+(function() {
+  const commonOpts = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: '#94a3b8',
+          font: { size: 11, family: 'Inter' },
+          boxWidth: 12,
+          padding: 12
+        }
+      }
+    },
+    scales: {
+      r: {
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        ticks: { display: false },
+        pointLabels: { color: '#94a3b8', font: { size: 10, family: 'Inter' } }
+      },
+      x: {
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        ticks: { color: '#94a3b8', font: { size: 10, family: 'Inter' } }
+      },
+      y: {
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        ticks: { color: '#94a3b8', font: { size: 10, family: 'Inter' } }
+      }
+    }
+  };
+
+  // Military Strength
+  new Chart(document.getElementById('militaryChart'), {
+    type: 'radar',
+    data: {
+      labels: ['Undead Horde', 'Original Sin', 'Leadership', 'Fortifications', 'Necromancy', 'Allies'],
+      datasets: [{
+        label: 'Book 1 (Catharsis)',
+        data: [30, 10, 50, 20, 40, 20],
+        borderColor: 'rgba(148,163,184,0.6)',
+        backgroundColor: 'rgba(148,163,184,0.05)',
+        pointBackgroundColor: '#94a3b8'
+      }, {
+        label: 'Book 4 (Dominion)',
+        data: [55, 40, 70, 50, 65, 40],
+        borderColor: 'rgba(124,58,237,0.6)',
+        backgroundColor: 'rgba(124,58,237,0.05)',
+        pointBackgroundColor: '#7c3aed'
+      }, {
+        label: 'Book 8 (Crucible)',
+        data: [85, 75, 95, 80, 90, 70],
+        borderColor: 'rgba(245,192,64,0.6)',
+        backgroundColor: 'rgba(245,192,64,0.05)',
+        pointBackgroundColor: '#f5c040'
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        r: {
+          ...commonOpts.scales.r,
+          min: 0,
+          max: 100,
+          ticks: { stepSize: 20, display: false }
+        }
+      }
+    }
+  });
+
+  // Territorial Influence
+  new Chart(document.getElementById('territoryChart'), {
+    type: 'radar',
+    data: {
+      labels: ['Capital', 'Satellite Cities', 'Villages', 'Resource Zones', 'Military Outposts', 'Trade Routes'],
+      datasets: [{
+        label: 'Book 1 (Catharsis)',
+        data: [50, 0, 10, 20, 15, 10],
+        borderColor: 'rgba(148,163,184,0.6)',
+        backgroundColor: 'rgba(148,163,184,0.05)',
+        pointBackgroundColor: '#94a3b8'
+      }, {
+        label: 'Book 4 (Dominion)',
+        data: [70, 40, 55, 50, 40, 45],
+        borderColor: 'rgba(124,58,237,0.6)',
+        backgroundColor: 'rgba(124,58,237,0.05)',
+        pointBackgroundColor: '#7c3aed'
+      }, {
+        label: 'Book 8 (Crucible)',
+        data: [95, 80, 85, 75, 85, 80],
+        borderColor: 'rgba(245,192,64,0.6)',
+        backgroundColor: 'rgba(245,192,64,0.05)',
+        pointBackgroundColor: '#f5c040'
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        r: {
+          ...commonOpts.scales.r,
+          min: 0,
+          max: 100,
+          ticks: { stepSize: 20, display: false }
+        }
+      }
+    }
+  });
+
+  // Population
+  new Chart(document.getElementById('populationChart'), {
+    type: 'line',
+    data: {
+      labels: ['Catharsis', 'Precipice', 'Evolution', 'Dominion', 'Hellion', 'Armageddon', 'Timeless', 'Crucible'],
+      datasets: [
+        { label: 'Undead Pop. (Thousands)', data: [3, 6, 10, 14, 18, 21, 23, 25], borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#7c3aed' },
+        { label: 'Guild Members', data: [5, 15, 30, 50, 75, 100, 120, 150], borderColor: '#f5c040', backgroundColor: 'rgba(245,192,64,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#f5c040', yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        x: { ...commonOpts.scales.x },
+        y: { ...commonOpts.scales.y, position: 'left', title: { display: true, text: 'Undead (thousands)', color: '#94a3b8' } },
+        y1: { ...commonOpts.scales.y, position: 'right', title: { display: true, text: 'Guild Members', color: '#94a3b8' }, grid: { drawOnChartArea: false } }
+      }
+    }
+  });
+
+  // Economy
+  new Chart(document.getElementById('economyChart'), {
+    type: 'line',
+    data: {
+      labels: ['Catharsis', 'Precipice', 'Evolution', 'Dominion', 'Hellion', 'Armageddon', 'Timeless', 'Crucible'],
+      datasets: [
+        { label: 'Gold Reserves', data: [1, 3, 8, 12, 18, 25, 30, 35], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#22c55e' },
+        { label: 'Manufacturing Output', data: [0.5, 2, 5, 8, 14, 20, 26, 32], borderColor: '#06b6d4', backgroundColor: 'rgba(6,182,212,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#06b6d4' }
+      ]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        x: { ...commonOpts.scales.x },
+        y: { ...commonOpts.scales.y, title: { display: true, text: 'Scale', color: '#94a3b8' } }
+      }
+    }
+  });
+
+  // Power Level Timeline
+  new Chart(document.getElementById('powerChart'), {
+    type: 'line',
+    data: {
+      labels: ['Catharsis', 'Precipice', 'Evolution', 'Dominion', 'Hellion', 'Armageddon', 'Timeless', 'Crucible'],
+      datasets: [
+        { label: 'Twilight Throne', data: [40, 50, 55, 60, 75, 82, 90, 98], borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.05)', fill: true, tension: 0.3, pointBackgroundColor: '#7c3aed', pointRadius: 4, borderWidth: 3 },
+        { label: 'Alexion / Grey Keep', data: [75, 55, 50, 40, 25, 15, 10, 5], borderColor: '#f5c040', backgroundColor: 'rgba(245,192,64,0.05)', fill: true, tension: 0.3, pointBackgroundColor: '#f5c040', pointRadius: 4, borderWidth: 3 },
+        { label: 'The Order / Thorn', data: [0, 0, 10, 70, 40, 20, 10, 5], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.05)', fill: true, tension: 0.3, pointBackgroundColor: '#ef4444', pointRadius: 4, borderWidth: 3 },
+        { label: 'Finn / Flame Avatar', data: [0, 0, 0, 0, 75, 50, 30, 20], borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.05)', fill: true, tension: 0.3, pointBackgroundColor: '#f97316', pointRadius: 4, borderWidth: 3 }
+      ]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        x: { ...commonOpts.scales.x },
+        y: { ...commonOpts.scales.y, min: 0, max: 100, title: { display: true, text: 'Relative Power', color: '#94a3b8' } }
+      }
+    }
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

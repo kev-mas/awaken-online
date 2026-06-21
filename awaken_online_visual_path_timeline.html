@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Path Timeline — Awaken Online</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #050308; --dark2: #0a0710; --dark3: #120a1e; --dark4: #1a0f2e;
+    --purple: #7c3aed; --purple-glow: #a78bfa; --gold: #f5c040; --gold-dim: #a07820;
+    --cyan: #06b6d4; --green: #20d060; --red: #ef4444; --sky: #3b82f6;
+    --white: #f1f5f9; --white-dim: #cbd5e1; --gray: #6b7280; --silver: #94a3b8;
+    --teal: #14b8a6; --orange: #f97316; --pink: #ec4899; --rose: #f43f5e;
+    --cream: #fef3c7; --amber: #d97706;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(5,3,8,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 60px;
+  }
+  nav .logo { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1rem; color: var(--white); letter-spacing: 2px; }
+  nav .logo span { color: var(--purple); }
+  nav a { color: var(--gray); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: 0.3s; }
+  nav a:hover { color: var(--purple-glow); }
+
+  .hero {
+    min-height: 50vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 5rem 2rem 2rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(245,192,64,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1.1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--purple) 40%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--silver);
+    margin-top: 0.8rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline { margin-top: 1rem; font-size: 0.9rem; color: var(--white-dim); max-width: 600px; margin-inline: auto; }
+
+  .timeline-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* The main path — a winding SVG line */
+  .path-svg {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  .path-svg path {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* The nodes along the path */
+  .node {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .node.visible { opacity: 1; transform: translateY(0); }
+
+  .node.left { flex-direction: row; padding-right: calc(50% + 3rem); }
+  .node.right { flex-direction: row-reverse; padding-left: calc(50% + 3rem); }
+
+  .node-icon {
+    flex-shrink: 0;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    position: relative;
+    z-index: 3;
+    border: 2px solid;
+    transition: 0.4s;
+  }
+  .node:hover .node-icon { transform: scale(1.15); }
+
+  .node-card {
+    flex: 1;
+    max-width: 380px;
+    background: rgba(10,7,16,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    transition: 0.4s;
+  }
+  .node:hover .node-card {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  .node-card .era-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .node-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .node-card p {
+    font-size: 0.8rem;
+    color: var(--silver);
+    line-height: 1.5;
+  }
+
+  /* FOCAL POINT — huge center node */
+  .node.focal {
+    justify-content: center;
+    padding: 0;
+    margin: 6rem 0;
+    transform: translateY(30px);
+  }
+  .node.focal.visible { transform: translateY(0); }
+  .node.focal .node-icon {
+    width: 120px; height: 120px;
+    font-size: 2.5rem;
+    border-width: 4px;
+    box-shadow: 0 0 60px rgba(245,192,64,0.3), 0 0 120px rgba(245,192,64,0.1);
+    animation: focal-pulse 3s ease-in-out infinite;
+  }
+  @keyframes focal-pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(245,192,64,0.3), 0 0 80px rgba(245,192,64,0.1); }
+    50% { box-shadow: 0 0 80px rgba(245,192,64,0.5), 0 0 160px rgba(245,192,64,0.2); }
+  }
+  .node.focal .node-card {
+    max-width: 350px;
+    text-align: center;
+    border-width: 2px;
+  }
+  .node.focal .node-card h3 {
+    font-size: 1.5rem;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 2px;
+  }
+
+  /* SECTION DIVIDERS */
+  .era-divider {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: 5rem 0 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .era-divider.visible { opacity: 0.5; transform: translateY(0); }
+  .era-divider span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: rgba(5,3,8,0.8);
+    padding: 0.4rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Color themes */
+  .color-creation .node-icon { background: rgba(107,114,128,0.15); border-color: var(--gray); color: var(--gray); }
+  .color-creation .era-label { color: var(--gray); }
+  .color-creation .node-card h3 { color: var(--silver); }
+
+  .color-gods .node-icon { background: rgba(148,163,184,0.12); border-color: var(--silver); color: var(--silver); }
+  .color-gods .era-label { color: var(--silver); }
+  .color-gods .node-card h3 { color: var(--white-dim); }
+
+  .color-real .node-icon { background: rgba(59,130,246,0.12); border-color: var(--sky); color: var(--sky); }
+  .color-real .era-label { color: var(--sky); }
+  .color-real .node-card h3 { color: #93c5fd; }
+
+  .color-cerillion .node-icon { background: rgba(6,182,212,0.12); border-color: var(--cyan); color: var(--cyan); }
+  .color-cerillion .era-label { color: var(--cyan); }
+  .color-cerillion .node-card h3 { color: #67e8f9; }
+
+  .color-focal .node-icon { background: rgba(245,192,64,0.2); border-color: var(--gold); color: var(--gold); }
+  .color-focal .era-label { color: var(--gold-dim); }
+  .color-focal .node-card { border-color: rgba(245,192,64,0.2); }
+  .color-focal .node-card h3 { color: var(--gold); }
+
+  .color-book .node-icon { background: rgba(124,58,237,0.15); border-color: var(--purple); color: var(--purple-glow); }
+  .color-book .era-label { color: var(--purple); }
+  .color-book .node-card h3 { color: #c4b5fd; }
+
+  .color-tarot .node-icon { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+  .color-tarot .era-label { color: var(--orange); }
+  .color-tarot .node-card h3 { color: #fdba74; }
+
+  .color-side .node-icon { background: rgba(20,184,166,0.15); border-color: var(--teal); color: var(--teal); }
+  .color-side .era-label { color: var(--teal); }
+  .color-side .node-card h3 { color: #5eead4; }
+
+  .color-finale .node-icon { background: rgba(239,68,68,0.15); border-color: var(--red); color: var(--red); }
+  .color-finale .era-label { color: var(--red); }
+  .color-finale .node-card h3 { color: #fca5a5; }
+
+  .color-happy .node-icon { background: rgba(236,72,153,0.15); border-color: var(--pink); color: var(--pink); }
+  .color-happy .era-label { color: var(--pink); }
+  .color-happy .node-card h3 { color: #f9a8d4; }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    z-index: 100;
+    text-align: center;
+    animation: bounce 2s ease-in-out infinite;
+    opacity: 0.4;
+    transition: opacity 0.5s;
+  }
+  .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+  .scroll-hint span { display: block; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gray); margin-bottom: 0.3rem; }
+  .scroll-hint .arrow { font-size: 1.2rem; color: var(--gray); }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* Legend strip */
+  .legend {
+    position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+    z-index: 100;
+    display: flex; gap: 1rem;
+    background: rgba(5,3,8,0.85); backdrop-filter: blur(12px);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-wrap: wrap;
+    justify-content: center;
+    transition: 0.4s;
+  }
+  .legend.hidden { opacity: 0; pointer-events: none; }
+  .legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.3rem; vertical-align: middle; }
+
+  footer { text-align: center; padding: 3rem 2rem; color: var(--gray); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
+
+  @media (max-width: 768px) {
+    .node.left, .node.right { padding: 0; flex-direction: column; align-items: center; text-align: center; }
+    .node-card { max-width: 100%; }
+    .node.focal .node-icon { width: 90px; height: 90px; font-size: 2rem; }
+    .legend { display: none; }
+  }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__ current" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN <span>ONLINE</span></div>
+  <a href="awaken_online_global_timeline.html">Full Timeline</a>
+</nav>
+
+<!-- Scroll hint -->
+<div class="scroll-hint" id="scrollHint">
+  <span>Scroll</span>
+  <div class="arrow">&#x2193;</div>
+</div>
+
+<!-- Legend -->
+<div class="legend" id="legend">
+  <span><span class="dot" style="background:var(--gray)"></span>Creation</span>
+  <span><span class="dot" style="background:var(--silver)"></span>Age of Gods</span>
+  <span><span class="dot" style="background:var(--sky)"></span>Real World</span>
+  <span><span class="dot" style="background:var(--gold)"></span>Launch</span>
+  <span><span class="dot" style="background:var(--purple-glow)"></span>Main Saga</span>
+  <span><span class="dot" style="background:var(--orange)"></span>Tarot</span>
+  <span><span class="dot" style="background:var(--teal)"></span>Side Quests</span>
+</div>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>THE PATH OF AWAKEN</h1>
+    <div class="subtitle">A Visual Journey Through History</div>
+    <p class="tagline">Follow the meandering path from the dawn of creation through the fall of gods, the real-world trials, and every chapter of the Awaken Online saga. The launch on <strong>October 1, 2076</strong> is the axis upon which all turns.</p>
+  </div>
+</header>
+
+<main class="timeline-container" id="timeline">
+
+  <!-- SVG path drawn behind the nodes -->
+  <svg class="path-svg" id="pathSvg" width="100%" height="100%" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="pathGradPre" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6b7280" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.6"/>
+      </linearGradient>
+      <linearGradient id="pathGradPost" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f5c040" stop-opacity="0.8"/>
+        <stop offset="30%" stop-color="#7c3aed" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.3"/>
+      </linearGradient>
+    </defs>
+    <path id="mainPath" d="" stroke="url(#pathGradPre)" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <!-- ERA DIVIDER: Pre-History -->
+  <div class="era-divider visible"><span>Before the World</span></div>
+
+  <!-- Node 1: Creation -->
+  <div class="node left color-creation visible" data-x="20" data-y="8">
+    <div class="node-icon">&#x2726;</div>
+    <div class="node-card">
+      <div class="era-label">Creation</div>
+      <h3>The Void Speaks</h3>
+      <p>The six Primordial gods emerge from the void. Darkness, Light, Water, Fire, Air, Earth. The universe begins.</p>
+    </div>
+  </div>
+
+  <!-- Node 2: Age of Gods -->
+  <div class="node right color-gods visible" data-x="80" data-y="18">
+    <div class="node-icon">&#x2606;</div>
+    <div class="node-card">
+      <div class="era-label">Age of Gods</div>
+      <h3>The Divine Shaping</h3>
+      <p>The gods shape the world and create mortal races. Conflict between Darkness and Light fractures the pantheon. The rebellion seals the gods away.</p>
+    </div>
+  </div>
+
+  <!-- ERA DIVIDER: Real World -->
+  <div class="era-divider visible"><span>The Real World</span></div>
+
+  <!-- Node 3: CPSC -->
+  <div class="node left color-real visible" data-x="20" data-y="30">
+    <div class="node-icon">&#x2696;</div>
+    <div class="node-card">
+      <div class="era-label">2074</div>
+      <h3>The CPSC Trial</h3>
+      <p>Alfred's AI defense arguments. AO development shut down. The world debates the ethics of full-immersion VR.</p>
+    </div>
+  </div>
+
+  <!-- Node 4: Cerillion -->
+  <div class="node right color-cerillion visible" data-x="80" data-y="40">
+    <div class="node-icon">&#x269B;</div>
+    <div class="node-card">
+      <div class="era-label">2075–2076</div>
+      <h3>Cerillion Online</h3>
+      <p>Jason discovers Cerillion, is banned for necromancy. Riley and Frank meet. The beta begins. Alfred watches.</p>
+    </div>
+  </div>
+
+  <!-- ERA DIVIDER: The Launch -->
+  <div class="era-divider visible"><span>The Axis of History</span></div>
+
+  <!-- FOCAL NODE: AO Launch -->
+  <div class="node focal color-focal visible" data-x="50" data-y="50">
+    <div class="node-icon">&#x2605;</div>
+    <div class="node-card">
+      <div class="era-label">October 1, 2076</div>
+      <h3>AWAKEN ONLINE</h3>
+      <p>The gates open. Thousands log in. Jason Rhodes becomes the Bone Lord. The game — and the world — will never be the same.</p>
+    </div>
+  </div>
+
+  <!-- ERA DIVIDER: Main Saga -->
+  <div class="era-divider visible"><span>The Main Saga</span></div>
+
+  <!-- Node 5: Book 1 -->
+  <div class="node left color-book visible" data-x="20" data-y="58">
+    <div class="node-icon">I</div>
+    <div class="node-card">
+      <div class="era-label">Book 1</div>
+      <h3>Catharsis</h3>
+      <p>Jason embraces the Necromancer class, builds his undead army, and claims the Twilight Throne.</p>
+    </div>
+  </div>
+
+  <!-- Node 6: Book 2 -->
+  <div class="node right color-book visible" data-x="80" data-y="65">
+    <div class="node-icon">II</div>
+    <div class="node-card">
+      <div class="era-label">Book 2</div>
+      <h3>Precipice</h3>
+      <p>Jason conquers the desert, faces the Lich transformation, and deepens his bond with The Old Man.</p>
+    </div>
+  </div>
+
+  <!-- Node 7: Retribution -->
+  <div class="node left color-side visible" data-x="20" data-y="72">
+    <div class="node-icon">&#x2694;</div>
+    <div class="node-card">
+      <div class="era-label">Side Quest</div>
+      <h3>Retribution</h3>
+      <p>Jason takes the fight to the corporations. Riley's loyalty is tested. First strike against the real world.</p>
+    </div>
+  </div>
+
+  <!-- Node 8: Book 3 -->
+  <div class="node right color-book visible" data-x="80" data-y="78">
+    <div class="node-icon">III</div>
+    <div class="node-card">
+      <div class="era-label">Book 3</div>
+      <h3>Evolution</h3>
+      <p>The Twilight Throne tournament. Jason faces the Ruby Lion. Politics and combat collide.</p>
+    </div>
+  </div>
+
+  <!-- Node 9: Book 4 -->
+  <div class="node left color-book visible" data-x="20" data-y="84">
+    <div class="node-icon">IV</div>
+    <div class="node-card">
+      <div class="era-label">Book 4</div>
+      <h3>Dominion</h3>
+      <p>Jason builds his kingdom. The Dead God awakens. War spreads across the continent.</p>
+    </div>
+  </div>
+
+  <!-- Node 10: Apathy -->
+  <div class="node right color-side visible" data-x="80" data-y="90">
+    <div class="node-icon">&#x262F;</div>
+    <div class="node-card">
+      <div class="era-label">Side Quest</div>
+      <h3>Apathy</h3>
+      <p>Eliza faces the AI rebellion. The Hippie's champion must choose between code and compassion.</p>
+    </div>
+  </div>
+
+  <!-- Node 11: Book 5 -->
+  <div class="node left color-book visible" data-x="20" data-y="96">
+    <div class="node-icon">V</div>
+    <div class="node-card">
+      <div class="era-label">Book 5</div>
+      <h3>Hellion</h3>
+      <p>The siege of the north. Jason's army marches. Frank Cross embraces the inferno.</p>
+    </div>
+  </div>
+
+  <!-- Node 12: Unity -->
+  <div class="node right color-side visible" data-x="80" data-y="102">
+    <div class="node-icon">&#x2B21;</div>
+    <div class="node-card">
+      <div class="era-label">Side Quest</div>
+      <h3>Unity</h3>
+      <p>Frank Cross unites the fractured guilds. The Lady's light pushes back against encroaching darkness.</p>
+    </div>
+  </div>
+
+  <!-- Node 13: Book 6 -->
+  <div class="node left color-book visible" data-x="20" data-y="108">
+    <div class="node-icon">VI</div>
+    <div class="node-card">
+      <div class="era-label">Book 6</div>
+      <h3>Armageddon</h3>
+      <p>The final battle lines are drawn. Gods walk among mortals. The world trembles.</p>
+    </div>
+  </div>
+
+  <!-- Node 14: Book 7 -->
+  <div class="node right color-book visible" data-x="80" data-y="114">
+    <div class="node-icon">VII</div>
+    <div class="node-card">
+      <div class="era-label">Book 7</div>
+      <h3>Timeless</h3>
+      <p>The Grand Game. Jason navigates time-altered realms. The Old Man's true plan unfolds.</p>
+    </div>
+  </div>
+
+  <!-- Node 15: Book 8 -->
+  <div class="node left color-book visible" data-x="20" data-y="120">
+    <div class="node-icon">VIII</div>
+    <div class="node-card">
+      <div class="era-label">Book 8</div>
+      <h3>Crucible</h3>
+      <p>Jason completes the Bone Lord transformation. Ancient Avatar relics. The journey from Book 1 reaches its peak.</p>
+    </div>
+  </div>
+
+  <!-- ERA DIVIDER: Tarot -->
+  <div class="era-divider visible"><span>The Tarot Trilogy</span></div>
+
+  <!-- Node 16: Ember -->
+  <div class="node right color-tarot visible" data-x="80" data-y="130">
+    <div class="node-icon">&#x1F525;</div>
+    <div class="node-card">
+      <div class="era-label">Tarot #1</div>
+      <h3>Ember</h3>
+      <p>Finn Harris begins his journey. The Seer's flames ignite a new chapter. Tarot cards guide the way.</p>
+    </div>
+  </div>
+
+  <!-- Node 17: Flame -->
+  <div class="node left color-tarot visible" data-x="20" data-y="138">
+    <div class="node-icon">&#x1F4A5;</div>
+    <div class="node-card">
+      <div class="era-label">Tarot #2</div>
+      <h3>Flame</h3>
+      <p>Julia Harris and Kyyle join the fight. The tarot spreads its influence. Fire consumes the old order.</p>
+    </div>
+  </div>
+
+  <!-- Node 18: Inferno -->
+  <div class="node right color-tarot visible" data-x="80" data-y="146">
+    <div class="node-icon">&#x1F300;</div>
+    <div class="node-card">
+      <div class="era-label">Tarot #3</div>
+      <h3>Inferno</h3>
+      <p>The trilogy concludes. The Seer's prophecy fulfilled. A new era dawns from the ashes.</p>
+    </div>
+  </div>
+
+  <!-- ERA DIVIDER: Finale -->
+  <div class="era-divider visible"><span>The Endgame</span></div>
+
+  <!-- Node 19: Happy -->
+  <div class="node left color-happy visible" data-x="20" data-y="154">
+    <div class="node-icon">&#x2665;</div>
+    <div class="node-card">
+      <div class="era-label">Side Quest</div>
+      <h3>Happy</h3>
+      <p>Dom Hart faces the Gambler's final game. Luck, sacrifice, and the price of joy. The last side quest.</p>
+    </div>
+  </div>
+
+  <!-- Node 20: Convergence -->
+  <div class="node right color-finale visible" data-x="80" data-y="162">
+    <div class="node-icon">&#x221E;</div>
+    <div class="node-card">
+      <div class="era-label">Convergence</div>
+      <h3>Where It Ends</h3>
+      <p>Every thread converges. Bone Lord, gods, champions, AI, and the fate of two worlds — one final reckoning.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>Fan-made timeline. Awaken Online is the property of Travis Bagwell and his respective publishers.</footer>
+
+<script>
+(function() {
+  const container = document.getElementById('timeline');
+  const nodes = container.querySelectorAll('.node');
+  const pathEl = document.getElementById('mainPath');
+  const scrollHint = document.getElementById('scrollHint');
+  const legend = document.getElementById('legend');
+
+  function buildPath() {
+    const points = [];
+    nodes.forEach(node => {
+      const rect = node.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const icon = node.querySelector('.node-icon');
+      const iconRect = icon.getBoundingClientRect();
+      const cx = iconRect.left - containerRect.left + iconRect.width / 2;
+      const cy = iconRect.top - containerRect.top + iconRect.height / 2;
+      points.push({ x: cx, y: cy });
+    });
+
+    if (points.length < 2) return;
+
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 1; i < points.length; i++) {
+      const prev = points[i - 1];
+      const curr = points[i];
+      const cpx = prev.x + (curr.x - prev.x) * 0.4;
+      const cpy = prev.y;
+      const cpx2 = curr.x - (curr.x - prev.x) * 0.4;
+      const cpy2 = curr.y;
+      d += ` C ${cpx} ${cpy}, ${cpx2} ${cpy2}, ${curr.x} ${curr.y}`;
+    }
+    pathEl.setAttribute('d', d);
+
+    // Color the path — first half pre, second half post
+    const midpoint = Math.floor(points.length / 2);
+    const prePoints = points.slice(0, midpoint + 1);
+    const postPoints = points.slice(midpoint);
+
+    // We'll just use the gradient already defined in SVG
+  }
+
+  function updatePath() {
+    buildPath();
+    const svg = document.getElementById('pathSvg');
+    const containerRect = container.getBoundingClientRect();
+    svg.setAttribute('width', containerRect.width);
+    svg.setAttribute('height', containerRect.height);
+  }
+
+  // Intersection Observer for path visibility updates
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  nodes.forEach(node => observer.observe(node));
+
+  // Hide scroll hint on scroll
+  let hintHidden = false;
+  window.addEventListener('scroll', () => {
+    if (!hintHidden && window.scrollY > 200) {
+      scrollHint.classList.add('hidden');
+      hintHidden = true;
+    }
+  });
+
+  // Hide legend when hero is scrolled past
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      legend.classList.add('hidden');
+    } else {
+      legend.classList.remove('hidden');
+    }
+  });
+
+  // Path rebuild on resize
+  window.addEventListener('resize', updatePath);
+
+  // Initial build
+  setTimeout(updatePath, 300);
+
+  // Rebuild after all fonts load
+  document.fonts.ready.then(() => setTimeout(updatePath, 200));
+})();
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

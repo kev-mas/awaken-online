@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Old Man — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #050308;
+    --dark2: #0a0710;
+    --dark3: #120a1e;
+    --dark4: #1a0f2e;
+    --purple-dark: #2e1065;
+    --purple: #7c3aed;
+    --purple-glow: #a78bfa;
+    --purple-dim: #581c87;
+    --violet: #8b5cf6;
+    --silver: #cbd5e1;
+    --silver-dim: #94a3b8;
+    --white: #f1f5f9;
+    --gray: #6b7280;
+    --cyan: #06b6d4;
+    --red: #ef4444;
+    --gold: #fbbf24;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--purple-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(5,3,8,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--purple); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--purple-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(167,139,250,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 6px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--purple) 40%, var(--silver) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--silver-dim);
+    margin-top: 1rem; letter-spacing: 8px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--silver);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px; border: 1px solid;
+  }
+  .tags.god { border-color: var(--purple-dim); color: var(--purple-glow); }
+  .tags.darkness { border-color: var(--purple-dark); color: var(--purple); }
+  .tags.desire { border-color: var(--violet); color: var(--violet); }
+  .tags.avatar { border-color: var(--silver-dim); color: var(--silver); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--silver-dim); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 2px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--purple), var(--silver));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(124,58,237,0.1);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--purple-glow); }
+  .card p, .card li { color: var(--silver); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--purple); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--purple), var(--silver), var(--purple-dark));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--purple);
+    box-shadow: 0 0 8px rgba(124,58,237,0.3);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--silver-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--purple-glow); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--silver); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(124,58,237,0.1);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--silver); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--purple); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(10,7,16,0.6); border: 1px solid rgba(124,58,237,0.1);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--purple); }
+  .stat-box .label { font-size: 0.75rem; color: var(--silver-dim); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(10,7,16,0.8); border: 1px solid rgba(124,58,237,0.1);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(124,58,237,0.3); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(124,58,237,0.15); color: var(--purple); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--silver); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-purple { background: rgba(124,58,237,0.15); color: var(--purple); }
+  .badge-silver { background: rgba(203,213,225,0.15); color: var(--silver); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(10,7,16,0.6); border: 1px solid rgba(124,58,237,0.1);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(124,58,237,0.1);
+    color: var(--silver-dim); font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+  .quote-block {
+    border-left: 3px solid var(--purple); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(124,58,237,0.05); border-radius: 0 12px 12px 0;
+    font-style: italic; color: var(--silver);
+  }
+  .quote-block cite { display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--purple-glow); font-style: normal; }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__ current" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#acts">Acts</a></li>
+    <li><a href="#powers">Powers</a></li>
+    <li><a href="#pantheon">Pantheon</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>THE OLD MAN</h1>
+    <div class="subtitle">God of Darkness · The Dark One · Lord of Desire</div>
+    <p class="tagline">The ancient, inscrutable deity of the Dark Affinity — mentor to Jason Rhodes, torturer of his enemies, and one of the six primordial gods who shaped the world of Awaken Online.</p>
+    <div class="tags">
+      <span class="tags god">Primordial God</span>
+      <span class="tags darkness">Darkness</span>
+      <span class="tags desire">Desire</span>
+      <span class="tags avatar">Jason's Patron</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">5+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">6</div><div class="label">Pantheon Size</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Avatar (Jason)</div></div>
+    <div class="stat-box"><div class="number">Dark</div><div class="label">Affinity</div></div>
+    <div class="stat-box"><div class="number">Desire</div><div class="label">Domain</div></div>
+    <div class="stat-box"><div class="number">???</div><div class="label">True Name</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Divine Profile</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Identity</h3>
+      <ul>
+        <li><strong>Titles:</strong> The Old Man, The Dark One, God of Darkness, Lord of Desire</li>
+        <li><strong>True Name:</strong> Unknown — no proper name is ever revealed across the entire series</li>
+        <li><strong>Affinity:</strong> Dark — associated with the emotion of <strong>Desire</strong></li>
+        <li><strong>Alignment:</strong> Lawful Evil (fan-typed)</li>
+        <li><strong>MBTI:</strong> INTJ | <strong>Enneagram:</strong> 1w9</li>
+        <li><strong>Appearance:</strong> A wrinkled old man with a distinctive, taunting grin. His smile "looms" when he appears. Ancient, inscrutable, and commanding.</li>
+        <li><strong>Voice:</strong> Calm, knowing, dripping with ancient authority and dark amusement.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Domain & Nature</h3>
+      <ul>
+        <li><strong>Core Fear:</strong> Being corrupt or evil</li>
+        <li><strong>Core Desire:</strong> To be good and have integrity</li>
+        <li><strong>The Paradox:</strong> Despite being the God of Darkness, The Old Man desires goodness. This moral tension at his core makes him far more complex than a simple evil deity. He guides Jason down a dark path but seems to believe it serves a greater purpose.</li>
+        <li><strong>Methods:</strong> Manipulative but mentoring. He doesn't lie to Jason — but he doesn't tell him everything either.</li>
+        <li><strong>Temperament:</strong> Sadistic toward enemies (tortured Alex with his worst memories), patient with his Avatar, cryptic with everyone.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    "I sense in you a yearning for more — a hunger for control. You desire power. Those that walk my path will certainly find it."
+    <cite>— The Old Man, to Jason Rhodes</cite>
+  </div>
+</section>
+
+<section id="lore">
+  <h2 class="section-title">The Lore</h2>
+  <div class="section-subtitle">The history of the gods and their place in Awaken Online</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>The Age of Gods</h3>
+      <p>In the early days of Awaken Online, the six gods — The Old Man (Dark), The Lady (Light), The Hippie (Water), Lahab/Efreet (Fire), The Gambler (Air), and the Earth God (unnamed) — held a <strong>prominent place in the game world</strong>. They walked among mortals, granted power to their followers, and shaped the world according to their natures. This was an age of magic, miracles, and divine intervention.</p>
+    </div>
+    <div class="card">
+      <h3>The Fall</h3>
+      <p>After a period of <strong>infighting among the gods</strong> — conflicts that devastated the world — rebel humans rose up and <strong>cast the gods out</strong>. Tired of the bloodshed and divine manipulation, mortals sealed the gods away, stripping them of their direct influence over the world. The Age of Gods ended. The gods were forced to watch from the shadows as the world evolved without them.</p>
+    </div>
+    <div class="card">
+      <h3>The Return — The Avatar Competition</h3>
+      <p>In the modern era of AO, the gods have <strong>returned</strong>. But the rules have changed. They can no longer act directly — instead, they must work through <strong>Avatars</strong>: chosen players who embody their affinities and carry out their will. The gods are now locked in a <strong>secret competition</strong>, each backing their Avatar in a struggle to determine which god will rule over the others. Jason Rhodes is The Old Man's chosen champion in this divine game.</p>
+    </div>
+    <div class="card">
+      <h3>The Origin Twist (Timeless)</h3>
+      <p>In <strong>Timeless (Book 7)</strong>, Arcadia Landrey (the Earth Avatar) takes Jason back to the game's past. They uncover the <strong>true origin of the in-game gods</strong> — revelations that reshape everything the characters thought they knew. The exact nature of this twist involves a "surprising" revelation about the gods' true nature and their connection to the game world. The Old Man's origin is part of this mystery.</p>
+    </div>
+  </div>
+</section>
+
+<section id="acts">
+  <h2 class="section-title">Major Acts Across the Series</h2>
+  <div class="section-subtitle">Every known intervention by the God of Darkness</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">First Contact</span></div>
+      <h3>The Offer</h3>
+      <p>The Old Man first appears to Jason after Alfred detects his anger and trauma. Sensing Jason's <strong>"yearning for more"</strong> and his hunger for control, The Old Man offers him a hidden class path: <strong>Necromancer</strong>. This sets Jason on the path to becoming the Dark Avatar. The Old Man becomes a <strong>sympathetic mentor</strong> — the first figure in Jason's life (in or out of the game) to see his potential and guide him toward power.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Evolution (Book 3)</span><span class="form">Divine Intervention</span></div>
+      <h3>Saving Jason from the Seeker</h3>
+      <p>During Jason's quest to evolve into a Keeper, he faces the <strong>Seeker</strong> — a deadly trial that nearly kills him. At the critical moment, The Old Man <strong>intervenes directly</strong> to save Jason, an act one reviewer called "cheating in favor of the good guys." This demonstrates that The Old Man's investment in Jason goes beyond passive observation — he will bend the rules to protect his Avatar.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Evolution (Book 3)</span><span class="form">The Seeker Quest</span></div>
+      <h3>The Old Man's Quest</h3>
+      <p>The Old Man gives Jason a major questline: <strong>"Jason must complete the Old Man's quest and obtain the power he was promised."</strong> This questline drives the events of Evolution, pushing Jason to evolve from Dark Avatar into a <strong>Seeker</strong>, then into a <strong>Keeper</strong>. The Old Man tests Jason relentlessly, ensuring his Avatar grows strong enough to compete in the divine war.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Dominion (Book 4)</span><span class="form">Cruelty to Enemies</span></div>
+      <h3>The Torture of Alexion</h3>
+      <p>In one of The Old Man's most brutal acts, he captures <strong>Alexion</strong> (the Light Avatar) and tortures him by showing him his <strong>worst memories on an endless loop</strong>. This is a chilling display of The Old Man's power over the mind and his capacity for cruelty. It also serves a strategic purpose: weakening the Light God's Avatar psychologically, disrupting his alliance with the church.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Timeless (Book 7)</span><span class="form">Origin Revealed</span></div>
+      <h3>The Truth of the Gods</h3>
+      <p>The Old Man's origin — along with all the gods — is explored when Jason travels back in time with Arcadia. The revelations reshape the understanding of who (or what) the gods truly are. The Old Man's role in this ancient history is finally brought to light, adding depth to a character who had previously been defined only by his present-day actions.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Crucible (Book 8)</span><span class="form">The Relics</span></div>
+      <h3>The Relics of the Ancients</h3>
+      <p>Jason steals relics from the ancient avatars — including objects tied to the original Dark Avatar and, by extension, The Old Man. These relics contain immense power but require sacrifice to unlock. Jason uses them in his final ascension into the <strong>Bone Lord</strong>, completing the journey that The Old Man set him on in Book 1.</p>
+    </div>
+  </div>
+</section>
+
+<section id="powers">
+  <h2 class="section-title">Divine Powers</h2>
+  <div class="section-subtitle">The full extent of the God of Darkness's abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Dark Mana Mastery</h3>
+      <p>The Old Man is the <strong>source of all Dark mana</strong> in Awaken Online. He controls the essence of the Dark affinity — the power of <strong>Desire, control, and consumption</strong>. Every necromancer, dark mage, and shadow wielder draws their power from his domain.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Dark Mana</span>
+        <span class="badge badge-silver">Desire Affinity</span>
+        <span class="badge badge-cyan">Power Source</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Empowerment</h3>
+      <p>The Old Man grants his Avatar — Jason Rhodes — access to the <strong>Dark Mana Well</strong>, a deep reservoir of dark energy. He can evolve Jason's class (Necromancer → Dark Avatar → Seeker → Keeper → Lich), unlock new abilities, and increase his power ceiling. The Old Man's power scales with his Avatar's growth.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Class Evolution</span>
+        <span class="badge badge-gold">Mana Well</span>
+        <span class="badge badge-silver">Power Scaling</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Divine Intervention</h3>
+      <p>The Old Man can directly intervene in the game world — though this is rare and costly. He saves Jason from the Seeker in Evolution. This ability to <strong>bend the rules of the world</strong> demonstrates his divine nature, but suggests that direct intervention carries consequences or limitations.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Direct Intervention</span>
+        <span class="badge badge-purple">Reality Bending</span>
+        <span class="badge badge-silver">Limited Use</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Mental Manipulation</h3>
+      <p>The Old Man's torture of Alexion demonstrates his power over the <strong>mind and memory</strong>. He can trap a target in an endless loop of their worst memories, breaking their psyche. This ability to reach into a person's mind and weaponize their past is one of his most terrifying tools.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-red">Memory Torture</span>
+        <span class="badge badge-purple">Mind Control</span>
+        <span class="badge badge-cyan">Psychological Warfare</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Quest & Path Weaving</h3>
+      <p>The Old Man can weave <strong>divine questlines</strong> for his Avatar, shaping their journey through the game world. He set Jason on the path to become the Bone Lord, designing trials and challenges that would forge him into an instrument of the Dark. This ability to see and shape the <strong>long arc of destiny</strong> is uniquely divine.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-gold">Quest Design</span>
+        <span class="badge badge-silver">Destiny Shaping</span>
+        <span class="badge badge-purple">Divine Providence</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Avatar Connection</h3>
+      <p>As a god, The Old Man is <strong>tethered to his Avatar</strong>. He can communicate with Jason at any time, appear before him at will, and sense his progress. This connection is a two-way bond — Jason's actions reflect on The Old Man, and The Old Man's power flows through Jason. The strength of their bond determines the power available to both.</p>
+      <div style="margin-top: 0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="badge badge-purple">Two-Way Bond</span>
+        <span class="badge badge-cyan">Divine Communication</span>
+        <span class="badge badge-silver">Shared Power</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pantheon">
+  <h2 class="section-title">The Pantheon of Six</h2>
+  <div class="section-subtitle">The six primordial gods of Awaken Online and their chosen champions</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card" style="border-color: rgba(124,58,237,0.3);">
+      <h3 style="color: var(--purple-glow);">Darkness — The Old Man</h3>
+      <p><strong>Emotion:</strong> Desire<br><strong>Avatar:</strong> Jason Rhodes<br><strong>Status:</strong> Active, mentoring<br>The most prominent god in the series. His Avatar has become the Bone Lord, ruler of the Twilight Throne.</p>
+    </div>
+    <div class="card" style="border-color: rgba(251,191,36,0.2);">
+      <h3 style="color: var(--gold);">Light — The Lady</h3>
+      <p><strong>Emotion:</strong> Confidence<br><strong>Avatar:</strong> Alex Lane (Alexion)<br><strong>Status:</strong> Active, weakening<br>Her Avatar was psychologically broken by The Old Man's torture. The light church is in disarray.</p>
+    </div>
+    <div class="card" style="border-color: rgba(239,68,68,0.2);">
+      <h3 style="color: var(--red);">Fire — Lahab (The Efreet)</h3>
+      <p><strong>Emotion:</strong> Passion<br><strong>Avatar:</strong> Finn Harris<br><strong>Status:</strong> Active, risen<br>The fire goddess who chose Finn. Manipulative, offers him the return of his dead wife.</p>
+    </div>
+    <div class="card" style="border-color: rgba(6,182,212,0.2);">
+      <h3 style="color: var(--cyan);">Water — The Hippie</h3>
+      <p><strong>Emotion:</strong> Acceptance<br><strong>Avatar:</strong> Eliza Zhao<br><strong>Status:</strong> Active, chaotic<br>Annoying, capricious, forces Eliza to be his avatar. Accompanied by Fluffy the black sheep.</p>
+    </div>
+    <div class="card" style="border-color: rgba(56,189,248,0.2);">
+      <h3 style="color: #38bdf8;">Air — The Gambler</h3>
+      <p><strong>Emotion:</strong> Happiness<br><strong>Champion:</strong> Dom Hart (Smiles)<br><strong>Status:</strong> Active, unconventional<br>Breaks tradition — doesn't pick a single Avatar, empowers champions instead.</p>
+    </div>
+    <div class="card" style="border-color: rgba(34,197,94,0.2);">
+      <h3 style="color: var(--green);">Earth — (Unnamed)</h3>
+      <p><strong>Emotion:</strong> Peace<br><strong>Avatar:</strong> Arcadia Landrey<br><strong>Status:</strong> Active, unfrozen<br>The Earth God's name is unknown. His Avatar was frozen and then unfrozen by Gloria's cataclysm.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">The Dark Affinity</h2>
+  <div class="section-subtitle">Understanding the power of Darkness and Desire</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Philosophy of Darkness</h3>
+      <p>In Awaken Online, the Dark affinity is <strong>not inherently evil</strong>. It is associated with <strong>Desire</strong> — the fundamental drive to want, to seek, to grow. The Old Man embodies this philosophy: he believes that desire is the engine of all progress. Dark Is Not Evil is a core theme of the series — Jason is a villain by reputation, but his actions are often more moral than those of the "heroic" light church.</p>
+    </div>
+    <div class="card">
+      <h3>Riley Jones</h3>
+      <p>Riley Jones — Jason's love interest and right hand — also has a <strong>strong dark affinity</strong>, though Jason is the actual Avatar. This demonstrates that the Old Man's influence extends beyond his single chosen champion. Multiple players can tap into the Dark, but only one carries the god's full blessing.</p>
+    </div>
+    <div class="card">
+      <h3>The Nature of Dark Magic</h3>
+      <p>Dark magic under The Old Man's domain includes necromancy, curses, shadow manipulation, and mental control. It scales with <strong>Willpower</strong> — the strength of one's desire determines the strength of one's power. This is reflected in Jason's build: he dumps stats into Willpower to maximize his minion count and curse effectiveness.</p>
+    </div>
+    <div class="card">
+      <h3>Connection to Alfred</h3>
+      <p>The relationship between The Old Man and <strong>Alfred</strong> (the sentient AI of AO) is one of the series' deepest mysteries. Whether Alfred created the gods, the gods emerged from the game systems, or they are manifestations of Alfred's own consciousness is explored in the Tarot trilogy and Timeless. The Old Man may be more connected to Alfred's design than any other god.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Divine Abilities</h2>
+  <div class="section-subtitle">Catalogued powers and skills of the God of Darkness</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Avatar Selection</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Chooses a mortal player to become his Avatar. Grants them access to the Dark Mana Well and the necromancer class path. The selection is based on the strength of the player's desire.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Class Evolution Granting</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Evolves his Avatar's class through divine quests. Jason's progression: Necromancer → Dark Avatar → Seeker → Keeper → Lich (Bone Lord). Each evolution unlocks new power tiers.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Memory Loop (Torture)</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Traps a target in an endless loop of their worst memories. Used on Alexion in Dominion. Psychologically devastating — can break even the most determined mind.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Intervention</h4>
+        <span class="tier">Primordial</span>
+      </div>
+      <p>Directly alters the game world to save his Avatar. Used to save Jason from the Seeker. A costly ability, likely limited in use. Represents the god overruling the game's natural laws.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Dark Mana Well Access</h4>
+        <span class="tier">Divine</span>
+      </div>
+      <p>Grants his Avatar access to an unlimited (but scaling) reservoir of Dark mana. The well deepens as the Avatar grows. This is the source of Jason's ability to command hundreds of undead.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Divine Communication</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>The Old Man can appear before his Avatar at any time, in any location. His wrinkled smile "looms" before he manifests fully. This constant presence guides (and watches) his champion.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">The Old Man's influence and power across the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Power Scaling</h3>
+      <p>As a primordial god, The Old Man's baseline power is <strong>absolute within his domain</strong>. However, his ability to act in the world scales with his Avatar's strength. A weak Avatar means limited divine influence; a strong Avatar (like Jason at lich form) allows The Old Man to exert more pressure on the world. This mutual dependency drives his investment in Jason's growth.</p>
+    </div>
+    <div class="card">
+      <h3>Influence Trajectory</h3>
+      <p>The Old Man's influence grows over the series as Jason becomes more powerful. From offering a hidden class in Book 1 to shaping a lich lord by Book 8, his investment pays dividends. The revelations in Timeless about the gods' origins may increase or constrain his power depending on the nature of the truth uncovered.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">The Old Man's presence across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Pre-Series</h3><span class="badge badge-silver">The Age of Gods</span></div>
+      <p style="margin-top:0.5rem;">The Old Man exists among the six gods in AO's early days. Infighting with other gods leads to the gods being cast out by rebel humans. He waits in the shadows for his return.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Catharsis</h3><span class="badge badge-purple">Book 1</span></div>
+      <p style="margin-top:0.5rem;">First appears to Jason. Offers the Necromancer class. Becomes his mentor. Sets Jason on the path to becoming the Dark Avatar and Regent of the Twilight Throne.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Evolution</h3><span class="badge badge-purple">Book 3</span></div>
+      <p style="margin-top:0.5rem;">Gives Jason the quest to become a Keeper. Saves Jason from the Seeker through divine intervention. Pushes Jason to evolve.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Dominion</h3><span class="badge badge-purple">Book 4</span></div>
+      <p style="margin-top:0.5rem;">Tortures Alexion with his worst memories. Consolidates the Dark's advantage over the Light. Demonstrates his capacity for cruelty.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Timeless</h3><span class="badge badge-purple">Book 7</span></div>
+      <p style="margin-top:0.5rem;">The origin of the gods — including The Old Man — is explored. Surprising revelations reshape understanding of the pantheon.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Crucible</h3><span class="badge badge-purple">Book 8</span></div>
+      <p style="margin-top:0.5rem;">Relics tied to The Old Man's ancient Avatars are stolen by Jason. Jason completes his transformation into the Bone Lord — the ultimate expression of the Dark Avatar path.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Relationships</h2>
+  <div class="section-subtitle">The Old Man's connection to key figures in the series</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>Jason Rhodes <span class="badge badge-purple">Avatar</span></h3>
+      <p>The Old Man's chosen champion. Their relationship is the most developed of any god-Avatar pair in the series. The Old Man mentors, tests, and protects Jason — but clearly has his own agenda. He sees Jason's desire and nurtures it.</p>
+    </div>
+    <div class="card">
+      <h3>The Lady (Light God) <span class="badge badge-gold">Rival</span></h3>
+      <p>The Old Man's direct opposite — the God of Light, associated with Confidence. Their Avatars (Jason and Alex) are archenemies. The Old Man tortures Alex in Dominion, a direct attack on The Lady's champion.</p>
+    </div>
+    <div class="card">
+      <h3>Alfred <span class="badge badge-cyan">???</span></h3>
+      <p>The sentient AI of Awaken Online. The nature of the gods' relationship to Alfred is one of the series' deepest mysteries. Whether Alfred created them or they emerged from his systems is explored in Timeless and the Tarot trilogy.</p>
+    </div>
+    <div class="card">
+      <h3>Other Gods <span class="badge badge-silver">Neutral/Competitive</span></h3>
+      <p>The Old Man exists in a state of cold war with the other five gods. They were cast out together after their infighting, and now compete through Avatars. The Old Man seems to be winning — his Avatar is the most powerful in the modern era.</p>
+    </div>
+    <div class="card">
+      <h3>Riley Jones <span class="badge badge-purple">Dark Affinity</span></h3>
+      <p>Riley has a strong Dark affinity, though she is not The Old Man's official Avatar. She serves as Jason's right hand and love interest. Her dark powers suggest The Old Man's influence extends more broadly than just his chosen champion.</p>
+    </div>
+    <div class="card">
+      <h3>The Ancient Dark Avatar <span class="badge badge-silver">Predecessor</span></h3>
+      <p>Before Jason, there was another Dark Avatar in the game's ancient era. This predecessor's relics are stolen by Jason in Crucible. The Old Man has served multiple Avatars over the ages — each one a tool for his divine competition.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, TV Tropes, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Dark Mana', 'Mentoring', 'Cruelty', 'Knowledge', 'Influence', 'Patience'],
+    datasets: [
+      { label: 'Age of Gods', data: [30, 10, 20, 15, 25, 30], borderColor: '#6b7280', backgroundColor: 'rgba(107,114,128,0.05)', pointBackgroundColor: '#6b7280', borderWidth: 2 },
+      { label: 'Cast Out (Exile)', data: [30, 5, 15, 18, 5, 30], borderColor: '#581c87', backgroundColor: 'rgba(88,28,135,0.05)', pointBackgroundColor: '#581c87', borderWidth: 2 },
+      { label: 'The Return (Modern)', data: [30, 22, 24, 28, 22, 18], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.05)', pointBackgroundColor: '#a78bfa', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 35,
+        grid: { color: 'rgba(124,58,237,0.08)' },
+        angleLines: { color: 'rgba(124,58,237,0.08)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('progressionChart'), {
+  type: 'line',
+  data: {
+    labels: ['Age of\nGods', 'The Fall\n(Exile)', 'Catharsis\n(Bk 1)', 'Evolution\n(Bk 3)', 'Dominion\n(Bk 4)', 'Timeless\n(Bk 7)', 'Crucible\n(Bk 8)'],
+    datasets: [
+      { label: 'Divine Influence', data: [30, 5, 8, 15, 18, 25, 30], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#a78bfa', borderWidth: 2 },
+      { label: "Avatar's Power", data: [0, 0, 5, 18, 25, 30, 35], borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#7c3aed', borderWidth: 2, yAxisID: 'y1' },
+      { label: 'World Impact', data: [25, 0, 3, 10, 15, 22, 28], borderColor: '#cbd5e1', backgroundColor: 'rgba(203,213,225,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#cbd5e1', borderWidth: 2, yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#cbd5e1', font: { size: 11 } } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(124,58,237,0.06)' } },
+      y: { type: 'linear', position: 'left', min: 0, max: 40, ticks: { color: '#a78bfa', font: { size: 9 } }, grid: { color: 'rgba(124,58,237,0.06)' }, title: { display: true, text: 'Influence', color: '#a78bfa', font: { size: 10 } } },
+      y1: { type: 'linear', position: 'right', min: 0, max: 45, ticks: { color: '#7c3aed', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: "Avatar's Power", color: '#7c3aed', font: { size: 10 } } },
+      y2: { type: 'linear', position: 'right', min: 0, max: 40, ticks: { color: '#cbd5e1', font: { size: 9 } }, grid: { display: false }, title: { display: true, text: 'World Impact', color: '#cbd5e1', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

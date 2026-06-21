@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frank Cross — Complete Character Breakdown | Awaken Online</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #0d1210;
+    --dark3: #14281c;
+    --dark4: #1e3a2a;
+    --green-dark: #14532d;
+    --green: #22c55e;
+    --green-glow: #4ade80;
+    --green-dim: #166534;
+    --brown: #78350f;
+    --brown-light: #a16207;
+    --gold: #fbbf24;
+    --gray: #94a3b8;
+    --gray-light: #cbd5e1;
+    --white: #f1f5f9;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --orange: #f97316;
+    --bg-gradient: linear-gradient(135deg, var(--dark) 0%, #0f1a12 40%, var(--dark3) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: var(--green-glow); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,222,128,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  nav .logo {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.1rem; color: var(--white);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--green-glow); }
+  nav ul { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--gray); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    padding: 0.25rem 0;
+  }
+  nav ul li a:hover { color: var(--green-glow); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(34,197,94,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(74,222,128,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900; letter-spacing: 4px; line-height: 1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--green) 50%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gray);
+    margin-top: 1rem; letter-spacing: 6px; text-transform: uppercase;
+  }
+  .hero .tagline {
+    margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-light);
+    max-width: 650px; margin-inline: auto;
+  }
+  .hero .tags { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero .tags span {
+    padding: 0.4rem 1.2rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; border: 1px solid;
+  }
+  .tags.thauma { border-color: var(--green-dim); color: var(--green); }
+  .tags.shifter { border-color: var(--green-dark); color: var(--green-glow); }
+  .tags.primal { border-color: var(--brown); color: var(--gold); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700;
+    text-align: center; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--white), var(--green-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 0.9rem;
+    margin-bottom: 3rem; letter-spacing: 1px;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--green), var(--gold));
+    margin: 0 auto 3rem; border-radius: 4px;
+  }
+
+  .card-grid { display: grid; gap: 1.5rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card-grid-5 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+  .card {
+    background: rgba(13,18,16,0.8); border: 1px solid rgba(74,222,128,0.08);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+    transition: 0.3s;
+  }
+  .card:hover { border-color: rgba(74,222,128,0.25); transform: translateY(-2px); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--green-glow); }
+  .card p, .card li { color: var(--gray-light); font-size: 0.9rem; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--green); }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--green-dark), var(--green-glow), var(--gold));
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -3rem; top: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--dark2); border: 2px solid var(--green-glow);
+  }
+  .timeline-item .meta {
+    display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-item .book { font-size: 0.75rem; color: var(--cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-item .form { font-size: 0.8rem; color: var(--green); font-weight: 700; }
+  .timeline-item h3 { font-size: 1.15rem; color: var(--white); }
+  .timeline-item p { color: var(--gray-light); font-size: 0.9rem; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .compare-card {
+    background: rgba(13,18,16,0.8); border: 1px solid rgba(74,222,128,0.08);
+    border-radius: 16px; overflow: hidden; text-align: center; transition: 0.3s;
+  }
+  .compare-card:hover { border-color: rgba(74,222,128,0.25); transform: translateY(-4px); }
+  .compare-card .svg-wrap { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+  .compare-card .svg-wrap svg { max-width: 100%; height: auto; }
+  .compare-card .body { padding: 1.25rem 1.5rem 1.5rem; }
+  .compare-card .body h3 { font-family: 'Cinzel', serif; color: var(--white); font-size: 1.1rem; }
+  .compare-card .body .form-label {
+    display: inline-block; padding: 0.2rem 0.8rem; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 0.75rem; border: 1px solid;
+  }
+  .compare-card .body ul { text-align: left; list-style: none; padding: 0; }
+  .compare-card .body ul li { font-size: 0.85rem; color: var(--gray-light); padding: 0.25rem 0; }
+  .compare-card .body ul li::before { content: '▸ '; color: var(--green); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .stat-box {
+    text-align: center; padding: 1.25rem 1rem;
+    background: rgba(13,18,16,0.6); border: 1px solid rgba(74,222,128,0.08);
+    border-radius: 12px;
+  }
+  .stat-box .number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--green-glow); }
+  .stat-box .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+
+  .ability-card {
+    background: rgba(13,18,16,0.8); border: 1px solid rgba(74,222,128,0.08);
+    border-radius: 12px; padding: 1.25rem 1.5rem; transition: 0.3s;
+  }
+  .ability-card:hover { border-color: rgba(74,222,128,0.25); }
+  .ability-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .ability-card .header h4 { font-size: 0.95rem; color: var(--white); }
+  .ability-card .header .tier {
+    font-size: 0.65rem; padding: 0.15rem 0.6rem; border-radius: 100px;
+    background: rgba(74,222,128,0.12); color: var(--green-glow); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ability-card p { font-size: 0.85rem; color: var(--gray-light); }
+
+  .badge {
+    display: inline-block; padding: 0.15rem 0.6rem; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-green { background: rgba(74,222,128,0.12); color: var(--green-glow); }
+  .badge-gold { background: rgba(251,191,36,0.12); color: var(--gold); }
+  .badge-cyan { background: rgba(6,182,212,0.12); color: var(--cyan); }
+  .badge-red { background: rgba(239,68,68,0.12); color: var(--red); }
+  .badge-orange { background: rgba(249,115,22,0.12); color: var(--orange); }
+  .badge-brown { background: rgba(120,53,15,0.12); color: var(--brown-light); }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+  .chart-wrap {
+    background: rgba(13,18,16,0.6); border: 1px solid rgba(74,222,128,0.08);
+    border-radius: 16px; padding: 1.5rem; margin-top: 1rem;
+  }
+  .chart-wrap canvas { max-height: 300px; }
+
+  footer {
+    text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(74,222,128,0.08);
+    color: var(--gray); font-size: 0.85rem;
+  }
+
+  .form-svg { width: 100%; max-width: 200px; margin: 0 auto; display: block; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 0.75rem; }
+    nav ul li a { font-size: 0.65rem; }
+    section { padding: 3rem 1rem; }
+    .section-title { font-size: 1.6rem; }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-item::before { left: -2.5rem; width: 22px; height: 22px; }
+  }
+  @media (max-width: 480px) {
+    nav ul li a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+/* ── Floating Sidebar Menu ── */
+#menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10001;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+  line-height: 1;
+}
+#menu-btn:hover {
+  background: rgba(20,20,30,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
+#menu-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+#menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+#menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(12,12,20,0.97) 0%, rgba(18,18,26,0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+#menu-panel.open { transform: translateX(0); }
+
+#menu-panel::-webkit-scrollbar { width: 3px; }
+#menu-panel::-webkit-scrollbar-track { background: transparent; }
+#menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.menu-header a {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.menu-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.menu-close:hover { color: #f1f5f9; }
+
+.menu-group { margin-bottom: 4px; }
+.menu-group-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 6px 18px 4px;
+  margin-top: 4px;
+}
+.menu-sub-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+  padding: 2px 18px 2px 30px;
+  margin-top: 2px;
+}
+.menu-link {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+.menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+.menu-link.current {
+  color: #f1f5f9;
+  border-left-color: #a855f7;
+  background: rgba(168,85,247,0.08);
+}
+.menu-link.sub { padding-left: 44px; font-size: 0.76rem; }
+/* ── end menu ── */
+
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Open navigation menu">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <a href="index.html">Compendium</a>
+    <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link __JR__" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link __AX__" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link __EZ__" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link __FH__" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link __DH__" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link __AL__" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link __RJ__" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link __FC__ current" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link __JH__" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link __KY__" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link __OM__" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link __TL__" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link __TH__" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link __TS__" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link __TG__" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link __GT__" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link __VT__" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Faction Capitals</div>
+    <a class="menu-link __TT__" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link __CR__" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link __SE__" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link __SC__" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link __BT__" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link __PX__" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+
+<nav>
+  <div class="logo">AWAKEN<span>ONLINE</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#abilities">Abilities</a></li>
+    <li><a href="#stats">Progression</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="hero-content">
+    <h1>FRANK CROSS</h1>
+    <div class="subtitle">The Primal Shifter · Left Hand of the Dark Lord · Hero of Haven</div>
+    <p class="tagline">Jason's only real-world friend, the guild tank, and a shapeshifter who found his true potential in the frozen north — the complete breakdown of Frank Cross.</p>
+    <div class="tags">
+      <span class="tags thauma">Thaumaturge</span>
+      <span class="tags shifter">Shapeshifter</span>
+      <span class="tags primal">Primal Shifter</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</section>
+
+<section>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="number">6+</div><div class="label">Books Appeared</div></div>
+    <div class="stat-box"><div class="number">1</div><div class="label">Protagonist Book</div></div>
+    <div class="stat-box"><div class="number">Str</div><div class="label">Main Stat</div></div>
+    <div class="stat-box"><div class="number">Wolf</div><div class="label">Primary Form</div></div>
+    <div class="stat-box"><div class="number">Twilight</div><div class="label">Throne Faction</div></div>
+    <div class="stat-box"><div class="number">Tank</div><div class="label">Role</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Character Overview</h2>
+  <div class="section-divider"></div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Real Life — Frank Cross</h3>
+      <ul>
+        <li><strong>School:</strong> Richmond Private School. Jason's only friend.</li>
+        <li><strong>Appearance:</strong> Overweight, known for playing video games. Struggles with self-image and confidence.</li>
+        <li><strong>Personality:</strong> Loyal, good-natured, but plagued by self-doubt. Often feels overshadowed by Jason and Riley. His journey in AO is as much about finding self-worth as it is about gaining power.</li>
+        <li><strong>Relationship with Jason:</strong> His only real friend at Richmond. They stay in touch after Jason's expulsion. Their bond is the foundation of Frank's loyalty.</li>
+        <li><strong>Struggles:</strong> Compares himself to others (Jason, Riley, Rebecca). Feels inadequate in both real life and the game. His journey in Unity forces him to confront these feelings.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>In Game — Frank Cross</h3>
+      <ul>
+        <li><strong>In-Game Name:</strong> Frank (same)</li>
+        <li><strong>Class Path:</strong> Thaumaturge → Primal Shifter</li>
+        <li><strong>Alignment:</strong> Lawful Evil</li>
+        <li><strong>Affinities:</strong> All weak and equal — which gave him the unique <strong>Thaumaturge</strong> class, a jack-of-all-trades foundation. Later evolves into pure shapeshifting.</li>
+        <li><strong>Role:</strong> Tank / Front-line fighter / Shapeshifter</li>
+        <li><strong>Faction:</strong> Original Sin / Twilight Throne</li>
+        <li><strong>Build:</strong> After his first death, dumped all stats into <strong>Strength</strong> to become the team's barbarian/tank.</li>
+        <li><strong>Signature Moment:</strong> In Dominion, fought Alexion for a Gate Piece. Defeated and imprisoned him, but Alexion escaped and stole the piece. Later took his own solo journey north in Unity.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="evolution">
+  <h2 class="section-title">The Transformation</h2>
+  <div class="section-subtitle">Frank's journey from Jason's gamer friend to a primal force of nature</div>
+  <div class="section-divider"></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Catharsis (Book 1)</span><span class="form">Real-Life Friend</span></div>
+      <h3>The Only Friend</h3>
+      <p>Frank is introduced as <strong>Jason's only friend at Richmond</strong>. While he doesn't appear in-game until Book 2, he stays loyal to Jason after the expulsion, keeping in touch with him. He's a typical gamer kid — overweight, good-natured, and deeply loyal. This foundation of trust makes him Jason's most reliable companion.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Precipice (Book 2)</span><span class="form">Thaumaturge → Barbarian</span></div>
+      <h3>First Steps in AO</h3>
+      <p>Frank joins Jason and Riley in the Twilight Throne. He reveals he had a <strong>rough start</strong> — all his affinities were equally weak, preventing him from becoming a mage. This gave him the unique <strong>Thaumaturge</strong> class. During a journey with Jason and Riley, <strong>Frank dies for the first time</strong>. After respawning, he makes a pivotal decision: <strong>dump all stats into Strength</strong> and become the team's tank. This is his first step toward finding his place in the group.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Dominion (Book 4)</span><span class="form">The Gate Piece Fight</span></div>
+      <h3>Facing Alexion</h3>
+      <p>With Jason busy consolidating power, Frank takes on a critical mission: securing a <strong>Gate Piece</strong> from Alexion. He fights the Light Avatar and <strong>defeats him</strong>, successfully imprisoning him. However, Alexion <strong>escapes</strong> in a controversial twist and steals the Gate Piece. Despite the outcome, Frank proves he can hold his own against one of AO's most powerful players.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Unity (Book 4.5)</span><span class="form">Primal Shifter Awakening</span></div>
+      <h3>The Journey North</h3>
+      <p>Feeling outpaced by Jason and Riley, Frank sets off on his own toward the <strong>snow-capped mountains north of the Twilight Throne</strong> to improve his shapeshifting abilities. He stumbles upon <strong>Haven</strong> — a hidden village of shapeshifters, druids, tamers, and growers. He meets <strong>Silver</strong> (a cold, skilled shifter), <strong>Alderas</strong> (a leader figure), and <strong>Abigail</strong> (a warm teacher). He encounters an <strong>ancient God</strong>, faces cultists, and for the first time, <strong>becomes a leader</strong>. He also <strong>falls in love</strong>. His class evolves into <strong>Primal Shifter</strong>, unlocking his true potential.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="meta"><span class="book">Hellion → Crucible (Books 5–8)</span><span class="form">The Faithful Lieutenant</span></div>
+      <h3>Standing Beside the Dark Lord</h3>
+      <p>Frank returns to the main storyline as Jason's <strong>left hand</strong>, fighting alongside him against Finn Harris, Death and Taxes, the ancient avatars, and the chaos of the lich transformation. He has fully embraced his Primal Shifter identity, able to shift between human, hybrid, and animal forms at will. In Armageddon, he witnesses Jason's apotheosis. In Crucible, he stands ready as Jason sacrifices his humanity.</p>
+    </div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2 class="section-title">Evolution of Form</h2>
+  <div class="section-subtitle">Frank's physical journey across his transformations</div>
+  <div class="section-divider"></div>
+
+  <div class="compare-grid">
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#e8dcc8" stroke="#94a3b8" stroke-width="1.2"/>
+          <ellipse cx="93" cy="40" rx="4" ry="4" fill="#4b5563" stroke="none"/>
+          <ellipse cx="107" cy="40" rx="4" ry="4" fill="#4b5563" stroke="none"/>
+          <path d="M90 47 Q100 52 110 47" stroke="#6b7280" stroke-width="0.8" fill="none"/>
+          <circle cx="100" cy="20" r="8" fill="#cbd5e1" opacity="0.2" stroke="none"/>
+          <rect x="76" y="72" rx="8" ry="8" width="48" height="60" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M76 72 Q66 60 62 68 L72 84" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M124 72 Q134 60 138 68 L128 84" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <rect x="88" y="132" rx="4" ry="4" width="24" height="42" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M86 174 L82 196" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M114 174 L118 196" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M62 68 Q58 60 54 68 Q52 76 58 78" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <path d="M138 68 Q142 60 146 68 Q148 76 142 78" fill="#cbd5e1" opacity="0.3" stroke="#94a3b8" stroke-width="1"/>
+          <text x="100" y="230" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="700" letter-spacing="4">Human</text>
+          <text x="100" y="244" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Richmond · Real World</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#6b7280;color:#9ca3af;">Real Life</div>
+        <ul>
+          <li>Overweight build</li>
+          <li>Gamer, casual dress</li>
+          <li>Friendly, approachable face</li>
+          <li>Lacks confidence physically</li>
+          <li>Kind eyes, warm smile</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <ellipse cx="100" cy="45" rx="30" ry="32" fill="#e8dcc8" stroke="#22c55e" stroke-width="1.2"/>
+          <ellipse cx="91" cy="40" rx="4" ry="4" fill="#166534" stroke="none"/>
+          <ellipse cx="109" cy="40" rx="4" ry="4" fill="#166534" stroke="none"/>
+          <path d="M88 48 Q100 53 112 48" stroke="#166534" stroke-width="0.8" fill="none"/>
+          <rect x="74" y="74" rx="8" ry="8" width="52" height="62" fill="#14532d" opacity="0.5" stroke="#22c55e" stroke-width="1.5"/>
+          <path d="M74 74 Q62 60 58 70 L70 86" fill="#14532d" opacity="0.5" stroke="#22c55e" stroke-width="1.5"/>
+          <path d="M126 74 Q138 60 142 70 L130 86" fill="#14532d" opacity="0.5" stroke="#22c55e" stroke-width="1.5"/>
+          <rect x="86" y="136" rx="4" ry="4" width="28" height="44" fill="#14532d" opacity="0.5" stroke="#22c55e" stroke-width="1.5"/>
+          <path d="M58 70 Q52 58 48 70 Q46 80 52 82" fill="#14532d" opacity="0.5" stroke="#22c55e" stroke-width="1.5"/>
+          <path d="M142 70 Q148 58 152 70 Q154 80 148 82" fill="#14532d" opacity="0.5" stroke="#22c55e" stroke-width="1.5"/>
+          <path d="M84 136 L80 160" stroke="#22c55e" stroke-width="1.5"/>
+          <path d="M116 136 L120 160" stroke="#22c55e" stroke-width="1.5"/>
+          <!-- axe / weapon indicator -->
+          <path d="M134 80 L150 60 L155 64 L140 84" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+          <circle cx="148" cy="62" r="5" fill="none" stroke="#4ade80" stroke-width="1"/>
+          <text x="100" y="234" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="700" letter-spacing="3">Thaumaturge</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Book 2 · Barbarian Tank</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#22c55e;color:#4ade80;">Thaumaturge / Tank</div>
+        <ul>
+          <li>Heavy plate or half-plate armor</li>
+          <li>Large two-handed weapon (axe)</li>
+          <li>Broader, more muscular in-game</li>
+          <li>Scarred from battle</li>
+          <li>Confidence slowly building</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="svg-wrap">
+        <svg class="form-svg" viewBox="0 0 200 280" fill="none">
+          <!-- wolf face -->
+          <ellipse cx="100" cy="45" rx="28" ry="30" fill="#8b5cf6" stroke="#4ade80" stroke-width="1"/>
+          <ellipse cx="92" cy="40" rx="4" ry="4" fill="#fbbf24" stroke="none"/>
+          <ellipse cx="108" cy="40" rx="4" ry="4" fill="#fbbf24" stroke="none"/>
+          <path d="M86 50 Q100 58 114 50" stroke="#166534" stroke-width="1.5" fill="none"/>
+          <path d="M95 35 L100 30 L105 35" fill="none" stroke="#fbbf24" stroke-width="0.8"/>
+          <!-- ears -->
+          <path d="M85 20 L78 8 L90 18" fill="#8b5cf6" stroke="#4ade80" stroke-width="0.8"/>
+          <path d="M115 20 L122 8 L110 18" fill="#8b5cf6" stroke="#4ade80" stroke-width="0.8"/>
+          <!-- body - hybrid form -->
+          <rect x="72" y="76" rx="8" ry="8" width="56" height="62" fill="#1e3a2a" opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M72 76 Q60 62 56 72 L68 88" fill="#1e3a2a" opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M128 76 Q140 62 144 72 L132 88" fill="#1e3a2a" opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M56 72 Q50 60 46 72 Q44 82 50 84" fill="#1e3a2a" opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M144 72 Q150 60 154 72 Q156 82 150 84" fill="#1e3a2a" opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+          <rect x="86" y="138" rx="4" ry="4" width="28" height="42" fill="#1e3a2a" opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M84 138 L80 162" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M116 138 L120 162" stroke="#4ade80" stroke-width="1.5"/>
+          <path d="M92 90 L100 78 L108 90" fill="none" stroke="#4ade80" stroke-width="1" opacity="0.5"/>
+          <path d="M120 88 Q135 70 140 80" fill="none" stroke="#4ade80" stroke-width="1.5" opacity="0.5"/>
+          <text x="100" y="234" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700" letter-spacing="3">PRIMAL</text>
+          <text x="100" y="248" text-anchor="middle" fill="#6b7280" font-size="7" letter-spacing="2">Unity · Haven</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="form-label" style="border-color:#4ade80;color:#86efac;">Primal Shifter</div>
+        <ul>
+          <li>Hybrid wolf-human form</li>
+          <li>Fur, claws, fangs</li>
+          <li>Golden eyes in all forms</li>
+          <li>Can shift between human, hybrid, and full wolf</li>
+          <li>Natural weaponry (claws, bite)</li>
+          <li>Heightened senses</li>
+          <li>Deep connection to nature</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="abilities">
+  <h2 class="section-title">Powers & Abilities</h2>
+  <div class="section-subtitle">Frank's unique class and combat capabilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Thaumaturge Foundation</h3>
+      <p>Frank's unique class was born from having <strong>all affinities weak and equal</strong>. This gave him a jack-of-all-trades foundation that later specialized into shapeshifting. The Thaumaturge class allows him to <strong>adapt and learn</strong> abilities from multiple domains, making him incredibly versatile despite not excelling in any single affinity.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-green">Versatile</span>
+        <span class="badge badge-cyan">Adaptive</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Shapeshifting — Primal Shifter</h3>
+      <p>Frank's core ability. He can transform between <strong>human, hybrid (werewolf-like), and full animal forms</strong>. His primary animal form is a <strong>wolf</strong>. In hybrid form, he retains human dexterity with animal strength, claws, and fangs. Each form has advantages: human for speech/social, hybrid for combat, animal for speed/tracking. His shapeshifting is tied to his Primal Shifter class, unlocked during his journey in Unity.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-green">Wolf Form</span>
+        <span class="badge badge-gold">Hybrid Form</span>
+        <span class="badge badge-orange">Full Beast</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Tank / Barbarian Build</h3>
+      <p>After his first death, Frank <strong>dumped all stats into Strength</strong>. He wears heavy armor and wields a two-handed weapon (an axe). He serves as the <strong>front-line tank</strong> for the Twilight Throne forces, absorbing damage and drawing aggro while Jason commands from the back and Riley picks off targets from range. His endurance is exceptional.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-red">Damage Sponge</span>
+        <span class="badge badge-gold">High Strength</span>
+        <span class="badge badge-green">Melee Combat</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Nature Connection</h3>
+      <p>Frank developed a <strong>deep connection to nature and primal forces</strong> through his journey in Haven. He learned from druids, shifters, tamers, and growers. He encountered an <strong>ancient God</strong> who tested him. This connection allows him to sense natural energies, track through wilderness, and tap into primal rage when fighting.</p>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="badge badge-green">Primal Connection</span>
+        <span class="badge badge-brown">Tracking</span>
+        <span class="badge badge-orange">Primal Rage</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Known Abilities & Skills</h2>
+  <div class="section-subtitle">Catalogued Thaumaturge and Primal Shifter abilities</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="ability-card">
+      <div class="header">
+        <h4>Wolf Transformation</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>Shifts into a full wolf form. Grants increased speed, stealth, and tracking ability. Heightened senses — smell, hearing, night vision. Used for scouting and pursuit.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Hybrid Form</h4>
+        <span class="tier">Signature</span>
+      </div>
+      <p>A bipedal wolf-human hybrid. Combines human dexterity and weapon proficiency with animal strength, claws, and bite. Frank's primary combat form. Retains ability to speak.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Primal Rage</h4>
+        <span class="tier">Tier 2</span>
+      </div>
+      <p>Taps into primal fury. Increases Strength and damage resistance but reduces strategic thinking. Frank struggles to control this, sometimes acting impulsively.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Thaumaturge Adaptation</h4>
+        <span class="tier">Passive</span>
+      </div>
+      <p>Frank's unique class allows him to learn and adapt abilities from multiple domains. This is what enabled his transition into shapeshifting — his Thaumaturge foundation could absorb the Primal Shifter evolution.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Heavy Weapon Mastery</h4>
+        <span class="tier">Tier 1</span>
+      </div>
+      <p>Proficient with two-handed axes and heavy weapons. His high Strength stat makes each blow devastating. Can cleave through multiple enemies.</p>
+    </div>
+    <div class="ability-card">
+      <div class="header">
+        <h4>Gate Piece Combat</h4>
+      <span class="tier">Tier 3</span>
+      </div>
+      <p>Frank's fight against Alexion demonstrated his tactical ability. He defeated the Light Avatar in direct combat and successfully imprisoned him — a feat few could claim. His combat instincts are sharper than he gives himself credit for.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <h2 class="section-title">Character Progression</h2>
+  <div class="section-subtitle">Frank's growth from sidekick to primal force</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <h3>Build Philosophy</h3>
+      <p>Frank is a <strong>Strength-based melee tank</strong>. After his first death, he went all-in on Strength, with secondary stats in Endurance and Constitution. His Thaumaturge foundation gives him unusual versatility, while his Primal Shifter evolution adds natural weaponry and mobility. Stat priority: Strength > Endurance > Constitution > Wisdom.</p>
+    </div>
+    <div class="card">
+      <h3>Character Arc</h3>
+      <p>Frank's journey is about <strong>finding his own identity</strong>. He starts as "Jason's gamer friend" — always in the background, never the hero. His arc peaks in Unity where he becomes a <strong>leader for the first time</strong>, facing an ancient God, protecting a village, and falling in love. He emerges as a <strong>Primal Shifter</strong> — no longer just a sidekick, but a force in his own right.</p>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="statChart"></canvas>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:1.5rem;">
+    <canvas id="powerChart"></canvas>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Allies & Associates</h2>
+  <div class="section-subtitle">Those who fight alongside the Primal Shifter</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><h3>Jason Rhodes</h3><p>Frank's <strong>best friend</strong> and the Dark Lord himself. They were friends at Richmond before AO. Frank is Jason's most loyal companion, following him through every transformation. Their bond is the longest-standing relationship in the series.</p></div>
+    <div class="card"><h3>Riley Jones</h3><p>Frank's teammate and fellow lieutenant of the Twilight Throne. They operate as Jason's <strong>right and left hands</strong>. Riley and Frank manage the city and fight alongside each other in every major battle.</p></div>
+    <div class="card"><h3>Silver</h3><p>A skilled shifter from Haven. Initially cold and dismissive toward Frank, she eventually becomes his <strong>teacher and love interest</strong>. She transforms into a wolf and has deep ties to the druidic community. Her real name is "Ana," revealed when children call her that.</p></div>
+    <div class="card"><h3>Alderas</h3><p>A leader figure in Haven. Initially skeptical of Frank, but willing to give him a chance. Represents the open-mindedness needed to overcome prejudice. Helps Frank find his place in the community.</p></div>
+    <div class="card"><h3>Abigail</h3><p>A bubbly teacher in Haven who leads the children's class. She welcomes Frank warmly and offers him a place to learn, despite his initial awkwardness with the children. A symbol of Haven's nurturing side.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Enemies & Rivals</h2>
+  <div class="section-subtitle">Those who oppose the Primal Shifter</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>Alex Lane / Alexion</h3>
+      <p>Frank fought Alexion in <strong>Dominion</strong> for a Gate Piece and <strong>defeated him</strong> in combat. However, Alexion escaped imprisonment and stole the piece. Their rivalry is personal — Alex represents everything wrong with privilege and cruelty, and Frank represents earned strength.</p>
+    </div>
+    <div class="card">
+      <h3>Haven's Cultists</h3>
+      <p>During his journey in Unity, Frank encounters cultists who threaten Haven. These enemies are connected to the darker forces in the region. Frank must protect his new home from them.</p>
+    </div>
+    <div class="card">
+      <h3>Self-Doubt</h3>
+      <p>Frank's greatest enemy is his own <strong>lack of confidence</strong>. He constantly compares himself to Jason, Riley, and others. His journey is as much about overcoming internal demons as external ones. Haven taught him to believe in his own worth.</p>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2 class="section-title">Series Timeline</h2>
+  <div class="section-subtitle">Frank's journey across the Awaken Online universe</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="flex-between"><h3>Catharsis</h3><span class="badge badge-green">Book 1</span></div>
+      <p style="margin-top:0.5rem;">Frank is introduced as Jason's only friend at Richmond. Stays in touch after Jason's expulsion. Does not yet appear in-game.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Precipice</h3><span class="badge badge-green">Book 2</span></div>
+      <p style="margin-top:0.5rem;">Frank enters AO for the first time. Struggles with weak affinities, gets Thaumaturge class. Dies once, then dumps all stats into Strength. Becomes the team's barbarian/tank.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Dominion</h3><span class="badge badge-green">Book 4</span></div>
+      <p style="margin-top:0.5rem;">Fights and defeats Alexion for a Gate Piece. Imprisons him but Alexion escapes and steals the piece. Proves his combat ability against a top-tier player.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Unity</h3><span class="badge badge-gold">Book 4.5</span></div>
+      <p style="margin-top:0.5rem;">Frank's solo journey. Travels north to snow-capped mountains. Discovers Haven. Meets Silver, Alderas, Abigail. Faces cultists. Encounters an ancient God. Evolves into Primal Shifter. Falls in love. Becomes a leader.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Hellion → Armageddon</h3><span class="badge badge-green">Books 5–6</span></div>
+      <p style="margin-top:0.5rem;">Fights alongside Jason against Finn, Death and Taxes, and other threats. Witnesses Jason's lich transformation. His Primal Shifter abilities are fully integrated into the group's tactics.</p>
+    </div>
+    <div class="card">
+      <div class="flex-between"><h3>Timeless → Crucible</h3><span class="badge badge-green">Books 7–8</span></div>
+      <p style="margin-top:0.5rem;">Stands by Jason through the ancient avatar crisis and the crucible. His loyalty never wavers. He has fully grown into his role as a leader and primal warrior.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Psychological Profile</h2>
+  <div class="section-subtitle">Understanding Frank's inner world</div>
+  <div class="section-divider"></div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <h3>The Loyal Friend</h3>
+      <p>Frank is defined by his <strong>loyalty</strong>. He stuck with Jason when he was expelled, followed him into a game where he struggled, and never wavered even as Jason became a terrifying lich lord. His loyalty is his greatest strength and occasionally his weakness — he sometimes defines himself by who he follows rather than who he is.</p>
+    </div>
+    <div class="card">
+      <h3>The Comparison Trap</h3>
+      <p>Frank constantly <strong>compares himself unfavorably</strong> to Jason, Riley, and even Rebecca (a figure from Unity). This self-doubt holds him back from stepping into leadership. His journey in Unity forces him to confront this and realize he has his own unique strengths.</p>
+    </div>
+    <div class="card">
+      <h3>The Primal Self</h3>
+      <p>Frank's shapeshifting is a metaphor for his <strong>inner transformation</strong>. The wolf represents instincts, freedom, and power that he never accessed as an overweight gamer kid. Learning to shift is learning to accept all parts of himself — including the primal, powerful ones. His hybrid form is the balance between his human self-doubt and his animal confidence.</p>
+    </div>
+    <div class="card">
+      <h3>Finding Leadership</h3>
+      <p>For the first time in Unity, Frank <strong>becomes a leader</strong>. He protects Haven, faces an ancient God, and makes decisions that affect others. This is a turning point. He returns to the main storyline not as a sidekick but as an equal. The experience reshapes his self-image permanently.</p>
+    </div>
+    <div class="card">
+      <h3>Love & Belonging</h3>
+      <p>Frank <strong>falls in love</strong> in Haven, finding a connection beyond the game. This relationship grounds him and gives him something to fight for beyond Jason's cause. It represents his growth into a full person with his own desires and attachments — no longer just "Jason's friend."</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Awaken Online is a series by <strong>Travis Bagwell</strong>. This fan resource is for reference and analysis purposes.</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;color:#6b7280;">Data compiled from the Awaken Online book series, Fandom wiki, and fan resources.</p>
+</footer>
+
+<script>
+new Chart(document.getElementById('statChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Strength', 'Endurance', 'Constitution', 'Wisdom', 'Dexterity', 'Charisma'],
+    datasets: [
+      { label: 'Early (Book 2)', data: [16, 12, 10, 8, 7, 7], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.05)', pointBackgroundColor: '#22c55e', borderWidth: 2 },
+      { label: 'Pre-Unity (Book 4)', data: [20, 16, 14, 10, 9, 9], borderColor: '#4ade80', backgroundColor: 'rgba(74,222,128,0.05)', pointBackgroundColor: '#4ade80', borderWidth: 2 },
+      { label: 'Primal Shifter (Book 4.5+)', data: [26, 20, 18, 14, 14, 12], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', pointBackgroundColor: '#fbbf24', borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      r: {
+        beginAtZero: true, max: 30,
+        grid: { color: 'rgba(74,222,128,0.06)' },
+        angleLines: { color: 'rgba(74,222,128,0.06)' },
+        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('powerChart'), {
+  type: 'line',
+  data: {
+    labels: ['Book 2\n(Precipice)', 'Book 3\n(Evolution)', 'Book 4\n(Dominion)', 'Book 4.5\n(Unity)', 'Book 5\n(Hellion)', 'Book 6\n(Armageddon)', 'Books 7–8\n(Timeless/Crucible)'],
+    datasets: [
+      { label: 'Combat Power', data: [10, 18, 28, 35, 42, 50, 58], borderColor: '#4ade80', backgroundColor: 'rgba(74,222,128,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#4ade80', borderWidth: 2 },
+      { label: 'Confidence / Self-Worth', data: [5, 10, 16, 32, 38, 44, 50], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#fbbf24', borderWidth: 2, borderDash: [5,3] },
+      { label: 'Shapeshifting Mastery', data: [2, 8, 14, 34, 40, 46, 54], borderColor: '#06b6d4', backgroundColor: 'rgba(6,182,212,0.05)', fill: false, tension: 0.3, pointBackgroundColor: '#06b6d4', borderWidth: 2, borderDash: [2,4] }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(74,222,128,0.05)' } },
+      y: { min: 0, max: 65, ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(74,222,128,0.05)' }, title: { display: true, text: 'Rating (0–65)', color: '#94a3b8', font: { size: 10 } } }
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('menu-panel');
+  var backdrop = document.getElementById('menu-backdrop');
+  var closeBtn = document.getElementById('menuClose');
+  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
+  if(btn) btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  if(backdrop) backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+</body>
+</html>
