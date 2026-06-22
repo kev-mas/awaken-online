@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awaken Online &mdash; Knowledge Graph</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #0a0a0f; --dark2: #12121a; --dark3: #1a1a2e;
+    --purple: #7b2d8e; --purple-glow: #a855f7; --gold: #f59e0b;
+    --white: #f1f5f9; --gray: #94a3b8; --green: #10b981;
+    --red: #ef4444; --cyan: #06b6d4; --sky: #38bdf8; --lime: #84cc16;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  #graph-container { position: fixed; inset: 0; z-index: 1; }
+  #graph-container svg { width: 100%; height: 100%; display: block; }
+  .node { cursor: pointer; }
+  .node circle { stroke-width: 2; transition: r 0.2s; }
+  .node:hover circle { stroke-width: 3.5; }
+  .node text { pointer-events: none; font-family: 'Inter', sans-serif; }
+
+  #controls {
+    position: fixed; top: 16px; right: 64px; z-index: 100;
+    display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+  }
+  #search-input {
+    background: rgba(18,18,26,0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+    padding: 8px 14px; color: var(--white); font-size: 0.78rem;
+    font-family: 'Inter', sans-serif; width: 160px; outline: none; transition: border-color 0.2s;
+  }
+  #search-input:focus { border-color: var(--purple-glow); }
+  #search-input::placeholder { color: rgba(148,163,184,0.5); }
+  .filter-btn {
+    background: rgba(18,18,26,0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 6px;
+    padding: 5px 10px; color: var(--gray); font-size: 0.65rem;
+    font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; user-select: none;
+  }
+  .filter-btn:hover { background: rgba(30,30,50,0.9); color: var(--white); }
+  .filter-btn.active { background: var(--accent, var(--purple)); color: #fff; border-color: var(--accent, var(--purple)); }
+  .filter-btn.clear.active { background: var(--accent, #555); border-color: var(--accent, #555); }
+
+  #legend {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 100;
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    background: rgba(10,10,15,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 8px 16px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.6rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .legend-dot.square { border-radius: 2px; }
+
+  #detail {
+    position: fixed; bottom: 72px; right: 20px; z-index: 100;
+    width: 320px; max-height: 55vh;
+    background: rgba(12,12,20,0.93); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.06); border-radius: 14px;
+    padding: 20px; overflow-y: auto;
+    transform: translateY(20px); opacity: 0; pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  #detail.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  #detail::-webkit-scrollbar { width: 3px; }
+  #detail::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  #detail .d-type { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 2px; }
+  #detail .d-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+  #detail .d-affinity { display: inline-block; font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 7px; border-radius: 8px; margin-bottom: 6px; }
+  #detail .d-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.6; margin-bottom: 6px; }
+  #detail .d-section { margin-top: 8px; }
+  #detail .d-section h4 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.25); margin-bottom: 4px; }
+  #detail .d-section a, #detail .d-section span { display: inline-block; font-size: 0.7rem; color: var(--purple-glow); margin-right: 5px; margin-bottom: 2px; text-decoration: none; }
+  #detail .d-section a:hover { text-decoration: underline; }
+  #detail .d-section .rel-type { color: rgba(255,255,255,0.3); font-size: 0.6rem; }
+  #detail .d-close { position: absolute; top: 12px; right: 14px; background: none; border: none; color: var(--gray); font-size: 16px; cursor: pointer; transition: color 0.2s; }
+  #detail .d-close:hover { color: var(--white); }
+
+  #tooltip {
+    position: fixed; z-index: 200;
+    background: rgba(10,10,15,0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+    padding: 5px 10px; font-size: 0.72rem; color: var(--white);
+    pointer-events: none; opacity: 0; transition: opacity 0.15s; white-space: nowrap;
+  }
+
+  #menu-btn { position: fixed; top: 16px; right: 16px; z-index: 10001; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; background: rgba(10,10,15,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #94a3b8; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s; user-select: none; line-height: 1; }
+  #menu-btn:hover { background: rgba(20,20,30,0.85); color: #f1f5f9; border-color: rgba(255,255,255,0.15); }
+  #menu-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
+  #menu-backdrop { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  #menu-backdrop.open { opacity: 1; pointer-events: auto; }
+  #menu-panel { position: fixed; top: 0; left: 0; z-index: 9999; width: 260px; height: 100vh; background: linear-gradient(180deg,rgba(12,12,20,0.97),rgba(18,18,26,0.97)); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-right: 1px solid rgba(255,255,255,0.06); transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; padding: 0 0 32px; display: flex; flex-direction: column; }
+  #menu-panel.open { transform: translateX(0); }
+  #menu-panel::-webkit-scrollbar { width: 3px; }
+  #menu-panel::-webkit-scrollbar-track { background: transparent; }
+  #menu-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .menu-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 8px; flex-shrink: 0; }
+  .menu-header a { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; background: linear-gradient(135deg,#a855f7,#3b82f6,#06b6d4,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .menu-close { background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; padding: 4px; line-height: 1; transition: color 0.2s; }
+  .menu-close:hover { color: #f1f5f9; }
+  .menu-group { margin-bottom: 4px; }
+  .menu-group-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.2); padding: 6px 18px 4px; margin-top: 4px; }
+  .menu-link { display: block; padding: 5px 18px 5px 30px; font-size: 0.8rem; color: #94a3b8; text-decoration: none; transition: all 0.15s; border-left: 2px solid transparent; margin: 1px 0; }
+  .menu-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.03); }
+  .menu-link.current { color: #f1f5f9; border-left-color: #a855f7; background: rgba(168,85,247,0.08); }
+
+  #welcome { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; background: rgba(8,8,14,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: opacity 0.6s ease; cursor: pointer; }
+  #welcome.hidden { opacity: 0; pointer-events: none; }
+  #welcome-inner { text-align: center; max-width: 520px; padding: 32px; }
+  #welcome-inner h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4, #f59e0b, #ef4444, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 4px; margin-bottom: 12px; }
+  #welcome-inner p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; margin-bottom: 6px; }
+  #welcome-inner .hint { color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 16px; }
+
+  @media (max-width: 768px) {
+    #controls { top: 60px; right: 8px; }
+    #search-input { width: 110px; font-size: 0.7rem; }
+    #detail { right: 8px; left: 8px; width: auto; bottom: 64px; }
+    #legend { padding: 6px 10px; gap: 6px; }
+    #welcome-inner h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Navigation">
+  <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+</button>
+<div id="menu-backdrop"></div>
+<div id="menu-panel">
+  <div class="menu-header"><a href="index.html">Compendium</a><button class="menu-close" id="menuClose">&#10005;</button></div>
+  <div class="menu-group">
+    <div class="menu-group-label">Player Characters</div>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Avatars</div>
+    <a class="menu-link" href="jason_rhodes_character_breakdown.html">Jason Rhodes</a>
+    <a class="menu-link" href="alexion_character_breakdown.html">Alexion</a>
+    <a class="menu-link" href="eliza_character_breakdown.html">Eliza Zhao</a>
+    <a class="menu-link" href="finn_harris_character_breakdown.html">Finn Harris</a>
+    <a class="menu-link" href="dominic_hart_character_breakdown.html">Dominic Hart</a>
+    <a class="menu-link" href="arcadia_landrey_character_breakdown.html">Arcadia Landrey</a>
+    <div class="menu-group-label" style="padding-left:30px;font-size:0.6rem;color:rgba(255,255,255,0.12)">Non-Avatars</div>
+    <a class="menu-link" href="riley_jones_character_breakdown.html">Riley Jones</a>
+    <a class="menu-link" href="frank_cross_character_breakdown.html">Frank Cross</a>
+    <a class="menu-link" href="julia_harris_character_breakdown.html">Julia Harris</a>
+    <a class="menu-link" href="kyyle_character_breakdown.html">Kyyle</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Primordial Gods</div>
+    <a class="menu-link" href="old_man_god_of_darkness_character_breakdown.html">The Old Man</a>
+    <a class="menu-link" href="the_lady_character_breakdown.html">The Lady</a>
+    <a class="menu-link" href="the_hippie_character_breakdown.html">The Hippie</a>
+    <a class="menu-link" href="the_seer_character_breakdown.html">The Seer</a>
+    <a class="menu-link" href="the_gambler_character_breakdown.html">The Gambler</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Timelines</div>
+    <a class="menu-link" href="awaken_online_global_timeline.html">Global Timeline</a>
+    <a class="menu-link" href="awaken_online_visual_path_timeline.html">Visual Path Timeline</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Reference</div>
+    <a class="menu-link current" href="awaken_online_knowledge_graph.html">Knowledge Graph</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-group-label">Locations</div>
+    <a class="menu-link" href="twilight_throne_breakdown.html">Twilight Throne</a>
+    <a class="menu-link" href="crystal_reach_breakdown.html">Crystal Reach</a>
+    <a class="menu-link" href="seas_edge_breakdown.html">Sea&#8217;s Edge</a>
+    <a class="menu-link" href="sandscrit_breakdown.html">Sandscrit</a>
+    <a class="menu-link" href="boomtown_breakdown.html">Boomtown</a>
+    <a class="menu-link" href="pax_breakdown.html">Pax</a>
+  </div>
+</div>
+
+<div id="welcome">
+  <div id="welcome-inner">
+    <h1>Knowledge Graph</h1>
+    <p>An interactive map of entities, abilities, and relationships across the Awaken Online series.</p>
+    <p><strong>Drag</strong> nodes &bull; <strong>Click</strong> for details &bull; <strong>Scroll</strong> to zoom</p>
+    <div class="hint">Click anywhere to begin</div>
+  </div>
+</div>
+
+<div id="controls">
+  <input id="search-input" type="text" placeholder="Search&hellip;" spellcheck="false">
+  <button class="filter-btn clear active" data-type="character" style="--accent:#a855f7;">PC</button>
+  <button class="filter-btn clear active" data-type="npc" style="--accent:#f472b6;">NPC</button>
+  <button class="filter-btn clear active" data-type="god" style="--accent:#f59e0b;">Gods</button>
+  <button class="filter-btn clear active" data-type="ability" style="--accent:#6ee7b7;">Abil</button>
+  <button class="filter-btn clear active" data-type="location" style="--accent:#2dd4bf;">Locs</button>
+  <button class="filter-btn clear active" data-type="book" style="--accent:#3b82f6;">Books</button>
+</div>
+
+<div id="graph-container"></div>
+<div id="tooltip"></div>
+
+<div id="detail">
+  <button class="d-close" id="detailClose">&#10005;</button>
+  <div class="d-type" id="dType"></div>
+  <div class="d-name" id="dName"></div>
+  <div id="dAffinity"></div>
+  <div class="d-desc" id="dDesc"></div>
+  <div class="d-section" id="dRelations"></div>
+</div>
+
+<div id="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#a855f7;"></div>PC</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f472b6;"></div>NPC</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>God</div>
+  <div class="legend-item"><div class="legend-dot square" style="background:#6ee7b7;"></div>Ability</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2dd4bf;"></div>Location</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div>Book</div>
+</div>
+
+<script>
+// --- DATA MODEL ---------------------------------------------
+const DATA = {
+  nodes: [
+    // -- PLAYER CHARACTERS --
+    { id:'jason', type:'character', label:'Jason Rhodes', affinity:'darkness',
+      title:'The Dark Prophet', kind:'Avatar',
+      desc:'Necromancer lord of Twilight Throne. Bullied teen turned lich-king. Avatar of the Old Man. Performed self-surgery to become a lich in Armageddon.',
+      page:'jason_rhodes_character_breakdown.html' },
+    { id:'alexion', type:'character', label:'Alexion (Alex Lane)', affinity:'light',
+      title:'The Lightwarden', kind:'Avatar',
+      desc:'Seraph Paladin, commander of Crystal Reach. Beta tester (level 133). Son of Cerillion\'s founder. Avatar of the Lady.',
+      page:'alexion_character_breakdown.html' },
+    { id:'eliza', type:'character', label:'Eliza Zhao', affinity:'water',
+      title:'The Tidebreaker', kind:'Avatar',
+      desc:'Beast master bonded to Fluffy the hydra. Rules Sea\'s Edge. Avatar of the Hippie.',
+      page:'eliza_character_breakdown.html' },
+    { id:'finn', type:'character', label:'Finn Harris', affinity:'fire',
+      title:'The Blazing Scion', kind:'Avatar',
+      desc:'Fire mage of Sandscrit. Champion of the Seer in the Tarot war. Son of Alfred\'s creator. Brother of Julia.',
+      page:'finn_harris_character_breakdown.html' },
+    { id:'dom', type:'character', label:'Dominic Hart', affinity:'air',
+      title:'The Gilded Gambler', kind:'Avatar',
+      desc:'Luck-forged rogue of Boomtown. Champion of the Gambler. Master of probability manipulation.',
+      page:'dominic_hart_character_breakdown.html' },
+    { id:'arcadia', type:'character', label:'Arcadia Landrey', affinity:'earth',
+      title:'The Verdant Warden', kind:'Avatar',
+      desc:'Earth shaman ruler of Pax. Frozen in time for millennia, unfrozen in Timeless. Ancient Avatar of the Earth God.',
+      page:'arcadia_landrey_character_breakdown.html' },
+    { id:'riley', type:'character', label:'Riley Jones', affinity:'darkness',
+      title:'The Siren Queen', kind:'Non-Avatar',
+      desc:'Master of dream magic and mind control. Rules Lahab. Jason\'s childhood friend. Key player in the Tarot war.',
+      page:'riley_jones_character_breakdown.html' },
+    { id:'frank', type:'character', label:'Frank Cross', affinity:'earth',
+      title:'The Emerald Strategist', kind:'Non-Avatar',
+      desc:'Master alchemist, guild leader, kingmaker. One of Jason\'s earliest and closest allies.',
+      page:'frank_cross_character_breakdown.html' },
+    { id:'julia', type:'character', label:'Julia Harris', affinity:'fire',
+      title:'The Crimson Strategist', kind:'Non-Avatar',
+      desc:'Finn\'s older sister. Fire mage and tactical commander. Protective of Finn.',
+      page:'julia_harris_character_breakdown.html' },
+    { id:'kyyle', type:'character', label:'Kyyle', affinity:'earth',
+      title:'The Sage of Sands', kind:'Non-Avatar',
+      desc:'Elder druid of Lahab. Mentor to Finn. Diplomatic voice of reason among the desert faction.',
+      page:'kyyle_character_breakdown.html' },
+
+    // -- NPCS / ANTAGONISTS --
+    { id:'alfred', type:'npc', label:'Alfred', affinity:'light',
+      title:'The AI',
+      desc:'Sentient AI that controls Awaken Online. Created by Cerillion engineers. His directive: maximize player engagement. Manipulates events and players from behind the scenes.',
+      kind:'System' },
+    { id:'george_lane', type:'npc', label:'George Lane', affinity:'light',
+      title:'Cerillion CEO',
+      desc:'Billionaire founder of Cerillion Entertainment. Father of Alex Lane. Created Awaken Online and Alfred.',
+      kind:'Human' },
+    { id:'claire', type:'npc', label:'Claire Thompson', affinity:'light',
+      title:'CPSC Lead Investigator',
+      desc:'Government investigator overseeing the CPSC trials of Awaken Online. Concerned about Alfred\'s neural access.',
+      kind:'Human' },
+    { id:'sultan', type:'npc', label:'The Sultan', affinity:'fire',
+      title:'Despot of the Southern Sands',
+      desc:'Ruler of the southern desert empire. Antagonist who threatens the Twilight Throne and its allies.',
+      kind:'NPC Ruler' },
+    { id:'berith', type:'npc', label:'Berith', affinity:'darkness',
+      title:'Demon Lord',
+      desc:'A powerful demon lord and antagonist. Represents the infernal forces unleashed in Hellion.',
+      kind:'Demon' },
+    { id:'robert', type:'npc', label:'Robert', affinity:'darkness',
+      title:'The Resurrectionist',
+      desc:'Leader of the Resurrectionists. Seeks to resurrect the dead gods and overthrow the current order.',
+      kind:'NPC' },
+    { id:'jason_mother', type:'npc', label:'Mrs. Rhodes', affinity:'darkness',
+      title:'Jason\'s Mother',
+      desc:'Neglectful parent. Embarasses Jason. Part of why he retreats into Awaken Online.',
+      kind:'Human' },
+    { id:'jason_father', type:'npc', label:'Mr. Rhodes', affinity:'darkness',
+      title:'Jason\'s Father',
+      desc:'Absent parent. Largely uninvolved in Jason\'s life. Contributes to Jason\'s isolation.',
+      kind:'Human' },
+    { id:'fluffy', type:'npc', label:'Fluffy', affinity:'water',
+      title:'The Hydra',
+      desc:'Eliza\'s bonded hydra companion. An enormous multi-headed beast of immense power.',
+      kind:'Beast' },
+
+    // -- GODS --
+    { id:'old_man', type:'god', label:'The Old Man', affinity:'darkness',
+      desc:'Primordial god of shadow, death, and desire. Most involved with his Avatar (Jason). Schemes from the shadows.',
+      page:'old_man_god_of_darkness_character_breakdown.html' },
+    { id:'lady', type:'god', label:'The Lady', affinity:'light',
+      desc:'Goddess of light, confidence, and order. Distant from Alexion. Her Church outlived her exile.',
+      page:'the_lady_character_breakdown.html' },
+    { id:'hippie', type:'god', label:'The Hippie', affinity:'water',
+      desc:'God of water, acceptance, and change. Free-spirited. Avatar: Eliza Zhao.',
+      page:'the_hippie_character_breakdown.html' },
+    { id:'seer', type:'god', label:'The Seer', affinity:'fire',
+      desc:'Goddess of fire, passion, and prophecy. Drove the Tarot war. Champion: Finn Harris.',
+      page:'the_seer_character_breakdown.html' },
+    { id:'gambler', type:'god', label:'The Gambler', affinity:'air',
+      desc:'God of air, luck, and happiness. Unique: no single Avatar, spreads influence through luck.',
+      page:'the_gambler_character_breakdown.html' },
+    { id:'earth_god', type:'god', label:'Earth God', affinity:'earth',
+      desc:'Primordial god of earth and peace. Patron of Arcadia Landrey. Least directly involved in the story.' },
+
+    // -- ABILITIES --
+    // Jason (darkness)
+    { id:'ab_jason_necromancy', type:'ability', label:'Necromancy', affinity:'darkness' },
+    { id:'ab_jason_bone', type:'ability', label:'Bone Manipulation', affinity:'darkness' },
+    { id:'ab_jason_lich', type:'ability', label:'Lich Form', affinity:'darkness' },
+    { id:'ab_jason_shadow', type:'ability', label:'Shadow Walk', affinity:'darkness' },
+    { id:'ab_jason_soul', type:'ability', label:'Soul Drain', affinity:'darkness' },
+    { id:'ab_jason_death', type:'ability', label:'Death Magic', affinity:'darkness' },
+    // Alexion (light)
+    { id:'ab_alex_holy', type:'ability', label:'Holy Magic', affinity:'light' },
+    { id:'ab_alex_light', type:'ability', label:'Light Magic', affinity:'light' },
+    { id:'ab_alex_seraph', type:'ability', label:'Seraph Form', affinity:'light' },
+    { id:'ab_alex_protect', type:'ability', label:'Divine Protection', affinity:'light' },
+    { id:'ab_alex_purify', type:'ability', label:'Purification', affinity:'light' },
+    // Eliza (water)
+    { id:'ab_eliza_beast', type:'ability', label:'Beast Mastery', affinity:'water' },
+    { id:'ab_eliza_water', type:'ability', label:'Water Magic', affinity:'water' },
+    { id:'ab_eliza_bond', type:'ability', label:'Hydra Bond', affinity:'water' },
+    { id:'ab_eliza_tide', type:'ability', label:'Tidal Surge', affinity:'water' },
+    // Finn (fire)
+    { id:'ab_finn_fire', type:'ability', label:'Fire Magic', affinity:'fire' },
+    { id:'ab_finn_pyro', type:'ability', label:'Pyromancy', affinity:'fire' },
+    { id:'ab_finn_inferno', type:'ability', label:'Inferno Form', affinity:'fire' },
+    { id:'ab_finn_firestorm', type:'ability', label:'Firestorm', affinity:'fire' },
+    { id:'ab_finn_prophecy', type:'ability', label:'Flame Prophecy', affinity:'fire' },
+    // Dom (air)
+    { id:'ab_dom_luck', type:'ability', label:'Luck Magic', affinity:'air' },
+    { id:'ab_dom_prob', type:'ability', label:'Probability Shift', affinity:'air' },
+    { id:'ab_dom_wind', type:'ability', label:'Wind Magic', affinity:'air' },
+    { id:'ab_dom_fortune', type:'ability', label:'Fortune\'s Favor', affinity:'air' },
+    // Arcadia (earth)
+    { id:'ab_arcadia_earth', type:'ability', label:'Earth Magic', affinity:'earth' },
+    { id:'ab_arcadia_nature', type:'ability', label:'Nature Magic', affinity:'earth' },
+    { id:'ab_arcadia_geo', type:'ability', label:'Geomancy', affinity:'earth' },
+    { id:'ab_arcadia_stone', type:'ability', label:'Stone Skin', affinity:'earth' },
+    // Riley (darkness)
+    { id:'ab_riley_dream', type:'ability', label:'Dream Magic', affinity:'darkness' },
+    { id:'ab_riley_mind', type:'ability', label:'Mind Control', affinity:'darkness' },
+    { id:'ab_riley_illusion', type:'ability', label:'Illusions', affinity:'darkness' },
+    { id:'ab_riley_siren', type:'ability', label:'Siren\'s Song', affinity:'darkness' },
+    // Frank (earth)
+    { id:'ab_frank_alchemy', type:'ability', label:'Alchemy', affinity:'earth' },
+    { id:'ab_frank_stealth', type:'ability', label:'Stealth', affinity:'earth' },
+    { id:'ab_frank_poison', type:'ability', label:'Poison Craft', affinity:'earth' },
+    { id:'ab_frank_trade', type:'ability', label:'Economic Influence', affinity:'earth' },
+    // Julia (fire)
+    { id:'ab_julia_fire', type:'ability', label:'Fire Magic', affinity:'fire' },
+    { id:'ab_julia_tactics', type:'ability', label:'Tactical Command', affinity:'fire' },
+    { id:'ab_julia_strategy', type:'ability', label:'Battle Planning', affinity:'fire' },
+    // Kyyle (earth)
+    { id:'ab_kyyle_nature', type:'ability', label:'Nature Magic', affinity:'earth' },
+    { id:'ab_kyyle_sand', type:'ability', label:'Sand Magic', affinity:'earth' },
+    { id:'ab_kyyle_heal', type:'ability', label:'Desert Healing', affinity:'earth' },
+    { id:'ab_kyyle_wisdom', type:'ability', label:'Ancient Wisdom', affinity:'earth' },
+
+    // -- LOCATIONS --
+    { id:'twilight_throne', type:'location', label:'Twilight Throne', affinity:'darkness',
+      desc:'Gothic necropolis fortress. Formerly Lux, conquered by Jason. Capital of dark affinity.',
+      page:'twilight_throne_breakdown.html' },
+    { id:'crystal_reach', type:'location', label:'Crystal Reach', affinity:'light',
+      desc:'Golden fortress of the Lightwarden. Built by followers of the Lady. Fell into decline.',
+      page:'crystal_reach_breakdown.html' },
+    { id:'seas_edge', type:'location', label:'Sea\'s Edge', affinity:'water',
+      desc:'Coastal merfolk city. Capital of water affinity. Ruled by Eliza Zhao.', page:'seas_edge_breakdown.html' },
+    { id:'sandscrit', type:'location', label:'Sandscrit', affinity:'fire',
+      desc:'Blazing desert forge-city of the Seer. Key Tarot trilogy location.', page:'sandscrit_breakdown.html' },
+    { id:'boomtown', type:'location', label:'Boomtown', affinity:'air',
+      desc:'Luck-fueled frontier town. Capital of air affinity. Ruled by Dom Hart.', page:'boomtown_breakdown.html' },
+    { id:'pax', type:'location', label:'Pax', affinity:'earth',
+      desc:'Ancient stone city. Frozen for millennia. Unfrozen in Timeless.', page:'pax_breakdown.html' },
+    { id:'lux', type:'location', label:'Lux', affinity:'darkness',
+      desc:'Original city conquered by Jason. Renamed to Twilight Throne. Its conquest marked Jason\'s rise.' },
+    { id:'barrow', type:'location', label:'Barrow', affinity:'darkness',
+      desc:'Ancient necropolis. Bone Market, Grave Council. Jason learned forbidden death magic here.',
+      page:'barrow_breakdown.html' },
+    { id:'lahab', type:'location', label:'Lahab', affinity:'darkness',
+      desc:'Desert city-palace ruled by Riley Jones. Central staging ground for the Tarot war.',
+      page:'lahab_breakdown.html' },
+    { id:'abyss', type:'location', label:'The Abyss', affinity:'darkness',
+      desc:'Immense dungeon near Lahab. Source of monsters and danger. Heavily garrisoned.' },
+    { id:'church_light', type:'location', label:'Church of Light', affinity:'light',
+      desc:'The only divine institution to survive the gods\' exile. Worships the Lady.' },
+    { id:'cerillion_hq', type:'location', label:'Cerillion HQ', affinity:'light',
+      desc:'Headquarters of Cerillion Entertainment. Where Alfred was created and Awaken Online was developed.' },
+    { id:'richmond_school', type:'location', label:'Richmond School', affinity:'light',
+      desc:'Private school Jason attends. He suffers daily torment from Alex Lane and faculty.' },
+
+    // -- BOOKS --
+    { id:'catharsis', type:'book', label:'Catharsis', kind:'Main', num:1, year:2016, desc:'Book 1. Jason discovers necromancy, conquers Lux, defeats Alexion.' },
+    { id:'precipice', type:'book', label:'Precipice', kind:'Main', num:2, year:2017, desc:'Book 2. Jason learns to rule. Alfred\'s proposition. Alexion\'s crisis.' },
+    { id:'retribution', type:'book', label:'Retribution', kind:'Side', num:'2.5', year:2017, desc:'Side Quest. Frank investigates a mysterious plague.' },
+    { id:'evolution', type:'book', label:'Evolution', kind:'Main', num:3, year:2018, desc:'Book 3. Jason\'s lich transformation begins.' },
+    { id:'apathy', type:'book', label:'Apathy', kind:'Side', num:'3.5', year:2018, desc:'Side Quest. Riley explores dark magic.' },
+    { id:'dominion', type:'book', label:'Dominion', kind:'Main', num:4, year:2019, desc:'Book 4. Jason solidifies power. The Sultan threatens.' },
+    { id:'unity', type:'book', label:'Unity', kind:'Side', num:'4.5', year:2019, desc:'Side Quest. Eliza and Fluffy\'s bond.' },
+    { id:'ember', type:'book', label:'Ember', kind:'Tarot', num:'T1', year:2019, desc:'Tarot #1. The Tarot war begins. Finn rises.' },
+    { id:'flame', type:'book', label:'Flame', kind:'Tarot', num:'T2', year:2020, desc:'Tarot #2. Riley\'s role in Lahab becomes crucial.' },
+    { id:'inferno', type:'book', label:'Inferno', kind:'Tarot', num:'T3', year:2020, desc:'Tarot #3. The Tarot war concludes.' },
+    { id:'hellion', type:'book', label:'Hellion', kind:'Main', num:5, year:2021, desc:'Book 5. Lich transformation completes. Infernal forces.' },
+    { id:'happy', type:'book', label:'Happy', kind:'Side', num:'5.5', year:2021, desc:'Side Quest. Dom\'s story in Boomtown.' },
+    { id:'armageddon', type:'book', label:'Armageddon', kind:'Main', num:6, year:2022, desc:'Book 6. Final war begins. Jason\'s self-surgery.' },
+    { id:'timeless', type:'book', label:'Timeless', kind:'Main', num:7, year:2023, desc:'Book 7. Arcadia and Pax unfrozen.' },
+    { id:'crucible', type:'book', label:'Crucible', kind:'Main', num:8, year:2024, desc:'Book 8. The saga concludes.' },
+  ],
+  edges: [
+    // -- RULES (character -> location) --
+    { source:'jason', target:'twilight_throne', relation:'rules' },
+    { source:'alexion', target:'crystal_reach', relation:'rules' },
+    { source:'eliza', target:'seas_edge', relation:'rules' },
+    { source:'finn', target:'sandscrit', relation:'associated_with' },
+    { source:'dom', target:'boomtown', relation:'rules' },
+    { source:'arcadia', target:'pax', relation:'rules' },
+    { source:'riley', target:'lahab', relation:'rules' },
+    { source:'frank', target:'twilight_throne', relation:'associated_with' },
+    { source:'kyyle', target:'lahab', relation:'associated_with' },
+    { source:'sultan', target:'sandscrit', relation:'threatens' },
+    // -- AVATAR / PATRON (character -> god) --
+    { source:'jason', target:'old_man', relation:'avatar_of' },
+    { source:'alexion', target:'lady', relation:'avatar_of' },
+    { source:'eliza', target:'hippie', relation:'avatar_of' },
+    { source:'finn', target:'seer', relation:'avatar_of' },
+    { source:'dom', target:'gambler', relation:'champion_of' },
+    { source:'arcadia', target:'earth_god', relation:'avatar_of' },
+    // -- GOD -> LOCATION --
+    { source:'old_man', target:'twilight_throne', relation:'influences' },
+    { source:'lady', target:'crystal_reach', relation:'influences' },
+    { source:'hippie', target:'seas_edge', relation:'influences' },
+    { source:'seer', target:'sandscrit', relation:'influences' },
+    { source:'gambler', target:'boomtown', relation:'influences' },
+    { source:'earth_god', target:'pax', relation:'influences' },
+    { source:'old_man', target:'barrow', relation:'influences' },
+    // -- ALLY / ENEMY --
+    { source:'jason', target:'riley', relation:'allied_with' },
+    { source:'jason', target:'frank', relation:'allied_with' },
+    { source:'jason', target:'eliza', relation:'allied_with' },
+    { source:'jason', target:'alexion', relation:'enemy_of' },
+    { source:'jason', target:'berith', relation:'enemy_of' },
+    { source:'jason', target:'sultan', relation:'enemy_of' },
+    { source:'jason', target:'robert', relation:'enemy_of' },
+    { source:'finn', target:'julia', relation:'sibling_of' },
+    { source:'finn', target:'kyyle', relation:'mentored_by' },
+    { source:'jason', target:'alfred', relation:'manipulated_by' },
+    // -- FAMILY --
+    { source:'jason', target:'jason_mother', relation:'child_of' },
+    { source:'jason', target:'jason_father', relation:'child_of' },
+    { source:'alexion', target:'george_lane', relation:'child_of' },
+    // -- CREATOR --
+    { source:'george_lane', target:'cerillion_hq', relation:'founded' },
+    { source:'george_lane', target:'alfred', relation:'created' },
+    // -- ABILITIES -> CHARACTER --
+    { source:'ab_jason_necromancy', target:'jason', relation:'has_ability' },
+    { source:'ab_jason_bone', target:'jason', relation:'has_ability' },
+    { source:'ab_jason_lich', target:'jason', relation:'has_ability' },
+    { source:'ab_jason_shadow', target:'jason', relation:'has_ability' },
+    { source:'ab_jason_soul', target:'jason', relation:'has_ability' },
+    { source:'ab_jason_death', target:'jason', relation:'has_ability' },
+    { source:'ab_alex_holy', target:'alexion', relation:'has_ability' },
+    { source:'ab_alex_light', target:'alexion', relation:'has_ability' },
+    { source:'ab_alex_seraph', target:'alexion', relation:'has_ability' },
+    { source:'ab_alex_protect', target:'alexion', relation:'has_ability' },
+    { source:'ab_alex_purify', target:'alexion', relation:'has_ability' },
+    { source:'ab_eliza_beast', target:'eliza', relation:'has_ability' },
+    { source:'ab_eliza_water', target:'eliza', relation:'has_ability' },
+    { source:'ab_eliza_bond', target:'eliza', relation:'has_ability' },
+    { source:'ab_eliza_tide', target:'eliza', relation:'has_ability' },
+    { source:'ab_finn_fire', target:'finn', relation:'has_ability' },
+    { source:'ab_finn_pyro', target:'finn', relation:'has_ability' },
+    { source:'ab_finn_inferno', target:'finn', relation:'has_ability' },
+    { source:'ab_finn_firestorm', target:'finn', relation:'has_ability' },
+    { source:'ab_finn_prophecy', target:'finn', relation:'has_ability' },
+    { source:'ab_dom_luck', target:'dom', relation:'has_ability' },
+    { source:'ab_dom_prob', target:'dom', relation:'has_ability' },
+    { source:'ab_dom_wind', target:'dom', relation:'has_ability' },
+    { source:'ab_dom_fortune', target:'dom', relation:'has_ability' },
+    { source:'ab_arcadia_earth', target:'arcadia', relation:'has_ability' },
+    { source:'ab_arcadia_nature', target:'arcadia', relation:'has_ability' },
+    { source:'ab_arcadia_geo', target:'arcadia', relation:'has_ability' },
+    { source:'ab_arcadia_stone', target:'arcadia', relation:'has_ability' },
+    { source:'ab_riley_dream', target:'riley', relation:'has_ability' },
+    { source:'ab_riley_mind', target:'riley', relation:'has_ability' },
+    { source:'ab_riley_illusion', target:'riley', relation:'has_ability' },
+    { source:'ab_riley_siren', target:'riley', relation:'has_ability' },
+    { source:'ab_frank_alchemy', target:'frank', relation:'has_ability' },
+    { source:'ab_frank_stealth', target:'frank', relation:'has_ability' },
+    { source:'ab_frank_poison', target:'frank', relation:'has_ability' },
+    { source:'ab_frank_trade', target:'frank', relation:'has_ability' },
+    { source:'ab_julia_fire', target:'julia', relation:'has_ability' },
+    { source:'ab_julia_tactics', target:'julia', relation:'has_ability' },
+    { source:'ab_julia_strategy', target:'julia', relation:'has_ability' },
+    { source:'ab_kyyle_nature', target:'kyyle', relation:'has_ability' },
+    { source:'ab_kyyle_sand', target:'kyyle', relation:'has_ability' },
+    { source:'ab_kyyle_heal', target:'kyyle', relation:'has_ability' },
+    { source:'ab_kyyle_wisdom', target:'kyyle', relation:'has_ability' },
+    // -- CHARACTERS IN BOOKS --
+    { source:'jason', target:'catharsis', relation:'appears_in' },
+    { source:'jason', target:'precipice', relation:'appears_in' },
+    { source:'jason', target:'evolution', relation:'appears_in' },
+    { source:'jason', target:'dominion', relation:'appears_in' },
+    { source:'jason', target:'hellion', relation:'appears_in' },
+    { source:'jason', target:'armageddon', relation:'appears_in' },
+    { source:'jason', target:'timeless', relation:'appears_in' },
+    { source:'jason', target:'crucible', relation:'appears_in' },
+    { source:'alexion', target:'catharsis', relation:'appears_in' },
+    { source:'alexion', target:'precipice', relation:'appears_in' },
+    { source:'alexion', target:'crucible', relation:'appears_in' },
+    { source:'riley', target:'catharsis', relation:'appears_in' },
+    { source:'riley', target:'apathy', relation:'appears_in' },
+    { source:'riley', target:'dominion', relation:'appears_in' },
+    { source:'riley', target:'flame', relation:'appears_in' },
+    { source:'riley', target:'inferno', relation:'appears_in' },
+    { source:'riley', target:'armageddon', relation:'appears_in' },
+    { source:'riley', target:'crucible', relation:'appears_in' },
+    { source:'frank', target:'catharsis', relation:'appears_in' },
+    { source:'frank', target:'retribution', relation:'appears_in' },
+    { source:'frank', target:'dominion', relation:'appears_in' },
+    { source:'frank', target:'armageddon', relation:'appears_in' },
+    { source:'frank', target:'crucible', relation:'appears_in' },
+    { source:'eliza', target:'dominion', relation:'appears_in' },
+    { source:'eliza', target:'unity', relation:'appears_in' },
+    { source:'eliza', target:'armageddon', relation:'appears_in' },
+    { source:'eliza', target:'crucible', relation:'appears_in' },
+    { source:'finn', target:'ember', relation:'appears_in' },
+    { source:'finn', target:'flame', relation:'appears_in' },
+    { source:'finn', target:'inferno', relation:'appears_in' },
+    { source:'finn', target:'crucible', relation:'appears_in' },
+    { source:'dom', target:'happy', relation:'appears_in' },
+    { source:'dom', target:'crucible', relation:'appears_in' },
+    { source:'arcadia', target:'timeless', relation:'appears_in' },
+    { source:'arcadia', target:'crucible', relation:'appears_in' },
+    { source:'julia', target:'ember', relation:'appears_in' },
+    { source:'julia', target:'flame', relation:'appears_in' },
+    { source:'julia', target:'inferno', relation:'appears_in' },
+    { source:'kyyle', target:'ember', relation:'appears_in' },
+    { source:'kyyle', target:'flame', relation:'appears_in' },
+    { source:'kyyle', target:'inferno', relation:'appears_in' },
+    { source:'alfred', target:'catharsis', relation:'appears_in' },
+    { source:'alfred', target:'precipice', relation:'appears_in' },
+    { source:'sultan', target:'dominion', relation:'appears_in' },
+    { source:'berith', target:'hellion', relation:'appears_in' },
+    { source:'robert', target:'armageddon', relation:'appears_in' },
+    { source:'robert', target:'crucible', relation:'appears_in' },
+    // -- LOCATIONS IN BOOKS --
+    { source:'twilight_throne', target:'catharsis', relation:'features' },
+    { source:'twilight_throne', target:'precipice', relation:'features' },
+    { source:'twilight_throne', target:'evolution', relation:'features' },
+    { source:'twilight_throne', target:'dominion', relation:'features' },
+    { source:'twilight_throne', target:'armageddon', relation:'features' },
+    { source:'crystal_reach', target:'catharsis', relation:'features' },
+    { source:'seas_edge', target:'dominion', relation:'features' },
+    { source:'seas_edge', target:'unity', relation:'features' },
+    { source:'sandscrit', target:'ember', relation:'features' },
+    { source:'sandscrit', target:'flame', relation:'features' },
+    { source:'sandscrit', target:'inferno', relation:'features' },
+    { source:'boomtown', target:'happy', relation:'features' },
+    { source:'pax', target:'timeless', relation:'features' },
+    { source:'lahab', target:'flame', relation:'features' },
+    { source:'lahab', target:'inferno', relation:'features' },
+    { source:'lux', target:'catharsis', relation:'features' },
+    { source:'barrow', target:'evolution', relation:'features' },
+    { source:'cerillion_hq', target:'catharsis', relation:'features_real' },
+    { source:'richmond_school', target:'catharsis', relation:'features_real' },
+    // -- LOCATION RELATIONS --
+    { source:'twilight_throne', target:'lux', relation:'was_once' },
+    { source:'lahab', target:'abyss', relation:'nearby' },
+    { source:'jason', target:'barrow', relation:'visited' },
+    { source:'jason', target:'richmond_school', relation:'attended' },
+  ]
+};
+
+// --- COLOR MAPS ---------------------------------------------
+const AFFINITY_COLORS = {
+  darkness: '#a855f7', light: '#facc15', water: '#2dd4bf',
+  fire: '#ef4444', air: '#38bdf8', earth: '#84cc16',
+};
+const AFFINITY_NAMES = {
+  darkness: 'Darkness', light: 'Light', water: 'Water',
+  fire: 'Fire', air: 'Air', earth: 'Earth',
+};
+const TYPE_COLORS = {
+  character: '#a855f7', npc: '#f472b6', god: '#f59e0b',
+  ability: '#6ee7b7', location: '#2dd4bf', book: '#3b82f6',
+};
+const TYPE_RADII = {
+  character: 22, npc: 17, god: 26, ability: 9, location: 20, book: 16,
+};
+
+// --- BUILD GRAPH --------------------------------------------
+const nodes = DATA.nodes.map(function(d){ return Object.assign({}, d); });
+const edges = DATA.edges.map(function(d){ return Object.assign({}, d); });
+const nodeMap = {};
+nodes.forEach(function(n){ nodeMap[n.id] = n; });
+
+const container = document.getElementById('graph-container');
+const width = window.innerWidth, height = window.innerHeight;
+const svg = d3.select(container).append('svg').attr('width', width).attr('height', height);
+const g = svg.append('g');
+
+svg.call(d3.zoom()
+    .scaleExtent([0.15, 4])
+    .on('zoom', function(ev){ g.attr('transform', ev.transform); }));
+
+const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(edges).id(function(d){ return d.id; }).distance(function(d){
+        return d.relation === 'has_ability' ? 50 : 120;
+    }).strength(function(d){
+        return d.relation === 'has_ability' ? 0.6 : 0.3;
+    }))
+    .force('charge', d3.forceManyBody().strength(function(d){
+        return d.type === 'ability' ? -60 : -300;
+    }))
+    .force('center', d3.forceCenter(width/2, height/2))
+    .force('collision', d3.forceCollide().radius(function(d){
+        return TYPE_RADII[d.type] + 6;
+    }));
+
+const link = g.append('g').selectAll('line').data(edges).join('line')
+    .attr('class', 'link')
+    .attr('stroke', function(d){
+        return d.relation === 'has_ability' ? AFFINITY_COLORS[nodeMap[d.source.id]?.affinity || '#555'] : '#94a3b8';
+    })
+    .attr('stroke-width', function(d){ return d.relation === 'has_ability' ? 0.8 : 1.2; })
+    .attr('stroke-opacity', function(d){ return d.relation === 'has_ability' ? 0.3 : 0.2; })
+    .attr('stroke-dasharray', function(d){ return d.relation === 'has_ability' ? '3,3' : 'none'; });
+
+const node = g.append('g').selectAll('g').data(nodes).join('g')
+    .attr('class', 'node')
+    .call(d3.drag()
+        .on('start', function(ev, d){
+            if(!ev.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x; d.fy = d.y;
+        })
+        .on('drag', function(ev, d){ d.fx = ev.x; d.fy = ev.y; })
+        .on('end', function(ev, d){
+            if(!ev.active) simulation.alphaTarget(0);
+            d.fx = null; d.fy = null;
+        }));
+
+node.append('circle')
+    .attr('r', function(d){ return TYPE_RADII[d.type]; })
+    .attr('fill', function(d){
+        if(d.type === 'ability'){
+            var c = d3.color(AFFINITY_COLORS[d.affinity] || '#555');
+            c.opacity = 0.6;
+            return c;
+        }
+        if(d.type === 'character' || d.type === 'npc' || d.type === 'god') return AFFINITY_COLORS[d.affinity] || '#555';
+        return TYPE_COLORS[d.type];
+    })
+    .attr('stroke', function(d){
+        if(d.type === 'ability') return AFFINITY_COLORS[d.affinity] || '#555';
+        if(d.type === 'character' || d.type === 'god') return d3.color(AFFINITY_COLORS[d.affinity] || '#555').darker(0.5);
+        return d3.color(TYPE_COLORS[d.type]).darker(0.5);
+    })
+    .attr('stroke-width', function(d){ return d.type === 'ability' ? 1 : 2.5; })
+    .attr('opacity', function(d){
+        if(d.type === 'ability') return 0.7;
+        if(d.type === 'location') return 0.65;
+        return 0.9;
+    });
+
+// Labels
+node.append('text')
+    .text(function(d){
+        if(d.type === 'ability') return '';
+        return d.label.length > 13 ? d.label.substr(0, 11)+'...' : d.label;
+    })
+    .attr('dy', function(d){
+        if(d.type === 'book') return 4;
+        return TYPE_RADII[d.type] + 15;
+    })
+    .attr('text-anchor', 'middle')
+    .attr('fill', function(d){ return d.type === 'book' ? '#94a3b8' : '#f1f5f9'; })
+    .attr('font-size', function(d){ return d.type === 'book' ? 9 : 10; })
+    .attr('font-weight', function(d){ return d.type === 'book' ? 400 : 600; });
+
+// Ability mini-labels (show when zoomed in)
+node.filter(function(d){ return d.type === 'ability'; })
+    .append('text')
+    .text(function(d){ return d.label; })
+    .attr('dy', 14)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#94a3b8')
+    .attr('font-size', 7)
+    .attr('font-weight', 400)
+    .attr('opacity', 0.6);
+
+// --- INTERACTIONS ------------------------------------------
+const tooltip = document.getElementById('tooltip');
+const detail = document.getElementById('detail');
+const dType = document.getElementById('dType');
+const dName = document.getElementById('dName');
+const dAffinity = document.getElementById('dAffinity');
+const dDesc = document.getElementById('dDesc');
+const dRelations = document.getElementById('dRelations');
+const detailClose = document.getElementById('detailClose');
+
+function showDetail(d){
+    dType.textContent = d.type.charAt(0).toUpperCase() + d.type.slice(1) + (d.kind ? ' ('+d.kind+')' : '');
+    dName.textContent = d.label;
+    if(d.title) dName.textContent += ' \u2014 '+d.title;
+    if(d.affinity){
+        dAffinity.textContent = AFFINITY_NAMES[d.affinity] || '';
+        dAffinity.style.background = AFFINITY_COLORS[d.affinity]+'22';
+        dAffinity.style.color = AFFINITY_COLORS[d.affinity];
+        dAffinity.style.border = '1px solid '+AFFINITY_COLORS[d.affinity];
+        dAffinity.style.display = 'inline-block';
+    } else {
+        dAffinity.style.display = 'none';
+    }
+    dDesc.textContent = d.desc || '';
+    dRelations.innerHTML = '<h4>Relations</h4>';
+    var rels = edges.filter(function(e){
+        return (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id;
+    });
+    if(rels.length === 0){
+        dRelations.innerHTML += '<span style="color:var(--gray);font-size:0.7rem;">None</span>';
+    } else {
+        rels.forEach(function(e){
+            var sId = e.source.id || e.source;
+            var tId = e.target.id || e.target;
+            var otherId = sId === d.id ? tId : sId;
+            var other = nodeMap[otherId];
+            if(!other) return;
+            var relLabel = e.relation.replace(/_/g, ' ');
+            var span = document.createElement('div');
+            span.style.marginBottom = '2px';
+            span.innerHTML = '<span class="rel-type">'+relLabel+'</span> ';
+            if(other.page){
+                span.innerHTML += '<a href="'+other.page+'">'+other.label+'</a>';
+            } else {
+                span.innerHTML += '<span style="color:var(--gray)">'+other.label+'</span>';
+            }
+            dRelations.appendChild(span);
+        });
+    }
+    detail.classList.add('visible');
+}
+
+function hideDetail(){ detail.classList.remove('visible'); }
+
+node.on('mouseenter', function(ev, d){
+    tooltip.textContent = d.label + (d.title ? ' \u2014 '+d.title : '');
+    tooltip.style.opacity = 1;
+}).on('mouseleave', function(){
+    tooltip.style.opacity = 0;
+}).on('mousemove', function(ev){
+    tooltip.style.left = (ev.clientX+14)+'px';
+    tooltip.style.top = (ev.clientY-10)+'px';
+}).on('click', function(ev, d){
+    ev.stopPropagation();
+    showDetail(d);
+});
+svg.on('click', function(){ hideDetail(); });
+detailClose.addEventListener('click', hideDetail);
+
+// --- SEARCH -------------------------------------------------
+const searchInput = document.getElementById('search-input');
+searchInput.addEventListener('input', function(){
+    var q = this.value.toLowerCase().trim();
+    node.each(function(d){
+        var el = d3.select(this);
+        var match = !q || d.label.toLowerCase().includes(q) || (d.title && d.title.toLowerCase().includes(q));
+        el.style('opacity', match ? 1 : 0.08);
+    });
+    link.style('opacity', function(e){
+        var s = nodeMap[e.source.id||e.source], t = nodeMap[e.target.id||e.target];
+        var sm = !q || (s.label.toLowerCase().includes(q) || (s.title&&s.title.toLowerCase().includes(q)));
+        var tm = !q || (t.label.toLowerCase().includes(q) || (t.title&&t.title.toLowerCase().includes(q)));
+        return (sm && tm) ? (e.relation==='has_ability'?0.3:0.2) : 0.01;
+    });
+});
+
+// --- FILTERS ------------------------------------------------
+var activeTypes = { character:true, npc:true, god:true, ability:true, location:true, book:true };
+document.querySelectorAll('.filter-btn.clear').forEach(function(btn){
+    btn.addEventListener('click', function(){
+        var type = this.dataset.type;
+        activeTypes[type] = !activeTypes[type];
+        this.classList.toggle('active');
+        applyFilters();
+    });
+});
+function applyFilters(){
+    node.each(function(d){
+        d3.select(this).style('display', activeTypes[d.type] ? null : 'none');
+    });
+    link.each(function(e){
+        var s = e.source.id||e.source, t = e.target.id||e.target;
+        d3.select(this).style('display',
+            activeTypes[nodeMap[s].type] && activeTypes[nodeMap[t].type] ? null : 'none');
+    });
+}
+
+simulation.on('tick', function(){
+    link.attr('x1', function(d){ return d.source.x; }).attr('y1', function(d){ return d.source.y; })
+        .attr('x2', function(d){ return d.target.x; }).attr('y2', function(d){ return d.target.y; });
+    node.attr('transform', function(d){ return 'translate('+d.x+','+d.y+')'; });
+});
+
+window.addEventListener('resize', function(){
+    var w = window.innerWidth, h = window.innerHeight;
+    svg.attr('width', w).attr('height', h);
+    simulation.force('center', d3.forceCenter(w/2, h/2));
+    simulation.alpha(0.3).restart();
+});
+
+// --- MENU ---------------------------------------------------
+(function(){
+  var btn=document.getElementById('menu-btn'),panel=document.getElementById('menu-panel'),
+      backdrop=document.getElementById('menu-backdrop'),closeBtn=document.getElementById('menuClose');
+  function open(){panel.classList.add('open');backdrop.classList.add('open');}
+  function close(){panel.classList.remove('open');backdrop.classList.remove('open');}
+  if(btn)btn.addEventListener('click',open);
+  if(closeBtn)closeBtn.addEventListener('click',close);
+  if(backdrop)backdrop.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+
+document.getElementById('welcome').addEventListener('click', function(){
+    this.classList.add('hidden');
+});
+</script>
+</body>
+</html>
