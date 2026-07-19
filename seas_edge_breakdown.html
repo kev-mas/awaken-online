@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Awaken Online compendium of characters, locations, timelines, and reference tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Awaken Online">
+  <meta property="og:title" content="Sea's Edge &mdash; Capital of the Water Affinity">
+  <meta property="og:description" content="Awaken Online compendium of characters, locations, timelines, and reference tools.">
+  <meta name="twitter:card" content="summary_large_image">
     <title>Sea's Edge &mdash; Capital of the Water Affinity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-    <style>
+    <link rel="stylesheet" href="assets/styles.css">
+<style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --teal: #14b8a6;
@@ -36,6 +43,16 @@
             color: var(--text);
             line-height: 1.7;
             overflow-x: hidden;
+        }
+        .page-nav .logo span { color: var(--aqua); }
+        .page-nav ul li a:hover,
+        .page-nav ul li a:focus {
+            color: var(--aqua);
+            background: rgba(103,232,249,0.12);
+        }
+        .page-nav ul li a.active {
+            color: #ffffff;
+            background: rgba(103,232,249,0.16);
         }
         h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.04em; }
         h2 {
@@ -467,7 +484,7 @@
   position: fixed;
   top: 16px;
   left: 16px;
-  z-index: 10001;
+  z-index: 10011;
   width: 40px;
   height: 40px;
   border: 1px solid rgba(255,255,255,0.1);
@@ -599,14 +616,17 @@
 /* ── end menu ── */
 
 </style>
+  <script src="assets/menu.js" defer></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-<button id="menu-btn" aria-label="Open navigation menu">
+
+<button id="menu-btn" aria-label="Open navigation menu" aria-controls="menu-panel" aria-expanded="false">
   <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
 </button>
 <div id="menu-backdrop"></div>
-<div id="menu-panel">
+<nav id="menu-panel" aria-label="Primary navigation">
   <div class="menu-header">
     <a href="index.html">Compendium</a>
     <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
@@ -653,7 +673,20 @@
     <div class="menu-group-label">Reference</div>
     <a class="menu-link" href="awaken_online_knowledge_graph.html">Knowledge Graph</a>
   </div>
-</div>
+</nav>
+<nav class="page-nav" aria-label="Sea's Edge page navigation">
+  <div class="logo">SEA'S <span>EDGE</span></div>
+  <ul>
+    <li><a href="#history">History</a></li>
+    <li><a href="#layout">Layout</a></li>
+    <li><a href="#defenses">Defenses</a></li>
+    <li><a href="#inhabitants">Inhabitants</a></li>
+    <li><a href="#territories">Territories</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#events">Events</a></li>
+  </ul>
+</nav>
+    <div id="main-content" tabindex="-1" class="sr-only">Main content</div>
 
 
 <!-- Hero -->
@@ -682,7 +715,7 @@
 </section>
 
 <!-- History Timeline -->
-<section>
+<section id="history">
     <div class="container">
         <h2>&#9876; History &amp; Origins</h2>
         <div class="section-header"><p>The evolution of Sea's Edge from a forgotten fishing village to the heart of the Water Affinity.</p></div>
@@ -731,7 +764,7 @@
     </div>
 </section>
 
-<section class="section-alt">
+<section class="section-alt" id="layout">
     <div class="container">
         <h2>&#127760; City Layout</h2>
         <div class="section-header"><p>The districts and key locations that make up the city of Sea's Edge.</p></div>
@@ -789,7 +822,7 @@
 </section>
 
 <!-- Defenses -->
-<section>
+<section id="defenses">
     <div class="container">
         <h2>&#9876; City Defenses</h2>
         <div class="section-header"><p>Sea's Edge is protected by layered defenses that leverage the power of the Water Affinity.</p></div>
@@ -818,7 +851,7 @@
     </div>
 </section>
 
-<section class="section-alt">
+<section class="section-alt" id="inhabitants">
     <div class="container">
         <h2>&#9822; Key Inhabitants</h2>
         <div class="section-header"><p>The people and beings who shape Sea's Edge.</p></div>
@@ -863,7 +896,7 @@
     </div>
 </section>
 
-<section>
+<section id="territories">
     <div class="container">
         <h2>&#127760; Territories &amp; Influence</h2>
         <div class="section-header"><p>Sea's Edge projects power across the coastal regions and beyond.</p></div>
@@ -902,7 +935,7 @@
     </div>
 </section>
 
-<section class="section-alt">
+<section class="section-alt" id="evolution">
     <div class="container">
         <h2>&#9881; City Evolution</h2>
         <div class="section-header"><p>Key metrics showing the growth and development of Sea's Edge over time.</p></div>
@@ -935,7 +968,7 @@
     </div>
 </section>
 
-<section>
+<section id="events">
     <div class="container">
         <h2>&#10022; Major Events</h2>
         <div class="section-header"><p>Key moments in the history of Sea's Edge.</p></div>

@@ -3,9 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Awaken Online compendium of characters, locations, timelines, and reference tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Awaken Online">
+  <meta property="og:title" content="Awaken Online &mdash; Compendium">
+  <meta property="og:description" content="Awaken Online compendium of characters, locations, timelines, and reference tools.">
+  <meta name="twitter:card" content="summary_large_image">
 <title>Awaken Online &mdash; Compendium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --dark: #0a0a0f;
@@ -325,14 +334,18 @@
 /* -- end menu -- */
 
 </style>
+  <script src="assets/menu.js" defer></script>
+  <script src="assets/index.js" defer></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-<button id="menu-btn" aria-label="Open navigation menu">
+
+<button id="menu-btn" aria-label="Open navigation menu" aria-controls="menu-panel" aria-expanded="false">
   <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
 </button>
 <div id="menu-backdrop"></div>
-<div id="menu-panel">
+<nav id="menu-panel" aria-label="Primary navigation">
   <div class="menu-header">
     <a href="index.html">Compendium</a>
     <button class="menu-close" id="menuClose" aria-label="Close navigation menu">&#10005;</button>
@@ -379,7 +392,8 @@
     <div class="menu-group-label">Reference</div>
     <a class="menu-link" href="awaken_online_knowledge_graph.html">Knowledge Graph</a>
   </div>
-</div>
+</nav>
+  <div id="main-content" tabindex="-1" class="sr-only">Main content</div>
 
 <div class="wrapper">
 
@@ -388,6 +402,11 @@
   <p>Character &amp; World Compendium</p>
   <div class="sub">26 entries &bull; Complete series reference</div>
 </header>
+  <div class="search-container">
+    <label for="search-input" class="sr-only">Search entries</label>
+    <input id="search-input" class="search-input" type="search" placeholder="Search characters, locations, timelines...">
+    <div class="section-desc" id="visible-count" style="margin-top: 14px;">26 of 26 entries</div>
+  </div>
 
 <!-- 1. Player Characters -->
 <div class="section-block">
@@ -398,32 +417,32 @@
 
   <div class="sub-header">Avatars</div>
   <div class="grid">
-    <a href="jason_rhodes_character_breakdown.html" class="card" style="--accent:#a855f7;">
+    <a href="jason_rhodes_character_breakdown.html" class="card accent-violet">
       <span class="name">Jason Rhodes</span>
       <span class="desc">The Dark Prophet &mdash; Necromancer lord of Twilight Throne, avatar of the Old Man.</span>
       <span class="tag">Darkness</span>
     </a>
-    <a href="alexion_character_breakdown.html" class="card" style="--accent:#facc15;">
+    <a href="alexion_character_breakdown.html" class="card accent-gold">
       <span class="name">Alexion</span>
       <span class="desc">The Lightwarden &mdash; Paladin commander of Crystal Reach, avatar of the Lady.</span>
       <span class="tag">Light</span>
     </a>
-    <a href="eliza_character_breakdown.html" class="card" style="--accent:#2dd4bf;">
+    <a href="eliza_character_breakdown.html" class="card accent-teal">
       <span class="name">Eliza Zhao</span>
       <span class="desc">The Tidebreaker &mdash; Beast master of Sea&rsquo;s Edge, bonded to Fluffy the hydra.</span>
       <span class="tag">Water</span>
     </a>
-    <a href="finn_harris_character_breakdown.html" class="card" style="--accent:#ef4444;">
+    <a href="finn_harris_character_breakdown.html" class="card accent-red">
       <span class="name">Finn Harris</span>
       <span class="desc">The Blazing Scion &mdash; Fire mage of Sandscrit, the Seer&rsquo;s champion in the Tarot war.</span>
       <span class="tag">Fire</span>
     </a>
-    <a href="dominic_hart_character_breakdown.html" class="card" style="--accent:#fbbf24;">
+    <a href="dominic_hart_character_breakdown.html" class="card accent-amber">
       <span class="name">Dominic Hart</span>
       <span class="desc">The Gilded Gambler &mdash; Luck-forged rogue of Boomtown, champion of the Gambler.</span>
       <span class="tag">Air</span>
     </a>
-    <a href="arcadia_landrey_character_breakdown.html" class="card" style="--accent:#84cc16;">
+    <a href="arcadia_landrey_character_breakdown.html" class="card accent-lime">
       <span class="name">Arcadia Landrey</span>
       <span class="desc">The Verdant Warden &mdash; Earth shaman ruler of Pax, unfrozen from ages past.</span>
       <span class="tag">Earth</span>
@@ -432,28 +451,29 @@
 
   <div class="sub-header">Non-Avatars</div>
   <div class="grid">
-    <a href="riley_jones_character_breakdown.html" class="card" style="--accent:#d946ef;">
+    <a href="riley_jones_character_breakdown.html" class="card accent-magenta">
       <span class="name">Riley Jones</span>
       <span class="desc">The Shadow Dreamer &mdash; Siren queen of Lahab, master of mind and dream magic.</span>
       <span class="tag">Darkness</span>
     </a>
-    <a href="frank_cross_character_breakdown.html" class="card" style="--accent:#22c55e;">
+    <a href="frank_cross_character_breakdown.html" class="card accent-emerald">
       <span class="name">Frank Cross</span>
       <span class="desc">The Emerald Strategist &mdash; Master alchemist, guild leader, earth-aligned kingmaker.</span>
       <span class="tag">Earth</span>
     </a>
-    <a href="julia_harris_character_breakdown.html" class="card" style="--accent:#fb7185;">
+    <a href="julia_harris_character_breakdown.html" class="card accent-rose">
       <span class="name">Julia Harris</span>
       <span class="desc">The Crimson Strategist &mdash; Finn&rsquo;s sister, fire mage and battlefield commander.</span>
       <span class="tag">Fire</span>
     </a>
-    <a href="kyyle_character_breakdown.html" class="card" style="--accent:#a3e635;">
+    <a href="kyyle_character_breakdown.html" class="card accent-lime">
       <span class="name">Kyyle</span>
       <span class="desc">The Sage of Sands &mdash; Elder druid of Lahab, desert prophet and healer.</span>
       <span class="tag">Earth</span>
     </a>
   </div>
-</div>
+</nav>
+
 
 <div class="divider-bar"></div>
 
@@ -465,27 +485,27 @@
   </div>
   <div class="section-desc">The six elemental deities who shaped Lamentia and chose champions to wage the Tarot war.</div>
   <div class="grid">
-    <a href="old_man_god_of_darkness_character_breakdown.html" class="card" style="--accent:#6b21a8;">
+    <a href="old_man_god_of_darkness_character_breakdown.html" class="card accent-indigo">
       <span class="name">The Old Man</span>
       <span class="desc">God of Darkness &mdash; Primordial lord of shadow, death, and the void beyond.</span>
       <span class="tag">Darkness</span>
     </a>
-    <a href="the_lady_character_breakdown.html" class="card" style="--accent:#fef08a;">
+    <a href="the_lady_character_breakdown.html" class="card accent-citrine">
       <span class="name">The Lady</span>
       <span class="desc">Goddess of Light &mdash; Radiant mother of creation, eternal champion of order.</span>
       <span class="tag">Light</span>
     </a>
-    <a href="the_hippie_character_breakdown.html" class="card" style="--accent:#2dd4bf;">
+    <a href="the_hippie_character_breakdown.html" class="card accent-teal">
       <span class="name">The Hippie</span>
       <span class="desc">God of Water &mdash; Oceanic force of change, tide, and boundless freedom.</span>
       <span class="tag">Water</span>
     </a>
-    <a href="the_seer_character_breakdown.html" class="card" style="--accent:#ef4444;">
+    <a href="the_seer_character_breakdown.html" class="card accent-red">
       <span class="name">The Seer</span>
       <span class="desc">Goddess of Fire &mdash; Blazing eye of prophecy, destruction and rebirth incarnate.</span>
       <span class="tag">Fire</span>
     </a>
-    <a href="the_gambler_character_breakdown.html" class="card" style="--accent:#38bdf8;">
+    <a href="the_gambler_character_breakdown.html" class="card accent-blue">
       <span class="name">The Gambler</span>
       <span class="desc">God of Air &mdash; Keeper of luck, fortune, and the winds of chance.</span>
       <span class="tag">Air</span>
@@ -503,7 +523,7 @@
   </div>
   <div class="section-desc">Complete chronology of the series from the Age of Gods through the Tarot war and beyond.</div>
   <div class="grid">
-    <a href="awaken_online_global_timeline.html" class="card" style="--accent:#a855f7;">
+    <a href="awaken_online_global_timeline.html" class="card accent-violet">
       <span class="name">Global Timeline</span>
       <span class="desc">Full series chronology &mdash; Creation, Age of Gods, launch, and all major arcs through the Tarot era.</span>
       <span class="tag">Reference</span>
@@ -526,7 +546,7 @@
   </div>
   <div class="section-desc">Interactive tools for exploring the series data and relationships.</div>
   <div class="grid">
-    <a href="awaken_online_knowledge_graph.html" class="card" style="--accent:#6ee7b7;">
+    <a href="awaken_online_knowledge_graph.html" class="card accent-aqua">
       <span class="name">Knowledge Graph</span>
       <span class="desc">Interactive force-directed graph of every entity, ability, and relationship across the series.</span>
       <span class="tag">Interactive</span>
@@ -550,27 +570,27 @@
       <span class="desc">Darkness affinity capital &mdash; Gothic necropolis fortress of the Dark Prophet.</span>
       <span class="tag">Darkness</span>
     </a>
-    <a href="crystal_reach_breakdown.html" class="card" style="--accent:#fef08a;">
+    <a href="crystal_reach_breakdown.html" class="card accent-citrine">
       <span class="name">Crystal Reach</span>
       <span class="desc">Light affinity capital &mdash; Golden fortress of the Lightwarden, fallen from grace.</span>
       <span class="tag">Light</span>
     </a>
-    <a href="seas_edge_breakdown.html" class="card" style="--accent:#2dd4bf;">
+    <a href="seas_edge_breakdown.html" class="card accent-teal">
       <span class="name">Sea&rsquo;s Edge</span>
       <span class="desc">Water affinity capital &mdash; Coastal merfolk city, home of Eliza and Fluffy.</span>
       <span class="tag">Water</span>
     </a>
-    <a href="sandscrit_breakdown.html" class="card" style="--accent:#ef4444;">
+    <a href="sandscrit_breakdown.html" class="card accent-red">
       <span class="name">Sandscrit</span>
       <span class="desc">Fire affinity capital &mdash; Blazing desert forge-city of the Seer.</span>
       <span class="tag">Fire</span>
     </a>
-    <a href="boomtown_breakdown.html" class="card" style="--accent:#38bdf8;">
+    <a href="boomtown_breakdown.html" class="card accent-blue">
       <span class="name">Boomtown</span>
       <span class="desc">Air affinity capital &mdash; Lawless luck-fueled frontier town of the Gambler.</span>
       <span class="tag">Air</span>
     </a>
-    <a href="pax_breakdown.html" class="card" style="--accent:#84cc16;">
+    <a href="pax_breakdown.html" class="card accent-lime">
       <span class="name">Pax</span>
       <span class="desc">Earth affinity capital &mdash; Ancient stone city of the Verdant Warden, unfrozen in Timeless.</span>
       <span class="tag">Earth</span>

@@ -3,10 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Awaken Online compendium of characters, locations, timelines, and reference tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Awaken Online">
+  <meta property="og:title" content="Awaken Online &mdash; Knowledge Graph">
+  <meta property="og:description" content="Awaken Online compendium of characters, locations, timelines, and reference tools.">
+  <meta name="twitter:card" content="summary_large_image">
 <title>Awaken Online &mdash; Knowledge Graph</title>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700;800&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --dark: #0a0a0f; --dark2: #12121a; --dark3: #1a1a2e;
@@ -130,14 +139,17 @@
     #welcome-inner h1 { font-size: 1.4rem; }
   }
 </style>
+  <script src="assets/menu.js" defer></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-<button id="menu-btn" aria-label="Navigation">
+
+<button id="menu-btn" aria-label="Navigation" aria-controls="menu-panel" aria-expanded="false">
   <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
 </button>
 <div id="menu-backdrop"></div>
-<div id="menu-panel">
+<nav id="menu-panel" aria-label="Primary navigation">
   <div class="menu-header"><a href="index.html">Compendium</a><button class="menu-close" id="menuClose">&#10005;</button></div>
   <div class="menu-group">
     <div class="menu-group-label">Player Characters</div>
@@ -180,16 +192,18 @@
     <a class="menu-link" href="boomtown_breakdown.html">Boomtown</a>
     <a class="menu-link" href="pax_breakdown.html">Pax</a>
   </div>
-</div>
+  </div>
+  <div id="main-content" tabindex="-1" class="sr-only">Main content</div>
 
-<div id="welcome">
+  <div id="welcome">
   <div id="welcome-inner">
     <h1>Knowledge Graph</h1>
     <p>An interactive map of entities, abilities, and relationships across the Awaken Online series.</p>
     <p><strong>Drag</strong> nodes &bull; <strong>Click</strong> for details &bull; <strong>Scroll</strong> to zoom</p>
     <div class="hint">Click anywhere to begin</div>
   </div>
-</div>
+</nav>
+
 
 <div id="controls">
   <input id="search-input" type="text" placeholder="Search&hellip;" spellcheck="false">
