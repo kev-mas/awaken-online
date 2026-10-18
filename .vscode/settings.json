@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^python3 - <<'PY'\nfrom html\\.parser import HTMLParser\nfrom pathlib import Path\nclass A\\(HTMLParser\\):\n def __init__\\(self\\): super\\(\\)\\.__init__\\(\\); self\\.ids=set\\(\\); self\\.refs=\\[\\]; self\\.main=0; self\\.skip=None; self\\.menu=0\n def handle_starttag\\(self,t,attrs\\):\n  d=dict\\(attrs\\)\n  if d\\.get\\('id'\\): self\\.ids\\.add\\(d\\['id'\\]\\)\n  if t=='main': self\\.main\\+=1\n  if t=='a' and d\\.get\\('href',''\\)\\.startswith\\('#'\\): self\\.refs\\.append\\(d\\['href'\\]\\[1:\\]\\)\n  if d\\.get\\('id'\\)=='main-content': self\\.skip=t\nfor f in sorted\\(Path\\('\\.'\\)\\.glob\\('\\*\\.html'\\)\\):\n p=A\\(\\); p\\.feed\\(f\\.read_text\\(errors='replace'\\)\\)\n bad=\\[x for x in p\\.refs if x and x not in p\\.ids\\]\n if p\\.main==0 or bad: print\\(f'\\{f\\.name\\}: main=\\{p\\.main\\}, skip-target=\\{p\\.skip\\}, broken-fragment-refs=\\{bad\\[:6\\]\\}'\\)\nPY$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
