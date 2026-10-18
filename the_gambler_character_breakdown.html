@@ -814,22 +814,5 @@ new Chart(document.getElementById('progressionChart'), {
   }
 });
 </script>
-
-
-<script>
-(function(){
-  var btn = document.getElementById('menu-btn');
-  var panel = document.getElementById('menu-panel');
-  var backdrop = document.getElementById('menu-backdrop');
-  var closeBtn = document.getElementById('menuClose');
-  function open(){ panel.classList.add('open'); backdrop.classList.add('open'); }
-  function close(){ panel.classList.remove('open'); backdrop.classList.remove('open'); }
-  if(btn) btn.addEventListener('click', open);
-  if(closeBtn) closeBtn.addEventListener('click', close);
-  if(backdrop) backdrop.addEventListener('click', close);
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
-})();
-</script>
-
 </body>
 </html>
